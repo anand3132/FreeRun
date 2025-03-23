@@ -72,3 +72,8 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+.idea/.idea.DedicatedGameServer/.idea/.gitignore
+.idea/.idea.DedicatedGameServer/.idea/encodings.xml
+.idea/.idea.DedicatedGameServer/.idea/indexLayout.xml
+.idea/.idea.DedicatedGameServer/.idea/vcs.xml
+.idea/.idea.DedicatedGameServer/.idea/inspectionProfiles/Project_Default.xml
