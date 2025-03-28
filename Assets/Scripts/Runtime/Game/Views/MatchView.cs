@@ -1,7 +1,7 @@
 using System;
 using UnityEngine.UIElements;
 
-namespace Unity.DedicatedGameServerSample.Runtime
+namespace RedGaint.Network.Runtime
 {
     internal class MatchView : View<GameApplication>
     {

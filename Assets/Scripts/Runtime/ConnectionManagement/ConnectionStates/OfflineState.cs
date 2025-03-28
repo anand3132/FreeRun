@@ -1,4 +1,4 @@
-namespace Unity.DedicatedGameServerSample.Runtime.ConnectionManagement
+namespace RedGaint.Network.Runtime.ConnectionManagement
 {
     /// <summary>
     /// Connection state corresponding to when the NetworkManager is shut down. From this state we can transition to the

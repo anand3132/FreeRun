@@ -1,6 +1,6 @@
 using Unity.Netcode;
 
-namespace Unity.DedicatedGameServerSample.Runtime.ConnectionManagement
+namespace RedGaint.Network.Runtime.ConnectionManagement
 {
     /// <summary>
     /// Base class representing a connection state.

@@ -1,14 +1,14 @@
 {
-    "name": "com.unity.sample.dedicated-server.runtime",
-    "rootNamespace": "Unity.DedicatedGameServerSample.Runtime",
+    "name": "com.redgaint.network.runtime",
+    "rootNamespace": "RedGaint.Network.Runtime",
     "references": [
         "Unity.Netcode.Runtime",
         "Unity.Services.Core",
-        "Unity.Services.Matchmaker",
+        "Unity.Services.Multiplayer",  
         "Unity.Services.Authentication",
         "Unity.Services.Core.Environments",
+        "com.redgaint.network.shared",
         "Unity.Networking.Transport",
-        "com.unity.sample.dedicated-server.shared",
         "Cinemachine",
         "Unity.Multiplayer.Samples.Utilities.ClientAuthority",
         "Unity.InputSystem",

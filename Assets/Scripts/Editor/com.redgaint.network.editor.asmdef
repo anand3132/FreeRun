@@ -1,10 +1,10 @@
 {
-    "name": "com.unity.sample.dedicated-server.editor",
-    "rootNamespace": "Unity.DedicatedGameServerSample.Editor",
+    "name": "com.redgaint.network.editor",
+    "rootNamespace": "Unity.RedGaint.Network.Editor",
     "references": [
         "Unity.Netcode.Runtime",
-        "com.unity.sample.dedicated-server.shared",
-        "com.unity.sample.dedicated-server.runtime",
+        "com.redgaint.network.runtime",
+        "com.redgaint.network.shared",
         "Unity.Networking.Transport",
         "Unity.EditorCoroutines.Editor",
         "Unity.DedicatedServer.MultiplayerRoles",

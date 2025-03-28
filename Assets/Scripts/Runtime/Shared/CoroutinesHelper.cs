@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Unity.DedicatedGameServerSample.Runtime
+namespace RedGaint.Network.Runtime
 {
     ///<summary>
     /// A collection of Coroutines Helpers

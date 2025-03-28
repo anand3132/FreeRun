@@ -1,8 +1,8 @@
-using Unity.DedicatedGameServerSample.Runtime.ApplicationLifecycle;
+using RedGaint.Network.Runtime.ApplicationLifecycle;
 using Unity.Netcode;
 using UnityEngine;
 
-namespace Unity.DedicatedGameServerSample.Runtime.ConnectionManagement
+namespace RedGaint.Network.Runtime.ConnectionManagement
 {
     /// <summary>
     /// Connection state corresponding to a listening server. Handles incoming client connections. When shutting down or

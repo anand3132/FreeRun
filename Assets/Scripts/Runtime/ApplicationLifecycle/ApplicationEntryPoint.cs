@@ -1,13 +1,16 @@
 using System;
 using System.Collections;
-using Unity.DedicatedGameServerSample.Runtime.ConnectionManagement;
 using Unity.Multiplayer;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using ConnectionEvent = Unity.DedicatedGameServerSample.Runtime.ConnectionManagement.ConnectionEvent;
+using ConnectionEvent = RedGaint.Network.Runtime.ConnectionManagement.ConnectionEvent;
+using System.Linq;
+using System.Net.NetworkInformation;
+using RedGaint.Network.Runtime.ConnectionManagement;
+using ConnectionManagement_ConnectionEvent = RedGaint.Network.Runtime.ConnectionManagement.ConnectionEvent;
 
-namespace Unity.DedicatedGameServerSample.Runtime.ApplicationLifecycle
+namespace RedGaint.Network.Runtime.ApplicationLifecycle
 {
     /// <summary>
     /// This is the application's entry point, where the configuration is read and the application is initialized
@@ -63,12 +66,12 @@ namespace Unity.DedicatedGameServerSample.Runtime.ApplicationLifecycle
             {
                 Singleton = this;
             }
-            m_ConnectionManager.EventManager.AddListener<ConnectionEvent>(OnConnectionEvent);
+            m_ConnectionManager.EventManager.AddListener<ConnectionManagement_ConnectionEvent>(OnConnectionEvent);
         }
 
         void OnDestroy()
         {
-            m_ConnectionManager.EventManager.RemoveListener<ConnectionEvent>(OnConnectionEvent);
+            m_ConnectionManager.EventManager.RemoveListener<ConnectionManagement_ConnectionEvent>(OnConnectionEvent);
         }
 
         [RuntimeInitializeOnLoadMethod]
@@ -91,6 +94,8 @@ namespace Unity.DedicatedGameServerSample.Runtime.ApplicationLifecycle
         {
             var commandLineArgumentsParser = new CommandLineArgumentsParser();
             ushort listeningPort = (ushort) commandLineArgumentsParser.Port;
+            listeningPort = GetAvailablePort(listeningPort); // Ensure the port is available
+
             switch (MultiplayerRolesManager.ActiveMultiplayerRoleMask)
             {
                 case MultiplayerRoleFlags.Server:
@@ -112,8 +117,27 @@ namespace Unity.DedicatedGameServerSample.Runtime.ApplicationLifecycle
                     throw new ArgumentOutOfRangeException("MultiplayerRole", "ClientAndServer is an invalid multiplayer role in this sample. Please select the Client or Server role.");
             }
         }
+        ushort GetAvailablePort(ushort startingPort)
+        {
+            var activePorts = IPGlobalProperties.GetIPGlobalProperties()
+                .GetActiveTcpListeners()
+                .Select(ep => ep.Port)
+                .Concat(IPGlobalProperties.GetIPGlobalProperties()
+                    .GetActiveUdpListeners()
+                    .Select(ep => ep.Port))
+                .ToHashSet();
 
-        void OnConnectionEvent(ConnectionEvent evt)
+            while (activePorts.Contains(startingPort))
+            {
+                startingPort++;
+                if (startingPort > 65535) // Ensure we stay within valid port range
+                {
+                    throw new Exception("No available ports found.");
+                }
+            }
+            return startingPort;
+        }
+        void OnConnectionEvent(ConnectionManagement_ConnectionEvent evt)
         {
             if (MultiplayerRolesManager.ActiveMultiplayerRoleMask == MultiplayerRoleFlags.Server)
             {

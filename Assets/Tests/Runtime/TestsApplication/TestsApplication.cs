@@ -1,6 +1,6 @@
-using Unity.DedicatedGameServerSample.Runtime;
+using RedGaint.Network.Runtime;
 
-namespace Unity.DedicatedGameServerSample.Tests.Runtime
+namespace RedGaint.Network.Tests.Runtime
 {
     class TestsApplication : BaseApplication<TestsModel, TestsView, TestsController>
     {

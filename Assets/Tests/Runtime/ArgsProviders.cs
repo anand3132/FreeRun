@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace Unity.DedicatedGameServerSample.Tests.Runtime
+namespace RedGaint.Network.Tests.Runtime
 {
     class BaseProvider<T> : IEnumerable<T> where T : MonoBehaviour
     {

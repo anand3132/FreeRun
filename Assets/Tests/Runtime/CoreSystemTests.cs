@@ -1,10 +1,10 @@
 using NUnit.Framework;
 using System.Collections;
-using Unity.DedicatedGameServerSample.Runtime;
+using RedGaint.Network.Runtime;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace Unity.DedicatedGameServerSample.Tests.Runtime
+namespace RedGaint.Network.Tests.Runtime
 {
     [TestFixture, TestFixtureSource(typeof(TestsApplicationProvider))]
     class CoreSystemTests

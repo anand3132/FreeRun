@@ -5,8 +5,8 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "Unity.Netcode.Runtime",
-        "com.unity.sample.dedicated-server.runtime",
-        "com.unity.sample.dedicated-server.shared"
+        "com.redgaint.network.runtime",
+        "com.redgaint.network.shared"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

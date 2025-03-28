@@ -1,6 +1,6 @@
 using Unity.Netcode;
 
-namespace Unity.DedicatedGameServerSample.Runtime
+namespace RedGaint.Network.Runtime
 {
     internal interface ICharacter
     {

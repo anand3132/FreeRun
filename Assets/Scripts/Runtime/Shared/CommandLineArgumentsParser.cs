@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using UnityEngine.DedicatedServer;
 
-namespace Unity.DedicatedGameServerSample.Runtime
+namespace RedGaint.Network.Runtime
 {
     internal class CommandLineArgumentsParser
     {

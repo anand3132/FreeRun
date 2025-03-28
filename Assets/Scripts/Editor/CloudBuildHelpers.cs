@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace Unity.DedicatedGameServerSample.Editor
+namespace RedGaint.Network.Editor
 {
     ///<summary>
     ///A set of methods invoked by Unity Cloud Build during the build process

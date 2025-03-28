@@ -38,12 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -162,12 +162,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1001 &1070813499
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -327,10 +327,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1499409729229728483, guid: 3a41671a155a2cb4aacaae406dfb14e6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1962574759987601738, guid: 3a41671a155a2cb4aacaae406dfb14e6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2323577037850719321, guid: 3a41671a155a2cb4aacaae406dfb14e6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2428959305925853634, guid: 3a41671a155a2cb4aacaae406dfb14e6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3035901024959509340, guid: 3a41671a155a2cb4aacaae406dfb14e6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3724706654895478303, guid: 3a41671a155a2cb4aacaae406dfb14e6, type: 3}
       propertyPath: m_NavMeshData
       value: 
       objectReference: {fileID: 23800000, guid: 3027e5fce9e0cde419de2ce2f63e2050, type: 2}
+    - target: {fileID: 4243189240155641094, guid: 3a41671a155a2cb4aacaae406dfb14e6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5674194232028085522, guid: 3a41671a155a2cb4aacaae406dfb14e6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5697806516671651168, guid: 3a41671a155a2cb4aacaae406dfb14e6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6642074371324403707, guid: 3a41671a155a2cb4aacaae406dfb14e6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7473578518635895177, guid: 3a41671a155a2cb4aacaae406dfb14e6, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 2674337932
@@ -379,6 +415,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Environment
       objectReference: {fileID: 0}
+    - target: {fileID: 8198071126687418567, guid: 3a41671a155a2cb4aacaae406dfb14e6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8424377640963482238, guid: 3a41671a155a2cb4aacaae406dfb14e6, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3484423001
@@ -386,6 +426,10 @@ PrefabInstance:
     - target: {fileID: 8556053690530776507, guid: 3a41671a155a2cb4aacaae406dfb14e6, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1038608452
+      objectReference: {fileID: 0}
+    - target: {fileID: 8639684277812794102, guid: 3a41671a155a2cb4aacaae406dfb14e6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1,4 +1,4 @@
-﻿namespace Unity.DedicatedGameServerSample.Runtime
+﻿namespace RedGaint.Network.Runtime
 {
     /// <summary>
     /// Base class for all Model related classes.

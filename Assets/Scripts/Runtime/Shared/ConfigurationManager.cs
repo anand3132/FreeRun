@@ -1,9 +1,9 @@
 using System.IO;
 using System.Linq;
-using Unity.DedicatedGameServerSample.Runtime.SimpleJSON;
+using RedGaint.Network.Runtime.SimpleJSON;
 using UnityEngine;
 
-namespace Unity.DedicatedGameServerSample.Runtime
+namespace RedGaint.Network.Runtime
 {
     /// <summary>
     /// A configuration Manager for easily accessing dynamic configurations that alter the behaviour of the app

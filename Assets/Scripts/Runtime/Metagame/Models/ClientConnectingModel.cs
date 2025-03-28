@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Unity.DedicatedGameServerSample.Runtime
+namespace RedGaint.Network.Runtime
 {
     public class ClientConnectingModel : Model<MetagameApplication>
     {

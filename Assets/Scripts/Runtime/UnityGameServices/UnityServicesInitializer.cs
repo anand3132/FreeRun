@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Threading.Tasks;
 using Unity.Services.Core;
-using Unity.DedicatedGameServerSample.Runtime.ApplicationLifecycle;
+using RedGaint.Network.Runtime.ApplicationLifecycle;
 using Unity.Multiplayer;
 using UnityEngine;
 
-namespace Unity.DedicatedGameServerSample.Runtime
+namespace RedGaint.Network.Runtime
 {
     ///<summary>
     ///Initializes all the Unity Services managers
@@ -50,7 +50,7 @@ namespace Unity.DedicatedGameServerSample.Runtime
                 //servers should always have a single ID so their data isn't mixed with Users'.
                 UnityServices.ExternalUserId = k_ServerID;
             }
-            Debug.Log("--------------------------------");
+            Debug.Log("--------------------------------"+k_Environment);
             bool signedIn = await UnityServiceAuthenticator.TrySignInAsync(k_Environment, serviceProfileName);
             Debug.Log("--------------------------------"+signedIn);
 
