@@ -30,8 +30,8 @@ namespace RedGaint.Network.Editor
         const string k_PreviousSceneKey = "PreviousScene";
         const string k_ShouldLoadBootstrapSceneKey = "LoadBootstrapScene";
 
-        const string k_LoadBootstrapSceneOnPlay = "DedicatedGameServerSample/Load Bootstrap Scene On Play";
-        const string k_DoNotLoadBootstrapSceneOnPlay = "DedicatedGameServerSample/Don't Load Bootstrap Scene On Play";
+        const string k_LoadBootstrapSceneOnPlay = "ServerOptions/Load Bootstrap Scene On Play";
+        const string k_DoNotLoadBootstrapSceneOnPlay = "ServerOptions/Don't Load Bootstrap Scene On Play";
 
         const string k_TestRunnerSceneName = "InitTestScene";
 

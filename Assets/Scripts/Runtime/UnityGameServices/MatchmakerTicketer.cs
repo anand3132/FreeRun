@@ -11,13 +11,14 @@ using StatusOptions = Unity.Services.Matchmaker.Models.MultiplayAssignment.Statu
 namespace RedGaint.Network.Runtime
 {
     ///<summary>
-    /// Holds matchmaker search logic
+    ///Holds matchmaker search logic
     ///</summary>
     internal class MatchmakerTicketer : MonoBehaviour
     {
         internal string LastQueueName { get; private set; }
         internal bool Searching { get; private set; }
-        private string m_TicketId = "";
+        string m_TicketId = "";
+        Coroutine m_PollingCoroutine = null;
 
         internal async void FindMatch(string queueName, Action<MultiplayAssignment> onMatchSearchCompleted, Action<int> onMatchmakerTicked)
         {
@@ -25,9 +26,9 @@ namespace RedGaint.Network.Runtime
             {
                 if (!Searching)
                 {
-                    if (!string.IsNullOrEmpty(m_TicketId))
+                    if (m_TicketId.Length > 0)
                     {
-                        Debug.LogError("Already matchmaking!");
+                        Debug.LogError($"Already matchmaking!");
                         return;
                     }
 
@@ -43,28 +44,25 @@ namespace RedGaint.Network.Runtime
             }
         }
 
-        private async Task StartSearch(string queueName, Action<MultiplayAssignment> onMatchSearchCompleted, Action<int> onMatchmakerTicked)
+        async Task StartSearch(string queueName, Action<MultiplayAssignment> onMatchSearchCompleted, Action<int> onMatchmakerTicked)
         {
-            var attributes = new Dictionary<string, object>
+            var attributes = new Dictionary<string, object>();
+            var players = new List<Unity.Services.Matchmaker.Models.Player>
             {
-                { "platform", "Windows" }
+                new Unity.Services.Matchmaker.Models.Player(AuthenticationService.Instance.PlayerId, new { }),
             };
-            
-            var players = new List<Player>
-            {
-                new Player(AuthenticationService.Instance.PlayerId, new { }),
-            };
-            
             var options = new CreateTicketOptions(queueName, attributes);
             var ticketResponse = await MatchmakerService.Instance.CreateTicketAsync(players, options);
             LastQueueName = queueName;
             m_TicketId = ticketResponse.Id;
 
-            _ = PollTicketStatus(onMatchSearchCompleted, onMatchmakerTicked);
+            CoroutinesHelper.StopAndNullifyRoutine(ref m_PollingCoroutine, this);
+            m_PollingCoroutine = StartCoroutine(PollTicketStatus(onMatchSearchCompleted, onMatchmakerTicked));
         }
 
         internal async Task StopSearch()
         {
+            CoroutinesHelper.StopAndNullifyRoutine(ref m_PollingCoroutine, this);
             if (!string.IsNullOrEmpty(m_TicketId))
             {
                 await MatchmakerService.Instance.DeleteTicketAsync(m_TicketId);
@@ -73,55 +71,70 @@ namespace RedGaint.Network.Runtime
             Searching = false;
         }
 
-        private async Task PollTicketStatus(Action<MultiplayAssignment> onMatchSearchCompleted, Action<int> onMatchmakerTicked)
+        IEnumerator PollTicketStatus(Action<MultiplayAssignment> onMatchSearchCompleted, Action<int> onMatchmakerTicked)
         {
+            TicketStatusResponse response = null;
+            MultiplayAssignment assignment = null;
             bool polling = true;
             int elapsedTime = 0;
+            Task<TicketStatusResponse> ticketTask = null;
 
             while (polling)
             {
+                if (elapsedTime % 2 == 0)
+                {
+                    ticketTask = Task.Run(() => MatchmakerService.Instance.GetTicketAsync(m_TicketId));
+                }
+                yield return CoroutinesHelper.OneSecond;
+                elapsedTime++;
+                onMatchmakerTicked?.Invoke(elapsedTime);
+
                 try
                 {
-                    await Task.Delay(1000);
-                    elapsedTime++;
-                    onMatchmakerTicked?.Invoke(elapsedTime);
-                    
-                    var response = await MatchmakerService.Instance.GetTicketAsync(m_TicketId);
-                    if (response != null && response.Type == typeof(MultiplayAssignment))
+                    if (ticketTask.IsCompleted)
                     {
-                        MultiplayAssignment assignment = response.Value as MultiplayAssignment;
-                        Debug.Log($"<color=red> Got the IP from matchMaking: {assignment.Ip} Port: {assignment.Port}</color>");
+                        response = ticketTask.Result;
 
-                        if (assignment != null)
+                        if (response.Type == typeof(MultiplayAssignment))
                         {
-                            Debug.Log($"{assignment.Status} <color=red>progress... </color> {assignment.Message}");
-                            switch (assignment.Status)
-                            {
-                                case StatusOptions.InProgress:
-                                    // Keep polling
-                                    break;
-                                case StatusOptions.Found:
-                                case StatusOptions.Failed:
-                                case StatusOptions.Timeout:
-                                    polling = false;
-                                    onMatchSearchCompleted?.Invoke(assignment);
-                                    break;
-                                default:
-                                    throw new InvalidOperationException($"Unexpected assignment status: {assignment.Status}");
-                            }
+                            assignment = response.Value as MultiplayAssignment;
+                            Debug.Log("We got the ticket!:"+assignment.Ip+":"+assignment.Port);
+                        }
+
+                        if (assignment == null)
+                        {
+                            throw new InvalidOperationException($"GetTicketStatus returned a type that was not a {nameof(MultiplayAssignment)}. This operation is not supported.");
+                        }
+
+                        switch (assignment.Status)
+                        {
+                            case StatusOptions.InProgress:
+                                //Do nothing
+                                break;
+                            case StatusOptions.Found:
+                            case StatusOptions.Failed:
+                            case StatusOptions.Timeout:
+                                polling = false;
+                                break;
+                            default:
+                                throw new InvalidOperationException("Assignment status was a value other than 'In Progress', 'Found', 'Timeout' or 'Failed'! Mismatch between Matchmaker SDK expected responses and service API values! Status value: '{assignment.Status}'");
                         }
                     }
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
-                    Debug.LogError("Error in polling ticket status: " + e.Message);
-                    polling = false;
-                    await StopSearch();
-                    onMatchSearchCompleted?.Invoke(null);
+#pragma warning disable CS4014 // Can't await in coroutines, so the method execution will continue
+                    StopSearch();
+#pragma warning restore CS4014 // Can't await in coroutines, so the method execution will continue
+                    onMatchSearchCompleted?.Invoke(assignment);
+                    throw;
                 }
             }
 
-            await StopSearch();
+#pragma warning disable CS4014 // Can't await in coroutines, so the method execution will continue
+            StopSearch();
+#pragma warning restore CS4014 // Can't await in coroutines, so the method execution will continue
+            onMatchSearchCompleted?.Invoke(assignment);
         }
     }
 }

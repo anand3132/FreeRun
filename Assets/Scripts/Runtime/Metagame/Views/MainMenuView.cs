@@ -39,7 +39,7 @@ namespace RedGaint.Network.Runtime
 
         void OnClickFindMatch(ClickEvent evt)
         {
-            Broadcast(new EnterMatchmakerQueueEvent("Queue01"));
+            Broadcast(new EnterMatchmakerQueueEvent("casual"));
         }
 
         void OnClickJoinDirectIP(ClickEvent evt)

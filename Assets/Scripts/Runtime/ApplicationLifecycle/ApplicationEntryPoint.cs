@@ -19,8 +19,8 @@ namespace RedGaint.Network.Runtime.ApplicationLifecycle
     [MultiplayerRoleRestricted]
     public class ApplicationEntryPoint : MonoBehaviour
     {
-        const string k_DefaultServerListenAddress = "0.0.0.0";
-        const string k_DefaultClientAutoConnectServerAddress = "127.0.0.1";
+        private const string k_DefaultServerListenAddress = "0.0.0.0";
+        private const string k_DefaultClientAutoConnectServerAddress = "127.0.0.1";
         public static ApplicationEntryPoint Singleton { get; private set; }
         
 #if UNITY_EDITOR
@@ -93,9 +93,11 @@ namespace RedGaint.Network.Runtime.ApplicationLifecycle
         void InitializeNetworkLogic()
         {
             var commandLineArgumentsParser = new CommandLineArgumentsParser();
+            
             ushort listeningPort = (ushort) commandLineArgumentsParser.Port;
+            
             listeningPort = GetAvailablePort(listeningPort); // Ensure the port is available
-
+            
             switch (MultiplayerRolesManager.ActiveMultiplayerRoleMask)
             {
                 case MultiplayerRoleFlags.Server:

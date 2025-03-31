@@ -50,9 +50,9 @@ namespace RedGaint.Network.Runtime
                 //servers should always have a single ID so their data isn't mixed with Users'.
                 UnityServices.ExternalUserId = k_ServerID;
             }
-            Debug.Log("--------------------------------"+k_Environment);
+            Debug.Log("TrySignInAsync: on Environment "+k_Environment);
             bool signedIn = await UnityServiceAuthenticator.TrySignInAsync(k_Environment, serviceProfileName);
-            Debug.Log("--------------------------------"+signedIn);
+            Debug.Log("Authentication Status: "+signedIn);
 
             if (isClient)
             {

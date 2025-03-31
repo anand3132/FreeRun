@@ -1,4 +1,5 @@
 using System.IO;
+using UnityEngine;
 
 namespace RedGaint.Network.Editor
 {
@@ -18,11 +19,34 @@ namespace RedGaint.Network.Editor
         /// <param name="isServerBuild">Is this a server build?</param>
         public static void PostExport(string exportPath, bool isServerBuild)
         {
+            
+            if (!isServerBuild)
+            {
+                bool mobileBuild = false;
+#if UNITY_ANDROID || UNITY_IOS
+                mobileBuild = true;
+#endif
+                if (mobileBuild)
+                {
+                    //mobile builds need to have StartupConfiguration bundled as part of the apk/aab, so the Post-Export pass is useless
+                    return;
+                }
+            }
+            
+            
             FileAttributes attr = File.GetAttributes(exportPath);
             string directory;
             if (attr.HasFlag(FileAttributes.Directory))
             {
-                directory = exportPath;
+                if (exportPath.EndsWith(".app"))
+                {
+                    Debug.Log("Copying files next to OSX .app. This ensures additional build files are in the right place.");
+                    directory = Path.GetDirectoryName(exportPath);
+                }
+                else
+                {
+                    directory = exportPath;
+                }
             }
             else
             {
@@ -46,7 +70,10 @@ namespace RedGaint.Network.Editor
             // Get the files in the directory and copy them to the new location.
             foreach (FileInfo file in dir.GetFiles())
             {
-                file.CopyTo(Path.Combine(destDirName, file.Name), false);
+                if (file.Extension != ".meta") //must-have in Unity, useless in builds
+                {
+                    file.CopyTo(Path.Combine(destDirName, file.Name), false);
+                }
             }
 
             // If copying subdirectories, copy them and their contents to new location.

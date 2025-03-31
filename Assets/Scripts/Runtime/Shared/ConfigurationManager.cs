@@ -1,6 +1,9 @@
+using System.Collections;
+using UnityEngine.Networking;
 using System.IO;
 using System.Linq;
 using RedGaint.Network.Runtime.SimpleJSON;
+using Unity.Multiplayer;
 using UnityEngine;
 
 namespace RedGaint.Network.Runtime
@@ -23,15 +26,40 @@ namespace RedGaint.Network.Runtime
         /// <summary>
         /// Players the server expects in a match before allowing it to start
         /// </summary>
+        
+        /// Identifier of "Override Multiplayer Role" settings
+        /// </summary>
+        public const string k_OverrideMultiplayerRole = "OverrideMultiplayerRole";
+        /// <summary>
+        /// Identifier of "Host mode" settings
+        /// </summary>
+        public const string k_ModeHost = "StartAsHost";
+        /// <summary>
+        /// Identifier of "Server mode" settings
+        /// </summary>
+        public const string k_ModeServer = "StartAsServer";
+        /// Identifier of "Client mode" settings
+        public const string k_ModeClient = "StartAsClient";
+        /// <summary>
+        /// Identifier of "Client mode" settings
         public const string k_MinPlayers = "MinPlayers";
         /// <summary>
         /// Maximum number of players the server expects in a match
         /// </summary>
         public const string k_MaxPlayers = "MaxPlayers";
+        
+        /// Port where the game runs on the server 
+        public const string k_Port = "Port";
+        /// Are bots allowed in the match?
+        public const string k_EnableBots = "EnableBots";
+        /// IP address of the server 
+        public const string k_ServerIP = "ServerIP";
         /// <summary>
         /// Will the game startup behaviour change according to the settings?
         /// </summary>
         public const string k_Autoconnect = "AutoConnect";
+        /// Will the server stay open to allow reconnection of disconnected players?
+        public const string k_AllowReconnection = "AllowReconnection";
         #endregion
 
         /// <summary>
@@ -65,6 +93,49 @@ namespace RedGaint.Network.Runtime
         }
 
         /// <summary>
+        /// Initializes the ConfigurationManager
+        /// </summary>
+        /// <param name="routineRunner">A MonoBehaviour that will run the loading routine</param>
+        /// <param name="configFilePath">path of the configuration file</param>
+        /// <param name="onFinished">Callback invoked when the configuration is loaded</param>
+        public ConfigurationManager(MonoBehaviour routineRunner, string configFilePath, System.Action<ConfigurationManager> onFinished = null)
+        {
+#if !UNITY_EDITOR
+            string configPathOnMobile = Path.Combine(Application.streamingAssetsPath, "Client", configFilePath);
+#if UNITY_ANDROID
+            Debug.Log($"Loading config on Android platforms, from {configPathOnMobile}");
+            routineRunner.StartCoroutine(LoadConfigurationFromFileOnNonDesktop(configPathOnMobile, onFinished));
+            return;
+#endif
+#if UNITY_IOS
+            LoadConfigurationOnIOS(configPathOnMobile, onFinished);
+            return;
+#endif
+#endif
+            LoadConfigurationFromFile(configFilePath, false, false);
+            onFinished?.Invoke(this);
+        }
+
+        void LoadConfigurationOnIOS(string configFilePath, System.Action<ConfigurationManager> onFinished = null)
+        {
+            Debug.Log($"Loading config on iOS platform, from {configFilePath}");
+            LoadConfigurationFromFile(configFilePath, false, false);
+            onFinished?.Invoke(this);
+        }
+
+        IEnumerator LoadConfigurationFromFileOnNonDesktop(string configFilePath, System.Action<ConfigurationManager> onFinished)
+        {
+            m_ConfigFilePath = configFilePath;
+            using (UnityWebRequest www = UnityWebRequest.Get(configFilePath))
+            {
+                yield return www.SendWebRequest();
+                m_Config = JSONNode.Parse(www.downloadHandler.text);
+                Debug.Log("[Non-desktop] config: " + m_Config.ToString(""));
+                onFinished?.Invoke(this);
+            }
+        }
+        
+        /// <summary>
         /// Loads the configuration file
         /// </summary>
         /// <param name="configFilePath">Path of the configuration file.</param>
@@ -78,7 +149,14 @@ namespace RedGaint.Network.Runtime
             {
                 if (!createIfNotExists)
                 {
-                    throw new FileNotFoundException($"{configFilePath} not found");
+                    throw new FileNotFoundException($"{configFilePath} not found not found, " +
+                                                    $"please open the Bootstrapper Window to create a default configuration " +
+                                                    $"file (menu Window > Multiplayer > Bootstrapper). If you're using multiplayer " +
+                                                    $"Play Mode and this is a virtual player, please copy the " +
+                                                    $"StartupConfiguration.json file from the root folder of " +
+                                                    $"the project of the Main Editor, then use the Multiplayer " +
+                                                    $"Play Mode window to navigate to the Virtual " +
+                                                    $"Player's folder, and paste it there.\"");
                 }
 
                 m_Config = JSONNode.Parse(Resources.Load<TextAsset>(templatePath).text);
@@ -162,7 +240,25 @@ namespace RedGaint.Network.Runtime
         {
             JSONUtilities.WriteJSONToFile(path, m_Config, singleLine);
         }
-
+        public MultiplayerRoleFlags GetMultiplayerRole()
+        {
+            if (GetBool(k_OverrideMultiplayerRole))
+            {
+                if (GetBool(k_ModeServer))
+                {
+                    return MultiplayerRoleFlags.Server;
+                }
+                if (GetBool(k_ModeHost))
+                {
+                    return MultiplayerRoleFlags.ClientAndServer;
+                }
+                if (GetBool(k_ModeClient))
+                {
+                    return MultiplayerRoleFlags.Client;
+                }
+            }
+            return MultiplayerRolesManager.ActiveMultiplayerRoleMask;
+        }
         /// <summary>
         /// Overwrites the existing configuration with a new one
         /// </summary>
@@ -170,6 +266,10 @@ namespace RedGaint.Network.Runtime
         public void Overwrite(JSONNode newConfiguration)
         {
             m_Config = JSONNode.Parse(newConfiguration.ToString());
+        }
+        public override string ToString()
+        {
+            return m_Config.ToString("");
         }
     }
 }

@@ -964,7 +964,13 @@ PlayerSettings:
   windowsGamepadBackendHint: 0
   cloudProjectId: 52b8288e-8da7-4625-a2a3-32a577389bd1
   framebufferDepthMemorylessMode: 0
-  qualitySettingsNames: []
+  qualitySettingsNames:
+  - Very Low
+  - Low
+  - Medium
+  - High
+  - Very High
+  - Ultra
   projectName: DedicatedServer
   organizationId: redgiantgames
   cloudEnabled: 0
