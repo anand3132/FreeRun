@@ -1,0 +1,12 @@
+{ 
+   "MinPlayers" : "2", 
+   "MaxPlayers" : "8", 
+   "AutoConnect" : "false", 
+   "StartAsServer" : "False", 
+   "StartAsClient" : "False", 
+   "OverrideMultiplayerRole" : "false", 
+   "EnableBots" : "false", 
+   "Port" : "0", 
+   "AllowReconnection" : "false", 
+   "StartAsHost" : "True"
+}

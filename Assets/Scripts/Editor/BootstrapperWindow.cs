@@ -77,7 +77,7 @@ namespace RedGaint.Network.Editor
         /// <summary>
         /// Opens the bootstrapper window
         /// </summary>
-        [MenuItem("Window/Multiplayer/Bootstrapper")]
+        [MenuItem("ServerOptions/Bootstrapper")]
         public static void ShowWindow()
         {
             var window = GetWindow<BootstrapperWindow>("Bootstrapper");
@@ -111,14 +111,26 @@ namespace RedGaint.Network.Editor
             VisualTreeAsset playerVisualTree = UIElementsUtils.LoadUXML("Bootstrapper");
             playerVisualTree.CloneTree(m_Root);
 
-            m_OverrideMultiplayerRole = UIElementsUtils.SetupToggle("tglOverrideMultiplayerRole", "Override multiplayer role", string.Empty, OverrideMultiplayerRole, OnOverrideMultiplayerRoleChanged, m_Root);
+            m_OverrideMultiplayerRole = UIElementsUtils.SetupToggle("tglOverrideMultiplayerRole", "Override multiplayer role",
+                                                                    string.Empty, OverrideMultiplayerRole, OnOverrideMultiplayerRoleChanged, m_Root);
+            
             m_NetworkModeList = UIElementsUtils.SetupEnumField("lstMode", "Autoconnect Mode", OnNetworkModeChanged, m_Root, m_NetworkMode);
-            UIElementsUtils.SetupButton("btnReset", OnClickReset, true, m_Root, "Reset to default", "Resets the state of the configuration file to the one of the template provided in Resources/DefaultConfigurations/");
+            
+            UIElementsUtils.SetupButton("btnReset", OnClickReset, true, m_Root, "Reset to default", 
+                                                                    "Resets the state of the configuration file to the one of the template provided in Resources/DefaultConfigurations/");
+            
             m_UseBotToggle = UIElementsUtils.SetupToggle("tglUseBots", "Use bots", string.Empty, UseBots, OnEnableBotsChanged, m_Root);
+            
             m_ServerPort = UIElementsUtils.SetupIntegerField("intServerPort", ServerPort, OnServerPortChanged, m_Root);
+            
             m_ServerIPTextField = UIElementsUtils.SetupStringField("strServerIP", "Server IP", ServerIP, OnServerIPChanged, m_Root);
-            m_AutoConnectOnStartupToggle = UIElementsUtils.SetupToggle("tglAutoConnectOnStartup", "Autoconnect on startup", string.Empty, AutoConnectOnStartup, OnAutoConnectChanged, m_Root);
-            m_AllowReconnectionToggle = UIElementsUtils.SetupToggle("tglAllowReconnection", "Allow reconnection", string.Empty, AllowReconnection, OnAllowReconnectionChanged, m_Root);
+            
+            m_AutoConnectOnStartupToggle = UIElementsUtils.SetupToggle("tglAutoConnectOnStartup", 
+                                                                        "Autoconnect on startup", string.Empty, AutoConnectOnStartup, OnAutoConnectChanged, m_Root);
+            
+            m_AllowReconnectionToggle = UIElementsUtils.SetupToggle("tglAllowReconnection", 
+                                                                        "Allow reconnection", string.Empty, AllowReconnection, OnAllowReconnectionChanged, m_Root);
+            
             m_MaxPlayers = UIElementsUtils.SetupIntegerField("intMaxPlayers", MaxPlayers, OnMaxPlayersChanged, m_Root);
             UpdateUIAccordingToNetworkMode();
         }

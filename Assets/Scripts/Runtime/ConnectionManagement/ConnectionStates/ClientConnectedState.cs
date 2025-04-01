@@ -7,7 +7,10 @@ namespace RedGaint.Network.Runtime.ConnectionManagement
     /// </summary>
     class ClientConnectedState : OnlineState
     {
-        public override void Enter() { }
+        public override void Enter()
+        {
+            
+        }
 
         public override void Exit() { }
 

@@ -66,12 +66,12 @@ namespace RedGaint.Network.Runtime.ApplicationLifecycle
             {
                 Singleton = this;
             }
-            m_ConnectionManager.EventManager.AddListener<ConnectionManagement_ConnectionEvent>(OnConnectionEvent);
+            m_ConnectionManager.EventManager.AddListener<ConnectionEvent>(OnConnectionEvent);
         }
 
         void OnDestroy()
         {
-            m_ConnectionManager.EventManager.RemoveListener<ConnectionManagement_ConnectionEvent>(OnConnectionEvent);
+            m_ConnectionManager.EventManager.RemoveListener<ConnectionEvent>(OnConnectionEvent);
         }
 
        [RuntimeInitializeOnLoadMethod]
@@ -139,7 +139,7 @@ namespace RedGaint.Network.Runtime.ApplicationLifecycle
             }
             return startingPort;
         }
-        void OnConnectionEvent(ConnectionManagement_ConnectionEvent evt)
+        void OnConnectionEvent(ConnectionEvent evt)
         {
             if (MultiplayerRolesManager.ActiveMultiplayerRoleMask == MultiplayerRoleFlags.Server)
             {
