@@ -23,7 +23,7 @@ namespace RedGaint.Network.Runtime
 #elif STAGE
                                         "staging";
 #else
-                                        "dev";
+                                        "development";
 #endif
         public void Awake()
         {

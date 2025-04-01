@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: Unity
-  productName: DedicatedGameServer
+  companyName: RedGaint
+  productName: FreeRun
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -165,7 +165,9 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   androidMinAspectRatio: 1
   applicationIdentifier:
-    Standalone: com.Unity.DedicatedGameServer
+    Android: com.RedGaint.FreeRun
+    Standalone: com.RedGaint.FreeRun
+    iPhone: com.RedGaint.FreeRun
   buildNumber:
     Bratwurst: 0
     Standalone: 0
@@ -581,6 +583,9 @@ PlayerSettings:
   - serializedVersion: 3
     m_BuildTarget: Android
     m_Formats: 00000000
+  - serializedVersion: 3
+    m_BuildTarget: iOS
+    m_Formats: 03000000
   playModeTestRunnerEnabled: 0
   runPlayModeTestAsEditModeTest: 0
   actionOnDotNetUnhandledException: 1
@@ -971,7 +976,7 @@ PlayerSettings:
   - High
   - Very High
   - Ultra
-  projectName: DedicatedServer
+  projectName: FreeRun
   organizationId: redgiantgames
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0

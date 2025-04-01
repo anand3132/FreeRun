@@ -74,7 +74,7 @@ namespace RedGaint.Network.Runtime.ApplicationLifecycle
             m_ConnectionManager.EventManager.RemoveListener<ConnectionManagement_ConnectionEvent>(OnConnectionEvent);
         }
 
-        [RuntimeInitializeOnLoadMethod]
+       [RuntimeInitializeOnLoadMethod]
         static void OnApplicationStarted()
         {
             if (!Singleton) //this happens during PlayMode tests

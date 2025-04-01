@@ -880,6 +880,7 @@ MonoBehaviour:
     - line: '|   scriptingDefineSymbols:'
     - line: '|     Android: '
     - line: '|     Standalone: '
+    - line: '|     iPhone: '
     - line: '|   additionalCompilerArguments: {}'
     - line: '|   platformArchitecture: {}'
     - line: '|   scriptingBackend:'

@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Unity.Template.Multiplayer.NGO.Editor
+namespace RedGaint.Network.Editor
 {
     ///<summary>
     /// Allows for fast switching between host/server only/client only modes in unity editor
