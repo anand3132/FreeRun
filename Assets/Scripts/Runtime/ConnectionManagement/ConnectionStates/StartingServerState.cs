@@ -2,7 +2,7 @@ using System;
 using Unity.Netcode.Transports.UTP;
 using UnityEngine;
 
-namespace Unity.DedicatedGameServerSample.Runtime.ConnectionManagement
+namespace RedGaint.Network.Runtime.ConnectionManagement
 {
     /// <summary>
     /// Connection state corresponding to a server starting up. Starts the server when entering the state. If successful,

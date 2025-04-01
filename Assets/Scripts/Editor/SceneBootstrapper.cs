@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-namespace Unity.DedicatedGameServerSample.Editor
+namespace RedGaint.Network.Editor
 {
     /// <summary>
     /// Class that permits auto-loading a bootstrap scene when the editor switches play state. This class is

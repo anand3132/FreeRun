@@ -8,7 +8,7 @@ using System.Text;
 
 using UnityEngine;
 
-namespace Unity.DedicatedGameServerSample.Runtime
+namespace RedGaint.Network.Runtime
 {
     public class ProfileManager
     {

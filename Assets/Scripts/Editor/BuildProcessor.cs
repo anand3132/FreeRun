@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using Unity.DedicatedGameServerSample.Runtime;
+using RedGaint.Network.Runtime;
+using Unity.Burst;
 using Unity.Multiplayer;
 using Unity.Multiplayer.Editor;
 using UnityEditor;
@@ -8,7 +9,7 @@ using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 
-namespace Unity.DedicatedGameServerSample.Editor
+namespace RedGaint.Network.Editor
 {
     ///<summary>
     ///Performs additional operations before/after the build is done
@@ -60,7 +61,7 @@ namespace Unity.DedicatedGameServerSample.Editor
             //unfortunately we can't use burst compilation due to a 
             //bug in its latest version, so we need to disable it.
             //It annoyingly re-enables every time you switch platform...
-            Burst.BurstCompiler.Options.EnableBurstCompilation = false;
+            BurstCompiler.Options.EnableBurstCompilation = false;
             AssetDatabase.SaveAssets();
         }
 

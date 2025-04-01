@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Unity.DedicatedGameServerSample.Runtime
+namespace RedGaint.Network.Runtime
 {
     /// <summary>
     /// Extension of the element class to handle different BaseApplication types.

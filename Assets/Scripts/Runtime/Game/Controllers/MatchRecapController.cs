@@ -1,6 +1,6 @@
-using Unity.DedicatedGameServerSample.Runtime.ApplicationLifecycle;
+using RedGaint.Network.Runtime.ApplicationLifecycle;
 
-namespace Unity.DedicatedGameServerSample.Runtime
+namespace RedGaint.Network.Runtime
 {
     internal class MatchRecapController : Controller<GameApplication>
     {

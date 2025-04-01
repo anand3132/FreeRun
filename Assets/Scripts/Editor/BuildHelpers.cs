@@ -2,7 +2,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace Unity.DedicatedGameServerSample.Editor
+namespace RedGaint.Network.Editor
 {
     ///<summary>
     /// Utility menus to easily create client and server builds to accelerate testing iterations.

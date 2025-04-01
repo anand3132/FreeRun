@@ -1,9 +1,9 @@
 using System;
-using Unity.DedicatedGameServerSample.Runtime.ApplicationLifecycle;
-using Unity.DedicatedGameServerSample.Runtime.ConnectionManagement;
+using RedGaint.Network.Runtime.ApplicationLifecycle;
+using RedGaint.Network.Runtime.ConnectionManagement;
 using UnityEngine;
 
-namespace Unity.DedicatedGameServerSample.Runtime
+namespace RedGaint.Network.Runtime
 {
     internal class DirectIPController : Controller<MetagameApplication>
     {

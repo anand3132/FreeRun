@@ -1,9 +1,9 @@
 using System.IO;
 using System.Threading.Tasks;
-using Unity.DedicatedGameServerSample.Runtime.SimpleJSON;
+using RedGaint.Network.Runtime.SimpleJSON;
 using UnityEngine;
 
-namespace Unity.DedicatedGameServerSample.Runtime
+namespace RedGaint.Network.Runtime
 {
     /// <summary>
     /// Utility class for JSON files

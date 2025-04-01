@@ -8,7 +8,7 @@ using Unity.Services.Matchmaker;
 using Unity.Services.Matchmaker.Models;
 using StatusOptions = Unity.Services.Matchmaker.Models.MultiplayAssignment.StatusOptions;
 
-namespace Unity.DedicatedGameServerSample.Runtime
+namespace RedGaint.Network.Runtime
 {
     ///<summary>
     ///Holds matchmaker search logic
@@ -47,9 +47,9 @@ namespace Unity.DedicatedGameServerSample.Runtime
         async Task StartSearch(string queueName, Action<MultiplayAssignment> onMatchSearchCompleted, Action<int> onMatchmakerTicked)
         {
             var attributes = new Dictionary<string, object>();
-            var players = new List<Services.Matchmaker.Models.Player>
+            var players = new List<Player>
             {
-                new Services.Matchmaker.Models.Player(AuthenticationService.Instance.PlayerId, new { }),
+                new Player(AuthenticationService.Instance.PlayerId, new { }),
             };
             var options = new CreateTicketOptions(queueName, attributes);
             var ticketResponse = await MatchmakerService.Instance.CreateTicketAsync(players, options);

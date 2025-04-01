@@ -1,6 +1,6 @@
 using UnityEngine.UIElements;
 
-namespace Unity.DedicatedGameServerSample.Runtime
+namespace RedGaint.Network.Runtime
 {
     internal class MatchRecapView : View<GameApplication>
     {

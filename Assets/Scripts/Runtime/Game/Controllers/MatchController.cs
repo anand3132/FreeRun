@@ -1,6 +1,6 @@
 using System;
 
-namespace Unity.DedicatedGameServerSample.Runtime
+namespace RedGaint.Network.Runtime
 {
     internal class MatchController : Controller<GameApplication>
     {

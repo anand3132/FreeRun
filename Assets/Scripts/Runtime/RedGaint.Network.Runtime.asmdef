@@ -1,6 +1,6 @@
 {
-    "name": "com.unity.sample.dedicated-server.runtime",
-    "rootNamespace": "Unity.DedicatedGameServerSample.Runtime",
+    "name": "RedGaint.Network.Runtime",
+    "rootNamespace": "RedGaint.Network.Runtime",
     "references": [
         "Unity.Netcode.Runtime",
         "Unity.Services.Core",
@@ -8,14 +8,14 @@
         "Unity.Services.Authentication",
         "Unity.Services.Core.Environments",
         "Unity.Networking.Transport",
-        "com.unity.sample.dedicated-server.shared",
         "Cinemachine",
         "Unity.Multiplayer.Samples.Utilities.ClientAuthority",
         "Unity.InputSystem",
         "StarterAssets",
         "Unity.DedicatedServer.MultiplayerRoles",
         "Unity.AI.Navigation",
-        "Unity.Multiplayer.Samples.Utilities"
+        "Unity.Multiplayer.Samples.Utilities",
+        "RedGaint.Network.Shared"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
-using Unity.DedicatedGameServerSample.Runtime.ApplicationLifecycle;
-using Unity.DedicatedGameServerSample.Runtime.ConnectionManagement;
+using RedGaint.Network.Runtime.ApplicationLifecycle;
+using RedGaint.Network.Runtime.ConnectionManagement;
 using Unity.Netcode;
 using UnityEngine;
 
-namespace Unity.DedicatedGameServerSample.Runtime
+namespace RedGaint.Network.Runtime
 {
     /// <summary>
     /// Holds the logical state of a game and synchronizes it across the network

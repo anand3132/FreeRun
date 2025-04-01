@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
-using Unity.DedicatedGameServerSample.Runtime.ConnectionManagement;
+using RedGaint.Network.Runtime.ConnectionManagement;
 using Unity.Multiplayer;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using ConnectionEvent = Unity.DedicatedGameServerSample.Runtime.ConnectionManagement.ConnectionEvent;
+using ConnectionEvent = RedGaint.Network.Runtime.ConnectionManagement.ConnectionEvent;
+using ConnectionManagement_ConnectionEvent = RedGaint.Network.Runtime.ConnectionManagement.ConnectionEvent;
 
-namespace Unity.DedicatedGameServerSample.Runtime.ApplicationLifecycle
+namespace RedGaint.Network.Runtime.ApplicationLifecycle
 {
     /// <summary>
     /// This is the application's entry point, where the configuration is read and the application is initialized
@@ -63,12 +64,12 @@ namespace Unity.DedicatedGameServerSample.Runtime.ApplicationLifecycle
             {
                 Singleton = this;
             }
-            m_ConnectionManager.EventManager.AddListener<ConnectionEvent>(OnConnectionEvent);
+            m_ConnectionManager.EventManager.AddListener<ConnectionManagement_ConnectionEvent>(OnConnectionEvent);
         }
 
         void OnDestroy()
         {
-            m_ConnectionManager.EventManager.RemoveListener<ConnectionEvent>(OnConnectionEvent);
+            m_ConnectionManager.EventManager.RemoveListener<ConnectionManagement_ConnectionEvent>(OnConnectionEvent);
         }
 
         [RuntimeInitializeOnLoadMethod]
@@ -113,7 +114,7 @@ namespace Unity.DedicatedGameServerSample.Runtime.ApplicationLifecycle
             }
         }
 
-        void OnConnectionEvent(ConnectionEvent evt)
+        void OnConnectionEvent(ConnectionManagement_ConnectionEvent evt)
         {
             if (MultiplayerRolesManager.ActiveMultiplayerRoleMask == MultiplayerRoleFlags.Server)
             {

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0cfbca29-fb33-45bb-a16b-ee71f1584851" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/769470b9cd094881a167f43b70144a519c600/29/0b608a3c/0200001Epdb12.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0900e0d4bb644dafbfd59eb7fd222a681ddc00/02/e7a2cb8f/SceneManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0900e0d4bb644dafbfd59eb7fd222a681ddc00/74/715d4955/Object.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0900e0d4bb644dafbfd59eb7fd222a681ddc00/96/ad8f855b/MonoBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0900e0d4bb644dafbfd59eb7fd222a681ddc00/a0/c0169da1/Assert.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0900e0d4bb644dafbfd59eb7fd222a681ddc00/d7/fd0d37f8/RuntimeInitializeOnLoadMethodAttribute.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0900e0d4bb644dafbfd59eb7fd222a681ddc00/fc/95100b3d/Arguments.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4e9c48eedf6f482fa439ccf3356314819b8200/3e/207b6c3f/EditorApplication.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7a8285f8dc9940c7bb46fe253fff3327a4000/83/ed87a829/IMultiplayerService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d59d088174d643f487a455f58c6feb551f7800/06/7f295200/VisualTreeAsset.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d59d088174d643f487a455f58c6feb551f7800/48/7c39c4bd/EventDebuggerLogCall.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d59d088174d643f487a455f58c6feb551f7800/cc/5ea56e78/EventCallbackFunctor`1.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ed969b0e627d471da4848289f9c322df46ae00/30/5ee23438/AsyncTaskMethodBuilder`1.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ed969b0e627d471da4848289f9c322df46ae00/34/84117143/Type.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ed969b0e627d471da4848289f9c322df46ae00/3f/aa9c8bb9/IntPtr.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ed969b0e627d471da4848289f9c322df46ae00/b4/3553b1cd/Dictionary`2.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ed969b0e627d471da4848289f9c322df46ae00/c0/18ae8c9d/RuntimeType.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/Scripts/Runtime/ApplicationLifecycle/ApplicationEntryPoint.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/Scripts/Runtime/ApplicationLifecycle/ApplicationEntryPoint.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/Tests/Runtime/TestsApplication/ExtraTestsController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/Tests/Runtime/TestsApplication/TestsApplication.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/Tests/Runtime/TestsApplication/TestsApplication.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/Tests/Runtime/TestsApplication/TestsApplication.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/Tests/Runtime/TestsApplication/TestsApplication.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/Tests/Runtime/TestsApplication/TestsApplication.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/Tests/Runtime/TestsApplication/TestsApplication.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/Tests/Runtime/TestsApplication/TestsApplication.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/Tests/Runtime/TestsApplication/TestsApplication.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "node.js.selected.package.tslint": "(autodetect)"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.30f1\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-projectPath E:\1_Live\0_Network\0_FreeRun\FreeRun -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="E:\1_Live\0_Network\0_FreeRun\FreeRun" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.30f1\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath E:\1_Live\0_Network\0_FreeRun\FreeRun -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="E:\1_Live\0_Network\0_FreeRun\FreeRun" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
+</project>

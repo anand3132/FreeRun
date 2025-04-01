@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Unity.DedicatedGameServerSample.Runtime
+namespace RedGaint.Network.Runtime
 {
     /// <summary>
     /// Main controller of the <see cref="MetagameApplication"></see>

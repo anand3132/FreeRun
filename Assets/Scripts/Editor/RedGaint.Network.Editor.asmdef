@@ -1,15 +1,15 @@
 {
-    "name": "com.unity.sample.dedicated-server.editor",
-    "rootNamespace": "Unity.DedicatedGameServerSample.Editor",
+    "name": "RedGaint.Network.Editor",
+    "rootNamespace": "RedGaint.Network.Editor",
     "references": [
         "Unity.Netcode.Runtime",
-        "com.unity.sample.dedicated-server.shared",
-        "com.unity.sample.dedicated-server.runtime",
         "Unity.Networking.Transport",
         "Unity.EditorCoroutines.Editor",
         "Unity.DedicatedServer.MultiplayerRoles",
         "Unity.DedicatedServer.MultiplayerRoles.Editor",
-        "Unity.Burst"
+        "Unity.Burst",
+        "RedGaint.Network.Runtime",
+        "RedGaint.Network.Shared"
     ],
     "includePlatforms": [
         "Editor"

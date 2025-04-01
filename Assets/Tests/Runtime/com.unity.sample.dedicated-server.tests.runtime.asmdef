@@ -6,7 +6,9 @@
         "UnityEditor.TestRunner",
         "Unity.Netcode.Runtime",
         "com.unity.sample.dedicated-server.runtime",
-        "com.unity.sample.dedicated-server.shared"
+        "com.unity.sample.dedicated-server.shared",
+        "RedGaint.Network.Runtime",
+        "RedGaint.Network.Shared"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,6 +1,6 @@
 {
-    "name": "com.unity.sample.dedicated-server.shared",
-    "rootNamespace": "Unity.DedicatedGameServerSample.Shared",
+    "name": "RedGaint.Network.Shared",
+    "rootNamespace": "RedGaint.Network.Shared",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

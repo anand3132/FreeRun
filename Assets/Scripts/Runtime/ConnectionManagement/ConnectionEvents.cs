@@ -1,4 +1,4 @@
-namespace Unity.DedicatedGameServerSample.Runtime.ConnectionManagement
+namespace RedGaint.Network.Runtime.ConnectionManagement
 {
     public enum ConnectStatus
     {

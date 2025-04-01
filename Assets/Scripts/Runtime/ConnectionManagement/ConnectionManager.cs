@@ -4,7 +4,7 @@ using Unity.Multiplayer;
 using Unity.Netcode;
 using UnityEngine;
 
-namespace Unity.DedicatedGameServerSample.Runtime.ConnectionManagement
+namespace RedGaint.Network.Runtime.ConnectionManagement
 {
     [Serializable]
     public class ConnectionPayload
@@ -89,10 +89,10 @@ namespace Unity.DedicatedGameServerSample.Runtime.ConnectionManagement
         {
             switch (arg2.EventType)
             {
-                case Netcode.ConnectionEvent.ClientConnected:
+                case Unity.Netcode.ConnectionEvent.ClientConnected:
                     m_CurrentState.OnClientConnected(arg2.ClientId);
                     break;
-                case Netcode.ConnectionEvent.ClientDisconnected:
+                case Unity.Netcode.ConnectionEvent.ClientDisconnected:
                     m_CurrentState.OnClientDisconnect(arg2.ClientId);
                     break;
                 default:

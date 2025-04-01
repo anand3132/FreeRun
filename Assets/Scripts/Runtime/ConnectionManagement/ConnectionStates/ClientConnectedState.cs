@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Unity.DedicatedGameServerSample.Runtime.ConnectionManagement
+namespace RedGaint.Network.Runtime.ConnectionManagement
 {
     /// <summary>
     /// Connection state corresponding to a connected client. When being disconnected, transitions to the Offline state.

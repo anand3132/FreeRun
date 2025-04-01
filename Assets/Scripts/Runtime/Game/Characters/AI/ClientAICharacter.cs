@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Unity.DedicatedGameServerSample.Runtime
+namespace RedGaint.Network.Runtime
 {
     [RequireComponent(typeof(NetworkedAICharacter))]
     public class ClientAICharacter : MonoBehaviour

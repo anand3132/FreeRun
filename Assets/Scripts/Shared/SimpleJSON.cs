@@ -1,4 +1,4 @@
-namespace Unity.DedicatedGameServerSample.Runtime
+namespace RedGaint.Network.Runtime
 {
     /* * * * *
      * A simple JSON Parser / builder

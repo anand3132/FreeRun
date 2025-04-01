@@ -1,4 +1,4 @@
-namespace Unity.DedicatedGameServerSample.Runtime
+namespace RedGaint.Network.Runtime
 {
     internal class EnterMatchmakerQueueEvent : AppEvent
     {

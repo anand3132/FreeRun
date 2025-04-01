@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Threading.Tasks;
 using Unity.Services.Core;
-using Unity.DedicatedGameServerSample.Runtime.ApplicationLifecycle;
+using RedGaint.Network.Runtime.ApplicationLifecycle;
 using Unity.Multiplayer;
 using UnityEngine;
 
-namespace Unity.DedicatedGameServerSample.Runtime
+namespace RedGaint.Network.Runtime
 {
     ///<summary>
     ///Initializes all the Unity Services managers

@@ -1,9 +1,9 @@
 using NUnit.Framework;
-using Unity.DedicatedGameServerSample.Runtime.ApplicationLifecycle;
+using RedGaint.Network.Runtime.ApplicationLifecycle;
 using UnityEditor;
 using UnityEngine;
 
-namespace Unity.DedicatedGameServerSample.Tests.Runtime
+namespace RedGaint.Network.Tests.Runtime
 {
     /// <summary>
     /// Those tests are run ONCE before/after other tests of this assembly
