@@ -46,15 +46,24 @@ namespace RedGaint.Network.Runtime
 
         async Task StartSearch(string queueName, Action<MultiplayAssignment> onMatchSearchCompleted, Action<int> onMatchmakerTicked)
         {
-            var attributes = new Dictionary<string, object>();
+            
+            var attributes = new Dictionary<string, object>
+            {
+                { "region", "asia" }  // Replace with a valid region from Unity Multiplay
+            };
+            // var attributes = new Dictionary<string, object>();
             var players = new List<Player>
             {
-                new Player(AuthenticationService.Instance.PlayerId, new { }),
+                new Player(AuthenticationService.Instance.PlayerId, new Dictionary<string, object>()),
             };
             var options = new CreateTicketOptions(queueName, attributes);
+            
+            Debug.Log($"Matchmaking Ticket - Queue: {queueName}, Players: {players.Count}, Attributes: {JsonUtility.ToJson(attributes, true)}");
+
             var ticketResponse = await MatchmakerService.Instance.CreateTicketAsync(players, options);
             LastQueueName = queueName;
             m_TicketId = ticketResponse.Id;
+            Debug.Log($"Ticket Created - ID: {ticketResponse.Id}");
 
             CoroutinesHelper.StopAndNullifyRoutine(ref m_PollingCoroutine, this);
             m_PollingCoroutine = StartCoroutine(PollTicketStatus(onMatchSearchCompleted, onMatchmakerTicked));
@@ -111,6 +120,10 @@ namespace RedGaint.Network.Runtime
                                 //Do nothing
                                 break;
                             case StatusOptions.Found:
+                            {
+                                Debug.Log("Found..!!");
+                            }
+                                break;
                             case StatusOptions.Failed:
                             case StatusOptions.Timeout:
                                 polling = false;
@@ -120,8 +133,9 @@ namespace RedGaint.Network.Runtime
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Debug.Log("---->:"+ex.Message);
 #pragma warning disable CS4014 // Can't await in coroutines, so the method execution will continue
                     StopSearch();
 #pragma warning restore CS4014 // Can't await in coroutines, so the method execution will continue
