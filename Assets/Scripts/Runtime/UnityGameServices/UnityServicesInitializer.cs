@@ -23,7 +23,7 @@ namespace RedGaint.Network.Runtime
 #elif STAGE
                                         "staging";
 #else
-                                        "dev";
+                                        "development";
 #endif
         public void Awake()
         {
@@ -50,9 +50,10 @@ namespace RedGaint.Network.Runtime
                 //servers should always have a single ID so their data isn't mixed with Users'.
                 UnityServices.ExternalUserId = k_ServerID;
             }
-            Debug.Log("--------------------------------");
             bool signedIn = await UnityServiceAuthenticator.TrySignInAsync(k_Environment, serviceProfileName);
-            Debug.Log("--------------------------------"+signedIn);
+            Debug.Log("serviceProfileName:"+serviceProfileName);
+            Debug.Log("k_Environment:"+k_Environment);
+
 
             if (isClient)
             {

@@ -6,19 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="0cfbca29-fb33-45bb-a16b-ee71f1584851" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FreeRun/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FreeRun/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Metagame/MetagameApplication.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Metagame/MetagameApplication.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Editor/BuildHelpers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Editor/BuildHelpers.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Views/MainMenuView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Views/MainMenuView.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Runtime/UnityGameServices/MatchmakerTicketer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/UnityGameServices/MatchmakerTicketer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/Build Profiles/Linux Server Profile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/Build Profiles/Linux Server Profile.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/Universal Render Pipeline Asset.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/Universal Render Pipeline Asset.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/ClientConnectingView/ClientConnectingPanelSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI Toolkit/ClientConnectingView/ClientConnectingPanelSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/DirectIPView/DirectIPPanelSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI Toolkit/DirectIPView/DirectIPPanelSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/GameMenuView/GameMenuViewPanelSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI Toolkit/GameMenuView/GameMenuViewPanelSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/MainMenuView/MainMenuPanelSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI Toolkit/MainMenuView/MainMenuPanelSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/MatchView/MatchViewPanelSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI Toolkit/MatchView/MatchViewPanelSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/MatchmakerView/MatchmakerViewPanelSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI Toolkit/MatchmakerView/MatchmakerViewPanelSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UniversalRenderPipelineGlobalSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UniversalRenderPipelineGlobalSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Runtime/UnityGameServices/UnityServicesInitializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/UnityGameServices/UnityServicesInitializer.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,9 +45,9 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects/Runtime/Core/NetworkManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.matchmaker/Runtime/SDK/WrappedMatchmakerService.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2v8XI53NLxQX41KABlxcUGkkosB" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -73,6 +64,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.uml",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -93,15 +85,13 @@
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="6776">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="6776" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
-        <list>
-          <MonoRuntime />
-        </list>
+        <list />
       </option>
       <option name="selectedOptions">
         <list />

@@ -49,7 +49,7 @@ namespace RedGaint.Network.Runtime
             
             var attributes = new Dictionary<string, object>
             {
-                { "region", "asia" }  // Replace with a valid region from Unity Multiplay
+               // { "region", "asia" }  // Replace with a valid region from Unity Multiplay
             };
             // var attributes = new Dictionary<string, object>();
             var players = new List<Player>
@@ -58,7 +58,7 @@ namespace RedGaint.Network.Runtime
             };
             var options = new CreateTicketOptions(queueName, attributes);
             
-            Debug.Log($"Matchmaking Ticket - Queue: {queueName}, Players: {players.Count}, Attributes: {JsonUtility.ToJson(attributes, true)}");
+            Debug.Log($"Matchmaking Ticket  - Queue: {queueName}, Players: {players.Count}, Attributes: {JsonUtility.ToJson(attributes, true)}");
 
             var ticketResponse = await MatchmakerService.Instance.CreateTicketAsync(players, options);
             LastQueueName = queueName;
@@ -94,7 +94,7 @@ namespace RedGaint.Network.Runtime
                 {
                     ticketTask = Task.Run(() => MatchmakerService.Instance.GetTicketAsync(m_TicketId));
                 }
-                yield return CoroutinesHelper.OneSecond;
+                yield return CoroutinesHelper.ThreeSeconds;
                 elapsedTime++;
                 onMatchmakerTicked?.Invoke(elapsedTime);
 
@@ -117,10 +117,12 @@ namespace RedGaint.Network.Runtime
                         switch (assignment.Status)
                         {
                             case StatusOptions.InProgress:
+                                Debug.Log("Polling in progress");
                                 //Do nothing
                                 break;
                             case StatusOptions.Found:
                             {
+                                polling = false;
                                 Debug.Log("Found..!!");
                             }
                                 break;
