@@ -100,7 +100,7 @@ namespace RedGaint.Network.Sandbox
 
         public async void StartHost()
         {
-            await HostSingleton.Instance.StartHostAsync();
+          //  await HostSingleton.Instance.StartHostAsync();
         }
 
         public async void StartClient()

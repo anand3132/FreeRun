@@ -15,7 +15,8 @@
         "Unity.DedicatedServer.MultiplayerRoles",
         "Unity.AI.Navigation",
         "Unity.Multiplayer.Samples.Utilities",
-        "RedGaint.Network.Shared"
+        "RedGaint.Network.Shared",
+        "Unity.Services.Multiplayer"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

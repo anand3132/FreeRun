@@ -20,6 +20,7 @@
     "com.unity.test-framework": "1.4.5",
     "com.unity.toolchain.win-x86_64-linux-x86_64": "2.0.10",
     "com.unity.transport": "2.4.0",
-    "com.unity.modules.animation": "1.0.0"
+    "com.unity.modules.animation": "1.0.0",
+    "com.unity.modules.audio": "1.0.0"
   }
 }

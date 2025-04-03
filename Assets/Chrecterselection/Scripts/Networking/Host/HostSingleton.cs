@@ -52,109 +52,109 @@ namespace RedGaint.Network.Sandbox
             Shutdown();
         }
 
-        public async Task<bool> StartHostAsync()
-        {
-            Allocation allocation = null;
-
-            try
-            {
-                //Ask Unity Services to allocate a Relay server
-                allocation = await Relay.Instance.CreateAllocationAsync(maxConnections);
-            }
-            catch (Exception e)
-            {
-                Debug.Log(e);
-                return false;
-            }
-
-            //Populate the hosting data
-            relayHostData = new RelayHostData
-            {
-                Key = allocation.Key,
-                Port = (ushort)allocation.RelayServer.Port,
-                AllocationID = allocation.AllocationId,
-                AllocationIDBytes = allocation.AllocationIdBytes,
-                ConnectionData = allocation.ConnectionData,
-                IPv4Address = allocation.RelayServer.IpV4
-            };
-
-            try
-            {
-                //Retrieve the Relay join code for our clients to join our party
-                relayHostData.JoinCode = await Relay.Instance.GetJoinCodeAsync(RelayHostData.AllocationID);
-
-                Debug.Log(RelayHostData.JoinCode);
-            }
-            catch (Exception e)
-            {
-                Debug.Log(e);
-                return false;
-            }
-
-            //Retrieve the Unity transport used by the NetworkManager
-            UnityTransport transport = NetworkManager.Singleton.gameObject.GetComponent<UnityTransport>();
-
-            transport.SetRelayServerData(RelayHostData.IPv4Address,
-                RelayHostData.Port,
-                RelayHostData.AllocationIDBytes,
-                RelayHostData.Key,
-                RelayHostData.ConnectionData);
-
-            try
-            {
-                var createLobbyOptions = new CreateLobbyOptions();
-                createLobbyOptions.IsPrivate = false;
-                createLobbyOptions.Data = new Dictionary<string, DataObject>()
-                {
-                    {
-                        "JoinCode", new DataObject(
-                            visibility: DataObject.VisibilityOptions.Member,
-                            value: RelayHostData.JoinCode
-                        )
-                    }
-                };
-
-                Lobby lobby = await Lobbies.Instance.CreateLobbyAsync("My Lobby", maxConnections, createLobbyOptions);
-                lobbyId = lobby.Id;
-                StartCoroutine(HeartbeatLobbyCoroutine(15));
-            }
-            catch (LobbyServiceException e)
-            {
-                Debug.Log(e);
-                return false;
-            }
-
-            UserData userData = ClientSingleton.Instance.Manager.User.Data;
-
-            string payload = JsonUtility.ToJson(userData);
-            byte[] payloadBytes = Encoding.UTF8.GetBytes(payload);
-
-            NetworkManager.Singleton.NetworkConfig.ConnectionData = payloadBytes;
-
-            NetworkServer = new MatchplayNetworkServer(NetworkManager.Singleton);
-
-            NetworkManager.Singleton.StartHost();
-
-#pragma warning disable 4014
-            await NetworkServer.ConfigureServer(new GameInfo
-            {
-                map = Map.Default
-            });
-#pragma warning restore 4014
-
-            ClientSingleton.Instance.Manager.NetworkClient.RegisterListeners();
-
-            NetworkServer.OnClientLeft += OnClientDisconnect;
-
-            return true;
-        }
+//         public async Task<bool> StartHostAsync()
+//         {
+//             Allocation allocation = null;
+//
+//             try
+//             {
+//                 //Ask Unity Services to allocate a Relay server
+//                 allocation = await RelayService.Instance.CreateAllocationAsync(maxConnections);
+//             }
+//             catch (Exception e)
+//             {
+//                 Debug.Log(e);
+//                 return false;
+//             }
+//
+//             //Populate the hosting data
+//             relayHostData = new RelayHostData
+//             {
+//                 Key = allocation.Key,
+//                 Port = (ushort)allocation.RelayServer.Port,
+//                 AllocationID = allocation.AllocationId,
+//                 AllocationIDBytes = allocation.AllocationIdBytes,
+//                 ConnectionData = allocation.ConnectionData,
+//                 IPv4Address = allocation.RelayServer.IpV4
+//             };
+//
+//             try
+//             {
+//                 //Retrieve the Relay join code for our clients to join our party
+//                 relayHostData.JoinCode = await RelayService.Instance.GetJoinCodeAsync(RelayHostData.AllocationID);
+//
+//                 Debug.Log(RelayHostData.JoinCode);
+//             }
+//             catch (Exception e)
+//             {
+//                 Debug.Log(e);
+//                 return false;
+//             }
+//
+//             //Retrieve the Unity transport used by the NetworkManager
+//             UnityTransport transport = NetworkManager.Singleton.gameObject.GetComponent<UnityTransport>();
+//
+//             transport.SetRelayServerData(RelayHostData.IPv4Address,
+//                 RelayHostData.Port,
+//                 RelayHostData.AllocationIDBytes,
+//                 RelayHostData.Key,
+//                 RelayHostData.ConnectionData);
+//
+//             try
+//             {
+//                 var createLobbyOptions = new CreateLobbyOptions();
+//                 createLobbyOptions.IsPrivate = false;
+//                 createLobbyOptions.Data = new Dictionary<string, DataObject>()
+//                 {
+//                     {
+//                         "JoinCode", new DataObject(
+//                             visibility: DataObject.VisibilityOptions.Member,
+//                             value: RelayHostData.JoinCode
+//                         )
+//                     }
+//                 };
+//
+//                 Lobby lobby = await LobbyService.Instance.CreateLobbyAsync("My Lobby", maxConnections, createLobbyOptions);
+//                 lobbyId = lobby.Id;
+//                 StartCoroutine(HeartbeatLobbyCoroutine(15));
+//             }
+//             catch (LobbyServiceException e)
+//             {
+//                 Debug.Log(e);
+//                 return false;
+//             }
+//
+//             UserData userData = ClientSingleton.Instance.Manager.User.Data;
+//
+//             string payload = JsonUtility.ToJson(userData);
+//             byte[] payloadBytes = Encoding.UTF8.GetBytes(payload);
+//
+//             NetworkManager.Singleton.NetworkConfig.ConnectionData = payloadBytes;
+//
+//             NetworkServer = new MatchplayNetworkServer(NetworkManager.Singleton);
+//
+//             NetworkManager.Singleton.StartHost();
+//
+// #pragma warning disable 4014
+//             await NetworkServer.ConfigureServer(new GameInfo
+//             {
+//                 map = Map.Default
+//             });
+// #pragma warning restore 4014
+//
+//             ClientSingleton.Instance.Manager.NetworkClient.RegisterListeners();
+//
+//             NetworkServer.OnClientLeft += OnClientDisconnect;
+//
+//             return true;
+//         }
 
         private IEnumerator HeartbeatLobbyCoroutine(float waitTimeSeconds)
         {
             var delay = new WaitForSecondsRealtime(waitTimeSeconds);
             while (true)
             {
-                Lobbies.Instance.SendHeartbeatPingAsync(lobbyId);
+                LobbyService.Instance.SendHeartbeatPingAsync(lobbyId);
                 yield return delay;
             }
         }
@@ -182,7 +182,7 @@ namespace RedGaint.Network.Sandbox
 
             try
             {
-                await Lobbies.Instance.DeleteLobbyAsync(lobbyId);
+                await LobbyService.Instance.DeleteLobbyAsync(lobbyId);
             }
             catch (LobbyServiceException e)
             {

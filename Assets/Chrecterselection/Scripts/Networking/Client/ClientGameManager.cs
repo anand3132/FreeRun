@@ -49,11 +49,16 @@ namespace RedGaint.Network.Sandbox
             NetworkClient.StartClient(ip, port);
         }
 
-        public async Task<JoinAllocation> BeginConnection(string joinCode)
+        public async  Task BeginConnection(string joinCode)
         {
             Debug.Log($"Starting networkClient with join code {joinCode}\nWith : {User}");
-            return await NetworkClient.StartClient(joinCode);
+            return; // NetworkClient.StartClient(joinCode);
         }
+        // public async Task<Unity.Services.Relay.Models.JoinAllocation> BeginConnection(string joinCode)
+        // {
+        //     Debug.Log($"Starting networkClient with join code {joinCode}\nWith : {User}");
+        //     return await NetworkClient.StartClient(joinCode);
+        // }
 
         public void Disconnect()
         {

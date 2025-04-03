@@ -6,9 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="0cfbca29-fb33-45bb-a16b-ee71f1584851" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FreeRun/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FreeRun/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Chrecterselection/Editor/StartupSceneLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Chrecterselection/Editor/StartupSceneLoader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Chrecterselection/Scenes/CharacterSelect/CharacterSelect.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Chrecterselection/Scenes/CharacterSelect/CharacterSelect.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Chrecterselection/Scripts/Networking/Client/ClientGameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Chrecterselection/Scripts/Networking/Client/ClientGameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Chrecterselection/Scripts/Networking/Client/Netcode/MatchplayNetworkClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Chrecterselection/Scripts/Networking/Client/Netcode/MatchplayNetworkClient.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Chrecterselection/Scripts/Networking/Client/Services/MatchplayMatchmaker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Chrecterselection/Scripts/Networking/Client/Services/MatchplayMatchmaker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Chrecterselection/Scripts/Networking/Host/HostSingleton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Chrecterselection/Scripts/Networking/Host/HostSingleton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Chrecterselection/Scripts/UI/MainMenu/LobbiesList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Chrecterselection/Scripts/UI/MainMenu/LobbiesList.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Chrecterselection/Scripts/UI/MainMenu/MainMenuDisplay.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Chrecterselection/Scripts/UI/MainMenu/MainMenuDisplay.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Runtime/RedGaint.Network.Runtime.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/RedGaint.Network.Runtime.asmdef" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +38,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0900e0d4bb644dafbfd59eb7fd222a681ddc00/d7/fd0d37f8/RuntimeInitializeOnLoadMethodAttribute.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0900e0d4bb644dafbfd59eb7fd222a681ddc00/fc/95100b3d/Arguments.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4e9c48eedf6f482fa439ccf3356314819b8200/3e/207b6c3f/EditorApplication.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4e9c48eedf6f482fa439ccf3356314819b8200/6b/6fd12eba/EditorSceneManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4e9c48eedf6f482fa439ccf3356314819b8200/be/52fdcdf8/CloudProjectSettings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7a8285f8dc9940c7bb46fe253fff3327a4000/83/ed87a829/IMultiplayerService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d59d088174d643f487a455f58c6feb551f7800/06/7f295200/VisualTreeAsset.cs" root0="SKIP_HIGHLIGHTING" />
@@ -43,10 +52,9 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects/Runtime/Connection/NetworkClient.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects/Runtime/Connection/NetworkConnectionManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects/Runtime/Core/NetworkManager.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.matchmaker/Runtime/SDK/IMatchmakerService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.matchmaker/Runtime/SDK/WrappedMatchmakerService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core/Editor/SampleDependencyImportSystem/SampleDependencyImporter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.multiplayer/Runtime/Relay/Models/JoinAllocation.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../2_SandBox/Multiplayer-Character-Select/Assets/Chrecterselection/Scripts/CharacterSpawner.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../2_SandBox/Multiplayer-Character-Select/Assets/Chrecterselection/Scripts/CharacterSpawner.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
@@ -88,13 +96,15 @@
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="10316">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="10316" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
-        <list />
+        <list>
+          <MonoRuntime />
+        </list>
       </option>
       <option name="selectedOptions">
         <list />
@@ -127,6 +137,7 @@
       <workItem from="1743620113296" duration="412000" />
       <workItem from="1743620608823" duration="621000" />
       <workItem from="1743672166476" duration="1330000" />
+      <workItem from="1743681685804" duration="8656000" />
     </task>
     <servers />
   </component>

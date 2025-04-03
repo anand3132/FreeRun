@@ -36,30 +36,30 @@ namespace RedGaint.Network.Sandbox
             ConnectClient();
         }
 
-        public async Task<JoinAllocation> StartClient(string joinCode)
+        public async Task StartClient(string joinCode)
         {
-            JoinAllocation allocation = null;
+          //  JoinAllocation allocation = null;
 
-            try
-            {
-                allocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
-            }
-            catch (Exception e)
-            {
-                Debug.Log(e);
-                return null;
-            }
-
-            relayJoinData = new RelayJoinData
-            {
-                Key = allocation.Key,
-                Port = (ushort)allocation.RelayServer.Port,
-                AllocationID = allocation.AllocationId,
-                AllocationIDBytes = allocation.AllocationIdBytes,
-                ConnectionData = allocation.ConnectionData,
-                HostConnectionData = allocation.HostConnectionData,
-                IPv4Address = allocation.RelayServer.IpV4
-            };
+            // try
+            // {
+            //     allocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
+            // }
+            // catch (Exception e)
+            // {
+            //     Debug.Log(e);
+            //     return null;
+            // }
+            //
+            // relayJoinData = new RelayJoinData
+            // {
+            //     Key = allocation.Key,
+            //     Port = (ushort)allocation.RelayServer.Port,
+            //     AllocationID = allocation.AllocationId,
+            //     AllocationIDBytes = allocation.AllocationIdBytes,
+            //     ConnectionData = allocation.ConnectionData,
+            //     HostConnectionData = allocation.HostConnectionData,
+            //     IPv4Address = allocation.RelayServer.IpV4
+            // };
 
             UnityTransport unityTransport = networkManager.gameObject.GetComponent<UnityTransport>();
 
@@ -72,8 +72,47 @@ namespace RedGaint.Network.Sandbox
 
             ConnectClient();
 
-            return allocation;
+            // return allocation;
         }
+        
+        // public async Task<JoinAllocation> StartClient(string joinCode)
+        // {
+        //     JoinAllocation allocation = null;
+        //
+        //     try
+        //     {
+        //         allocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
+        //     }
+        //     catch (Exception e)
+        //     {
+        //         Debug.Log(e);
+        //         return null;
+        //     }
+        //
+        //     relayJoinData = new RelayJoinData
+        //     {
+        //         Key = allocation.Key,
+        //         Port = (ushort)allocation.RelayServer.Port,
+        //         AllocationID = allocation.AllocationId,
+        //         AllocationIDBytes = allocation.AllocationIdBytes,
+        //         ConnectionData = allocation.ConnectionData,
+        //         HostConnectionData = allocation.HostConnectionData,
+        //         IPv4Address = allocation.RelayServer.IpV4
+        //     };
+        //
+        //     UnityTransport unityTransport = networkManager.gameObject.GetComponent<UnityTransport>();
+        //
+        //     unityTransport.SetRelayServerData(relayJoinData.IPv4Address,
+        //         relayJoinData.Port,
+        //         relayJoinData.AllocationIDBytes,
+        //         relayJoinData.Key,
+        //         relayJoinData.ConnectionData,
+        //         relayJoinData.HostConnectionData);
+        //
+        //     ConnectClient();
+        //
+        //     return allocation;
+        // }
 
         public void DisconnectClient()
         {

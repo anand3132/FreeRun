@@ -447,7 +447,7 @@
     },
     "com.unity.modules.audio": {
       "version": "1.0.0",
-      "depth": 3,
+      "depth": 0,
       "source": "builtin",
       "dependencies": {}
     },

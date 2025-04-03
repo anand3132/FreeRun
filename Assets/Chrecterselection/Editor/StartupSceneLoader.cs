@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEditor.SceneManagement;
 
-[InitializeOnLoadAttribute]
+//[InitializeOnLoadAttribute]
 public static class StartupSceneLoader
 {
     static StartupSceneLoader()

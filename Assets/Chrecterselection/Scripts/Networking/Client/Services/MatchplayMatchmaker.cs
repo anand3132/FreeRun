@@ -6,146 +6,159 @@ using Unity.Services.Matchmaker;
 using Unity.Services.Matchmaker.Models;
 using UnityEngine;
 
-public enum MatchmakerPollingResult
+namespace RedGaint.Network.Sandbox
 {
-    Success,
-    TicketCreationError,
-    TicketCancellationError,
-    TicketRetrievalError,
-    MatchAssignmentError
-}
-
-public class MatchmakingResult
-{
-    public string ip;
-    public int port;
-    public MatchmakerPollingResult result;
-    public string resultMessage;
-}
-
-public class MatchplayMatchmaker : IDisposable
-{
-    private string lastUsedTicket;
-    private CancellationTokenSource cancelToken;
-
-    private const int TicketCooldown = 1000;
-
-    public bool IsMatchmaking { get; private set; }
-
-    public async Task<MatchmakingResult> Matchmake(UserData data)
+    public enum MatchmakerPollingResult
     {
-        cancelToken = new CancellationTokenSource();
+        Success,
+        TicketCreationError,
+        TicketCancellationError,
+        TicketRetrievalError,
+        MatchAssignmentError
+    }
 
-        string queueName = data.userGamePreferences.ToMultiplayQueue();
-        var createTicketOptions = new CreateTicketOptions(queueName);
-        Debug.Log(createTicketOptions.QueueName);
+    public class MatchmakingResult
+    {
+        public string ip;
+        public int port;
+        public MatchmakerPollingResult result;
+        public string resultMessage;
+    }
 
-        var players = new List<Player>
+    public class MatchplayMatchmaker : IDisposable
+    {
+        private string lastUsedTicket;
+        private CancellationTokenSource cancelToken;
+
+        private const int TicketCooldown = 1000;
+
+        public bool IsMatchmaking { get; private set; }
+
+        public async Task<MatchmakingResult> Matchmake(UserData data)
         {
-            new Player(data.userAuthId, data.userGamePreferences)
-        };
+            cancelToken = new CancellationTokenSource();
 
-        try
-        {
-            IsMatchmaking = true;
-            var createResult = await MatchmakerService.Instance.CreateTicketAsync(players, createTicketOptions);
+            string queueName = data.userGamePreferences.ToMultiplayQueue();
+            var createTicketOptions = new CreateTicketOptions(queueName);
+            Debug.Log(createTicketOptions.QueueName);
 
-            lastUsedTicket = createResult.Id;
+            var players = new List<Player>
+            {
+                new Player(data.userAuthId, data.userGamePreferences)
+            };
 
             try
             {
-                while (!cancelToken.IsCancellationRequested)
+                IsMatchmaking = true;
+                var createResult = await MatchmakerService.Instance.CreateTicketAsync(players, createTicketOptions);
+
+                lastUsedTicket = createResult.Id;
+
+                try
                 {
-                    var checkTicket = await MatchmakerService.Instance.GetTicketAsync(lastUsedTicket);
-
-                    if (checkTicket.Type == typeof(MultiplayAssignment))
+                    while (!cancelToken.IsCancellationRequested)
                     {
-                        var matchAssignment = (MultiplayAssignment)checkTicket.Value;
+                        var checkTicket = await MatchmakerService.Instance.GetTicketAsync(lastUsedTicket);
 
-                        if (matchAssignment.Status == MultiplayAssignment.StatusOptions.Found)
+                        if (checkTicket.Type == typeof(MultiplayAssignment))
                         {
-                            return ReturnMatchResult(MatchmakerPollingResult.Success, "", matchAssignment);
+                            var matchAssignment = (MultiplayAssignment)checkTicket.Value;
+
+                            if (matchAssignment.Status == MultiplayAssignment.StatusOptions.Found)
+                            {
+                                return ReturnMatchResult(MatchmakerPollingResult.Success, "", matchAssignment);
+                            }
+
+                            if (matchAssignment.Status == MultiplayAssignment.StatusOptions.Timeout ||
+                                matchAssignment.Status == MultiplayAssignment.StatusOptions.Failed)
+                            {
+                                return ReturnMatchResult(MatchmakerPollingResult.MatchAssignmentError,
+                                    $"Ticket: {lastUsedTicket} - {matchAssignment.Status} - {matchAssignment.Message}",
+                                    null);
+                            }
+
+                            Debug.Log($"Polled Ticket: {lastUsedTicket} Status: {matchAssignment.Status} ");
                         }
-                        if (matchAssignment.Status == MultiplayAssignment.StatusOptions.Timeout ||
-                            matchAssignment.Status == MultiplayAssignment.StatusOptions.Failed)
-                        {
-                            return ReturnMatchResult(MatchmakerPollingResult.MatchAssignmentError,
-                                $"Ticket: {lastUsedTicket} - {matchAssignment.Status} - {matchAssignment.Message}", null);
-                        }
-                        Debug.Log($"Polled Ticket: {lastUsedTicket} Status: {matchAssignment.Status} ");
+
+                        await Task.Delay(TicketCooldown);
                     }
-
-                    await Task.Delay(TicketCooldown);
+                }
+                catch (MatchmakerServiceException e)
+                {
+                    return ReturnMatchResult(MatchmakerPollingResult.TicketRetrievalError, e.ToString(), null);
                 }
             }
             catch (MatchmakerServiceException e)
             {
-                return ReturnMatchResult(MatchmakerPollingResult.TicketRetrievalError, e.ToString(), null);
+                return ReturnMatchResult(MatchmakerPollingResult.TicketCreationError, e.ToString(), null);
             }
-        }
-        catch (MatchmakerServiceException e)
-        {
-            return ReturnMatchResult(MatchmakerPollingResult.TicketCreationError, e.ToString(), null);
+
+            return ReturnMatchResult(MatchmakerPollingResult.TicketRetrievalError, "Cancelled Matchmaking", null);
         }
 
-        return ReturnMatchResult(MatchmakerPollingResult.TicketRetrievalError, "Cancelled Matchmaking", null);
-    }
-
-    public async Task CancelMatchmaking()
-    {
-        if (!IsMatchmaking) { return; }
-
-        IsMatchmaking = false;
-
-        if (cancelToken.Token.CanBeCanceled)
+        public async Task CancelMatchmaking()
         {
-            cancelToken.Cancel();
-        }
-
-        if (string.IsNullOrEmpty(lastUsedTicket)) { return; }
-
-        Debug.Log($"Cancelling {lastUsedTicket}");
-
-        await MatchmakerService.Instance.DeleteTicketAsync(lastUsedTicket);
-    }
-
-    private MatchmakingResult ReturnMatchResult(MatchmakerPollingResult resultErrorType, string message, MultiplayAssignment assignment)
-    {
-        IsMatchmaking = false;
-
-        if (assignment != null)
-        {
-            string parsedIp = assignment.Ip;
-            int? parsedPort = assignment.Port;
-            if (parsedPort == null)
+            if (!IsMatchmaking)
             {
+                return;
+            }
+
+            IsMatchmaking = false;
+
+            if (cancelToken.Token.CanBeCanceled)
+            {
+                cancelToken.Cancel();
+            }
+
+            if (string.IsNullOrEmpty(lastUsedTicket))
+            {
+                return;
+            }
+
+            Debug.Log($"Cancelling {lastUsedTicket}");
+
+            await MatchmakerService.Instance.DeleteTicketAsync(lastUsedTicket);
+        }
+
+        private MatchmakingResult ReturnMatchResult(MatchmakerPollingResult resultErrorType, string message,
+            MultiplayAssignment assignment)
+        {
+            IsMatchmaking = false;
+
+            if (assignment != null)
+            {
+                string parsedIp = assignment.Ip;
+                int? parsedPort = assignment.Port;
+                if (parsedPort == null)
+                {
+                    return new MatchmakingResult
+                    {
+                        result = MatchmakerPollingResult.MatchAssignmentError,
+                        resultMessage = $"Port missing? - {assignment.Port}\n-{assignment.Message}"
+                    };
+                }
+
                 return new MatchmakingResult
                 {
-                    result = MatchmakerPollingResult.MatchAssignmentError,
-                    resultMessage = $"Port missing? - {assignment.Port}\n-{assignment.Message}"
+                    result = MatchmakerPollingResult.Success,
+                    ip = parsedIp,
+                    port = (int)parsedPort,
+                    resultMessage = assignment.Message
                 };
             }
 
             return new MatchmakingResult
             {
-                result = MatchmakerPollingResult.Success,
-                ip = parsedIp,
-                port = (int)parsedPort,
-                resultMessage = assignment.Message
+                result = resultErrorType,
+                resultMessage = message
             };
         }
 
-        return new MatchmakingResult
+        public void Dispose()
         {
-            result = resultErrorType,
-            resultMessage = message
-        };
-    }
+            _ = CancelMatchmaking();
 
-    public void Dispose()
-    {
-        _ = CancelMatchmaking();
-
-        cancelToken?.Dispose();
+            cancelToken?.Dispose();
+        }
     }
 }

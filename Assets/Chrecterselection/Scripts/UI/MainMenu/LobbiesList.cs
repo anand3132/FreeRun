@@ -45,7 +45,7 @@ namespace RedGaint.Network.Sandbox
                         value: "0")
                 };
 
-                var lobbies = await Lobbies.Instance.QueryLobbiesAsync(options);
+                var lobbies = await LobbyService.Instance.QueryLobbiesAsync(options);
 
                 foreach (Transform child in lobbyItemParent)
                 {
@@ -79,7 +79,7 @@ namespace RedGaint.Network.Sandbox
 
             try
             {
-                var joiningLobby = await Lobbies.Instance.JoinLobbyByIdAsync(lobby.Id);
+                var joiningLobby = await LobbyService.Instance.JoinLobbyByIdAsync(lobby.Id);
                 string joinCode = joiningLobby.Data["JoinCode"].Value;
 
                 await ClientSingleton.Instance.Manager.BeginConnection(joinCode);
