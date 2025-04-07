@@ -21,5 +21,10 @@ namespace RedGaint.Network.Runtime
 
         [SerializeField]
         MatchRecapView m_MatchRecapView;
+        
+        internal LobbyView Lobby => m_LobbyView;
+        
+        [SerializeField]
+        LobbyView m_LobbyView;
     }
 }

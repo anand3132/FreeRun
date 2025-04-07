@@ -26,5 +26,11 @@ namespace RedGaint.Network.Runtime
 
         [SerializeField]
         ClientConnectingView m_ClientConnectingView;
+
+        internal LobbyView LobbyView => m_LobbyView;
+        
+        [SerializeField]
+        LobbyView m_LobbyView;
+        
     }
 }

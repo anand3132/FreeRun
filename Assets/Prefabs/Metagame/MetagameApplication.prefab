@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 690007956843493483}
   - component: {fileID: 4613537952915011020}
+  - component: {fileID: 6761606565151138925}
   m_Layer: 0
   m_Name: MetagameApplication
   m_TagString: Untagged
@@ -47,6 +48,81 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ce44d2abf9817409a32baacb52e8b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1652712579 &6761606565151138925
+MultiplayerRolesData:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815171797773770901}
+  m_GameObjectRolesMask: 3
+  m_ComponentsRolesMasks: []
+--- !u!1 &3495554412502426413
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2814974002350139507}
+  - component: {fileID: 8290033489212051470}
+  - component: {fileID: 1548554543400450379}
+  m_Layer: 0
+  m_Name: Lobby
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2814974002350139507
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3495554412502426413}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5873813210152660583}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8290033489212051470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3495554412502426413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 582fc436493743fc9fb6a3cd8e3abbed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  countdownText: {fileID: 0}
+  playerNameSlots: []
+--- !u!114 &1548554543400450379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3495554412502426413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 38c3e3ae47148bb4d9b594b2d1512095, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: e16879e71967b1246a2faaf99cf41f25, type: 3}
+  m_SortingOrder: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
 --- !u!1 &4175558726825995447
 GameObject:
   m_ObjectHideFlags: 0
@@ -65,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6114517833082937255
 Transform:
   m_ObjectHideFlags: 0
@@ -283,6 +359,7 @@ Transform:
   - {fileID: 1158808687355537868}
   - {fileID: 620830159629850781}
   - {fileID: 2664159220117613349}
+  - {fileID: 2814974002350139507}
   m_Father: {fileID: 690007956843493483}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7608159501841437823
@@ -301,6 +378,7 @@ MonoBehaviour:
   m_MatchmakerView: {fileID: 2675755657751875318}
   m_DirectIPView: {fileID: 5870602673018488666}
   m_ClientConnectingView: {fileID: 6464841519099050560}
+  m_LobbyView: {fileID: 8290033489212051470}
 --- !u!1 &6042265479794443901
 GameObject:
   m_ObjectHideFlags: 0

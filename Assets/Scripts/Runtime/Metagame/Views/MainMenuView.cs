@@ -3,9 +3,11 @@ namespace RedGaint.Network.Runtime
 {
     internal class MainMenuView : View<MetagameApplication>
     {
-        Button m_FindMatchButton;
-        Button m_JoinDirectIPButton;
+        Button m_MultiplayerButton;
+        Button m_SinglePlayerButton;
         Button m_QuitButton;
+        Button m_ModelSelectionButton;
+
         Label m_TitleLabel;
         UIDocument m_UIDocument;
 
@@ -17,34 +19,45 @@ namespace RedGaint.Network.Runtime
         void OnEnable()
         {
             var root = m_UIDocument.rootVisualElement;
-            m_FindMatchButton = root.Q<Button>("findMatchButton");
-            m_FindMatchButton.RegisterCallback<ClickEvent>(OnClickFindMatch);
-
-            m_JoinDirectIPButton = root.Q<Button>("joinDirectIPButton");
-            m_JoinDirectIPButton.RegisterCallback<ClickEvent>(OnClickJoinDirectIP);
+                
+            m_ModelSelectionButton = root.Q<Button>("modelSelectionButton");
+            m_ModelSelectionButton.RegisterCallback<ClickEvent>(OnClickModelSelect);
+            
+            m_SinglePlayerButton = root.Q<Button>("singlePlayerButton");
+            m_SinglePlayerButton.RegisterCallback<ClickEvent>(OnClickSinglePlay);
+            
+            m_MultiplayerButton = root.Q<Button>("multiPlayerButton");
+            m_MultiplayerButton.RegisterCallback<ClickEvent>(OnClickMultiplay);
 
             m_QuitButton = root.Q<Button>("quitButton");
             m_QuitButton.RegisterCallback<ClickEvent>(OnClickQuit);
+        
 
             m_TitleLabel = root.Query<Label>("titleLabel");
-            m_TitleLabel.text = "Game title";
+            m_TitleLabel.text = "Free Run";
         }
 
         void OnDisable()
         {
-            m_FindMatchButton.UnregisterCallback<ClickEvent>(OnClickFindMatch);
+            m_SinglePlayerButton.UnregisterCallback<ClickEvent>(OnClickModelSelect);
+            m_MultiplayerButton.UnregisterCallback<ClickEvent>(OnClickMultiplay);
+            m_SinglePlayerButton.UnregisterCallback<ClickEvent>(OnClickSinglePlay);
             m_QuitButton.UnregisterCallback<ClickEvent>(OnClickQuit);
-            m_JoinDirectIPButton.UnregisterCallback<ClickEvent>(OnClickJoinDirectIP);
         }
 
-        void OnClickFindMatch(ClickEvent evt)
+        void OnClickMultiplay(ClickEvent evt)
+        {
+            Broadcast(new EnterLobbyQueueEvent());
+        }
+
+        void OnClickSinglePlay(ClickEvent evt)
         {
             Broadcast(new EnterMatchmakerQueueEvent("default"));
+            
         }
-
-        void OnClickJoinDirectIP(ClickEvent evt)
+        void OnClickModelSelect(ClickEvent evt)
         {
-            Broadcast(new EnterIPConnectionEvent());
+            Broadcast(new EnterModelSelectionEvent());
         }
 
         void OnClickQuit(ClickEvent evt)

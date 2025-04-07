@@ -9,6 +9,8 @@ namespace RedGaint.Network.Runtime
             QueueName = queueName;
         }
     }
+    
+    internal class EnterLobbyQueueEvent : AppEvent { }
 
     internal class ExitMatchmakerQueueEvent : AppEvent { }
     
@@ -22,6 +24,7 @@ namespace RedGaint.Network.Runtime
         public ushort port;
     }
     
+    internal class EnterModelSelectionEvent : AppEvent { }
     internal class CancelConnectionEvent: AppEvent { }
     
     /// <summary>
