@@ -102,6 +102,7 @@ namespace RedGaint.Network.Runtime.ApplicationLifecycle
                     break;
                 case MultiplayerRoleFlags.Client:
                 {
+                    GlobalTextBridge.Init();
                     SceneManager.LoadScene("MetagameScene");
                     if (AutoConnectOnStartup)
                     {
@@ -128,7 +129,7 @@ namespace RedGaint.Network.Runtime.ApplicationLifecycle
                         break;
                     case ConnectStatus.Success:
                         // If server successfully starts, load game scene
-                        NetworkManager.Singleton.SceneManager.LoadScene("GameScene01", LoadSceneMode.Single);
+                        NetworkManager.Singleton.SceneManager.LoadScene(GlobalStaticVariables.GameScene, LoadSceneMode.Single);
                         break;
                 }
             }
@@ -140,7 +141,7 @@ namespace RedGaint.Network.Runtime.ApplicationLifecycle
                     case ConnectStatus.UserRequestedDisconnect:
                     case ConnectStatus.ServerEndedSession:
                         // If client is disconnected, return to metagame scene
-                        SceneManager.LoadScene("MetagameScene");
+                        SceneManager.LoadScene(GlobalStaticVariables.MetaScene);
                         break;
                 }
             }

@@ -5,27 +5,147 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0cfbca29-fb33-45bb-a16b-ee71f1584851" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Game/Controllers/LobbyController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Game/Controllers/LobbyController.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Game/Views/LobbyView.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Game/Views/LobbyView.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Containers.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Containers/UIReferences.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Containers/UIReferences.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Context.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Context/MainMenuModeContext.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Context/MainMenuModeContext.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Global.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Global/GlobalTextBridge.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Global/GlobalTextBridge.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Handlers.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Handlers/CloudPlayerProfileHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Handlers/CloudPlayerProfileHandler.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Handlers/FestivalMenuHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Handlers/FestivalMenuHandler.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Handlers/GuestModeHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Handlers/GuestModeHandler.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Handlers/LocalPlayerProfileHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Handlers/LocalPlayerProfileHandler.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Handlers/SharedUIHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Handlers/SharedUIHandler.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Handlers/UserModeHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Handlers/UserModeHandler.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Interfaces.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Interfaces/IMenuModeHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Interfaces/IMenuModeHandler.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Managers.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Managers/GameProfileManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Managers/GameProfileManager.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Models/LobbyModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Models/LobbyModel.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/UserData.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/UserData/PlayerProfileData.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/UserData/PlayerProfileData.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Views/LoginView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Views/LoginView.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Views/ModelSelectionView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Views/ModelSelectionView.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Views/UserProfileView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Views/UserProfileView.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Views/WaitingAreaView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Views/WaitingAreaView.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Shared/GameProfileService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Shared/GameProfileService.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/UnityGameServices/LobbyQuary.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/UnityGameServices/LobbyQuary.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/UnityGameServices/UserCredentialManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/UnityGameServices/UserCredentialManager.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/SO.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FreeRun/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FreeRun/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/AnimationControllers/Doors.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/AnimationControllers/Doors.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Chrecterselection/Scripts/CharacterSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/CharacterSelect/CharacterSpawner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Chrecterselection/Scripts/CharacterSpawner.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/CharacterSelect/CharacterSpawner.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Chrecterselection/Scripts/UI/CharacterSelect.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/CharacterSelect.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Chrecterselection/Scripts/UI/CharacterSelect/Character.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/CharacterSelect/Character.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Chrecterselection/Scripts/UI/CharacterSelect/Character.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/CharacterSelect/Character.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Chrecterselection/Scripts/UI/CharacterSelect/CharacterDatabase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/CharacterSelect/CharacterDatabase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Chrecterselection/Scripts/UI/CharacterSelect/CharacterDatabase.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/CharacterSelect/CharacterDatabase.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Chrecterselection/Scripts/UI/CharacterSelect/CharacterSelectButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/CharacterSelect/CharacterSelectButton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Chrecterselection/Scripts/UI/CharacterSelect/CharacterSelectButton.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/CharacterSelect/CharacterSelectButton.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Chrecterselection/Scripts/UI/CharacterSelect/CharacterSelectDisplay.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/CharacterSelect/CharacterSelectDisplay.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Chrecterselection/Scripts/UI/CharacterSelect/CharacterSelectDisplay.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/CharacterSelect/CharacterSelectDisplay.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Chrecterselection/Scripts/UI/CharacterSelect/CharacterSelectState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/CharacterSelect/CharacterSelectState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Chrecterselection/Scripts/UI/CharacterSelect/CharacterSelectState.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/CharacterSelect/CharacterSelectState.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Chrecterselection/Scripts/UI/CharacterSelect/PlayerCard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/CharacterSelect/PlayerCard.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Chrecterselection/Scripts/UI/CharacterSelect/PlayerCard.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/CharacterSelect/PlayerCard.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Game/Environment/Environment.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Game/Environment/Environment.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Metagame/MetagameApplication.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Metagame/MetagameApplication.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameScene01.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameScene01/NavMesh-NavMesh Surface.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameScene01/NavMesh-NavMesh Surface.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Lobby.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Lobby.unity.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/MetagameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MetagameScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Runtime/Game/GameEvents.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Game/GameEvents.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene/Global Volume Profile 1.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene/Global Volume Profile 1.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/StartupScene.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/StartupScene.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Runtime/ApplicationLifecycle/ApplicationEntryPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/ApplicationLifecycle/ApplicationEntryPoint.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Runtime/Game/Controllers/LobbyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Controllers/LobbyController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Runtime/Game/Controllers/LobbyController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Controllers/LobbyController.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Runtime/Game/Views/GameView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Game/Views/GameView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Runtime/Game/Views/LobbyView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Views/LobbyView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Runtime/Game/Views/LobbyView.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Views/LobbyView.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Controllers/MainMenuController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Controllers/MainMenuController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Controllers/MatchmakerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Controllers/MatchmakerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/MetagameApplication.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/MetagameApplication.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/MetagameEvents.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/MetagameEvents.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Views/MainMenuView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Views/MainMenuView.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Views/MetagameView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Views/MetagameView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/TutorialInfo/Scripts/Editor/ReadmeEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StarterAssets/TutorialInfo/Scripts/Editor/ReadmeEditor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/TutorialInfo/Scripts/Editor/ReadmeEditor.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StarterAssets/TutorialInfo/Scripts/Editor/ReadmeEditor.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/TutorialInfo/Scripts/Readme.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StarterAssets/TutorialInfo/Scripts/Readme.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/TutorialInfo/Scripts/Readme.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StarterAssets/TutorialInfo/Scripts/Readme.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/GameplayObjects/InteractiveDoor.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI Toolkit/GameplayObjects/InteractiveDoor.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/GameplayObjects/InteractiveDoor.renderTexture" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI Toolkit/GameplayObjects/InteractiveDoor.renderTexture" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/MainMenuView/MainMenuView.uxml" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI Toolkit/MainMenuView/MainMenuView.uxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Runtime/RedGaint.Network.Runtime.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/RedGaint.Network.Runtime.asmdef" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Runtime/UnityGameServices/MatchmakerTicketer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/UnityGameServices/MatchmakerTicketer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Runtime/UnityGameServices/UnityServicesInitializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Runtime/UnityGameServices/UnityServicesInitializer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/ThirdPersonController/Character/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/ThirdPersonController/Character/Materials/M_Armature_Arms.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/ThirdPersonController/Character/Materials/M_Armature_Arms.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/ThirdPersonController/Character/Materials/M_Armature_Body.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/ThirdPersonController/Character/Materials/M_Armature_Body.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/ThirdPersonController/Character/Materials/M_Armature_Legs.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/ThirdPersonController/Character/Materials/M_Armature_Legs.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/ThirdPersonController/Character/Models.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/ThirdPersonController/Character/Models/Armature.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/ThirdPersonController/Character/Models/Armature.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/ThirdPersonController/Character/Textures/Armature_Arms_AlbedoTransparency.tif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/ThirdPersonController/Character/Textures/Armature_Arms_AlbedoTransparency.tif.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/ThirdPersonController/Character/Textures/Armature_Body_AlbedoTransparency.tif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/ThirdPersonController/Character/Textures/Armature_Body_AlbedoTransparency.tif.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/ThirdPersonController/Character/Textures/Armature_Legs_AlbedoTransparency.tif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/ThirdPersonController/Character/Textures/Armature_Legs_AlbedoTransparency.tif.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/ThirdPersonController/Prefabs/MainCamera.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StarterAssets/ThirdPersonController/Prefabs/MainCamera.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/ClientConnectingView.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/ClientConnectingView/ClientConnectingPanelSettings.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/ClientConnectingView/ClientConnectingPanelSettings.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/ClientConnectingView/ClientConnectingView.uxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/ClientConnectingView/ClientConnectingView.uxml.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/GameMenuView.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/GameMenuView/GameMenuView.uxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/GameMenuView/GameMenuView.uxml.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/GameMenuView/GameMenuViewPanelSettings.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/GameMenuView/GameMenuViewPanelSettings.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/LobbyView.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/LobbyView/LobbyPanelSettings.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/LobbyView/LobbyPanelSettings.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/LobbyView/LobbyView.uxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/LobbyView/LobbyView.uxml.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/MainMenuView.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/MainMenuView/MainMenuPanelSettings.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/MainMenuView/MainMenuPanelSettings.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/MainMenuView/MainMenuView.uxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/MainMenuView/MainMenuView.uxml.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/MatchmakerView.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/MatchmakerView/MatchmakerView.uxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/MatchmakerView/MatchmakerView.uxml.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/MatchmakerView/MatchmakerViewPanelSettings.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/MatchmakerView/MatchmakerViewPanelSettings.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/UnityStyleSheet.uss" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI Toolkit/UnityStyleSheet.uss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UniversalRenderPipelineGlobalSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UniversalRenderPipelineGlobalSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,11 +175,20 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d59d088174d643f487a455f58c6feb551f7800/06/7f295200/VisualTreeAsset.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d59d088174d643f487a455f58c6feb551f7800/48/7c39c4bd/EventDebuggerLogCall.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d59d088174d643f487a455f58c6feb551f7800/cc/5ea56e78/EventCallbackFunctor`1.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d59d088174d643f487a455f58c6feb551f7800/e8/0c01981f/ClickEvent.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ed969b0e627d471da4848289f9c322df46ae00/30/5ee23438/AsyncTaskMethodBuilder`1.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ed969b0e627d471da4848289f9c322df46ae00/34/84117143/Type.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ed969b0e627d471da4848289f9c322df46ae00/3f/aa9c8bb9/IntPtr.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ed969b0e627d471da4848289f9c322df46ae00/b4/3553b1cd/Dictionary`2.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ed969b0e627d471da4848289f9c322df46ae00/c0/18ae8c9d/RuntimeType.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Global/GlobalEnums.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/Scripts/Runtime/Metagame/Views/MainMenuView.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/Scripts/Runtime/Metagame/Views/MainMenuView.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/Scripts/Runtime/Metagame/Views/MainMenuView.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/Scripts/Runtime/Metagame/Views/MainMenuView.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/Scripts/Runtime/Metagame/Views/MainMenuView.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/Scripts/Runtime/Metagame/Views/MainMenuView.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/SO/GameDataScriptableObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.multiplayer.samples.coop/Utilities/Net/NetcodeHooks.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects/Runtime/Connection/NetworkClient.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects/Runtime/Connection/NetworkConnectionManager.cs" root0="SKIP_HIGHLIGHTING" />
@@ -67,6 +196,8 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects/Runtime/NetworkVariable/NetworkVariable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects/Runtime/SceneManagement/NetworkSceneManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core/Editor/SampleDependencyImportSystem/SampleDependencyImporter.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.authentication/Runtime/AuthenticationService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.cloudsave/Runtime/com.unity.services.cloudsave.internal/Runtime/DataService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.multiplayer/Runtime/Relay/Models/JoinAllocation.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -88,7 +219,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.uml&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;proofread&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -153,7 +284,15 @@
       <workItem from="1743859009290" duration="3278000" />
       <workItem from="1743960544311" duration="6984000" />
       <workItem from="1744011822884" duration="6869000" />
-      <workItem from="1744049550882" duration="1021000" />
+      <workItem from="1744049550882" duration="2178000" />
+      <workItem from="1744096403434" duration="11879000" />
+      <workItem from="1744276867327" duration="5090000" />
+      <workItem from="1744375328938" duration="2775000" />
+      <workItem from="1744631009837" duration="1784000" />
+      <workItem from="1744632905781" duration="2115000" />
+      <workItem from="1744738252543" duration="55174000" />
+      <workItem from="1745397474881" duration="37603000" />
+      <workItem from="1745508725714" duration="5972000" />
     </task>
     <servers />
   </component>
@@ -178,10 +317,10 @@
           <line>41</line>
           <properties documentPath="E:\1_Live\0_Network\0_FreeRun\FreeRun\Assets\Scripts\Runtime\Metagame\Controllers\MatchmakerController.cs" containingFunctionPresentation="Method 'OnEnterMatchmakerQueue'">
             <startOffsets>
-              <option value="1395" />
+              <option value="1397" />
             </startOffsets>
             <endOffsets>
-              <option value="1507" />
+              <option value="1509" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="12" />
@@ -191,13 +330,39 @@
           <line>60</line>
           <properties documentPath="E:\1_Live\0_Network\0_FreeRun\FreeRun\Assets\Scripts\Runtime\Metagame\Controllers\MatchmakerController.cs" containingFunctionPresentation="Method 'OnMatchSearchCompleted'">
             <startOffsets>
-              <option value="1936" />
+              <option value="1938" />
             </startOffsets>
             <endOffsets>
-              <option value="1961" />
+              <option value="1963" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" log-message="true" suspend="NONE" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/CharacterSelect/CharacterSelectDisplay.cs</url>
+          <line>205</line>
+          <properties documentPath="E:\1_Live\0_Network\0_FreeRun\FreeRun\Assets\Scripts\Runtime\Metagame\CharacterSelect\CharacterSelectDisplay.cs" containingFunctionPresentation="Method 'LockInServerRpc'">
+            <startOffsets>
+              <option value="6202" />
+            </startOffsets>
+            <endOffsets>
+              <option value="6203" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Runtime/Metagame/Global/GlobalTextBridge.cs</url>
+          <line>89</line>
+          <properties documentPath="E:\1_Live\0_Network\0_FreeRun\FreeRun\Assets\Scripts\Runtime\Metagame\Global\GlobalTextBridge.cs" containingFunctionPresentation="Method 'Get'">
+            <startOffsets>
+              <option value="2869" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2900" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

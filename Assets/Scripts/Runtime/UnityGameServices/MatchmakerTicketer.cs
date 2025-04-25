@@ -10,146 +10,147 @@ using StatusOptions = Unity.Services.Matchmaker.Models.MultiplayAssignment.Statu
 
 namespace RedGaint.Network.Runtime
 {
-    ///<summary>
-    ///Holds matchmaker search logic
-    ///</summary>
     internal class MatchmakerTicketer : MonoBehaviour
     {
         internal string LastQueueName { get; private set; }
         internal bool Searching { get; private set; }
-        string m_TicketId = "";
-        Coroutine m_PollingCoroutine = null;
 
-        internal async void FindMatch(string queueName, Action<MultiplayAssignment> onMatchSearchCompleted, Action<int> onMatchmakerTicked)
+        private string m_TicketId = "";
+       
+        private int m_LocalCharacterId = -1;
+
+        /// <summary>
+        /// Starts matchmaking with the selected characterId.
+        /// </summary>
+        public async void FindMatch(
+            string queueName,
+            int characterId,
+            Action<MultiplayAssignment, List<(string playerId, int characterId)>> onMatchSearchCompleted,
+            Action<int> onMatchmakerTicked)
         {
+            if (Searching || !AuthenticationService.Instance.IsSignedIn)
+            {
+                Debug.LogWarning("Already searching or not signed in.");
+                return;
+            }
+
+            Searching = true;
+            m_LocalCharacterId = characterId;
+
             try
             {
-                if (!Searching)
-                {
-                    if (m_TicketId.Length > 0)
-                    {
-                        Debug.LogError($"Already matchmaking!");
-                        return;
-                    }
-
-                    Searching = true;
-                    await StartSearch(queueName, onMatchSearchCompleted, onMatchmakerTicked);
-                }
+                await StartSearch(queueName, characterId, onMatchSearchCompleted, onMatchmakerTicked);
             }
             catch (Exception e)
             {
-                Debug.LogError(e.Message);
+                Debug.LogError($"Matchmaker error: {e.Message}");
                 await StopSearch();
                 MetagameApplication.Instance.Broadcast(new ExitMatchmakerQueueEvent());
             }
         }
 
-        async Task StartSearch(string queueName, Action<MultiplayAssignment> onMatchSearchCompleted, Action<int> onMatchmakerTicked)
+        private async Task StartSearch(
+            string queueName,
+            int characterId,
+            Action<MultiplayAssignment, List<(string playerId, int characterId)>> onMatchSearchCompleted,
+            Action<int> onMatchmakerTicked)
         {
-            
-            var attributes = new Dictionary<string, object>
-            {
-               // { "region", "asia" }  // Replace with a valid region from Unity Multiplay
-            };
-            // var attributes = new Dictionary<string, object>();
+            LastQueueName = queueName;
+
+            var attributes = new Dictionary<string, object>();
+            var playerAttributes = new Dictionary<string, object> { { "characterId", characterId } };
+
             var players = new List<Player>
             {
-                new Player(AuthenticationService.Instance.PlayerId, new Dictionary<string, object>()),
+                new Player(AuthenticationService.Instance.PlayerId, playerAttributes)
             };
+
             var options = new CreateTicketOptions(queueName, attributes);
-            
-            Debug.Log($"Matchmaking Ticket  - Queue: {queueName}, Players: {players.Count}, Attributes: {JsonUtility.ToJson(attributes, true)}");
-
             var ticketResponse = await MatchmakerService.Instance.CreateTicketAsync(players, options);
-            LastQueueName = queueName;
-            m_TicketId = ticketResponse.Id;
-            Debug.Log($"Ticket Created - ID: {ticketResponse.Id}");
 
-            CoroutinesHelper.StopAndNullifyRoutine(ref m_PollingCoroutine, this);
-            m_PollingCoroutine = StartCoroutine(PollTicketStatus(onMatchSearchCompleted, onMatchmakerTicked));
+            m_TicketId = ticketResponse.Id;
+            Debug.Log($"Matchmaker Ticket Created: {m_TicketId}");
+
+            _ = PollTicketStatusAsync(onMatchSearchCompleted, onMatchmakerTicked);
         }
 
-        internal async Task StopSearch()
+        public async Task StopSearch()
         {
-            CoroutinesHelper.StopAndNullifyRoutine(ref m_PollingCoroutine, this);
             if (!string.IsNullOrEmpty(m_TicketId))
             {
-                await MatchmakerService.Instance.DeleteTicketAsync(m_TicketId);
+                try
+                {
+                    await MatchmakerService.Instance.DeleteTicketAsync(m_TicketId);
+                    Debug.Log($"Matchmaker ticket {m_TicketId} deleted.");
+                }
+                catch (Exception e)
+                {
+                    Debug.LogWarning($"Failed to delete matchmaking ticket: {e.Message}");
+                }
+
                 m_TicketId = string.Empty;
             }
+
             Searching = false;
         }
 
-        IEnumerator PollTicketStatus(Action<MultiplayAssignment> onMatchSearchCompleted, Action<int> onMatchmakerTicked)
+
+        private async Task PollTicketStatusAsync(
+            Action<MultiplayAssignment, List<(string playerId, int characterId)>> onMatchSearchCompleted,
+            Action<int> onMatchmakerTicked)
         {
-            TicketStatusResponse response = null;
-            MultiplayAssignment assignment = null;
+            int elapsed = 0;
             bool polling = true;
-            int elapsedTime = 0;
-            Task<TicketStatusResponse> ticketTask = null;
 
             while (polling)
             {
-                if (elapsedTime % 2 == 0)
-                {
-                    ticketTask = Task.Run(() => MatchmakerService.Instance.GetTicketAsync(m_TicketId));
-                }
-                yield return CoroutinesHelper.ThreeSeconds;
-                elapsedTime++;
-                onMatchmakerTicked?.Invoke(elapsedTime);
+                await Task.Delay(3000);
+                elapsed++;
+                onMatchmakerTicked?.Invoke(elapsed);
 
                 try
                 {
-                    if (ticketTask.IsCompleted)
+                    var statusResponse = await MatchmakerService.Instance.GetTicketAsync(m_TicketId);
+                    var assignment = statusResponse.Value as MultiplayAssignment;
+
+                    if (assignment == null) continue;
+
+                    switch (assignment.Status)
                     {
-                        response = ticketTask.Result;
+                        case StatusOptions.InProgress:
+                            Debug.Log("Matchmaker status: InProgress");
+                            break;
 
-                        if (response.Type == typeof(MultiplayAssignment))
-                        {
-                            assignment = response.Value as MultiplayAssignment;
-                        }
+                        case StatusOptions.Found:
+                            Debug.Log("Matchmaker status: Found");
+                            polling = false;
 
-                        if (assignment == null)
-                        {
-                            throw new InvalidOperationException($"GetTicketStatus returned a type that was not a {nameof(MultiplayAssignment)}. This operation is not supported.");
-                        }
-
-                        switch (assignment.Status)
-                        {
-                            case StatusOptions.InProgress:
-                                Debug.Log("Polling in progress");
-                                //Do nothing
-                                break;
-                            case StatusOptions.Found:
+                            var matchedPlayers = new List<(string, int)>
                             {
-                                polling = false;
-                                Debug.Log("Found..!!");
-                            }
-                                break;
-                            case StatusOptions.Failed:
-                            case StatusOptions.Timeout:
-                                polling = false;
-                                break;
-                            default:
-                                throw new InvalidOperationException("Assignment status was a value other than 'In Progress', 'Found', 'Timeout' or 'Failed'! Mismatch between Matchmaker SDK expected responses and service API values! Status value: '{assignment.Status}'");
-                        }
+                                (AuthenticationService.Instance.PlayerId, m_LocalCharacterId)
+                            };
+
+                            onMatchSearchCompleted?.Invoke(assignment, matchedPlayers);
+                            break;
+
+                        case StatusOptions.Failed:
+                        case StatusOptions.Timeout:
+                            Debug.LogWarning("Matchmaker status: Failed/Timeout");
+                            polling = false;
+                            onMatchSearchCompleted?.Invoke(null, new List<(string, int)>());
+                            break;
                     }
                 }
                 catch (Exception ex)
                 {
-                    Debug.Log("---->:"+ex.Message);
-#pragma warning disable CS4014 // Can't await in coroutines, so the method execution will continue
-                    StopSearch();
-#pragma warning restore CS4014 // Can't await in coroutines, so the method execution will continue
-                    onMatchSearchCompleted?.Invoke(assignment);
-                    throw;
+                    Debug.LogError($"Polling error: {ex.Message}");
+                    polling = false;
+                    onMatchSearchCompleted?.Invoke(null, new List<(string, int)>());
                 }
             }
 
-#pragma warning disable CS4014 // Can't await in coroutines, so the method execution will continue
-            StopSearch();
-#pragma warning restore CS4014 // Can't await in coroutines, so the method execution will continue
-            onMatchSearchCompleted?.Invoke(assignment);
+            await StopSearch();
         }
+
     }
 }

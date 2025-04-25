@@ -11,6 +11,9 @@ namespace RedGaint.Network.Runtime
     }
     
     internal class EnterLobbyQueueEvent : AppEvent { }
+    internal class EnterUserProfileEvent : AppEvent { }
+    internal class EnterLoginEvent : AppEvent { }
+
 
     internal class ExitMatchmakerQueueEvent : AppEvent { }
     

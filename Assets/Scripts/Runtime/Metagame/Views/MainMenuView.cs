@@ -1,72 +1,40 @@
+using UnityEngine;
 using UnityEngine.UIElements;
+using System;
 namespace RedGaint.Network.Runtime
 {
+
     internal class MainMenuView : View<MetagameApplication>
     {
-        Button m_MultiplayerButton;
-        Button m_SinglePlayerButton;
-        Button m_QuitButton;
-        Button m_ModelSelectionButton;
-
-        Label m_TitleLabel;
-        UIDocument m_UIDocument;
-
-        void Awake()
+        MainMenuModeContext modeContext;
+        bool IsFestivalSeason()
         {
-            m_UIDocument = GetComponent<UIDocument>();
+            var today = DateTime.UtcNow;
+            return today.Month == 12 && today.Day >= 20; // Dec 20 to Dec 31 for example
         }
 
         void OnEnable()
         {
-            var root = m_UIDocument.rootVisualElement;
-                
-            m_ModelSelectionButton = root.Q<Button>("modelSelectionButton");
-            m_ModelSelectionButton.RegisterCallback<ClickEvent>(OnClickModelSelect);
-            
-            m_SinglePlayerButton = root.Q<Button>("singlePlayerButton");
-            m_SinglePlayerButton.RegisterCallback<ClickEvent>(OnClickSinglePlay);
-            
-            m_MultiplayerButton = root.Q<Button>("multiPlayerButton");
-            m_MultiplayerButton.RegisterCallback<ClickEvent>(OnClickMultiplay);
+            var root = GetComponent<UIDocument>().rootVisualElement;
+            var uiRefs = new UIReferences(root);
 
-            m_QuitButton = root.Q<Button>("quitButton");
-            m_QuitButton.RegisterCallback<ClickEvent>(OnClickQuit);
-        
+            modeContext = new MainMenuModeContext(uiRefs);
 
-            m_TitleLabel = root.Query<Label>("titleLabel");
-            m_TitleLabel.text = "Free Run";
+            if (IsFestivalSeason()&&IsUserLoggedIn())
+                modeContext.SetMode(MenuMode.Festival);
+            else if (IsUserLoggedIn())
+                modeContext.SetMode(MenuMode.User);
+            else
+                modeContext.SetMode(MenuMode.Guest);
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
-            m_SinglePlayerButton.UnregisterCallback<ClickEvent>(OnClickModelSelect);
-            m_MultiplayerButton.UnregisterCallback<ClickEvent>(OnClickMultiplay);
-            m_SinglePlayerButton.UnregisterCallback<ClickEvent>(OnClickSinglePlay);
-            m_QuitButton.UnregisterCallback<ClickEvent>(OnClickQuit);
+          modeContext.ClearContext();
         }
 
-        void OnClickMultiplay(ClickEvent evt)
-        {
-            Broadcast(new EnterLobbyQueueEvent());
-        }
-
-        void OnClickSinglePlay(ClickEvent evt)
-        {
-            Broadcast(new EnterMatchmakerQueueEvent("default"));
-            
-        }
-        void OnClickModelSelect(ClickEvent evt)
-        {
-            Broadcast(new EnterModelSelectionEvent());
-        }
-
-        void OnClickQuit(ClickEvent evt)
-        {
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#else
-            UnityEngine.Application.Quit();
-#endif
-        }
+        bool IsUserLoggedIn() => !string.IsNullOrEmpty(GameProfileManager.Current?.Username);
     }
 }
+
+

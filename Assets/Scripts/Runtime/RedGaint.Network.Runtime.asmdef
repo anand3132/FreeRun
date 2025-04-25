@@ -16,7 +16,10 @@
         "Unity.Multiplayer.Samples.Utilities",
         "RedGaint.Network.Shared",
         "Unity.Services.Multiplayer",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "Unity.Services.CloudSave",
+        "Unity.Localization",
+        "Unity.ResourceManager"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

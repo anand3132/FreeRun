@@ -16,9 +16,41 @@ namespace RedGaint.Network.Runtime
             AddListener<ExitMatchmakerQueueEvent>(OnExitMatchmakerQueue);
             AddListener<EnterIPConnectionEvent>(OnEnterIPConnection);
             AddListener<ExitIPConnectionEvent>(OnExitIPConnection);
+            AddListener<EnterUserProfileEvent>(OnEnterUserProfileEvent);
+            AddListener<EnterLoginEvent>(OnEnterLoginEvent);
             ConnectionManager.EventManager.AddListener<ConnectionEvent>(OnConnectionEvent);
         }
 
+        private void Start()
+        {
+            if (PlayerPrefs.HasKey("username") && PlayerPrefs.HasKey("password"))
+            {
+                string savedUsername = PlayerPrefs.GetString("username");
+                string savedPassword = PlayerPrefs.GetString("password");
+
+                GlobalStaticVariables.UserName = savedUsername;
+                GlobalStaticVariables.Password = savedPassword;
+
+                _ = UnityServicesInitializer.Instance.InitializeAndSignIn(UnityServicesInitializer.SignInMethod.UsernamePassword);
+            }
+            else
+            {
+                
+                Debug.Log("Show main Menu....");
+                App.View.MainMenu.Show();
+            }
+        }
+
+        // private void OnLoginEntered()
+        // {
+        //     App.View.Login.Show();
+        //     View.Hide();
+        // }
+
+        private void OnLobbyEntered(EnterLobbyQueueEvent obj)
+        {
+            View.Hide();
+        }
         void OnDestroy()
         {
             RemoveListeners();
@@ -30,7 +62,23 @@ namespace RedGaint.Network.Runtime
             RemoveListener<ExitMatchmakerQueueEvent>(OnExitMatchmakerQueue);
             RemoveListener<EnterIPConnectionEvent>(OnEnterIPConnection);
             RemoveListener<ExitIPConnectionEvent>(OnExitIPConnection);
+            RemoveListener<EnterLobbyQueueEvent>(OnLobbyEntered);
+            RemoveListener<EnterUserProfileEvent>(OnEnterUserProfileEvent);
+            RemoveListener<EnterLoginEvent>(OnEnterLoginEvent);
+
             ConnectionManager.EventManager.RemoveListener<ConnectionEvent>(OnConnectionEvent);
+        }
+
+        private void OnEnterLoginEvent(EnterLoginEvent obj)
+        { 
+            View.Hide();
+            App.View.LoginView.Show();
+        }
+
+        void OnEnterUserProfileEvent(EnterUserProfileEvent evt)
+        {
+            View.Hide();
+            App.View.ModelSelectionView.Show();
         }
 
         void OnEnterMatchmakerQueue(EnterMatchmakerQueueEvent evt)

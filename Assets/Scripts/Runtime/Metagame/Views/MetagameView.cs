@@ -8,29 +8,20 @@ namespace RedGaint.Network.Runtime
     public class MetagameView : View<MetagameApplication>
     {
         internal MainMenuView MainMenu => m_MainMenuView;
-
-        [SerializeField]
-        MainMenuView m_MainMenuView;
+        [SerializeField] private MainMenuView m_MainMenuView;
 
         internal MatchmakerView Matchmaker => m_MatchmakerView;
-
-        [SerializeField]
-        MatchmakerView m_MatchmakerView;
+        [SerializeField] private MatchmakerView m_MatchmakerView;
         
         internal DirectIPView DirectIP => m_DirectIPView;
-
-        [SerializeField]
-        DirectIPView m_DirectIPView;
+        [SerializeField] private DirectIPView m_DirectIPView;
         
         internal ClientConnectingView ClientConnecting => m_ClientConnectingView;
+        [SerializeField] private ClientConnectingView m_ClientConnectingView;
 
-        [SerializeField]
-        ClientConnectingView m_ClientConnectingView;
-
-        internal LobbyView LobbyView => m_LobbyView;
-        
-        [SerializeField]
-        LobbyView m_LobbyView;
-        
+        internal ModelSelectionView ModelSelectionView=>m_ModelSelectionView;
+        [SerializeField] ModelSelectionView m_ModelSelectionView;
+        internal LoginView LoginView => m_LoginView;
+        [SerializeField] private LoginView m_LoginView;
     }
 }

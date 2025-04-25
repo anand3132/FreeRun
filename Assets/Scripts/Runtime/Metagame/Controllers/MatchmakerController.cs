@@ -39,7 +39,7 @@ namespace RedGaint.Network.Runtime
         void OnEnterMatchmakerQueue(EnterMatchmakerQueueEvent evt)
         {
             View.Show();
-            UnityServicesInitializer.Instance.Matchmaker.FindMatch(evt.QueueName, OnMatchSearchCompleted, View.UpdateTimer);
+           // UnityServicesInitializer.Instance.Matchmaker.FindMatch(evt.QueueName, OnMatchSearchCompleted, View.UpdateTimer);
         }
 
         void OnExitMatchmakerQueue(ExitMatchmakerQueueEvent evt)
