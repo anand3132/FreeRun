@@ -1,5 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/UnityStyleSheet.uss?fileID=7433441132597879392&amp;guid=819e6491a1421a14db87a36e0c93b136&amp;type=3#UnityStyleSheet" />
+    <ui:VisualElement name="Profile" style="flex-grow: 1;" />
     <ui:VisualElement style="flex-grow: 1; flex-direction: column; justify-content: flex-end; align-items: center; padding: 20px;">
         <ui:Label text="ModelName" name="modelNameLabel" class="title" style="margin-bottom: 40px; font-size: 75px; text-align: center;" />
         <ui:VisualElement style="flex-direction: row; justify-content: center; align-items: center; margin-bottom: 30px; gap: 20px;">
@@ -7,7 +8,7 @@
             <ui:Button text="Next" display-tooltip-when-elided="true" name="nextButton" class="button" style="min-width: 120px; padding: 10px 20px;" />
         </ui:VisualElement>
         <ui:VisualElement style="flex-direction: row; justify-content: center; align-items: center; gap: 20px;">
-            <ui:Button text="MainMenu" display-tooltip-when-elided="true" name="backButton" class="button" style="min-width: 150px; padding: 12px 24px;" />
+            <ui:Button text="MainMenu" display-tooltip-when-elided="true" name="mainMenuButton" class="button" style="min-width: 150px; padding: 12px 24px;" />
             <ui:Button text="Start" display-tooltip-when-elided="true" name="startMultiplayerButton" class="button" style="min-width: 150px; padding: 12px 24px; background-color: rgb(76, 175, 80);" />
         </ui:VisualElement>
     </ui:VisualElement>
