@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 using UnityEngine.UIElements;
 namespace RedGaint.Network.Runtime
 {
@@ -7,6 +8,7 @@ namespace RedGaint.Network.Runtime
         Button m_QuitButton;
         Label m_TimerLabel;
         UIDocument m_UIDocument;
+        GameObject lobbyStage;
 
         void Awake()
         {

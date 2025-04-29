@@ -1,18 +1,31 @@
-<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/UnityStyleSheet.uss?fileID=7433441132597879392&amp;guid=819e6491a1421a14db87a36e0c93b136&amp;type=3#UnityStyleSheet" />
-    <engine:VisualElement name="LoginMenu" style="justify-content: flex-end; align-items: flex-start; align-self: flex-end; height: 1920px; width: 1080px; align-content: flex-start; flex-direction: column; flex-wrap: nowrap; -unity-text-align: middle-left;">
-        <engine:VisualElement name="SignInPanel" style="flex-grow: 1; align-items: stretch; justify-content: center; height: 500px; width: 500px; -unity-text-align: upper-left; transition-property: all, ignored; transition-duration: 0s, 0s; transition-timing-function: ease, ease; transition-delay: 0s, 0s; align-self: flex-end; align-content: stretch;">
-            <engine:TextField label="UserName" placeholder-text="UserName" name="UsernameField" style="height: 100px;" />
-            <engine:TextField label="Password" placeholder-text="Password" name="PasswordField" password="true" style="height: 82px; width: 453px; margin-top: 0; margin-bottom: 0;" />
-            <engine:Button text="SignIn" display-tooltip-when-elided="true" name="UsernameSignInButton" class="button" style="top: auto; left: auto; right: auto; bottom: auto; align-self: center; position: relative; transition-property: scale; transition-duration: 0.25s; align-content: auto; justify-content: flex-start; align-items: stretch; -unity-text-align: middle-left; padding-top: 0; margin-top: 50px;" />
-            <engine:Button text="CreateNew" display-tooltip-when-elided="true" name="CreateNewButton" class="button" style="top: auto; left: auto; right: auto; bottom: auto; align-self: center; position: relative; transition-property: scale; transition-duration: 0.25s; align-content: auto; justify-content: flex-start; align-items: stretch; -unity-text-align: middle-left;" />
-            <engine:Label name="StatusLabel" style="height: 50px; width: 500px; font-size: 40px; margin-top: 50px;" />
-        </engine:VisualElement>
-        <engine:VisualElement name="SocialPanel" style="flex-grow: 1; justify-content: flex-start; flex-direction: column-reverse; align-self: flex-end;">
-            <engine:Button text="Google" display-tooltip-when-elided="true" name="GoogleSignInButton" class="button" style="top: auto; left: auto; right: auto; bottom: auto; align-self: center; position: relative; transition-property: scale; transition-duration: 0.25s; align-content: auto; justify-content: flex-start; align-items: stretch; -unity-text-align: middle-left;" />
-            <engine:Button text="FaceBook" display-tooltip-when-elided="true" name="FacebookSignInButton" class="button" style="top: auto; left: auto; right: auto; bottom: auto; align-self: center; position: relative; transition-property: scale; transition-duration: 0.25s; align-content: auto; justify-content: flex-start; align-items: stretch; -unity-text-align: middle-left;" />
-            <engine:Button text="Apple" display-tooltip-when-elided="true" name="AppleSignInButton" class="button" style="top: auto; left: auto; right: auto; bottom: auto; align-self: center; position: relative; transition-property: scale; transition-duration: 0.25s; align-content: auto; justify-content: flex-start; align-items: stretch; -unity-text-align: middle-left;" />
-            <engine:Button text="GuestLogin" display-tooltip-when-elided="true" name="AnonymousSignInButton" class="button" style="top: auto; left: auto; right: auto; bottom: auto; align-self: center; position: relative; transition-property: scale; transition-duration: 0.25s; align-content: auto; justify-content: flex-start; align-items: stretch; -unity-text-align: middle-left;" />
-        </engine:VisualElement>
-    </engine:VisualElement>
-</engine:UXML>
+    <ui:VisualElement class="background">
+        <ui:Label text="Welcome Back!" name="modelNameLabel" class="main-title" />
+        <ui:VisualElement class="form-container">
+            <ui:TextField label="Username" name="UsernameField" class="input-field" />
+            <ui:TextField label="Password" name="PasswordField" password="true" class="input-field" />
+            <ui:Button name="UsernameSignInButton" class="menu-button">
+                <ui:Label text="Sign In" class="button-text" />
+            </ui:Button>
+            <ui:Button name="CreateNewButton" class="menu-button">
+                <ui:Label text="SignUp" class="button-text" />
+            </ui:Button>
+            <ui:Label name="StatusLabel" class="status-label" />
+        </ui:VisualElement>
+        <ui:VisualElement class="social-panel">
+            <ui:Button name="GoogleSignInButton" class="menu-button">
+                <ui:Label text="Google" class="button-text" />
+            </ui:Button>
+            <ui:Button name="FacebookSignInButton" class="menu-button">
+                <ui:Label text="Facebook" class="button-text" />
+            </ui:Button>
+            <ui:Button name="AppleSignInButton" class="menu-button">
+                <ui:Label text="Apple" class="button-text" />
+            </ui:Button>
+            <ui:Button name="AnonymousSignInButton" class="menu-button">
+                <ui:Label text="Anonymous" class="button-text" />
+            </ui:Button>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

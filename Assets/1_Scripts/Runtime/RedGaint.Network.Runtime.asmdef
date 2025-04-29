@@ -19,7 +19,10 @@
         "Unity.TextMeshPro",
         "Unity.Services.CloudSave",
         "Unity.Localization",
-        "Unity.ResourceManager"
+        "Unity.ResourceManager",
+        "Unity.Services.CloudCode",
+        "Unity.Services.CloudCode.GeneratedBindings",
+        "RedGaint.Utility"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

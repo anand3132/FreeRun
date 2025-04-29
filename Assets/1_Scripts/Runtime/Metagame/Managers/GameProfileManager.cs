@@ -5,97 +5,127 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using RedGaint.Network.Runtime.UserData;
+using RedGaint.Utility;
 using UnityEngine;
 
 namespace RedGaint.Network.Runtime
 {
-    public static class GameProfileManager
+    public  class GameProfileManager:Singleton<GameProfileManager>, IBugsBunny
     {
-        public static PlayerProfileData? Current { get; private set; }
+        // Create a default empty profile immediately
+        public static PlayerProfileData CurrentUser { get; private set; } = new PlayerProfileData();
 
-        public static bool IsLoggedIn => Current != null && !Current.Username.StartsWith("Guest", StringComparison.OrdinalIgnoreCase);
 
-        public static string DisplayName => Current?.Username ?? "Guest";
-        private  static  string CurrentGuestID= string.Empty;
-        public static void CreateGuestProfile()
+        public  PlayerProfileData CreateGuestProfile()
         {
-            CurrentGuestID= $"Guest-{SystemInfo.deviceUniqueIdentifier[..6]}";
-            
-            Current = new PlayerProfileData
-            {
-                PlayerId = CurrentGuestID,
-                Username = CurrentGuestID,
-                XP = 0,
-                Coins = 0,
-                ProgressLevel = 1
-            };
+            CurrentUser.Username = $"Guest_{SystemInfo.deviceUniqueIdentifier[..6]}";
+            CurrentUser.PlayerId = CurrentUser.Username;
+            CurrentUser.XP = 0;
+            CurrentUser.Coins = 0;
+            CurrentUser.ProgressLevel = 1;
+            CurrentUser.AvatarId = string.Empty;
+            CurrentUser.CharacterId = string.Empty;
+            CurrentUser.CurrentLevelId = string.Empty;
+            return CurrentUser;
         }
 
-        public static async Task LoadAsync(bool useCloud, CancellationToken cancellationToken = default)
+        public  async Task<bool> LoadAsync(bool useCloud, CancellationToken cancellationToken = default)
         {
+            useCloud = false;
             if (useCloud)
             {
                 var cloudProfile = await CloudPlayerProfileHandler.LoadAsync(cancellationToken);
                 if (cloudProfile != null)
                 {
-                    Current = cloudProfile;
+                    CurrentUser = cloudProfile;
                     Debug.Log("Loaded profile from cloud.");
-                    return;
+                    return true;
                 }
                 Debug.Log("No cloud profile found, falling back to guest.");
+                return false;
             }
 
             var local = LocalPlayerProfileHandler.Load();
             if (local != null)
             {
-                Current = local;
+                CurrentUser = local;
                 Debug.Log("Loaded profile from local.");
+                return true;
             }
             else
             {
                 CreateGuestProfile();
                 Debug.Log("Created guest profile.");
+                return false;
             }
         }
 
-        public static async Task SaveAsync(bool toCloud, UserData.PlayerProfileData newuser,CancellationToken cancellationToken = default)
+        public  async Task SaveAsync(bool toCloud, PlayerProfileData newuser, CancellationToken cancellationToken = default)
         {
-            if (string.Equals(CurrentGuestID, newuser.PlayerId))
-            {
-                Current = newuser;
-                SaveAsync(false);
-            }
-            else
-            {
-                Current = newuser;
-                Debug.Log($"{CurrentGuestID} Current guest profile is not in playerid: {newuser.PlayerId}.");
-                SaveAsync(false);
-            }
+            toCloud = false;
+            CurrentUser = newuser;
+            await SaveAsync(false, cancellationToken);
         }
 
-        public static async Task SaveAsync(bool toCloud, CancellationToken cancellationToken = default)
+        private  async Task<bool> SaveAsync(bool toCloud, CancellationToken cancellationToken = default)
         {
-            if (Current == null)
+            
+            if (CurrentUser == null)
             {
                 Debug.LogWarning("No current profile to save.");
-                return;
+                return false;
             }
 
             if (toCloud)
             {
-                await CloudPlayerProfileHandler.SaveAsync(Current, cancellationToken);
+                await CloudPlayerProfileHandler.SaveAsync(CurrentUser, cancellationToken);
                 Debug.Log("Saved profile to cloud.");
+                return true;
             }
             else
             {
-                LocalPlayerProfileHandler.Save(Current);
+                LocalPlayerProfileHandler.Save(CurrentUser);
                 Debug.Log("Saved profile locally.");
+                return true;
             }
         }
 
-        public static void Clear()
+        public async Task<bool> UpdatePlayerProfile(PlayerProfileData playerProfileData,bool saveOnCloud)
         {
-            Current = null;
+            saveOnCloud = false;
+            CurrentUser = playerProfileData;
+            return await SaveAsync(saveOnCloud);
         }
+
+        public  void Clear()
+        {
+            CurrentUser = new PlayerProfileData();
+        }
+
+        public bool LogThisClass { get; } = false;
     }
 }
+// using System.Threading.Tasks;
+//
+// namespace RedGaint.Network.Runtime
+// {
+//     public static class GameProfileService
+//     {
+//         public static UserData.PlayerProfileData CurrentProfileData { get; private set; }
+//
+//         public static void LoadFromLocal()
+//         {
+//             CurrentProfileData = UserData.LocalPlayerProfileHandler.Load() ?? new UserData.PlayerProfileData();
+//         }
+//
+//         public static async Task LoadFromCloudAsync()
+//         {
+//             CurrentProfileData = await UserData.CloudPlayerProfileHandler.LoadAsync() ?? new UserData.PlayerProfileData();
+//         }
+//
+//         public static void SaveLocal() => UserData.LocalPlayerProfileHandler.Save(CurrentProfileData);
+//
+//         public static async Task SaveCloudAsync() => await UserData.CloudPlayerProfileHandler.SaveAsync(CurrentProfileData);
+//     }
+//
+// }

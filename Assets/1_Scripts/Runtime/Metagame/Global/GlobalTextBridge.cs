@@ -56,7 +56,7 @@ namespace RedGaint
                 {
                     var value = await localized.GetLocalizedStringAsync().Task;
                     cachedStrings[keyStr] = value;
-                    Debug.Log("Localisation Enabled..."+value);
+               //     Debug.Log("Localisation Enabled..."+value);
                 }
                 catch (Exception ex)
                 {
@@ -82,11 +82,14 @@ namespace RedGaint
         public static string WelcomeText => Get(LocalizedKey.welcome_text);
         public static string SignInButtonText => Get(LocalizedKey.SignIN_button);
         public static string ProfileButtonText => Get(LocalizedKey.Profile_button);
+        
+        public static string LobbyWaitingText="Waiting for player to join..."; 
 
+        public static string ExitText="Exit";
         // Get string by enum
         public static string Get(LocalizedKey key)
         {
-            Debug.Log("Get: " + key);
+          //  Debug.Log("Get: " + key);
             string keyStr = key.ToString();
             return cachedStrings.TryGetValue(keyStr, out var value) ? value : $"[{keyStr}]";
         }

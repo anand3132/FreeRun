@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -9,44 +10,54 @@ namespace RedGaint.Network.Runtime
     public class LobbyView : View<MetagameApplication>
     {
         [Header("UI Elements")]
-        // [SerializeField] private TMP_Text countdownText;
        // [SerializeField] private List<TMP_Text> playerNameSlots;
-        private Button m_RunButton;
+        // private Button m_RunButton;
+        
         private Label m_TitleLabel;
+        private Label m_InfoLabel;
+
         private bool isOnRun=false;
-        private UIDocument m_UIDocument;    
-        
-        
+        private UIDocument m_UIDocument;
+        private Button m_ExitButton;
         void Awake()
         {
             m_UIDocument = GetComponent<UIDocument>();
+            var root = m_UIDocument.rootVisualElement;
+            m_ExitButton = root.Q<Button>("quitButton");
+            m_TitleLabel = root.Query<Label>("timerLabel");
+            m_InfoLabel = root.Query<Label>("titleLabel");
+            m_TitleLabel.text = GlobalTextBridge.LobbyWaitingText;
         }
 
         void OnEnable()
         {
-            var root = m_UIDocument.rootVisualElement;
-            m_RunButton = root.Q<Button>("resumeButton");
-            m_RunButton.RegisterCallback<ClickEvent>(OnClickRunClicked);
-             m_TitleLabel = root.Query<Label>("infotext");
-            m_TitleLabel.text = "Free Run";
+            m_ExitButton.clicked += OnClickQuitClicked;
         }
 
-        private void OnClickRunClicked(ClickEvent evt)
+        private void OnClickQuitClicked()
         {
-            if (!isOnRun)
-            {
-                m_TitleLabel.text = "Searching...";
-                m_RunButton.text = "cancel";
-                isOnRun = true;
-                Broadcast(new LobbyStartedEvent(30f));
-                
-            }
-            else
-            {
-                m_TitleLabel.text = "Searching...";
-            }
-
         }
+
+        private void OnDisable()
+        {
+            m_ExitButton.clicked -= OnClickQuitClicked;
+        }
+
+        // private void OnClickQuitClicked(ClickEvent evt)
+        // {
+        //     // if (!isOnRun)
+        //     // {
+        //     //     // m_TitleLabel.text = "Searching...";
+        //     //     // m_RunButton.text = "cancel";
+        //     //     isOnRun = true;
+        //     //     Broadcast(new LobbyStartedEvent(30f));
+        //     //     
+        //     // }
+        //     // else
+        //     // {
+        //     //     m_TitleLabel.text = "Searching...";
+        //     // }
+        // }
 
         // internal LobbyView Lobby => m_LobbyView;
         // [SerializeField] 
@@ -79,17 +90,17 @@ namespace RedGaint.Network.Runtime
         /// <summary>
         /// Shows the lobby panel.
         /// </summary>
-        public void ShowLobby()
-        {
-            Show();
-        }
-
-        /// <summary>
-        /// Hides the lobby panel.
-        /// </summary>
-        public void HideLobby()
-        {
-            Hide();
-        }
+        // public void ShowLobby()
+        // {
+        //     Show();
+        // }
+        //
+        // /// <summary>
+        // /// Hides the lobby panel.
+        // /// </summary>
+        // public void HideLobby()
+        // {
+        //     Hide();
+        // }
     }
 }

@@ -45,8 +45,7 @@ namespace RedGaint.Network.Runtime
 
         async public Task Initialize(bool isClient)
         {
-            //server login handled over here 
-            string serviceProfileName = ProfileManager.Singleton.Profile;
+            string serviceProfileName = $"FunRunServerProfile-{Guid.NewGuid()}";
             if (!isClient)
             {
                 //servers should always have a single ID so their data isn't mixed with Users'.
@@ -56,26 +55,6 @@ namespace RedGaint.Network.Runtime
                 Debug.Log("Environment :"+k_Environment);
 
             }
-            
-            // if (isClient)
-            // {
-            //     //wait for the MetagameApplication to be instantiated, to avoid race conditions
-            //     StartCoroutine(CoroutinesHelper.WaitAndDo(new WaitUntil(() => MetagameApplication.Instance), () =>
-            //     {
-            //         //MetagameApplication.Instance.Broadcast(new PlayerSignedIn(signedIn, UnityServiceAuthenticator.PlayerId));
-            //
-            //         //at this point, it's safe to tell the Application that the player signed in
-            //         // MetagameApplication.Instance.Broadcast(new PlayerSignedIn(signedIn, UnityServiceAuthenticator.PlayerId));
-            //         // if (signedIn)
-            //         // {
-            //         //     InitializeClientOnlyServices();
-            //         // }
-            //         // else
-            //         // {
-            //         //     Debug.LogError("User could not sign in. Please check that your device is connected to the internet, and that the project is linked to an existing Project in the Unity Cloud.");
-            //         // }
-            //     }));
-            // }
         }
         
         public enum SignInMethod
@@ -84,10 +63,12 @@ namespace RedGaint.Network.Runtime
             Apple,
             Google,
             Facebook,
-            UsernamePassword
+            UsernamePassword,
+            AutoLogin,
+            None
         }
 
-        public async Task InitializeAndSignIn(SignInMethod method, string customID = null)
+        public async Task<bool> InitializeAndSignIn(SignInMethod method, string customID = null)
         {
             try
             {
@@ -116,6 +97,9 @@ namespace RedGaint.Network.Runtime
                         case SignInMethod.UsernamePassword:
                             await TryAutoLogin();
                             break;
+                        case SignInMethod.AutoLogin:
+                            await TryAutoLogin();
+                            break;
                     }
 
                     Debug.Log($"Signed in with {method}. PlayerID: {AuthenticationService.Instance.PlayerId}");
@@ -137,8 +121,16 @@ namespace RedGaint.Network.Runtime
             {
                 Debug.LogError($"Unexpected error: {ex.Message}");
             }
+
+            // if (AuthenticationService.Instance.IsSignedIn)
+            // {
+            //     MetagameApplication.Instance.Broadcast(new PlayerSignedIn(AuthenticationService.Instance.IsSignedIn,AuthenticationService.Instance.PlayerId,method));
+            //     return true;
+            // }
+
+            return false;
         }
-        public async Task<bool> TryAutoLogin()
+        private async Task<bool> TryAutoLogin()
         {
             try
             {
@@ -156,7 +148,7 @@ namespace RedGaint.Network.Runtime
                 {
                     // Attempt to sign in with stored credentials
                     await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(username, password);
-                    Debug.Log(" Auto-login successful.");
+                    Debug.Log(" Auto-login successful."+AuthenticationService.Instance.AccessToken);
                     return true;
                 }
                 else
@@ -195,6 +187,11 @@ namespace RedGaint.Network.Runtime
             }
 
             return false; // failed
+        }
+
+        public async Task<bool> TrySignOut()
+        {
+            return true;
         }
         
         void InitializeClientOnlyServices()

@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 using System;
+using Unity.Services.Authentication;
+
 namespace RedGaint.Network.Runtime
 {
 
@@ -32,7 +34,8 @@ namespace RedGaint.Network.Runtime
         {
           modeContext.ClearContext();
         }
-        bool IsUserLoggedIn() => !string.IsNullOrEmpty(GameProfileManager.Current?.Username);
+
+        bool IsUserLoggedIn() => AuthenticationService.Instance.IsSignedIn;
     }
 }
 

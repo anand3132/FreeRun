@@ -11,7 +11,7 @@ namespace RedGaint.Network.Runtime
 
         public void Initialize()
         {
-             _ui.NameLabel.text = GameProfileManager.Current?.Username ?? "User";
+             _ui.NameLabel.text = GameProfileManager.CurrentUser?.Username ?? "User";
             _ui.ProfileButton.clicked += OnClickProfile;
             _ui.ProfileButton.text = GlobalTextBridge.ProfileButtonText;
         }

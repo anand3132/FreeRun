@@ -1,0 +1,13 @@
+C:\Users\anand\AppData\Local\Temp\GameSessionModule\module-compilation-cross-platform\GameSessionModule.dll
+C:\Users\anand\AppData\Local\Temp\GameSessionModule\module-compilation-cross-platform\GameSessionModule.deps.json
+C:\Users\anand\AppData\Local\Temp\GameSessionModule\module-compilation-cross-platform\GameSessionModule.pdb
+C:\Users\anand\AppData\Local\Temp\GameSessionModule\module-compilation-cross-platform\Unity.Services.CloudCode.Apis.dll
+C:\Users\anand\AppData\Local\Temp\GameSessionModule\module-compilation-cross-platform\Unity.Services.CloudCode.Core.dll
+C:\Users\anand\AppData\Local\Temp\GameSessionModule\module-compilation-cross-platform\Google.Protobuf.dll
+C:\Users\anand\AppData\Local\Temp\GameSessionModule\module-compilation-cross-platform\Grpc.Core.Api.dll
+C:\Users\anand\AppData\Local\Temp\GameSessionModule\module-compilation-cross-platform\Grpc.Net.Client.dll
+C:\Users\anand\AppData\Local\Temp\GameSessionModule\module-compilation-cross-platform\Grpc.Net.Common.dll
+C:\Users\anand\AppData\Local\Temp\GameSessionModule\module-compilation-cross-platform\JsonSubTypes.dll
+C:\Users\anand\AppData\Local\Temp\GameSessionModule\module-compilation-cross-platform\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\anand\AppData\Local\Temp\GameSessionModule\module-compilation-cross-platform\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\anand\AppData\Local\Temp\GameSessionModule\module-compilation-cross-platform\Newtonsoft.Json.dll

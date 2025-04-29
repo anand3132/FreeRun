@@ -11,11 +11,11 @@ namespace RedGaint.Network.Runtime
 
         public UIReferences(VisualElement root)
         {
-            NameLabel = root.Q<Label>("titleLabel");
+            NameLabel = root.Q<Label>("modelNameLabel");
             ProfileButton = root.Q<Button>("ProfileButton");
-            MultiplayerButton = root.Q<Button>("multiPlayerButton");
-            SinglePlayerButton = root.Q<Button>("singlePlayerButton");
-            QuitButton = root.Q<Button>("quitButton");
+            MultiplayerButton = root.Q<Button>("MultiplayerButton");
+            SinglePlayerButton = root.Q<Button>("SinglePlayerButton");
+            QuitButton = root.Q<Button>("QuitButton");
         }
     }
 }

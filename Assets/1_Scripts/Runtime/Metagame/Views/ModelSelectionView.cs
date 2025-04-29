@@ -57,6 +57,10 @@ namespace RedGaint.Network.Runtime
 
         void OnStartMultiplayerClicked()
         {
+            App.View.ModelSelectionView.Hide();
+            m_Stage.SetActive(false);
+            MetagameApplication.Instance.Broadcast(new EnterLobbyQueueEvent());
+
             // Debug.Log($"Starting multiplayer with model: {m_ModelNames[m_CurrentIndex]}");
             //
             // // Example mapping model name to character ID (update this logic to your actual character system)

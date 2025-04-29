@@ -38,11 +38,13 @@ namespace RedGaint.Network.Runtime
     
     internal class PlayerSignedIn : AppEvent
     {
+        public UnityServicesInitializer.SignInMethod  SignInMethod { get; private set; }
         public bool Success { get; private set; }
         public string PlayerId { get; private set; }
 
-        public PlayerSignedIn(bool success, string playerId)
+        public PlayerSignedIn(bool success, string playerId, UnityServicesInitializer.SignInMethod signInMethod)
         {
+            SignInMethod = signInMethod;
             Success = success;
             PlayerId = playerId;
         }

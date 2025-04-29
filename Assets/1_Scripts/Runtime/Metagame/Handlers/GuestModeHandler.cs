@@ -11,7 +11,9 @@ namespace RedGaint.Network.Runtime
 
         public void Initialize()
         {
-            _ui.NameLabel.text = $"Guest-{SystemInfo.deviceUniqueIdentifier.Substring(0, 6)}";
+            var name= $"Guest-{SystemInfo.deviceUniqueIdentifier.Substring(0, 6)}";
+            UserData.PlayerProfileData guestProfile=GameProfileManager.Instance.CreateGuestProfile();
+            _ui.NameLabel.text = guestProfile.Username;
             _ui.ProfileButton.clicked += OnClickProfile;
             
             _ui.ProfileButton.text = GlobalTextBridge.SignInButtonText;

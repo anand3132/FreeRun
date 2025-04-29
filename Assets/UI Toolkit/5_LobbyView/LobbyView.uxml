@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/UnityStyleSheet.uss?fileID=7433441132597879392&amp;guid=819e6491a1421a14db87a36e0c93b136&amp;type=3#UnityStyleSheet" />
+    <ui:VisualElement name="InfoBox" style="justify-content: flex-start; align-self: center; align-content: stretch; flex-direction: column-reverse; align-items: flex-start; -unity-text-align: upper-left; white-space: nowrap;">
+        <ui:VisualElement name="GroupBox" style="flex-grow: 0; align-self: center; justify-content: center; align-items: auto; height: auto; flex-direction: column; align-content: flex-end;">
+            <ui:Label text="Waiting For Player to join" name="titleLabel" class="title" style="align-self: center; top: auto; font-size: 30px;" />
+            <ui:Label text="00:00" name="timerLabel" style="top: auto; align-self: center; font-size: 40px; margin-bottom: 0;" />
+            <ui:Button text="Exit queue" display-tooltip-when-elided="true" name="quitButton" class="button" style="position: relative; top: auto; left: auto; right: auto; bottom: auto; align-self: center;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

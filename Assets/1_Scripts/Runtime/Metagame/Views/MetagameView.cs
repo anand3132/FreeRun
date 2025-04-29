@@ -1,3 +1,4 @@
+using Unity.Services.Lobbies.Models;
 using UnityEngine;
 
 namespace RedGaint.Network.Runtime
@@ -9,9 +10,13 @@ namespace RedGaint.Network.Runtime
     {
         internal MainMenuView MainMenu => m_MainMenuView;
         [SerializeField] private MainMenuView m_MainMenuView;
+        internal LoginView LoginView => m_LoginView;
+        [SerializeField] private LoginView m_LoginView;
+        internal ModelSelectionView ModelSelectionView=>m_ModelSelectionView;
+        [SerializeField] ModelSelectionView m_ModelSelectionView;
 
-        internal MatchmakerView Matchmaker => m_MatchmakerView;
-        [SerializeField] private MatchmakerView m_MatchmakerView;
+        internal LobbyView LobbyView => m_LobbyView;
+        [SerializeField] private LobbyView m_LobbyView;
         
         internal DirectIPView DirectIP => m_DirectIPView;
         [SerializeField] private DirectIPView m_DirectIPView;
@@ -19,9 +24,6 @@ namespace RedGaint.Network.Runtime
         internal ClientConnectingView ClientConnecting => m_ClientConnectingView;
         [SerializeField] private ClientConnectingView m_ClientConnectingView;
 
-        internal ModelSelectionView ModelSelectionView=>m_ModelSelectionView;
-        [SerializeField] ModelSelectionView m_ModelSelectionView;
-        internal LoginView LoginView => m_LoginView;
-        [SerializeField] private LoginView m_LoginView;
+
     }
 }

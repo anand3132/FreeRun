@@ -14,6 +14,8 @@ namespace RedGaint.Network.Runtime
         [SerializeField] private NetworkObject gameplayPrefab;
 
         public int Id => id;
+        
+        public Transform stageOffset;
         public string DisplayName => displayName;
         public Sprite Icon => icon;
         public GameObject IntroPrefab => introPrefab;

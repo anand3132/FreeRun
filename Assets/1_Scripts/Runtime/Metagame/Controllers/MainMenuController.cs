@@ -13,32 +13,19 @@ namespace RedGaint.Network.Runtime
 
         void Awake()
         {
-            AddListener<EnterMatchmakerQueueEvent>(OnEnterMatchmakerQueue);
-            AddListener<ExitMatchmakerQueueEvent>(OnExitMatchmakerQueue);
-            AddListener<EnterIPConnectionEvent>(OnEnterIPConnection);
-            AddListener<ExitIPConnectionEvent>(OnExitIPConnection);
+            AddListener<EnterLobbyQueueEvent>(OnLobbyEntered);
             AddListener<EnterUserProfileEvent>(OnEnterUserProfileEvent);
             AddListener<EnterLoginEvent>(OnEnterLoginEvent);
             AddListener<EnterMainMenuEvent>(OnEnterMainMenuEvent);
             ConnectionManager.EventManager.AddListener<ConnectionEvent>(OnConnectionEvent);
         }
-
-        public  async void Start()
-        {
-           bool status= await UnityServicesInitializer.Instance.TryAutoLogin();
-            if (status)
-            {
-                //Todo: need to shift the logic to cloud to prevent spoofing
-                //load user profile 
-                GameProfileManager.LoadAsync(false);
-            }
-            App.View.MainMenu.Show();
-        }
-
+        
         private void OnLobbyEntered(EnterLobbyQueueEvent obj)
         {
             View.Hide();
         }
+        
+
         void OnDestroy()
         {
             RemoveListeners();
@@ -46,10 +33,6 @@ namespace RedGaint.Network.Runtime
 
         internal override void RemoveListeners()
         {
-            RemoveListener<EnterMatchmakerQueueEvent>(OnEnterMatchmakerQueue);
-            RemoveListener<ExitMatchmakerQueueEvent>(OnExitMatchmakerQueue);
-            RemoveListener<EnterIPConnectionEvent>(OnEnterIPConnection);
-            RemoveListener<ExitIPConnectionEvent>(OnExitIPConnection);
             RemoveListener<EnterLobbyQueueEvent>(OnLobbyEntered);
             RemoveListener<EnterUserProfileEvent>(OnEnterUserProfileEvent);
             RemoveListener<EnterLoginEvent>(OnEnterLoginEvent);
@@ -59,7 +42,6 @@ namespace RedGaint.Network.Runtime
 
         private void OnEnterMainMenuEvent(EnterMainMenuEvent evt)
         {
-            Debug.Log(App.View.Name());
             App.View.MainMenu.Show();
         }
         private void OnEnterLoginEvent(EnterLoginEvent evt)
@@ -72,26 +54,6 @@ namespace RedGaint.Network.Runtime
         {
             View.Hide();
             App.View.ModelSelectionView.Show();
-        }
-
-        void OnEnterMatchmakerQueue(EnterMatchmakerQueueEvent evt)
-        {
-            View.Hide();
-        }
-
-        void OnExitMatchmakerQueue(ExitMatchmakerQueueEvent evt)
-        {
-            View.Show();
-        }
-
-        void OnEnterIPConnection(EnterIPConnectionEvent evt)
-        {
-            View.Hide();
-        }
-
-        void OnExitIPConnection(ExitIPConnectionEvent evt)
-        {
-            View.Show();
         }
 
         void OnConnectionEvent(ConnectionEvent evt)

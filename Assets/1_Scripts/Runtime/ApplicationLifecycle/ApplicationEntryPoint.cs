@@ -157,3 +157,13 @@ namespace RedGaint.Network.Runtime.ApplicationLifecycle
         }
     }
 }
+
+/* logic is simple
+1. Player signs in (Unity Authentication)
+2. Player joins or creates a Lobby
+3. When all players are ready → Send lobby data to Matchmaker
+4. Matchmaker finds/allocates a game server (Dedicated or Relay-hosted)
+5. Matchmaker returns the server connection info (IP or Relay join code)
+6. Lobby is updated with connection info (e.g., in a custom field)
+7. All clients read that and connect to the game
+ */

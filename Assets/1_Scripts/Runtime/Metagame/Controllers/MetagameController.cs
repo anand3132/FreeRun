@@ -11,29 +11,43 @@ namespace RedGaint.Network.Runtime
         {
             AddListener<PlayerSignedIn>(OnPlayerSignedIn);
             AddListener<MatchEnteredEvent>(OnMatchEntered);
+            AddListener<EnterModelSelectionEvent>(OnModelSelection);
         }
 
         void OnDestroy()
         {
             RemoveListeners();
         }
+        public bool enableAutoLoin = true;
+
+        public  async void Start()
+        {
+            if (enableAutoLoin)
+            {
+                if (await UnityServicesInitializer.Instance.InitializeAndSignIn(UnityServicesInitializer.SignInMethod.AutoLogin))
+                {
+                    await GameProfileManager.Instance.LoadAsync(true);
+                }
+            }
+            App.View.MainMenu.Show();
+        }
 
         internal override void RemoveListeners()
         {
             RemoveListener<PlayerSignedIn>(OnPlayerSignedIn);
             RemoveListener<MatchEnteredEvent>(OnMatchEntered);
+            RemoveListener<EnterModelSelectionEvent>(OnModelSelection);
+
+        }
+
+        private void OnModelSelection(EnterModelSelectionEvent obj)
+        {
+            App.View.ModelSelectionView.Show();
         }
 
         void OnPlayerSignedIn(PlayerSignedIn evt)
         {
-            if (evt.Success)
-            {
-                Debug.Log($"Player signed in with id {evt.PlayerId}");
-            }
-            else
-            {
-                Debug.Log("Player did not sign in");
-            }
+            App.View.MainMenu.Show();
         }
 
         void OnMatchEntered(MatchEnteredEvent evt)

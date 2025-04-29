@@ -35,7 +35,7 @@ namespace RedGaint.Network.Runtime
         }
         private void OnMultiPlayerButtonClicked()
         {
-          //  MetagameApplication.Instance.Broadcast(new EnterModelSelectionEvent());
+            MetagameApplication.Instance.Broadcast(new EnterLobbyQueueEvent());
         }
 
         private void OnQuitButtonClicked()
