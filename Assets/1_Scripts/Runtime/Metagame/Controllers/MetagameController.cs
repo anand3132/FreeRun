@@ -42,6 +42,8 @@ namespace RedGaint.Network.Runtime
 
         private void OnModelSelection(EnterModelSelectionEvent obj)
         {
+            Debug.Log(" model selection Entered.");
+
             App.View.ModelSelectionView.Show();
         }
 

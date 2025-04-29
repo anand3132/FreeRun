@@ -510,6 +510,10 @@ PrefabInstance:
       propertyPath: m_PanelSettings
       value: 
       objectReference: {fileID: 11400000, guid: 7c6cebb0990781845b86eaf62dde223a, type: 2}
+    - target: {fileID: 934705280649564849, guid: 94703e944d0f3b74a9720bbdae6978c9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2956502726495586519, guid: 94703e944d0f3b74a9720bbdae6978c9, type: 3}
       propertyPath: m_PanelSettings
       value: 

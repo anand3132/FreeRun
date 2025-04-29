@@ -1,15 +1,42 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI%20Toolkit/UnityStyleSheet.uss?fileID=7433441132597879392&amp;guid=819e6491a1421a14db87a36e0c93b136&amp;type=3#UnityStyleSheet" />
+<ui:UXML xmlns:ui="UnityEngine.UIElements" 
+         xmlns:uie="UnityEditor.UIElements"
+         xsi="http://www.w3.org/2001/XMLSchema-instance"
+         engine="UnityEngine.UIElements"
+         editor="UnityEditor.UIElements"
+         noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd"
+         editor-extension-mode="False">
+
+    <!-- Only import this screen's custom stylesheet -->
+    <Style src="project://database/Assets/UI Toolkit/CharacterSelectionStyle.uss" />
+
+    <!-- Root container (e.g., character preview area) -->
     <ui:VisualElement name="Profile" style="flex-grow: 1;" />
-    <ui:VisualElement style="flex-grow: 1; flex-direction: column; justify-content: flex-end; align-items: center; padding: 20px;">
-        <ui:Label text="ModelName" name="modelNameLabel" class="title" style="margin-bottom: 40px; font-size: 75px; text-align: center;" />
-        <ui:VisualElement style="flex-direction: row; justify-content: center; align-items: center; margin-bottom: 30px; gap: 20px;">
-            <ui:Button text="Previous" display-tooltip-when-elided="true" name="previousButton" class="button" style="min-width: 120px; padding: 10px 20px;" />
-            <ui:Button text="Next" display-tooltip-when-elided="true" name="nextButton" class="button" style="min-width: 120px; padding: 10px 20px;" />
+
+    <!-- Bottom UI area -->
+    <ui:VisualElement class="character-selection-layout">
+
+        <!-- Character Name -->
+        <ui:Label name="modelNameLabel" text="ModelName" class="main-title" />
+
+        <!-- Previous / Next buttons -->
+        <ui:VisualElement class="navigation-buttons">
+            <ui:Button name="previousButton" class="menu-button small">
+                <ui:Label text="Previous" class="button-text" />
+            </ui:Button>
+            <ui:Button name="nextButton" class="menu-button small">
+                <ui:Label text="Next" class="button-text" />
+            </ui:Button>
         </ui:VisualElement>
-        <ui:VisualElement style="flex-direction: row; justify-content: center; align-items: center; gap: 20px;">
-            <ui:Button text="MainMenu" display-tooltip-when-elided="true" name="mainMenuButton" class="button" style="min-width: 150px; padding: 12px 24px;" />
-            <ui:Button text="Start" display-tooltip-when-elided="true" name="startMultiplayerButton" class="button" style="min-width: 150px; padding: 12px 24px; background-color: rgb(76, 175, 80);" />
+
+        <!-- Main Menu / Start -->
+        <ui:VisualElement class="button-container">
+            <ui:Button name="mainMenuButton" class="menu-button medium">
+                <ui:Label text="Main Menu" class="button-text" />
+            </ui:Button>
+            <ui:Button name="startMultiplayerButton" class="menu-button medium green">
+                <ui:Label text="Start" class="button-text" />
+            </ui:Button>
         </ui:VisualElement>
+
     </ui:VisualElement>
 </ui:UXML>

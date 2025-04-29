@@ -120,6 +120,7 @@ namespace RedGaint.Network.Runtime
                 {
                     Debug.Log("Entered model selection to sign up.");
                     MetagameApplication.Instance.Broadcast(new EnterModelSelectionEvent());
+                    App.View.LoginView.Hide();
                 }            
             }
         }
