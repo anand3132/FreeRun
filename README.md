@@ -1,0 +1,2 @@
+FreeRun-Multiplayer
+FreeRun is a multiplayer game built using Unity Netcode for GameObjects, hosted on Multiplayer Hosting (Multiplayer Center) . It’s a runner game with combat mechanics, where tactics revolve around efficient movement, strategic use of power-ups, and understanding enemy behavior to maximize survival and damage output. Players must master momentum-based traversal, quick reflexes, and adaptive strategies to outpace and outfight their opponents.
