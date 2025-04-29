@@ -1,0 +1,31 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/UnityStyleSheet.uss?fileID=7433441132597879392&amp;guid=819e6491a1421a14db87a36e0c93b136&amp;type=3#UnityStyleSheet" />
+    <ui:VisualElement class="background">
+        <ui:Label text="Welcome Back!" name="modelNameLabel" class="main-title" />
+        <ui:VisualElement class="form-container">
+            <ui:TextField label="Username" name="UsernameField" class="input-field" />
+            <ui:TextField label="Password" name="PasswordField" password="true" class="input-field" />
+            <ui:Button name="UsernameSignInButton" class="menu-button">
+                <ui:Label text="Sign In" class="button-text" />
+            </ui:Button>
+            <ui:Button name="CreateNewButton" class="menu-button">
+                <ui:Label text="SignUp" class="button-text" />
+            </ui:Button>
+            <ui:Label name="StatusLabel" class="status-label" />
+        </ui:VisualElement>
+        <ui:VisualElement class="social-panel">
+            <ui:Button name="GoogleSignInButton" class="menu-button">
+                <ui:Label text="Google" class="button-text" />
+            </ui:Button>
+            <ui:Button name="FacebookSignInButton" class="menu-button">
+                <ui:Label text="Facebook" class="button-text" />
+            </ui:Button>
+            <ui:Button name="AppleSignInButton" class="menu-button">
+                <ui:Label text="Apple" class="button-text" />
+            </ui:Button>
+            <ui:Button name="AnonymousSignInButton" class="menu-button">
+                <ui:Label text="Anonymous" class="button-text" />
+            </ui:Button>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

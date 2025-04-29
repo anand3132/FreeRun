@@ -1,0 +1,20 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/UnityStyleSheet.uss?fileID=7433441132597879392&amp;guid=819e6491a1421a14db87a36e0c93b136&amp;type=3#UnityStyleSheet" />
+    <ui:VisualElement class="background">
+        <ui:Label text="FreeRun" name="modelNameLabel" class="main-title" />
+        <ui:VisualElement class="button-container">
+            <ui:Button name="ProfileButton" class="menu-button">
+                <ui:Label text="Profile" class="button-text" />
+            </ui:Button>
+            <ui:Button name="SinglePlayerButton" class="menu-button">
+                <ui:Label text="Single Player" class="button-text" />
+            </ui:Button>
+            <ui:Button name="MultiplayerButton" class="menu-button">
+                <ui:Label text="Multiplayer" class="button-text" />
+            </ui:Button>
+            <ui:Button name="QuitButton" class="menu-button">
+                <ui:Label text="Quit" class="button-text" />
+            </ui:Button>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

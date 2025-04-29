@@ -1,0 +1,17 @@
+{
+    "name": "Unity.Services.CloudCode.GeneratedBindings",
+    "rootNamespace": "Unity.Services.CloudCode.GeneratedBindings",
+    "references": [
+        "Unity.Services.CloudCode",
+        "Unity.Services.CloudCode.Editor"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

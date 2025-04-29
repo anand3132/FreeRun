@@ -1,0 +1,13 @@
+C:\Users\anand\AppData\Local\Temp\GameSessionModule\module-compilation\GameSessionModule.dll
+C:\Users\anand\AppData\Local\Temp\GameSessionModule\module-compilation\GameSessionModule.deps.json
+C:\Users\anand\AppData\Local\Temp\GameSessionModule\module-compilation\GameSessionModule.pdb
+C:\Users\anand\AppData\Local\Temp\GameSessionModule\module-compilation\Unity.Services.CloudCode.Apis.dll
+C:\Users\anand\AppData\Local\Temp\GameSessionModule\module-compilation\Unity.Services.CloudCode.Core.dll
+C:\Users\anand\AppData\Local\Temp\GameSessionModule\module-compilation\Google.Protobuf.dll
+C:\Users\anand\AppData\Local\Temp\GameSessionModule\module-compilation\Grpc.Core.Api.dll
+C:\Users\anand\AppData\Local\Temp\GameSessionModule\module-compilation\Grpc.Net.Client.dll
+C:\Users\anand\AppData\Local\Temp\GameSessionModule\module-compilation\Grpc.Net.Common.dll
+C:\Users\anand\AppData\Local\Temp\GameSessionModule\module-compilation\JsonSubTypes.dll
+C:\Users\anand\AppData\Local\Temp\GameSessionModule\module-compilation\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\anand\AppData\Local\Temp\GameSessionModule\module-compilation\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\anand\AppData\Local\Temp\GameSessionModule\module-compilation\Newtonsoft.Json.dll

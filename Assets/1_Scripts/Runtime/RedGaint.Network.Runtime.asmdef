@@ -1,0 +1,45 @@
+{
+<<<<<<<< HEAD:Assets/1_Scripts/Runtime/com.redgaint.network.runtime.asmdef
+    "name": "com.redgaint.network.runtime",
+========
+    "name": "RedGaint.Network.Runtime",
+>>>>>>>> dev2:Assets/1_Scripts/Runtime/RedGaint.Network.Runtime.asmdef
+    "rootNamespace": "RedGaint.Network.Runtime",
+    "references": [
+        "Unity.Netcode.Runtime",
+        "Unity.Services.Core",
+<<<<<<<< HEAD:Assets/1_Scripts/Runtime/com.redgaint.network.runtime.asmdef
+        "Unity.Services.Multiplayer",  
+========
+>>>>>>>> dev2:Assets/1_Scripts/Runtime/RedGaint.Network.Runtime.asmdef
+        "Unity.Services.Authentication",
+        "Unity.Services.Core.Environments",
+        "com.redgaint.network.shared",
+        "Unity.Networking.Transport",
+        "Cinemachine",
+        "Unity.Multiplayer.Samples.Utilities.ClientAuthority",
+        "Unity.InputSystem",
+        "StarterAssets",
+        "Unity.DedicatedServer.MultiplayerRoles",
+        "Unity.AI.Navigation",
+        "Unity.Multiplayer.Samples.Utilities",
+        "RedGaint.Network.Shared",
+        "Unity.Services.Multiplayer",
+        "Unity.TextMeshPro",
+        "Unity.Services.CloudSave",
+        "Unity.Localization",
+        "Unity.ResourceManager",
+        "Unity.Services.CloudCode",
+        "Unity.Services.CloudCode.GeneratedBindings",
+        "RedGaint.Utility"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,34 @@
+{
+<<<<<<<< HEAD:Assets/1_Scripts/Editor/com.redgaint.network.editor.asmdef
+    "name": "com.redgaint.network.editor",
+    "rootNamespace": "Unity.RedGaint.Network.Editor",
+    "references": [
+        "Unity.Netcode.Runtime",
+        "com.redgaint.network.runtime",
+        "com.redgaint.network.shared",
+========
+    "name": "RedGaint.Network.Editor",
+    "rootNamespace": "RedGaint.Network.Editor",
+    "references": [
+        "Unity.Netcode.Runtime",
+>>>>>>>> dev2:Assets/1_Scripts/Editor/RedGaint.Network.Editor.asmdef
+        "Unity.Networking.Transport",
+        "Unity.EditorCoroutines.Editor",
+        "Unity.DedicatedServer.MultiplayerRoles",
+        "Unity.DedicatedServer.MultiplayerRoles.Editor",
+        "Unity.Burst",
+        "RedGaint.Network.Runtime",
+        "RedGaint.Network.Shared"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
