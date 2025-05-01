@@ -34,6 +34,13 @@ namespace RedGaint.Network.Runtime
             m_StartMultiplayerButton.clicked += OnStartMultiplayerClicked;
             UpdateModelView(stageID,UserProfileManager.CurrentUser.CharacterId);
             Stage.Instance.UpdateTableUserName(stageID,UserProfileManager.CurrentUser.Username);
+            
+            UpdateModelView("2","2");
+            UpdateModelView("3","3");
+            UpdateModelView("4","4");
+            UpdateModelView("5","5");
+
+            
         }
 
         void OnNextClicked()
