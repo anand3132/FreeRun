@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace RedGaint.Network.Runtime
 {
-    public  class GameProfileManager:Singleton<GameProfileManager>, IBugsBunny
+    public  class UserProfileManager:Singleton<UserProfileManager>, IBugsBunny
     {
         // Create a default empty profile immediately
         public static PlayerProfileData CurrentUser { get; private set; } = new PlayerProfileData();

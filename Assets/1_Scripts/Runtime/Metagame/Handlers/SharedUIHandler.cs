@@ -31,7 +31,7 @@ namespace RedGaint.Network.Runtime
 
         private void OnSinglePlayerButtonClicked()
         {
-            //  MetagameApplication.Instance.Broadcast(new EnterModelSelectionEvent());
+            MetagameApplication.Instance.Broadcast(new StartSingleplayer());
         }
         private void OnMultiPlayerButtonClicked()
         {

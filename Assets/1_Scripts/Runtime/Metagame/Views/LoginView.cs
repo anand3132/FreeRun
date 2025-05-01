@@ -115,7 +115,7 @@ namespace RedGaint.Network.Runtime
                     return;
                 }
                 UserCredentialManager.SaveCredentials(username, passwordField.text, cloudEncryptionKey);
-                await GameProfileManager.Instance.UpdatePlayerProfile(CreateNewUserProfile(username),true);
+                await UserProfileManager.Instance.UpdatePlayerProfile(CreateNewUserProfile(username),true);
                 if (AuthenticationService.Instance.IsSignedIn)
                 {
                     Debug.Log("Entered model selection to sign up.");
@@ -179,22 +179,22 @@ namespace RedGaint.Network.Runtime
                         username = await SocialLoginHelper.GetFacebookUserNameAsync(GlobalStaticVariables.FacebookToken);
                         break;
                     case UnityServicesInitializer.SignInMethod.Anonymous:
-                        username = GameProfileManager.CurrentUser.Username;
-                        GameProfileManager.CurrentUser.PlayerId=AuthenticationService.Instance.PlayerId;
+                        username = UserProfileManager.CurrentUser.Username;
+                        UserProfileManager.CurrentUser.PlayerId=AuthenticationService.Instance.PlayerId;
                         // GameProfileManager.CurrentUser.AvatarId = string.Empty;
                         // GameProfileManager.CurrentUser.CharacterId = string.Empty;
                         // GameProfileManager.CurrentUser.CurrentLevelId = string.Empty;
                         break;
                 }
 
-                if (await GameProfileManager.Instance.LoadAsync(true))
+                if (await UserProfileManager.Instance.LoadAsync(true))
                 {
                     MetagameApplication.Instance.Broadcast(new EnterModelSelectionEvent());
                 }
                 else
                 {
-                    username=string.IsNullOrEmpty(username)?GameProfileManager.CurrentUser.Username:username;
-                    await GameProfileManager.Instance.UpdatePlayerProfile(CreateNewUserProfile(username),true);
+                    username=string.IsNullOrEmpty(username)?UserProfileManager.CurrentUser.Username:username;
+                    await UserProfileManager.Instance.UpdatePlayerProfile(CreateNewUserProfile(username),true);
                 }
                 App.View.LoginView.Hide();
             }

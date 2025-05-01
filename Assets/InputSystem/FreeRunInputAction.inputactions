@@ -1,5 +1,5 @@
 {
-    "name": "DedicatedGameServerSample",
+    "name": "FreeRunInputAction",
     "maps": [
         {
             "name": "Player",
@@ -27,7 +27,7 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "8c4abdf8-4099-493a-aa1a-129acec7c3df",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -805,6 +805,76 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Stage",
+            "id": "f0e3992e-6133-41b6-9975-d2da1758540c",
+            "actions": [
+                {
+                    "name": "LookDrag",
+                    "type": "Value",
+                    "id": "9f9133a6-02ea-4a4a-9f22-b8c22aa438fe",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "click",
+                    "type": "Button",
+                    "id": "b52ed7d0-4f28-4fbc-b05d-76431a0879e8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "37c44b20-c999-4408-9981-58a95f6f2a4d",
+                    "path": "<Pointer>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LookDrag",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7d23fa2e-49f6-4484-90b9-7247e3eca1fd",
+                    "path": "<Touchscreen>/primaryTouch/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LookDrag",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "228c312c-04d0-4e64-b3af-f82184eb614b",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6b5b8171-5115-4c9d-980c-ac3475259305",
+                    "path": "<Touchscreen>/primaryTouch/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "click",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

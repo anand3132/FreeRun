@@ -33,11 +33,9 @@ namespace RedGaint.Network.Runtime
 
         private void OnLobbyEntered(EnterLobbyQueueEvent obj)
         {
-            //set up the user pfofile and initialte lobby creation and wait fro the cloud code to get game start
             View.Show();
             LobbyStage.SetActive(true);
-            Broadcast(new LobbyStartedEvent(30));
-            
+           // Broadcast(new LobbyStartedEvent(30));
         }
 
         void OnDestroy()

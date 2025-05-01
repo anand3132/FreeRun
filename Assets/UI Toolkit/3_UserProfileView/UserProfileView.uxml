@@ -1,24 +1,18 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" 
-         xmlns:uie="UnityEditor.UIElements"
-         xsi="http://www.w3.org/2001/XMLSchema-instance"
-         engine="UnityEngine.UIElements"
-         editor="UnityEditor.UIElements"
-         noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd"
-         editor-extension-mode="False">
-
-    <!-- Only import this screen's custom stylesheet -->
-    <Style src="project://database/Assets/UI Toolkit/CharacterSelectionStyle.uss" />
-
-    <!-- Root container (e.g., character preview area) -->
-    <ui:VisualElement name="Profile" style="flex-grow: 1;" />
-
-    <!-- Bottom UI area -->
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/CharacterSelectionStyle.uss?fileID=7433441132597879392&amp;guid=e81cd540c75531b43815379bab0f4777&amp;type=3#CharacterSelectionStyle" />
+    <ui:VisualElement class="character-selection-container">
+        <ui:VisualElement name="Profile" class="character-preview" />
+        <ui:VisualElement class="character-stats-panel" style="align-self: flex-end; width: 252px; height: 445px; font-size: 20px;">
+            <ui:Label name="playerNameLabel" text="Name" class="stats-title" style="font-size: 40px;" />
+            <ui:Label name="levelLabel" text="Level 12" class="stats-entry" style="font-size: 40px;" />
+            <ui:Label name="xpLabel" text="XP: 2300 / 3000" class="stats-entry" style="font-size: 40px;" />
+            <ui:Label name="coinsLabel" text="Coins: 1580" class="stats-entry" style="font-size: 40px;" />
+            <ui:Label name="gemsLabel" text="Gems: 95" class="stats-entry" style="font-size: 40px;" />
+            <ui:Label name="powerRatingLabel" text="Power: 1450" class="stats-entry" style="font-size: 40px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
     <ui:VisualElement class="character-selection-layout">
-
-        <!-- Character Name -->
-        <ui:Label name="modelNameLabel" text="ModelName" class="main-title" />
-
-        <!-- Previous / Next buttons -->
+        <ui:Label name="modelNameLabel" text="ModelName" class="main-title" style="font-size: 40px;" />
         <ui:VisualElement class="navigation-buttons">
             <ui:Button name="previousButton" class="menu-button small">
                 <ui:Label text="Previous" class="button-text" />
@@ -27,8 +21,6 @@
                 <ui:Label text="Next" class="button-text" />
             </ui:Button>
         </ui:VisualElement>
-
-        <!-- Main Menu / Start -->
         <ui:VisualElement class="button-container">
             <ui:Button name="mainMenuButton" class="menu-button medium">
                 <ui:Label text="Main Menu" class="button-text" />
@@ -37,6 +29,5 @@
                 <ui:Label text="Start" class="button-text" />
             </ui:Button>
         </ui:VisualElement>
-
     </ui:VisualElement>
 </ui:UXML>

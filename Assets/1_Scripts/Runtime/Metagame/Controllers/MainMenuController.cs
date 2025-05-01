@@ -53,7 +53,7 @@ namespace RedGaint.Network.Runtime
         void OnEnterUserProfileEvent(EnterUserProfileEvent evt)
         {
             View.Hide();
-            App.View.ModelSelectionView.Show();
+            App.View.UserProfileView.Show();
         }
 
         void OnConnectionEvent(ConnectionEvent evt)

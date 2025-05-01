@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace RedGaint.Network.Runtime
 {
@@ -12,6 +13,13 @@ namespace RedGaint.Network.Runtime
             AddListener<PlayerSignedIn>(OnPlayerSignedIn);
             AddListener<MatchEnteredEvent>(OnMatchEntered);
             AddListener<EnterModelSelectionEvent>(OnModelSelection);
+            AddListener<StartSingleplayer>(OnSingleGameplaySelection);
+        }
+
+        private void OnSingleGameplaySelection(StartSingleplayer obj)
+        {
+            SceneManager.UnloadSceneAsync(GlobalStaticVariables.MetaScene);
+            SceneManager.LoadScene(GlobalStaticVariables.GameScene);
         }
 
         void OnDestroy()
@@ -26,7 +34,8 @@ namespace RedGaint.Network.Runtime
             {
                 if (await UnityServicesInitializer.Instance.InitializeAndSignIn(UnityServicesInitializer.SignInMethod.AutoLogin))
                 {
-                    await GameProfileManager.Instance.LoadAsync(true);
+                    await UserProfileManager.Instance.LoadAsync(true);
+                    Debug.Log("user loaded");
                 }
             }
             App.View.MainMenu.Show();
@@ -37,6 +46,7 @@ namespace RedGaint.Network.Runtime
             RemoveListener<PlayerSignedIn>(OnPlayerSignedIn);
             RemoveListener<MatchEnteredEvent>(OnMatchEntered);
             RemoveListener<EnterModelSelectionEvent>(OnModelSelection);
+            RemoveListener<StartSingleplayer>(OnSingleGameplaySelection);
 
         }
 
@@ -44,7 +54,7 @@ namespace RedGaint.Network.Runtime
         {
             Debug.Log(" model selection Entered.");
 
-            App.View.ModelSelectionView.Show();
+            App.View.UserProfileView.Show();
         }
 
         void OnPlayerSignedIn(PlayerSignedIn evt)

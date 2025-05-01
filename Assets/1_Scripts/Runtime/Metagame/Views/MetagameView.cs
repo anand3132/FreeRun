@@ -1,5 +1,6 @@
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace RedGaint.Network.Runtime
 {
@@ -12,8 +13,8 @@ namespace RedGaint.Network.Runtime
         [SerializeField] private MainMenuView m_MainMenuView;
         internal LoginView LoginView => m_LoginView;
         [SerializeField] private LoginView m_LoginView;
-        internal ModelSelectionView ModelSelectionView=>m_ModelSelectionView;
-        [SerializeField] ModelSelectionView m_ModelSelectionView;
+        internal UserProfileView UserProfileView=>mUserProfileView;
+        [FormerlySerializedAs("m_ModelSelectionView")] [SerializeField] UserProfileView mUserProfileView;
 
         internal LobbyView LobbyView => m_LobbyView;
         [SerializeField] private LobbyView m_LobbyView;

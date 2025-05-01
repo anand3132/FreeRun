@@ -22,7 +22,8 @@
         "Unity.ResourceManager",
         "Unity.Services.CloudCode",
         "Unity.Services.CloudCode.GeneratedBindings",
-        "RedGaint.Utility"
+        "RedGaint.Utility",
+        "RedGaint.Common.InputSystem"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -11,11 +11,11 @@ namespace RedGaint.Network.Runtime
 
         public Character[] GetAllCharacters() => characters;
 
-        public Character GetCharacterById(int id)
+        public Character GetCharacterById(string id)
         {
             foreach (var character in characters)
             {
-                if (character.Id == id)
+                if ( string .Equals(character.Id,id))
                 {
                     return character;
                 }
@@ -24,9 +24,9 @@ namespace RedGaint.Network.Runtime
             return null;
         }
 
-        public bool IsValidCharacterId(int id)
+        public bool IsValidCharacterId(string id)
         {
-            return characters.Any(x => x.Id == id);
+            return characters.Any(x => string.Equals(x.Id , id));
         }
     }
 }

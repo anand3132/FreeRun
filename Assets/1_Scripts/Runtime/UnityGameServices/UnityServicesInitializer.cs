@@ -112,23 +112,19 @@ namespace RedGaint.Network.Runtime
             catch (AuthenticationException ex)
             {
                 Debug.LogError($"Authentication failed: {ex.Message}");
+                return false;
             }
             catch (RequestFailedException ex)
             {
                 Debug.LogError($"Unity request failed: {ex.Message}");
+                return false;
             }
             catch (Exception ex)
             {
                 Debug.LogError($"Unexpected error: {ex.Message}");
+                return false;
             }
-
-            // if (AuthenticationService.Instance.IsSignedIn)
-            // {
-            //     MetagameApplication.Instance.Broadcast(new PlayerSignedIn(AuthenticationService.Instance.IsSignedIn,AuthenticationService.Instance.PlayerId,method));
-            //     return true;
-            // }
-
-            return false;
+            return true;
         }
         private async Task<bool> TryAutoLogin()
         {

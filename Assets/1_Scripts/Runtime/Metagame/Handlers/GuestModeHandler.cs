@@ -12,7 +12,7 @@ namespace RedGaint.Network.Runtime
         public void Initialize()
         {
             var name= $"Guest-{SystemInfo.deviceUniqueIdentifier.Substring(0, 6)}";
-            UserData.PlayerProfileData guestProfile=GameProfileManager.Instance.CreateGuestProfile();
+            UserData.PlayerProfileData guestProfile=UserProfileManager.Instance.CreateGuestProfile();
             _ui.NameLabel.text = guestProfile.Username;
             _ui.ProfileButton.clicked += OnClickProfile;
             

@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace RedGaint
 {
-
     public static class GlobalEnums
     {
         public enum Mode
@@ -84,13 +83,9 @@ namespace RedGaint
 
     public static class GlobalStaticVariables
     {
-        public static Color TeamRedColor { get; private set; }
         public static float GameSectionTime { get; private set; }
-        public static float BotMaxHealth { get; private set; }
         public static float BotFollowTimer { get; private set; }
 
-        public static float PlayerMaxHealth { get; private set; }
-        public static readonly float HealthHitRation = 10f;
         public static readonly string GameScene = "GameScene01";
         public static readonly string MetaScene = "MetagameScene";
         
@@ -100,6 +95,9 @@ namespace RedGaint
         public static readonly string GoolgeToken = "NotDefined";
         public static readonly string FacebookToken = "NotDefined";
         public static readonly string AnonimusToken = "NotDefined";
+        
+        //Asset Locations
+        public static readonly string TurntablePrefabPath="4_Prefabs/Metagame/Stage/Turntable";
         // public static string UserName = "NotDefined";
         // public static string Password = "NotDefined";
         
@@ -123,21 +121,6 @@ namespace RedGaint
         //     // BugsBunny.Log("GlobalStaticVariables: Data loaded successfully.");
         // }
     }
-    //
-    // [System.Serializable]
-    // public class UserProfile
-    // {
-    //     public string username;
-    //     public string UserID;
-    //     
-    //     public int level;
-    //     public int coins;
-    //
-    //     public UserProfile(string username, string UserID)
-    //     {
-    //         this.username = username;
-    //         this.UserID = UserID;
-    //     }
-    // }
+
 
 }//RedGaint
