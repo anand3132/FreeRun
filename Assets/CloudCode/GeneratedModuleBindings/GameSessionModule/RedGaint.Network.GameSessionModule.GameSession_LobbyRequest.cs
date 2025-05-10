@@ -4,15 +4,12 @@ using System;
 
 namespace Unity.Services.CloudCode.GeneratedBindings.RedGaint.Network.GameSessionModule
 {
-    public partial class GameSession_SessionRequest
+    public partial class GameSession_LobbyRequest
     {
-        public string PlayerId;
-        public string CharacterId;
-        public string PlayerName;
-        public int Xp;
+        public string lobbyId;
 
         [Preserve]
-        public GameSession_SessionRequest ()
+        public GameSession_LobbyRequest ()
         {
         }
     }

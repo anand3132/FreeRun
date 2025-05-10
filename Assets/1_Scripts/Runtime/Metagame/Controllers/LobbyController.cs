@@ -7,24 +7,22 @@ using System.Threading.Tasks;
 using RedGaint.Network.Runtime.UserData;
 using Unity.Services.CloudCode;
 using Unity.Services.Authentication;
+using System.Collections;
+
 namespace RedGaint.Network.Runtime
 {
     internal class LobbyController : Controller<MetagameApplication>
     {
-        // View for Lobby (Accessible through App.View.Lobby)
         LobbyView View => App.View.LobbyView;
-        public GameObject LobbyStage;
-
         ConnectionManager ConnectionManager => ApplicationEntryPoint.Singleton.ConnectionManager;
 
-        // Countdown time (For managing the timer for the lobby)
         private float countdownTime;
+        private Coroutine lobbyPollCoroutine;
+        private string currentLobbyId;
 
         void Awake()
         {
-            // Add event listeners for the lobby
             AddListener<EnterLobbyQueueEvent>(OnLobbyEntered);
-            
             AddListener<LobbyStartedEvent>(OnLobbyStarted);
             AddListener<LobbyCountdownUpdateEvent>(OnLobbyCountdownUpdate);
             AddListener<LobbyGameStartingEvent>(OnLobbyGameStarting);
@@ -33,14 +31,13 @@ namespace RedGaint.Network.Runtime
 
         private void OnLobbyEntered(EnterLobbyQueueEvent obj)
         {
+            Stage.Instance.ClearAllTables();
             View.Show();
-            LobbyStage.SetActive(true);
-           // Broadcast(new LobbyStartedEvent(30));
+            Broadcast(new LobbyStartedEvent(30)); // Trigger countdown start
         }
 
         void OnDestroy()
         {
-            // Remove event listeners when the controller is destroyed
             RemoveListeners();
         }
 
@@ -55,78 +52,98 @@ namespace RedGaint.Network.Runtime
             RemoveListener<LobbyStartedEvent>(OnLobbyStarted);
             RemoveListener<LobbyCountdownUpdateEvent>(OnLobbyCountdownUpdate);
             RemoveListener<LobbyGameStartingEvent>(OnLobbyGameStarting);
-            
             ConnectionManager.EventManager.RemoveListener<ConnectionEvent>(OnConnectionEvent);
         }
 
-        // Event handler when the lobby is started
         void OnLobbyStarted(LobbyStartedEvent evt)
         {
             countdownTime = evt.CountdownTime;
-            // Start the countdown in the view
-            View.UpdateCountdown(evt.CountdownTime);
+            View.UpdateCountdown(countdownTime);
 
-            Task SessionResponse = CloudModule.Instance.StartTheGame();
-            //JoinOrCreateLobby();
-
+            _ = StartLobbySession();
         }
 
-        // Event handler when the countdown is updated
+        async Task StartLobbySession()
+        {
+            Debug.Log($"Starting lobby session for :  {AuthenticationService.Instance.PlayerId}");
+            SessionResponse response = await CloudModule.Instance.StartTheGame();
+            currentLobbyId = response?.LobbyId;
+
+            if (!string.IsNullOrEmpty(currentLobbyId))
+            {
+                if (lobbyPollCoroutine != null)
+                    StopCoroutine(lobbyPollCoroutine);
+
+                lobbyPollCoroutine = StartCoroutine(PollLobbyPlayers());
+            }
+        }
+
         void OnLobbyCountdownUpdate(LobbyCountdownUpdateEvent evt)
         {
             countdownTime = evt.SecondsRemaining;
-            
-            // Update the countdown in the lobby view
-            View.UpdateCountdown(evt.SecondsRemaining);
+            View.UpdateCountdown(countdownTime);
         }
 
-        // Event handler when the game is about to start
         void OnLobbyGameStarting(LobbyGameStartingEvent evt)
         {
-            // Hide the lobby view
             View.Hide();
-            // Unload the lobby scene and load the game scene
+            StopLobby(); // Stop polling
+
             SceneManager.UnloadSceneAsync(GlobalStaticVariables.MetaScene);
             SceneManager.LoadSceneAsync(GlobalStaticVariables.GameScene);
         }
 
-        // Handle connection events (e.g., disconnect, connecting)
         void OnConnectionEvent(ConnectionEvent evt)
         {
             if (evt.status == ConnectStatus.Connecting)
             {
                 View.Hide();
+                StopLobby();
             }
         }
 
-        // Stop the lobby (e.g., during disconnection or when leaving the lobby)
         void StopLobby()
         {
-            // Logic to stop the lobby, possibly by cleaning up resources or stopping any background tasks
+            if (lobbyPollCoroutine != null)
+            {
+                StopCoroutine(lobbyPollCoroutine);
+                lobbyPollCoroutine = null;
+            }
         }
         
-        
-        async Task JoinOrCreateLobby()
+        void UpdatePlayerView(List<PlayerData> players)
         {
-            if (!AuthenticationService.Instance.IsSignedIn)
-                return;
-
-            var playerId = AuthenticationService.Instance.PlayerId;
-            var username = "Player_" + Random.Range(0, 9999); // 🚀 (You can use stored username if you have)
-            var characterId = "Warrior"; // 🚀 (Replace with selected character if available)
-
-            var result = await CloudCodeService.Instance.CallEndpointAsync<Dictionary<string, string>>(
-                "StartOrJoinLobby",
-                new Dictionary<string, object>
-                {
-                    { "playerId", playerId },
-                    { "playerName", username },
-                    { "characterId", characterId }
-                }
-            );
-
-            string lobbyId = result["lobbyId"];
-            Debug.Log($"Successfully joined or created lobby: {lobbyId}");
+            if (players != null)
+            {
+                View.UpdatePlayerList(players);
+            }
+            else
+            {
+                Debug.LogWarning("No players to update in the view.");
+            }
         }
+
+        IEnumerator PollLobbyPlayers()
+        {
+            while (true)
+            {
+                var fetchTask = CloudModule.Instance.FetchPlayersFromLobby(currentLobbyId);
+                yield return new WaitUntil(() => fetchTask.IsCompleted);
+                // yield return new WaitForSeconds(1f);
+                if (fetchTask.Exception != null)
+                {
+                    Debug.Log($"Error fetching players: {fetchTask.Exception.Message}");
+                }
+                else
+                {
+                    UpdatePlayerView(fetchTask.Result);
+                }
+
+                yield return new WaitForSeconds(3f);
+            }
+        }
+
+        
     }
 }
+

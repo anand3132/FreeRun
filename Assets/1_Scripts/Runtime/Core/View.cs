@@ -16,7 +16,7 @@
         /// </summary>
         new public T App => (T)base.App;
 
-        internal void Show()
+        internal virtual void Show()
         {
             gameObject.SetActive(true);
         }

@@ -68,7 +68,7 @@ namespace RedGaint.Network.Runtime
             None
         }
 
-        public async Task<bool> InitializeAndSignIn(SignInMethod method, string customID = null)
+        public async Task<bool> InitializeAndSignIn(SignInMethod method, Tuple<string,string> credentials=null)
         {
             try
             {
@@ -95,7 +95,7 @@ namespace RedGaint.Network.Runtime
                             break;
 
                         case SignInMethod.UsernamePassword:
-                            await TryAutoLogin();
+                            await TryAutoLogin(credentials);
                             break;
                         case SignInMethod.AutoLogin:
                             await TryAutoLogin();
@@ -126,7 +126,7 @@ namespace RedGaint.Network.Runtime
             }
             return true;
         }
-        private async Task<bool> TryAutoLogin()
+        private async Task<bool> TryAutoLogin(Tuple<string,string> credentials=null)
         {
             try
             {
@@ -140,7 +140,14 @@ namespace RedGaint.Network.Runtime
                 string encryptionKey =  UserData.CloudPlayerProfileHandler.GetEncryptionKeyFromCloud(); // Replace with actual implementation
 
                 // Try to load stored credentials
-                if (UserCredentialManager.TryLoadCredentials(encryptionKey, out string username, out string password))
+                bool loginState = false;
+#if UNITY_EDITOR
+                loginState = EditorCredentialManager.TryLoadCredentialsFromFile(encryptionKey, out string username, out string password);
+#else
+                loginState = UserCredentialManager.TryLoadCredentials(encryptionKey, out string username, out string password);
+#endif
+                    
+                if (loginState)
                 {
                     // Attempt to sign in with stored credentials
                     await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(username, password);
@@ -150,6 +157,15 @@ namespace RedGaint.Network.Runtime
                 else
                 {
                     Debug.Log(" No credentials stored or decryption failed.");
+                    if (credentials != null)
+                    {
+                        // Attempt to sign in with stored credentials
+                        await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(credentials.Item1,
+                            credentials.Item2);
+                        Debug.Log(" Auto-login successful." + AuthenticationService.Instance.AccessToken);
+                        return true;
+                    }
+                    Debug.Log("Login failed : ");
                     return false;
                 }
             }

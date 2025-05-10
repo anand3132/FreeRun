@@ -1,31 +1,30 @@
-using System;
 using System.Collections.Generic;
+using RedGaint.Network.Runtime.UserData;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
-
 
 namespace RedGaint.Network.Runtime
 {
     public class LobbyView : View<MetagameApplication>
     {
         [Header("UI Elements")]
-       // [SerializeField] private List<TMP_Text> playerNameSlots;
-        // private Button m_RunButton;
-        
         private Label m_TitleLabel;
         private Label m_InfoLabel;
-
-        private bool isOnRun=false;
-        private UIDocument m_UIDocument;
         private Button m_ExitButton;
+        private UIDocument m_UIDocument;
+
+        private HashSet<string> displayedPlayerIds = new(); // To prevent duplicates
+
         void Awake()
         {
             m_UIDocument = GetComponent<UIDocument>();
             var root = m_UIDocument.rootVisualElement;
+
+            m_TitleLabel = root.Q<Label>("timerLabel");
+            m_InfoLabel = root.Q<Label>("titleLabel");
             m_ExitButton = root.Q<Button>("quitButton");
-            m_TitleLabel = root.Query<Label>("timerLabel");
-            m_InfoLabel = root.Query<Label>("titleLabel");
+
             m_TitleLabel.text = GlobalTextBridge.LobbyWaitingText;
         }
 
@@ -34,73 +33,47 @@ namespace RedGaint.Network.Runtime
             m_ExitButton.clicked += OnClickQuitClicked;
         }
 
-        private void OnClickQuitClicked()
-        {
-        }
-
-        private void OnDisable()
+        void OnDisable()
         {
             m_ExitButton.clicked -= OnClickQuitClicked;
         }
 
-        // private void OnClickQuitClicked(ClickEvent evt)
-        // {
-        //     // if (!isOnRun)
-        //     // {
-        //     //     // m_TitleLabel.text = "Searching...";
-        //     //     // m_RunButton.text = "cancel";
-        //     //     isOnRun = true;
-        //     //     Broadcast(new LobbyStartedEvent(30f));
-        //     //     
-        //     // }
-        //     // else
-        //     // {
-        //     //     m_TitleLabel.text = "Searching...";
-        //     // }
-        // }
+        private void OnClickQuitClicked()
+        {
+            // Optional: add confirmation or debug logic
+            Debug.Log("Quit clicked in lobby (optional)");
+        }
 
-        // internal LobbyView Lobby => m_LobbyView;
-        // [SerializeField] 
-        // LobbyView m_LobbyView;
-        //
         /// <summary>
-        /// Updates the countdown text shown in the lobby.
+        /// Updates the countdown display.
         /// </summary>
-        /// <param name="secondsRemaining">How many seconds remain before the match starts.</param>
         public void UpdateCountdown(float secondsRemaining)
         {
-            m_TitleLabel.text = $"Game starts in {secondsRemaining}...";
+            m_TitleLabel.text = $"Game starts in {Mathf.CeilToInt(secondsRemaining)}...";
         }
 
         /// <summary>
-        /// Populates player name slots in the lobby view.
+        /// Updates the lobby view with all currently connected players.
+        /// Shows their character models using Stage.Instance.
         /// </summary>
-        /// <param name="playerNames">List of player names currently in the lobby.</param>
-        public void UpdatePlayerList(List<string> playerNames)
+        public void UpdatePlayerList(List<PlayerData> players)
         {
-            // for (int i = 0; i < playerNameSlots.Count; i++)
-            // {
-            //     if (i < playerNames.Count)
-            //         playerNameSlots[i].text = playerNames[i];
-            //     else
-            //         playerNameSlots[i].text = "Waiting...";
-            // }
+            foreach (var player in players)
+            {
+                if (!displayedPlayerIds.Contains(player.PlayerId))
+                {
+                    var table = Stage.Instance.GetAvailableTable();
+                    Stage.Instance.ShowCharacterOnTable(table, player.CharacterId);
+                    Debug.Log($"Player joined lobby: {player.PlayerName} with CharacterID: {player.CharacterId}");
+                    displayedPlayerIds.Add(player.PlayerId);
+                }
+            }
         }
 
-        /// <summary>
-        /// Shows the lobby panel.
-        /// </summary>
-        // public void ShowLobby()
-        // {
-        //     Show();
-        // }
-        //
-        // /// <summary>
-        // /// Hides the lobby panel.
-        // /// </summary>
-        // public void HideLobby()
-        // {
-        //     Hide();
-        // }
+        internal override void Show()
+        {
+            base.Show();
+            displayedPlayerIds.Clear(); // Reset state when entering view
+        }
     }
 }

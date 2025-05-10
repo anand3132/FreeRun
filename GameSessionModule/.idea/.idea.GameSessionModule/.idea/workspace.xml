@@ -8,42 +8,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e11ef570-29fb-43e8-922f-8bbaafb03f37" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/UnityGameServices/CloudModule.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/UnityGameServices/CloudModule.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.GameSessionModule/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.GameSessionModule/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.GameSessionModule/.idea/projectSettingsUpdater.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.GameSessionModule/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.GameSessionModule/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Project/GameSession.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Project/ModuleConfig.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Project/TestModule.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/.idea.FreeRun/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/.idea.FreeRun/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/ApplicationLifecycle/ApplicationEntryPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/ApplicationLifecycle/ApplicationEntryPoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/ConnectionManagement/ConnectionStates/ConnectionState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/ConnectionManagement/ConnectionStates/ConnectionState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/CharacterSelect/Character.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/CharacterSelect/Character.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Core/View.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Core/View.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/CharacterSelect/Stage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/CharacterSelect/Stage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/CharacterSelect/Table.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/CharacterSelect/Table.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/Controllers/LobbyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/Controllers/LobbyController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/Controllers/MainMenuController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/Controllers/MainMenuController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/Controllers/MatchmakerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/Controllers/MatchmakerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/Global/GlobalTextBridge.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/Global/GlobalTextBridge.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/Handlers/SharedUIHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/Handlers/SharedUIHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/UserData/PlayerProfileData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/UserData/PlayerProfileData.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/Views/LobbyView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/Views/LobbyView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/Views/MatchmakerView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/Views/MatchmakerView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/Views/MetagameView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/Views/MetagameView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/Views/ModelSelectionView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/Views/ModelSelectionView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/RedGaint.Network.Runtime.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/RedGaint.Network.Runtime.asmdef" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/UnityGameServices/UnityServicesInitializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/UnityGameServices/UnityServicesInitializer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Assets/1_Scripts/Utility/Stage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/CharacterSelect/Stage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Assets/1_Scripts/Utility/Stage.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/CharacterSelect/Stage.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/Views/UserProfileView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/Metagame/Views/UserProfileView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/UnityGameServices/CloudModule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/1_Scripts/Runtime/UnityGameServices/CloudModule.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/1_Scripts/Utility/RedGaint.Utility.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/1_Scripts/Utility/RedGaint.Utility.asmdef" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Assets/2_Scenes/MetagameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/2_Scenes/MetagameScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Assets/UI Toolkit/5_MatchmakerView.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Assets/UI Toolkit/5_MatchmakerView/MatchmakerView.uxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Assets/UI Toolkit/5_MatchmakerView/MatchmakerView.uxml.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Assets/UI Toolkit/5_MatchmakerView/MatchmakerViewPanelSettings.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Assets/UI Toolkit/5_MatchmakerView/MatchmakerViewPanelSettings.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/CloudCode/GeneratedModuleBindings/GameSessionModule/GameSessionModuleBindings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/CloudCode/GeneratedModuleBindings/GameSessionModule/GameSessionModuleBindings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/CloudCode/GeneratedModuleBindings/GameSessionModule/GameSessionModuleBindings.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/CloudCode/GeneratedModuleBindings/GameSessionModule/GameSessionModuleBindings.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/CloudCode/GeneratedModuleBindings/GameSessionModule/RedGaint.Network.GameSessionModule.GameSession_SessionRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/CloudCode/GeneratedModuleBindings/GameSessionModule/RedGaint.Network.GameSessionModule.GameSession_SessionRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/CloudCode/GeneratedModuleBindings/GameSessionModule/RedGaint.Network.GameSessionModule.GameSession_SessionRequest.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/CloudCode/GeneratedModuleBindings/GameSessionModule/RedGaint.Network.GameSessionModule.GameSession_SessionRequest.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/CloudCode/GeneratedModuleBindings/GameSessionModule/RedGaint.Network.GameSessionModule.GameSession_SessionResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/CloudCode/GeneratedModuleBindings/GameSessionModule/RedGaint.Network.GameSessionModule.GameSession_SessionResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/CloudCode/GeneratedModuleBindings/GameSessionModule/RedGaint.Network.GameSessionModule.GameSession_SessionResponse.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/CloudCode/GeneratedModuleBindings/GameSessionModule/RedGaint.Network.GameSessionModule.GameSession_SessionResponse.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/Samples/Cloud Save/3.2.2/Cloud Save Sample Script/CloudSaveSample.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/Samples/Cloud Save/3.2.2/Cloud Save Sample Script/CloudSaveSample.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/UI Toolkit/GameplayObjects/InteractiveDoor.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/UI Toolkit/GameplayObjects/InteractiveDoor.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assets/UI Toolkit/GameplayObjects/InteractiveDoor.renderTexture" beforeDir="false" afterPath="$PROJECT_DIR$/../Assets/UI Toolkit/GameplayObjects/InteractiveDoor.renderTexture" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.GameSessionModule/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GameSessionModule/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/GameSession.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Project/GameSession.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/bin/Release/net6.0/any/GameSessionModule.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Project/bin/Release/net6.0/any/GameSessionModule.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/bin/Release/net6.0/linux-x64/GameSessionModule.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Project/bin/Release/net6.0/linux-x64/GameSessionModule.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/obj/Debug/net6.0/GameSessionModule.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Project/obj/Debug/net6.0/GameSessionModule.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/obj/Release/net6.0/any/GameSessionModule.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Project/obj/Release/net6.0/any/GameSessionModule.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/obj/Release/net6.0/any/GameSessionModule.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Project/obj/Release/net6.0/any/GameSessionModule.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/obj/Release/net6.0/any/GameSessionModule.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Project/obj/Release/net6.0/any/GameSessionModule.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/obj/Release/net6.0/any/ref/GameSessionModule.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Project/obj/Release/net6.0/any/ref/GameSessionModule.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/obj/Release/net6.0/any/refint/GameSessionModule.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Project/obj/Release/net6.0/any/refint/GameSessionModule.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/obj/Release/net6.0/linux-x64/GameSessionModule.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Project/obj/Release/net6.0/linux-x64/GameSessionModule.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/obj/Release/net6.0/linux-x64/GameSessionModule.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Project/obj/Release/net6.0/linux-x64/GameSessionModule.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/obj/Release/net6.0/linux-x64/GameSessionModule.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Project/obj/Release/net6.0/linux-x64/GameSessionModule.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/obj/Release/net6.0/linux-x64/ref/GameSessionModule.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Project/obj/Release/net6.0/linux-x64/ref/GameSessionModule.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/obj/Release/net6.0/linux-x64/refint/GameSessionModule.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Project/obj/Release/net6.0/linux-x64/refint/GameSessionModule.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/Project/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Project/obj/rider.project.restore.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,16 +56,32 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2160bc4926aa466e9df96858144245fca24b18/89/2475de1f/List`1.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4a33ac6fa47d41e1ab90b188098828b8fa78/2e/285c4feb/LoggerExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/545ff563927a446cb9655c22d796cd991a00/c0/26464270/IExecutionContext.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a7b8e61819644be7a4fa99c64944a2aa92000/05/aee0abf8/QueryFilter.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a7b8e61819644be7a4fa99c64944a2aa92000/05/aee0abf8/QueryFilter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a7b8e61819644be7a4fa99c64944a2aa92000/1a/ee01d78d/ILobbyApi.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a7b8e61819644be7a4fa99c64944a2aa92000/1e/ec460e10/CreateRequest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a7b8e61819644be7a4fa99c64944a2aa92000/2e/0ef80ea6/IGameApiClient.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a7b8e61819644be7a4fa99c64944a2aa92000/56/d881f5e3/QueryResponse.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a7b8e61819644be7a4fa99c64944a2aa92000/6f/b4514ec0/ApiResponse`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a7b8e61819644be7a4fa99c64944a2aa92000/6f/b4514ec0/ApiResponse`1.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a7b8e61819644be7a4fa99c64944a2aa92000/83/fcb43e40/Player.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a7b8e61819644be7a4fa99c64944a2aa92000/aa/2c83188e/LobbyApi.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a7b8e61819644be7a4fa99c64944a2aa92000/ef/325bd7f6/QueryRequest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a7b8e61819644be7a4fa99c64944a2aa92000/ef/325bd7f6/QueryRequest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a7b8e61819644be7a4fa99c64944a2aa92000/f9/acb04c8b/Lobby.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/GameSessionModule/Project/GameSession.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/GameSessionModule/Project/GameSession.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/GameSessionModule/Project/GameSession.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/GameSessionModule/Project/GameSession.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/GameSessionModule/Project/GameSession.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/GameSessionModule/Project/GameSession.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/GameSessionModule/Project/GameSession.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/GameSessionModule/Project/GameSession.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/GameSessionModule/Project/GameSession.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/GameSessionModule/Project/GameSession.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/GameSessionModule/Project/GameSession.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/GameSessionModule/Project/GameSession.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/GameSessionModule/Project/GameSession.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/GameSessionModule/Project/GameSession.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -108,6 +125,7 @@
       <workItem from="1745783283281" duration="151000" />
       <workItem from="1745783723177" duration="717000" />
       <workItem from="1745824573702" duration="132000" />
+      <workItem from="1746803816097" duration="15458000" />
     </task>
     <servers />
   </component>

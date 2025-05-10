@@ -5,54 +5,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0cfbca29-fb33-45bb-a16b-ee71f1584851" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/CharacterSelect/ModelTurntable.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/CharacterSelect/StageRotatorInput.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/CharacterSelect/StageRotatorInput.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/CharacterSelect/Table.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/CharacterSelect/Table.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FreeRun/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FreeRun/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/CharacterSelect/Character.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/CharacterSelect/Character.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/CharacterSelect/CharacterDatabase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/CharacterSelect/CharacterDatabase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/CharacterSelect/CharacterSelectButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/CharacterSelect/CharacterSelectButton.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/CharacterSelect/CharacterSelectDisplay.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/CharacterSelect/CharacterSelectDisplay.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/CharacterSelect/PlayerCard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/CharacterSelect/PlayerCard.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Core/View.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Core/View.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/CharacterSelect/Stage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/CharacterSelect/Stage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/CharacterSelect/Table.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/CharacterSelect/Table.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Controllers/LobbyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Controllers/LobbyController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Controllers/MainMenuController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Controllers/MainMenuController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Controllers/MetagameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Controllers/MetagameController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Global/GlobalEnums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Global/GlobalEnums.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Handlers/GuestModeHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Handlers/GuestModeHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Handlers/SharedUIHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Handlers/SharedUIHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Handlers/UserModeHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Handlers/UserModeHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Managers/GameProfileManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Managers/UserProfileManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Managers/GameProfileManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Managers/UserProfileManager.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/MetagameEvents.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/MetagameEvents.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Views/LoginView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Views/LoginView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Views/MetagameView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Views/MetagameView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Views/ModelSelectionView.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Views/ModelSelectionView.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/UserData/PlayerProfileData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/UserData/PlayerProfileData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Views/LobbyView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Views/LobbyView.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Views/UserProfileView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Views/UserProfileView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/RedGaint.Network.Runtime.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/RedGaint.Network.Runtime.asmdef" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/UnityGameServices/UnityServicesInitializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/UnityGameServices/UnityServicesInitializer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Utility/ModelTurntable.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Utility/ModelTurntable.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/CharacterSelect/ModelTurntable.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/UnityGameServices/CloudModule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/UnityGameServices/CloudModule.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Utility/RedGaint.Utility.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Utility/RedGaint.Utility.asmdef" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/2_Scenes/MetagameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2_Scenes/MetagameScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/4_Prefabs/Stage.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/4_Prefabs/Stage/Lobby.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/4_Prefabs/Stage/Lobby.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/4_Prefabs/Stage/Stage.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/4_Prefabs/Stage/Stage.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/4_Prefabs/Stage/model offset.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/4_Prefabs/Stage/model offset.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/7_Settings/Build Profiles/Linux Server Profile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/7_Settings/Build Profiles/Linux Server Profile.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/InputSystem/DedicatedGameServerSample.inputactions" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/InputSystem/DedicatedGameServerSample.inputactions.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/Readme.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/Readme.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/3_UserProfileView/UserProfileView.uxml" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI Toolkit/3_UserProfileView/UserProfileView.uxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/CharacterSelectionStyle.uss" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI Toolkit/CharacterSelectionStyle.uss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/UnityStyleSheet.uss" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI Toolkit/UnityStyleSheet.uss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CloudCode/GeneratedModuleBindings/GameSessionModule/GameSessionModuleBindings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CloudCode/GeneratedModuleBindings/GameSessionModule/GameSessionModuleBindings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CloudCode/GeneratedModuleBindings/GameSessionModule/GameSessionModuleBindings.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CloudCode/GeneratedModuleBindings/GameSessionModule/GameSessionModuleBindings.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CloudCode/GeneratedModuleBindings/GameSessionModule/RedGaint.Network.GameSessionModule.GameSession_SessionRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CloudCode/GeneratedModuleBindings/GameSessionModule/RedGaint.Network.GameSessionModule.GameSession_SessionRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CloudCode/GeneratedModuleBindings/GameSessionModule/RedGaint.Network.GameSessionModule.GameSession_SessionRequest.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CloudCode/GeneratedModuleBindings/GameSessionModule/RedGaint.Network.GameSessionModule.GameSession_SessionRequest.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CloudCode/GeneratedModuleBindings/GameSessionModule/RedGaint.Network.GameSessionModule.GameSession_SessionResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CloudCode/GeneratedModuleBindings/GameSessionModule/RedGaint.Network.GameSessionModule.GameSession_SessionResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CloudCode/GeneratedModuleBindings/GameSessionModule/RedGaint.Network.GameSessionModule.GameSession_SessionResponse.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CloudCode/GeneratedModuleBindings/GameSessionModule/RedGaint.Network.GameSessionModule.GameSession_SessionResponse.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Samples/Cloud Save/3.2.2/Cloud Save Sample Script/CloudSaveSample.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Samples/Cloud Save/3.2.2/Cloud Save Sample Script/CloudSaveSample.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/GameplayObjects/InteractiveDoor.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI Toolkit/GameplayObjects/InteractiveDoor.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/GameplayObjects/InteractiveDoor.renderTexture" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI Toolkit/GameplayObjects/InteractiveDoor.renderTexture" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameSessionModule/.idea/.idea.GameSessionModule/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GameSessionModule/.idea/.idea.GameSessionModule/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameSessionModule/Project/GameSession.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameSessionModule/Project/GameSession.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameSessionModule/Project/bin/Release/net6.0/any/GameSessionModule.dll" beforeDir="false" afterPath="$PROJECT_DIR$/GameSessionModule/Project/bin/Release/net6.0/any/GameSessionModule.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameSessionModule/Project/bin/Release/net6.0/linux-x64/GameSessionModule.dll" beforeDir="false" afterPath="$PROJECT_DIR$/GameSessionModule/Project/bin/Release/net6.0/linux-x64/GameSessionModule.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameSessionModule/Project/obj/Debug/net6.0/GameSessionModule.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/GameSessionModule/Project/obj/Debug/net6.0/GameSessionModule.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameSessionModule/Project/obj/Release/net6.0/any/GameSessionModule.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameSessionModule/Project/obj/Release/net6.0/any/GameSessionModule.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameSessionModule/Project/obj/Release/net6.0/any/GameSessionModule.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/GameSessionModule/Project/obj/Release/net6.0/any/GameSessionModule.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameSessionModule/Project/obj/Release/net6.0/any/GameSessionModule.dll" beforeDir="false" afterPath="$PROJECT_DIR$/GameSessionModule/Project/obj/Release/net6.0/any/GameSessionModule.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameSessionModule/Project/obj/Release/net6.0/any/ref/GameSessionModule.dll" beforeDir="false" afterPath="$PROJECT_DIR$/GameSessionModule/Project/obj/Release/net6.0/any/ref/GameSessionModule.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameSessionModule/Project/obj/Release/net6.0/any/refint/GameSessionModule.dll" beforeDir="false" afterPath="$PROJECT_DIR$/GameSessionModule/Project/obj/Release/net6.0/any/refint/GameSessionModule.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameSessionModule/Project/obj/Release/net6.0/linux-x64/GameSessionModule.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameSessionModule/Project/obj/Release/net6.0/linux-x64/GameSessionModule.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameSessionModule/Project/obj/Release/net6.0/linux-x64/GameSessionModule.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/GameSessionModule/Project/obj/Release/net6.0/linux-x64/GameSessionModule.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameSessionModule/Project/obj/Release/net6.0/linux-x64/GameSessionModule.dll" beforeDir="false" afterPath="$PROJECT_DIR$/GameSessionModule/Project/obj/Release/net6.0/linux-x64/GameSessionModule.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameSessionModule/Project/obj/Release/net6.0/linux-x64/ref/GameSessionModule.dll" beforeDir="false" afterPath="$PROJECT_DIR$/GameSessionModule/Project/obj/Release/net6.0/linux-x64/ref/GameSessionModule.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameSessionModule/Project/obj/Release/net6.0/linux-x64/refint/GameSessionModule.dll" beforeDir="false" afterPath="$PROJECT_DIR$/GameSessionModule/Project/obj/Release/net6.0/linux-x64/refint/GameSessionModule.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameSessionModule/Project/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/GameSessionModule/Project/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameSessionModule/Project/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/GameSessionModule/Project/obj/rider.project.restore.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,6 +68,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4e9c48eedf6f482fa439ccf3356314819b8200/6b/6fd12eba/EditorSceneManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4e9c48eedf6f482fa439ccf3356314819b8200/be/52fdcdf8/CloudProjectSettings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/549cf43220434d47a4df98833fd1e05768000/47/1ed1d413/ConnectionEvent.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/4f/bab62522/Dictionary`2.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7a8285f8dc9940c7bb46fe253fff3327a4000/83/ed87a829/IMultiplayerService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d59d088174d643f487a455f58c6feb551f7800/06/7f295200/VisualTreeAsset.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d59d088174d643f487a455f58c6feb551f7800/48/7c39c4bd/EventDebuggerLogCall.cs" root0="FORCE_HIGHLIGHTING" />
@@ -90,6 +80,18 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ed969b0e627d471da4848289f9c322df46ae00/b4/3553b1cd/Dictionary`2.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ed969b0e627d471da4848289f9c322df46ae00/c0/18ae8c9d/RuntimeType.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/CharacterSelect/StageRotatorInput.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/1_Scripts/Runtime/Metagame/Controllers/LobbyController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/1_Scripts/Runtime/Metagame/Controllers/LobbyController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/1_Scripts/Runtime/Metagame/Controllers/LobbyController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/1_Scripts/Runtime/Metagame/Controllers/LobbyController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/1_Scripts/Runtime/Metagame/Controllers/LobbyController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/1_Scripts/Runtime/Metagame/Controllers/LobbyController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/1_Scripts/Runtime/Metagame/Controllers/LobbyController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/1_Scripts/Runtime/Metagame/Controllers/LobbyController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/1_Scripts/Runtime/Metagame/Controllers/LobbyController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/1_Scripts/Runtime/Metagame/Controllers/LobbyController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/1_Scripts/Runtime/Metagame/Controllers/LobbyController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/1_Live/0_Network/0_FreeRun/FreeRun/Assets/1_Scripts/Runtime/Metagame/Controllers/LobbyController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Helpers/SocialLoginHelper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/1_Scripts/Utility/Helper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/1_Scripts/Utility/Singleton.cs" root0="FORCE_HIGHLIGHTING" />
@@ -105,7 +107,9 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core/Editor/SampleDependencyImportSystem/SampleDependencyImporter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.authentication/Runtime/AuthenticationService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.authentication/Runtime/IAuthenticationService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.cloudcode/Editor/Authoring/Modules/Bindings/CloudCodeModuleBindingsGenerator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.cloudcode/Runtime/CloudCode.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.cloudcode/Runtime/CloudCodeService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.cloudsave/Runtime/com.unity.services.cloudsave.internal/Runtime/DataService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.multiplayer/Editor/Multiplay/Authoring/Deployment/FleetStatusTracker.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.multiplayer/Runtime/Relay/Models/JoinAllocation.cs" root0="SKIP_HIGHLIGHTING" />
@@ -118,21 +122,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Attach to Unity Editor.Attach to Unity Editor &amp; Play.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;Standalone Player.Start Unity.executor&quot;: &quot;Debug&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev2&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.uml&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Attach to Unity Editor.Attach to Unity Editor & Play.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Standalone Player.Start Unity.executor": "Debug",
+    "XThreadsFramesViewSplitterKey": "0.32572615",
+    "git-widget-placeholder": "dev2",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.uml",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor &amp; Play">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.30f1\Editor\Unity.exe" />
@@ -150,13 +155,15 @@
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="26880">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="26880" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
-        <list />
+        <list>
+          <MonoRuntime />
+        </list>
       </option>
       <option name="selectedOptions">
         <list />
@@ -214,7 +221,8 @@
       <workItem from="1745947783169" duration="4828000" />
       <workItem from="1745994623540" duration="29236000" />
       <workItem from="1746081463448" duration="5798000" />
-      <workItem from="1746092367984" duration="11885000" />
+      <workItem from="1746092367984" duration="13807000" />
+      <workItem from="1746773388785" duration="32086000" />
     </task>
     <servers />
   </component>
@@ -278,30 +286,56 @@
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Controllers/MetagameController.cs</url>
-          <line>36</line>
-          <properties documentPath="E:\1_Live\0_Network\0_FreeRun\FreeRun\Assets\1_Scripts\Runtime\Metagame\Controllers\MetagameController.cs" containingFunctionPresentation="Method 'Start'">
+          <url>file://$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/CharacterSelect/Stage.cs</url>
+          <line>82</line>
+          <properties documentPath="E:\1_Live\0_Network\0_FreeRun\FreeRun\Assets\1_Scripts\Runtime\Metagame\CharacterSelect\Stage.cs" containingFunctionPresentation="Method 'ShowCharacterOnTable'">
             <startOffsets>
-              <option value="1191" />
+              <option value="2505" />
             </startOffsets>
             <endOffsets>
-              <option value="1241" />
+              <option value="2547" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="26" />
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Controllers/MetagameController.cs</url>
-          <line>34</line>
-          <properties documentPath="E:\1_Live\0_Network\0_FreeRun\FreeRun\Assets\1_Scripts\Runtime\Metagame\Controllers\MetagameController.cs" containingFunctionPresentation="Method 'Start'">
+          <url>file://$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/CharacterSelect/Stage.cs</url>
+          <line>295</line>
+          <properties documentPath="E:\1_Live\0_Network\0_FreeRun\FreeRun\Assets\1_Scripts\Runtime\Metagame\CharacterSelect\Stage.cs" containingFunctionPresentation="Method 'SetCharacterOnTable'">
             <startOffsets>
-              <option value="1039" />
+              <option value="9982" />
             </startOffsets>
             <endOffsets>
-              <option value="1152" />
+              <option value="10048" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="27" />
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Views/UserProfileView.cs</url>
+          <line>37</line>
+          <properties documentPath="E:\1_Live\0_Network\0_FreeRun\FreeRun\Assets\1_Scripts\Runtime\Metagame\Views\UserProfileView.cs" containingFunctionPresentation="Method 'OnEnable'">
+            <startOffsets>
+              <option value="1519" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1615" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Views/UserProfileView.cs</url>
+          <line>26</line>
+          <properties documentPath="E:\1_Live\0_Network\0_FreeRun\FreeRun\Assets\1_Scripts\Runtime\Metagame\Views\UserProfileView.cs" containingFunctionPresentation="Method 'OnEnable'">
+            <startOffsets>
+              <option value="848" />
+            </startOffsets>
+            <endOffsets>
+              <option value="900" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="34" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
