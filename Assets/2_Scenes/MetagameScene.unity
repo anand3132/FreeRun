@@ -3815,6 +3815,10 @@ PrefabInstance:
       propertyPath: m_LobbyView
       value: 
       objectReference: {fileID: 3902472173517102221}
+    - target: {fileID: 6192332346717939171, guid: 94703e944d0f3b74a9720bbdae6978c9, type: 3}
+      propertyPath: mUserProfileView
+      value: 
+      objectReference: {fileID: 3902472173517102223}
     - target: {fileID: 7035275107186610736, guid: 94703e944d0f3b74a9720bbdae6978c9, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -3835,10 +3839,14 @@ PrefabInstance:
       propertyPath: m_Stage
       value: 
       objectReference: {fileID: 561766050649740652}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9211877889987687137, guid: 94703e944d0f3b74a9720bbdae6978c9, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 934705280649564849, guid: 94703e944d0f3b74a9720bbdae6978c9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3902472173517102223}
   m_SourcePrefab: {fileID: 100100000, guid: 94703e944d0f3b74a9720bbdae6978c9, type: 3}
 --- !u!114 &3902472173517102221 stripped
 MonoBehaviour:
@@ -3849,6 +3857,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 582fc436493743fc9fb6a3cd8e3abbed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &3902472173517102222 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 934705280649564849, guid: 94703e944d0f3b74a9720bbdae6978c9, type: 3}
+  m_PrefabInstance: {fileID: 3902472173517102220}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3902472173517102223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3902472173517102222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b551d998fba4d98816f5bb70eb0ba39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &4296697615959665811
