@@ -163,6 +163,12 @@ namespace RedGaint.Network.Runtime
                         await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(credentials.Item1,
                             credentials.Item2);
                         Debug.Log(" Auto-login successful." + AuthenticationService.Instance.AccessToken);
+#if UNITY_EDITOR
+                        EditorCredentialManager.SaveCredentialsToFile(username,credentials.Item1, credentials.Item2);
+#else
+                        UserCredentialManager.SaveCredentials(username, passwordField.text, cloudEncryptionKey);
+#endif
+
                         return true;
                     }
                     Debug.Log("Login failed : ");
