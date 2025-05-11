@@ -34,5 +34,27 @@ namespace Unity.Services.CloudCode.GeneratedBindings
                     {"request", request},
                 });
         }
+
+        public async Task<string> StartDedicatedServerForLobby(string lobbyId)
+        {
+            return await k_Service.CallModuleEndpointAsync<string>(
+                "GameSessionModule",
+                "StartDedicatedServerForLobby",
+                new Dictionary<string, object>()
+                {
+                    {"lobbyId", lobbyId},
+                });
+        }
+
+        public async Task<List<RedGaint.Network.GameSessionModule.GameSession_PlayerSummary>> GetLobbyPlayers(RedGaint.Network.GameSessionModule.GameSession_LobbyRequest request)
+        {
+            return await k_Service.CallModuleEndpointAsync<List<RedGaint.Network.GameSessionModule.GameSession_PlayerSummary>>(
+                "GameSessionModule",
+                "GetLobbyPlayers",
+                new Dictionary<string, object>()
+                {
+                    {"request", request},
+                });
+        }
     }
 }

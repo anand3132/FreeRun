@@ -26,5 +26,12 @@ namespace RedGaint.Network.Runtime.UserData
         public Dictionary<string, string> PlayerSettings= new();
     }
     
+    [Serializable]
+    public class PlayerData
+    {
+        public string PlayerId;
+        public string PlayerName;
+        public string CharacterId;
+    }
    
 }

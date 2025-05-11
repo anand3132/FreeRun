@@ -9,16 +9,22 @@ namespace RedGaint.Network.Runtime
         [Header("Stage Settings")] public CharacterDatabase characterDatabase;
         public List<Table> tables = new List<Table>();
         public Transform stageCameraPosition;
-        private Dictionary<string, GameObject> currentCharacters = new Dictionary<string, GameObject>();
+        private Dictionary<int, GameObject> currentCharacters = new Dictionary<int, GameObject>();
 
-        private Dictionary<string, int>
+        private Dictionary<int, int>
             currentCharacterIndexes =
-                new Dictionary<string, int>(); // To keep track of character indexes for each table
+                new Dictionary<int, int>(); // To keep track of character indexes for each table
 
         public bool LogThisClass { get; } = false;
         private GameObject stageRoot;
         private string turntablePrefabPath =GlobalStaticVariables.TurntablePrefabPath;
-        
+
+        public void Awake()
+        {
+           // LoadStage();
+           LoadAllTables();
+
+        }
         public void LoadStage()
         {
             if (stageRoot != null)
@@ -37,6 +43,14 @@ namespace RedGaint.Network.Runtime
             stageRoot = Instantiate(prefab, stageCameraPosition.position, Quaternion.identity);
             tables.Clear();
             tables.AddRange(stageRoot.GetComponentsInChildren<Table>(true));
+        }
+
+        public void LoadAllTables()
+        {
+            for (int id = 0; id < tables.Count; id++)
+            {
+                tables[id].tableId = id;
+            }
         }
 
         public void ShutdownStage()
@@ -63,66 +77,92 @@ namespace RedGaint.Network.Runtime
         /// <summary>
         /// Shows a character on the given table. Replaces the previous character if any.
         /// </summary>
-        public void ShowCharacterOnTable(string tableId, string characterId)
-        {
-            var character = characterDatabase.GetCharacterById(characterId);
-            if (character == null)
-            {
-                Debug.LogWarning($"Character with ID {characterId} not found.");
-                return;
-            }
 
-            var table = GetTableById(tableId);
+        public void ShowCharacterOnTable(int tableId, string characterId)
+        {
+            SetCharacterOnTable(tableId, characterId);
+            ShowCharacterOnTable(tableId);
+        }
+        public void ShowCharacterOnTable(int tableId)
+        {
+            if (currentCharacters.TryGetValue(tableId, out GameObject charObj))
+            {
+                charObj.SetActive(true);
+            }
+            else
+            {
+                Debug.LogWarning($"No character set for Table {tableId}");
+            }
+        }
+        public void FocusCharacterOnTable(int tableId)
+        {
+            if(!TryGetTableById(tableId, out Table table))
+               return;
             if (table == null)
             {
-                Debug.LogWarning($"Table with ID {tableId} not found.");
+                BugsBunny.LogYellow($"Cannot focus on table {tableId}: not found.");
                 return;
             }
 
-            // Remove previous character if exists
-            if (currentCharacters.TryGetValue(tableId, out GameObject oldChar) && oldChar != null)
+            if (table.cameraFocusPoint != null)
             {
-                Destroy(oldChar);
-                currentCharacters.Remove(tableId);
+                Camera.main.transform.position = table.cameraFocusPoint.position;
+                Camera.main.transform.rotation = table.cameraFocusPoint.rotation;
             }
-
-            // Instantiate the new character's intro prefab on the table's model hook
-            var newChar = Instantiate(character.IntroPrefab, table.modelHook);
-            currentCharacters[tableId] = newChar;
-
-            // Track the index of the current character
-            if (!currentCharacterIndexes.ContainsKey(tableId))
+            else
             {
-                currentCharacterIndexes[tableId] = 0;
+                BugsBunny.LogYellow($"Table {tableId} has no camera focus point assigned.");
+            }
+        }
+        public void FocusStage()
+        {
+            if (stageCameraPosition != null)
+            {
+                Camera.main.transform.position = stageCameraPosition.position;
+                Camera.main.transform.rotation = stageCameraPosition.rotation;
+            }
+            else
+            {
+                BugsBunny.LogYellow("Stage camera position not set.");
             }
         }
 
-        public void UpdateTableUserName(string tableId, string userName)
+
+        public void UpdateTableUserName(int tableId, string userName)
         {
-            var table = GetTableById(tableId);
+            if (!TryGetTableById(tableId, out Table table))
+            {
+                BugsBunny.LogYellow($"Table with ID {tableId} not found.");
+                return;
+            }
             table.tableName.text = userName;
         }
 
-        public Character GetCurrentCharacterOnStage(string tableId)
+        public bool TryGetCurrentCharacterOnStage(int tableId, out Character character)
         {
+            character = null;
+
             if (currentCharacterIndexes.TryGetValue(tableId, out int characterIndex))
             {
                 var characters = characterDatabase.GetAllCharacters();
                 if (characterIndex >= 0 && characterIndex < characters.Length)
                 {
-                    return characters[characterIndex];
+                    character = characters[characterIndex];
+                    return true;
                 }
             }
 
-            return null; // No character currently tracked for this table
+            return false;
         }
+
 
         /// <summary>
         /// Show the next character in the character database on the specified table.
         /// </summary>
-        public void ShowNextCharacterOnTable(string tableId)
+        public void ShowNextCharacterOnTable(int tableId)
         {
-            var table = GetTableById(tableId);
+            if(!TryGetTableById(tableId, out Table table))
+                return;
             if (table == null)
             {
                 Debug.LogWarning($"Table with ID {tableId} not found.");
@@ -155,10 +195,9 @@ namespace RedGaint.Network.Runtime
         /// <summary>
         /// Show the previous character in the character database on the specified table.
         /// </summary>
-        public void ShowPreviousCharacterOnTable(string tableId)
+        public void ShowPreviousCharacterOnTable(int tableId)
         {
-            var table = GetTableById(tableId);
-            if (table == null)
+            if (!TryGetTableById(tableId, out Table table))
             {
                 Debug.LogWarning($"Table with ID {tableId} not found.");
                 return;
@@ -192,15 +231,13 @@ namespace RedGaint.Network.Runtime
         /// Show a rotating selection of characters for character selection UI.
         /// Only on a specific table (e.g., selectionTableId).
         /// </summary>
-        public void ShowAllCharactersInRotation(string tableId)
+        public void ShowAllCharactersInRotation(int tableId)
         {
-            var table = GetTableById(tableId);
-            if (table == null)
+            if (!TryGetTableById(tableId, out Table table))
             {
                 Debug.LogWarning($"Table with ID {tableId} not found.");
                 return;
             }
-
             // Clean up existing characters
             if (currentCharacters.TryGetValue(tableId, out GameObject oldChar) && oldChar != null)
             {
@@ -220,7 +257,7 @@ namespace RedGaint.Network.Runtime
         /// <summary>
         /// Removes the current character from the specified table.
         /// </summary>
-        public void RemoveCharacterFromTable(string tableId)
+        public void RemoveCharacterFromTable(int tableId)
         {
             if (currentCharacters.TryGetValue(tableId, out GameObject charObj))
             {
@@ -230,11 +267,84 @@ namespace RedGaint.Network.Runtime
             }
         }
 
-        private Table GetTableById(string tableId)
+        private bool TryGetTableById(int tableId, out Table table)
         {
-            return tables.Find(t => t.tableId == tableId);
+            table = tables.Find(t => t.tableId == tableId);
+            return table != null;
         }
+
+        public void SetCharacterOnTable(int tableId, string characterId)
+        {
+            var character = characterDatabase.GetCharacterById(characterId);
+            if (character == null)
+            {
+                Debug.LogWarning($"Character with ID {characterId} not found.");
+                return;
+            }
+
+            if (!TryGetTableById(tableId, out Table table))
+            {
+                Debug.LogWarning($"Table with ID {tableId} not found.");
+                return;
+            }
+            if (currentCharacters.TryGetValue(tableId, out GameObject oldChar) && oldChar != null)
+            {
+                Destroy(oldChar);
+                currentCharacters.Remove(tableId);
+            }
+
+            var newChar = Instantiate(character.IntroPrefab, table.modelHook);
+            newChar.SetActive(false); // Do not show yet
+            table.currentCharacter = newChar;
+            table.characterID = characterId;
+
+            currentCharacters[tableId] = newChar;
+
+            if (!currentCharacterIndexes.ContainsKey(tableId))
+                currentCharacterIndexes[tableId] = 0;
+        }
+
+        /// <summary>
+        /// Returns the index of an available table that is not currently allocated.
+        /// Returns -1 if no table is available.
+        /// </summary>
+        public int GetAvailableTable()
+        {
+            for (int i = 0; i < tables.Count; i++)
+            {
+                int tableId = tables[i].tableId;
+                if (!currentCharacters.ContainsKey(tableId))
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+        /// <summary>
+        /// Clears all character models from all tables and resets their state.
+        /// </summary>
+        public void ClearAllTables()
+        {
+            foreach (var table in tables)
+            {
+                int tableId = table.tableId;
+
+                // Destroy character GameObject if present
+                if (currentCharacters.TryGetValue(tableId, out GameObject characterObj) && characterObj != null)
+                {
+                    Destroy(characterObj);
+                }
+
+                // Reset table-specific data
+                table.currentCharacter = null;
+                table.characterID = string.Empty;
+
+                // Clear tracking
+                currentCharacters.Remove(tableId);
+                currentCharacterIndexes.Remove(tableId);
+            }
+        }
+
     } //Stage
-
-
+    
 } //RedGaint.Network.Runtime

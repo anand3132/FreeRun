@@ -114,7 +114,13 @@ namespace RedGaint.Network.Runtime
                     UnityServicesInitializer.Instance.TrySignOut();
                     return;
                 }
+#if UNITY_EDITOR
+                EditorCredentialManager.SaveCredentialsToFile(username,passwordField.text, cloudEncryptionKey);
+#else
                 UserCredentialManager.SaveCredentials(username, passwordField.text, cloudEncryptionKey);
+#endif
+      
+                
                 await UserProfileManager.Instance.UpdatePlayerProfile(CreateNewUserProfile(username),true);
                 if (AuthenticationService.Instance.IsSignedIn)
                 {
@@ -152,7 +158,7 @@ namespace RedGaint.Network.Runtime
             }
 
             statusLabel.text = "Signing in with username & password...";
-            await UnityServicesInitializer.Instance.InitializeAndSignIn(UnityServicesInitializer.SignInMethod.UsernamePassword);
+            await UnityServicesInitializer.Instance.InitializeAndSignIn(UnityServicesInitializer.SignInMethod.UsernamePassword,new Tuple<string, string>(username,password));
             UpdateUserProfile(UnityServicesInitializer.SignInMethod.UsernamePassword);
         }
 

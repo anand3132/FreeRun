@@ -26,9 +26,11 @@ namespace RedGaint.Network.Runtime
                 throw new ArgumentNullException(nameof(encryptionKey), "Encryption key cannot be null or empty.");
 
             string encryptedPassword = Encrypt(password, encryptionKey);
+            
             PlayerPrefs.SetString(UsernameKey, username);
             PlayerPrefs.SetString(EncryptedPasswordKey, encryptedPassword);
             PlayerPrefs.Save();
+            
             Debug.Log(username + " Credentials saved");
         }
 
@@ -46,6 +48,7 @@ namespace RedGaint.Network.Runtime
             {
                 username = PlayerPrefs.GetString(UsernameKey);
                 string encryptedPassword = PlayerPrefs.GetString(EncryptedPasswordKey);
+                
                 password = Decrypt(encryptedPassword, encryptionKey);
                 return true;
             }
@@ -65,7 +68,7 @@ namespace RedGaint.Network.Runtime
         }
 
         // --- AES Encrypt ---
-        private static string Encrypt(string plainText, string key)
+        public static string Encrypt(string plainText, string key)
         {
             using Aes aes = Aes.Create();
             aes.Key = DeriveKey(key);
@@ -83,7 +86,7 @@ namespace RedGaint.Network.Runtime
         }
 
         // --- AES Decrypt ---
-        private static string Decrypt(string encryptedText, string key)
+        public static string Decrypt(string encryptedText, string key)
         {
             byte[] fullCipher = Convert.FromBase64String(encryptedText);
             using Aes aes = Aes.Create();

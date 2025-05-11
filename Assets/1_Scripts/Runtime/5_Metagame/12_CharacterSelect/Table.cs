@@ -5,13 +5,13 @@ namespace RedGaint.Network.Runtime
     [System.Serializable]
     public class Table:MonoBehaviour
     {
-        public string tableId;
+        public int tableId;
         public TextMeshProUGUI tableName;
         public Transform modelHook;
         [HideInInspector] public GameObject currentCharacter;
         [HideInInspector] public string characterID;
         public Vector3 tablePosition;
-        // public Transform cameraPosition;
+        public Transform cameraFocusPoint;
     }
 
 }

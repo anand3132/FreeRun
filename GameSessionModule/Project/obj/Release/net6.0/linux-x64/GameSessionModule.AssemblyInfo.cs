@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GameSessionModule")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d05fccb5cefe98141e7d9d3de0807312db3f5917")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+14f0fb984470f25ba5e5ab13c9f43e6b878803dc")]
 [assembly: System.Reflection.AssemblyProductAttribute("GameSessionModule")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GameSessionModule")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

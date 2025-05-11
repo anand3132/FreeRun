@@ -1,41 +1,45 @@
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEngine;
 using Unity.Services.CloudCode;
 using Unity.Services.CloudCode.GeneratedBindings;
-using UnityEngine;
-using System.Collections.Generic;
-using RedGaint.Utility;
-using Unity.Services.Authentication;
 using Unity.Services.CloudCode.GeneratedBindings.RedGaint.Network.GameSessionModule;
+using Unity.Services.Authentication;
+using RedGaint.Utility;
 
 namespace RedGaint.Network.Runtime.UserData
 {
     public class CloudModule : Singleton<CloudModule>, IBugsBunny
     {
+        private GameSessionModuleBindings _gameSessionModuleBinding;
+
+        public bool LogThisClass { get; } = false;
+
+        private void Awake()
+        {
+            _gameSessionModuleBinding = new GameSessionModuleBindings(CloudCodeService.Instance);
+        }
+
         public async Task<SessionResponse> StartTheGame()
         {
-            await TestCloudCode();
-            
             if (!AuthenticationService.Instance.IsSignedIn)
             {
                 Debug.Log("User is not signed in");
                 return null;
             }
-         
-            
+
             try
             {
-                // Here we initialize the Cloud Code service
-                var cloudCodeService = CloudCodeService.Instance;
-
-                // Call Cloud Code function (you can call the function here or elsewhere based on your design)
                 var sessionResponse = await JoinMatchLobby();
-                Debug.Log($"Lobby ID: {sessionResponse.LobbyId} - {sessionResponse.Message}");
+                Debug.Log($"Lobby ID: {sessionResponse?.LobbyId} - {sessionResponse?.Message}");
                 return sessionResponse;
             }
             catch (CloudCodeException exception)
             {
                 Debug.LogError("CloudCode exception: " + exception.Message);
             }
+
             return null;
         }
 
@@ -47,59 +51,35 @@ namespace RedGaint.Network.Runtime.UserData
                 return null;
             }
 
-            // Get the required information
-            string accessToken = AuthenticationService.Instance.AccessToken;
-            string playerId = AuthenticationService.Instance.PlayerId;  // Or fetch it differently if needed
-    
-            // Dummy values for playerName and characterId
-            string playerName = "DummyPlayer_"+Random.Range(1000, 9999);  // Dummy player name
-            string characterId = "DummyCharacter";  // Dummy character ID
-
-            // Prepare the arguments to send to the Cloud Code
-            Dictionary<string, object> args = new Dictionary<string, object>
-            {
-                { "AccessToken", accessToken },
-                { "PlayerId", playerId },
-                { "CharacterId", characterId },
-                { "PlayerName", playerName }
-            };
+            string playerId = AuthenticationService.Instance.PlayerId;
+            string playerName = AuthenticationService.Instance.PlayerName;
+            string characterId = UserProfileManager.CurrentUser.CharacterId.ToString();
 
             try
             {
-                
-                // Prepare the request object for the StartOrJoinSession function
-                var request = new GameSession_SessionRequest()
+                var request = new GameSession_SessionRequest
                 {
                     PlayerId = playerId,
                     CharacterId = characterId,
                     PlayerName = playerName
                 };
-                
-                var gameSessionBindings = new GameSessionModuleBindings(CloudCodeService.Instance);
 
-                // Call the StartOrJoinSession function
-                var result = await gameSessionBindings.StartOrJoinSession(request);
-                
-                // Check if the result is not null
-                if (result != null)
-                {
-                    
-                    
-                    Debug.Log($"Lobby Name : {result.LobbyName} : Lobby ID: {result.LobbyId} :: Message: {result.Message}");
-                }
-                else
+                var result = await _gameSessionModuleBinding.StartOrJoinSession(request);
+
+                if (result == null)
                 {
                     Debug.LogError("Failed to join or create the lobby.");
+                    return null;
                 }
 
-                SessionResponse response = new SessionResponse
+                Debug.Log($"Lobby Name: {result.LobbyName} | Lobby ID: {result.LobbyId} | Message: {result.Message}");
+
+                return new SessionResponse
                 {
                     LobbyId = result.LobbyId,
                     LobbyName = result.LobbyName,
-                    Message = result.Message,
+                    Message = result.Message
                 };
-                
-                return response;
             }
             catch (CloudCodeException ex)
             {
@@ -108,24 +88,45 @@ namespace RedGaint.Network.Runtime.UserData
             }
         }
 
-        private async Task<string> TestCloudCode()
+        public async Task<List<PlayerData>> FetchPlayersFromLobby(string lobbyId)
         {
-            Debug.Log("Queriing.....");
-            // Call the function within the module and provide the parameters we defined in there
-            var module = new GameSessionModuleBindings(CloudCodeService.Instance);
-            var result1 = await module.SayHello("World");
-            Debug.Log(result1);
-            return result1;
+            if (!AuthenticationService.Instance.IsSignedIn || string.IsNullOrEmpty(lobbyId))
+                return null;
+
+            try
+            {
+                var request = new GameSession_LobbyRequest
+                {
+                    lobbyId = lobbyId
+                };
+
+                var summaries = await _gameSessionModuleBinding.GetLobbyPlayers(request);
+
+                var players = new List<PlayerData>(summaries.Count);
+                foreach (var s in summaries)
+                {
+                    players.Add(new PlayerData
+                    {
+                        PlayerId = s.PlayerId,
+                        PlayerName = s.PlayerName,
+                        CharacterId = s.CharacterId
+                    });
+                }
+
+                return players;
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"Failed to fetch player list: {ex.Message}");
+                return null;
+            }
         }
-
-
-        public bool LogThisClass { get; } = false;
     }
-}
 
-public class SessionResponse
-{
-    public string LobbyId { get; set; }
-    public string LobbyName { get; set; }
-    public string Message { get; set; }
+    public class SessionResponse
+    {
+        public string LobbyId { get; set; }
+        public string LobbyName { get; set; }
+        public string Message { get; set; }
+    }
 }
