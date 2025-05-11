@@ -6,15 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0cfbca29-fb33-45bb-a16b-ee71f1584851" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FreeRun/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FreeRun/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Views/UserProfileView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/1_Scripts/Runtime/Metagame/Views/UserProfileView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2_Scenes/MetagameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2_Scenes/MetagameScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/7_Settings/Build Profiles/Linux Server Profile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/7_Settings/Build Profiles/Linux Server Profile.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-Assets-Shared.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-Assets-Shared.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-Locales.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-Locales.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-String-Tables-English (en).asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Localization-String-Tables-English (en).asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/1_LoginView/UXPanelSetting.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI Toolkit/1_LoginView/UXPanelSetting.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/MultiplayerManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/MultiplayerManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -177,7 +168,8 @@
       <workItem from="1745994623540" duration="29236000" />
       <workItem from="1746081463448" duration="5798000" />
       <workItem from="1746092367984" duration="11885000" />
-      <workItem from="1746123408078" duration="407000" />
+      <workItem from="1746123408078" duration="901000" />
+      <workItem from="1746951847892" duration="602000" />
     </task>
     <servers />
   </component>
