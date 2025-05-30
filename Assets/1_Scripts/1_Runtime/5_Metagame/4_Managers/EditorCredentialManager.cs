@@ -58,7 +58,7 @@ namespace RedGaint.Network.Runtime
                     return arg.Replace($"\n{vpIdArg}=", string.Empty);
                 }
             }
-            return string.Empty;
+            return "main";
         }
 #endif
         
@@ -79,7 +79,9 @@ namespace RedGaint.Network.Runtime
             if (string.IsNullOrEmpty(username)) throw new ArgumentNullException(nameof(username));
             if (string.IsNullOrEmpty(password)) throw new ArgumentNullException(nameof(password));
             if (string.IsNullOrEmpty(encryptionKey)) throw new ArgumentNullException(nameof(encryptionKey));
+            Debug.Log("--------------------------------------------");
 
+            Debug.Log("Saving credentials: " + username + " ");
             string encryptedPassword = UserCredentialManager.Encrypt(password, encryptionKey);
             string playerId = GetPlayerIDForPlayMode();
             Debug.Log($"Getting id : {playerId}");

@@ -15,13 +15,14 @@ namespace RedGaint.Network.Runtime
             currentCharacterIndexes =
                 new Dictionary<int, int>(); // To keep track of character indexes for each table
 
-        public bool LogThisClass { get; } = false;
+        public bool LogThisClass { get; } = true;
         private GameObject stageRoot;
         private string turntablePrefabPath =GlobalStaticVariables.TurntablePrefabPath;
 
         public void Awake()
         {
            // LoadStage();
+           BugsBunny.Log("Stage Awake",this);
            LoadAllTables();
 
         }

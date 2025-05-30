@@ -13,6 +13,7 @@
         "packagesPath": "C:\\Users\\anand\\.nuget\\packages\\",
         "outputPath": "E:\\1_Live\\0_Network\\0_FreeRun\\FreeRun\\GameSessionModule\\Project\\obj\\",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
@@ -93,11 +94,6 @@
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.408\\RuntimeIdentifierGraph.json"
-        }
-      },
-      "runtimes": {
-        "linux-x64": {
-          "#import": []
         }
       }
     }

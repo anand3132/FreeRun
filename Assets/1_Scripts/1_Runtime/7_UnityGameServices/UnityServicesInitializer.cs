@@ -4,6 +4,7 @@ using Unity.Multiplayer;
 using UnityEngine;
 using Unity.Services.Authentication;
 using System;
+using RedGaint.Utility;
 
 namespace RedGaint.Network.Runtime
 {
@@ -11,7 +12,7 @@ namespace RedGaint.Network.Runtime
     ///Initializes all the Unity Services managers
     ///</summary>
     [MultiplayerRoleRestricted]
-    internal class UnityServicesInitializer : MonoBehaviour
+    internal class UnityServicesInitializer : MonoBehaviour,IBugsBunny
     {
         public const string k_ServerID = "SERVER";
         public static UnityServicesInitializer Instance { get; private set; }
@@ -51,8 +52,8 @@ namespace RedGaint.Network.Runtime
                 //servers should always have a single ID so their data isn't mixed with Users'.
                 UnityServices.ExternalUserId = k_ServerID;
                 await UnityServiceAuthenticator.TrySignInAsync(k_Environment, serviceProfileName);
-                Debug.Log("Server Profile Name:"+serviceProfileName);
-                Debug.Log("Environment :"+k_Environment);
+                BugsBunny.Log("Server Profile Name:"+serviceProfileName);
+                BugsBunny.Log("Environment :"+k_Environment);
 
             }
         }
@@ -102,26 +103,26 @@ namespace RedGaint.Network.Runtime
                             break;
                     }
 
-                    Debug.Log($"Signed in with {method}. PlayerID: {AuthenticationService.Instance.PlayerId}");
+                    BugsBunny.Log($"Signed in with {method}. PlayerID: {AuthenticationService.Instance.PlayerId}");
                 }
                 else
                 {
-                    Debug.Log("Already signed in.");
+                    BugsBunny.Log("Already signed in.");
                 }
             }
             catch (AuthenticationException ex)
             {
-                Debug.LogError($"Authentication failed: {ex.Message}");
+                BugsBunny.LogRed($"Authentication failed: {ex.Message}",this);
                 return false;
             }
             catch (RequestFailedException ex)
             {
-                Debug.LogError($"Unity request failed: {ex.Message}");
+                BugsBunny.LogRed($"Unity request failed: {ex.Message}",this);
                 return false;
             }
             catch (Exception ex)
             {
-                Debug.LogError($"Unexpected error: {ex.Message}");
+                BugsBunny.LogRed($"Unexpected error: {ex.Message}",this);
                 return false;
             }
             return true;
@@ -151,18 +152,18 @@ namespace RedGaint.Network.Runtime
                 {
                     // Attempt to sign in with stored credentials
                     await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(username, password);
-                    Debug.Log(" Auto-login successful."+AuthenticationService.Instance.AccessToken);
+                    BugsBunny.Log(" Auto-login successful."+AuthenticationService.Instance.AccessToken);
                     return true;
                 }
                 else
                 {
-                    Debug.Log(" No credentials stored or decryption failed.");
+                    BugsBunny.Log(" No credentials stored or decryption failed.");
                     if (credentials != null)
                     {
                         // Attempt to sign in with stored credentials
                         await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(credentials.Item1,
                             credentials.Item2);
-                        Debug.Log(" Auto-login successful." + AuthenticationService.Instance.AccessToken);
+                        BugsBunny.Log(" Auto-login successful." + AuthenticationService.Instance.AccessToken);
 #if UNITY_EDITOR
                         EditorCredentialManager.SaveCredentialsToFile(username,credentials.Item1, credentials.Item2);
 #else
@@ -171,18 +172,18 @@ namespace RedGaint.Network.Runtime
 
                         return true;
                     }
-                    Debug.Log("Login failed : ");
+                    BugsBunny.Log("Login failed : ");
                     return false;
                 }
             }
             catch (AuthenticationException ex)
             {
-                Debug.LogError($" Auto-login failed: {ex.Message}");
+                BugsBunny.LogRed($" Auto-login failed: {ex.Message}",this);
                 return false;
             }
             catch (RequestFailedException ex)
             {
-                Debug.LogError($" Request failed: {ex.Message}");
+                BugsBunny.LogRed($" Request failed: {ex.Message}",this);
                 return false;
             }
         }
@@ -192,16 +193,16 @@ namespace RedGaint.Network.Runtime
             try
             {
                 await AuthenticationService.Instance.SignUpWithUsernamePasswordAsync(username, password);
-                Debug.Log("✅ Sign up successful!");
+                BugsBunny.Log("✅ Sign up successful!");
                 return true; // success
             }
             catch (AuthenticationException authEx)
             {
-                Debug.LogError($" Sign up failed - Authentication error: {authEx.Message}");
+                BugsBunny.LogRed($" Sign up failed - Authentication error: {authEx.Message}",this);
             }
             catch (RequestFailedException requestEx)
             {
-                Debug.LogError($"Sign up failed - Request error: {requestEx.Message}");
+                BugsBunny.LogRed($"Sign up failed - Request error: {requestEx.Message}",this);
             }
 
             return false; // failed
@@ -216,5 +217,7 @@ namespace RedGaint.Network.Runtime
         {
             Matchmaker = gameObject.AddComponent<MatchmakerTicketer>();
         }
+
+        public bool LogThisClass { get; } = true;
     }
 }

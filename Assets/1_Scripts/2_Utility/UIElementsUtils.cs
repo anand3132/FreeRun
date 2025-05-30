@@ -5,7 +5,7 @@ using UnityEditor;
 #endif
 using UnityEngine.UIElements;
 
-namespace RedGaint.Network.Shared
+namespace RedGaint.Utility
 {
     /// <summary>
     /// An utility class for common UIElements setup method

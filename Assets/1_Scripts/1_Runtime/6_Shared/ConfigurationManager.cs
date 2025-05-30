@@ -1,6 +1,7 @@
 using System.IO;
 using System.Linq;
-using RedGaint.Network.Runtime.SimpleJSON;
+// using RedGaint.Network.Runtime.SimpleJSON;
+using RedGaint.Utility;
 using UnityEngine;
 
 namespace RedGaint.Network.Runtime
