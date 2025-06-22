@@ -1,4 +1,4 @@
-# FreeRun-Multiplayer
+# FreeRun3D-Multiplayer
 
 **FreeRun-Multiplayer** is a fast-paced multiplayer runner game built in Unity using **Netcode for GameObjects** and hosted on **Unity Multiplayer Hosting (Multiplayer Center)**.
 
