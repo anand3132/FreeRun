@@ -32,10 +32,15 @@ namespace RedGaint.Network.Runtime
         {
             if (enableAutoLoin)
             {
-                if (await UnityServicesInitializer.Instance.InitializeAndSignIn(UnityServicesInitializer.SignInMethod.AutoLogin))
+                var result = await UnityServicesInitializer.Instance.InitializeAndSignIn(UnityServicesInitializer.SignInMethod.AutoLogin);
+                if (result.Success)
                 {
-                    await UserProfileManager.Instance.LoadAsync(true);
-                    Debug.Log("user loaded");
+                    if (!await UserProfileManager.Instance.LoadAsync(true, result.Username))
+                    {
+                        Debug.Log("Auto Login : Cant find user profile creating new user profile for  : "+result.Username);
+                        UserProfileManager.Instance.CreateNewUserProfile(result.Username,result.PlayerId);
+                        await UserProfileManager.Instance.UpdatePlayerProfile(true);
+                    }
                 }
             }
             App.View.MainMenu.Show();

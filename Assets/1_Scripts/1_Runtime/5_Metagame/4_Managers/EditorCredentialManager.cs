@@ -13,8 +13,6 @@ namespace RedGaint.Network.Runtime
     {
         private const string FilePrefix = "credentials_";
         private const string FileExtension = ".json";
-        private const string AssetFolderPath = "Assets/Resources";
-        private const string AssetPath = AssetFolderPath + "/EditorPlayerId.asset";
 
         [Serializable]
         private class CredentialData
@@ -23,81 +21,112 @@ namespace RedGaint.Network.Runtime
             public string EncryptedPassword;
         }
 
-        // private static string GetEditorPlayerId()
-        // {
-        //     // Try load asset
-        //     var asset = AssetDatabase.LoadAssetAtPath<EditorPlayerId>(AssetPath);
-        //     if (asset == null)
-        //     {
-        //         // Create folder if it doesn't exist
-        //         if (!Directory.Exists(AssetFolderPath))
-        //         {
-        //             Directory.CreateDirectory(AssetFolderPath);
-        //         }
-        //     
-        //         // Create and save asset
-        //         asset = ScriptableObject.CreateInstance<EditorPlayerId>();
-        //         asset.playerId = Guid.NewGuid().ToString("N"); // or "D" for dashes
-        //         AssetDatabase.CreateAsset(asset, AssetPath);
-        //         AssetDatabase.SaveAssets();
-        //         var id = GetPlayerIDForPlayMode();
-        //         Debug.Log($"[EditorCredentialManager] Created new EditorPlayerId.asset with ID: {asset.playerId}");
-        //     }
-        //     return string.IsNullOrEmpty(asset.playerId) ? "default" : asset.playerId;
-        //
-        //     return GetEditorPlayerId();
-        // }
-
-        
+        /// <summary>
+        /// Generates or loads a unique player ID per Unity Editor instance using process ID.
+        /// Ensures each simulated player has their own separate credential file.
+        /// </summary>
+        private static string GetPlayerIDForPlayMode()
+        {
 #if UNITY_EDITOR
-        private static string GetPlayerIDForPlayMode() {
-            const string vpIdArg = "-vpId";
-            var args = System.Environment.GetCommandLineArgs();
-            foreach (var arg in args) {
-                if (arg.StartsWith(vpIdArg)) {
-                    return arg.Replace($"\n{vpIdArg}=", string.Empty);
-                }
+            string processId = System.Diagnostics.Process.GetCurrentProcess().Id.ToString();
+            string editorKey = $"LocalSimulatedPlayerID_{processId}";
+
+            if (EditorPrefs.HasKey(editorKey))
+            {
+                string cachedId = EditorPrefs.GetString(editorKey);
+                Debug.Log($"[GetPlayerIDForPlayMode] Loaded cached Editor Player ID: {cachedId}");
+                return cachedId;
             }
-            return "main";
-        }
+
+            string newEditorId = $"EditorPlayer_{Guid.NewGuid().ToString().Substring(0, 8)}";
+            EditorPrefs.SetString(editorKey, newEditorId);
+            Debug.Log($"[GetPlayerIDForPlayMode] Generated new Editor Player ID: {newEditorId} for Process ID: {processId}");
+            return newEditorId;
+#else
+            if (Unity.Services.Authentication.AuthenticationService.Instance.IsSignedIn)
+                return Unity.Services.Authentication.AuthenticationService.Instance.PlayerId;
+
+            return SystemInfo.deviceUniqueIdentifier;
 #endif
-        
-        
-        
+        }
+
+        /// <summary>
+        /// Gets the file path for the credentials file based on the player ID.
+        /// </summary>
         private static string GetCredentialFilePath(string playerId)
         {
             string folder = Application.dataPath + "/../PlayerCredentials";
             if (!Directory.Exists(folder))
                 Directory.CreateDirectory(folder);
-            var path= Path.Combine(folder, $"{FilePrefix}{playerId}{FileExtension}");
-            Debug.Log(path);
+
+            string path = Path.Combine(folder, $"{FilePrefix}{playerId}{FileExtension}");
+            Debug.Log($"[GetCredentialFilePath] File path: {path}");
             return path;
         }
 
-        public static void SaveCredentialsToFile(string username, string password, string encryptionKey)
+        /// <summary>
+        /// Saves the given username and encrypted password to a credentials file.
+        /// </summary>
+        public static bool SaveCredentialsToFile(string username, string password, string encryptionKey)
         {
-            if (string.IsNullOrEmpty(username)) throw new ArgumentNullException(nameof(username));
-            if (string.IsNullOrEmpty(password)) throw new ArgumentNullException(nameof(password));
-            if (string.IsNullOrEmpty(encryptionKey)) throw new ArgumentNullException(nameof(encryptionKey));
             Debug.Log("--------------------------------------------");
+            Debug.Log("[SaveCredentialsToFile] Initiating credential save process...");
 
-            Debug.Log("Saving credentials: " + username + " ");
-            string encryptedPassword = UserCredentialManager.Encrypt(password, encryptionKey);
-            string playerId = GetPlayerIDForPlayMode();
-            Debug.Log($"Getting id : {playerId}");
-            string filePath = GetCredentialFilePath(playerId);
-
-            var data = new CredentialData
+            if (string.IsNullOrEmpty(username))
             {
-                Username = username,
-                EncryptedPassword = encryptedPassword
-            };
+                Debug.LogWarning("[SaveCredentialsToFile] Username is null or empty.");
+                return false;
+            }
 
-            string json = JsonUtility.ToJson(data, prettyPrint: true);
-            File.WriteAllText(filePath, json, Encoding.UTF8);
-            Debug.Log($"<color=red>[EditorCredentialFileStore] Credentials saved for '{playerId}' to: {filePath}</color>");
+            if (string.IsNullOrEmpty(password))
+            {
+                Debug.LogWarning("[SaveCredentialsToFile] Password is null or empty.");
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(encryptionKey))
+            {
+                Debug.LogWarning("[SaveCredentialsToFile] Encryption key is null or empty.");
+                return false;
+            }
+
+            try
+            {
+                Debug.Log($"[SaveCredentialsToFile] Input validated. Username: {username}");
+
+                string encryptedPassword = UserCredentialManager.Encrypt(password, encryptionKey);
+                Debug.Log("[SaveCredentialsToFile] Password encrypted successfully.");
+
+                string playerId = GetPlayerIDForPlayMode();
+                Debug.Log($"[SaveCredentialsToFile] Retrieved Player ID: {playerId}");
+
+                string filePath = GetCredentialFilePath(playerId);
+                Debug.Log($"[SaveCredentialsToFile] Credential file path: {filePath}");
+
+                var data = new CredentialData
+                {
+                    Username = username,
+                    EncryptedPassword = encryptedPassword
+                };
+
+                string json = JsonUtility.ToJson(data, true);
+                Debug.Log("[SaveCredentialsToFile] Credential data serialized to JSON.");
+
+                File.WriteAllText(filePath, json, Encoding.UTF8);
+                Debug.Log($"<color=green>[EditorCredentialFileStore] Credentials saved for '{playerId}' to: {filePath}</color>");
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"<color=red>[EditorCredentialFileStore] Failed to save credentials: {ex.Message}</color>\n{ex}");
+                return false;
+            }
         }
 
+        /// <summary>
+        /// Attempts to load stored credentials from the player-specific file.
+        /// </summary>
         public static bool TryLoadCredentialsFromFile(string encryptionKey, out string username, out string password)
         {
             username = null;
@@ -105,10 +134,11 @@ namespace RedGaint.Network.Runtime
 
             string playerId = GetPlayerIDForPlayMode();
             string filePath = GetCredentialFilePath(playerId);
+            Debug.Log($"[TryLoadCredentialsFromFile] Loading credentials for Player ID: {playerId}");
 
             if (!File.Exists(filePath))
             {
-                Debug.Log($"[EditorCredentialFileStore] No credentials file found /n {filePath} /n for playerId '{playerId}'");
+                Debug.LogWarning($"[EditorCredentialFileStore] No credentials file found at {filePath} for playerId '{playerId}'");
                 return false;
             }
 
@@ -118,6 +148,8 @@ namespace RedGaint.Network.Runtime
                 var data = JsonUtility.FromJson<CredentialData>(json);
                 username = data.Username;
                 password = UserCredentialManager.Decrypt(data.EncryptedPassword, encryptionKey);
+
+                Debug.Log($"[TryLoadCredentialsFromFile] Credentials loaded successfully for '{playerId}'");
                 return true;
             }
             catch (Exception e)

@@ -1,8 +1,7 @@
-using UnityEngine.UIElements;
 using UnityEngine;
+
 namespace RedGaint.Network.Runtime
 {
-    
     public class GuestMenuHandler : IMenuModeHandler
     {
         private readonly UIReferences _ui;
@@ -11,12 +10,23 @@ namespace RedGaint.Network.Runtime
 
         public void Initialize()
         {
-            var name= $"Guest-{SystemInfo.deviceUniqueIdentifier.Substring(0, 6)}";
-            UserData.PlayerProfileData guestProfile=UserProfileManager.Instance.CreateGuestProfile();
+            UserData.PlayerProfileData guestProfile;
+
+#if UNITY_EDITOR
+            string randomId = Random.Range(0, 9999).ToString("D4"); // Padded: 0001–9999
+            guestProfile = UserProfileManager.Instance.CreateNewUserProfile("Guest_" + randomId,"GuistID",true);
+#else
+            string deviceId = SystemInfo.deviceUniqueIdentifier;
+            if (string.IsNullOrEmpty(deviceId) || deviceId.Length < 6)
+            {
+                deviceId = System.Guid.NewGuid().ToString("N"); // fallback
+            }
+            guestProfile = UserProfileManager.Instance.CreateGuestProfile("Guest_" + deviceId[..6]);
+#endif
+
             _ui.NameLabel.text = guestProfile.Username;
-            _ui.ProfileButton.clicked += OnClickProfile;
-            
             _ui.ProfileButton.text = GlobalTextBridge.SignInButtonText;
+            _ui.ProfileButton.clicked += OnClickProfile;
         }
 
         public void Cleanup()
@@ -24,11 +34,9 @@ namespace RedGaint.Network.Runtime
             _ui.ProfileButton.clicked -= OnClickProfile;
         }
 
-        void OnClickProfile()
+        private void OnClickProfile()
         {
             MetagameApplication.Instance.Broadcast(new EnterLoginEvent());
         }
     }
-
-
 }

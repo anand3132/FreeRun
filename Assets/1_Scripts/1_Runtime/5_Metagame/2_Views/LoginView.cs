@@ -82,9 +82,9 @@ namespace RedGaint.Network.Runtime
         private async void AttemptSignIn(UnityServicesInitializer.SignInMethod method)
         {
             statusLabel.text = $"Signing in with {method}...";
-            
-            if(await UnityServicesInitializer.Instance.InitializeAndSignIn(method))
-                UpdateUserProfile( method);
+            var result = await UnityServicesInitializer.Instance.InitializeAndSignIn(method);
+            if(result.Success)
+                UpdateUserProfile( method,result.Username);
             else
             {
                 statusLabel.text = $"Failed to Login using {method}!";
@@ -119,15 +119,13 @@ namespace RedGaint.Network.Runtime
 #else
                 UserCredentialManager.SaveCredentials(username, passwordField.text, cloudEncryptionKey);
 #endif
-      
-                
-                await UserProfileManager.Instance.UpdatePlayerProfile(CreateNewUserProfile(username),true);
+                UserProfileManager.Instance.CreateNewUserProfile(username,AuthenticationService.Instance.PlayerId);
                 if (AuthenticationService.Instance.IsSignedIn)
                 {
                     Debug.Log("Entered model selection to sign up.");
                     MetagameApplication.Instance.Broadcast(new EnterModelSelectionEvent());
                     App.View.LoginView.Hide();
-                }            
+                }
             }
         }
         
@@ -158,18 +156,19 @@ namespace RedGaint.Network.Runtime
             }
 
             statusLabel.text = "Signing in with username & password...";
-            await UnityServicesInitializer.Instance.InitializeAndSignIn(UnityServicesInitializer.SignInMethod.UsernamePassword,new Tuple<string, string>(username,password));
-            UpdateUserProfile(UnityServicesInitializer.SignInMethod.UsernamePassword);
+            var result=await UnityServicesInitializer.Instance.InitializeAndSignIn(UnityServicesInitializer.SignInMethod.UsernamePassword,new Tuple<string, string>(username,password));
+            if(result.Success)
+                UpdateUserProfile(UnityServicesInitializer.SignInMethod.UsernamePassword, result.Username);
         }
 
-        private async Task UpdateUserProfile(UnityServicesInitializer.SignInMethod method)
+        private async Task UpdateUserProfile(UnityServicesInitializer.SignInMethod method,string username)
         {
             if (Unity.Services.Authentication.AuthenticationService.Instance.IsSignedIn)
             {
                 string playerID = Unity.Services.Authentication.AuthenticationService.Instance.PlayerId;
                 statusLabel.text = $"Signed in! PlayerID: {playerID}";
                 GlobalStaticVariables.UserLoggedInStatus = true;
-                string username=null;
+                // string username=null;
                 switch (method)
                 {
                     case UnityServicesInitializer.SignInMethod.UsernamePassword:
@@ -187,21 +186,20 @@ namespace RedGaint.Network.Runtime
                     case UnityServicesInitializer.SignInMethod.Anonymous:
                         username = UserProfileManager.CurrentUser.Username;
                         UserProfileManager.CurrentUser.PlayerId=AuthenticationService.Instance.PlayerId;
+                        
                         // GameProfileManager.CurrentUser.AvatarId = string.Empty;
                         // GameProfileManager.CurrentUser.CharacterId = string.Empty;
                         // GameProfileManager.CurrentUser.CurrentLevelId = string.Empty;
                         break;
                 }
+                //if loading failed create new profile
+                if (!await UserProfileManager.Instance.LoadAsync(true,username))
+                {
+                    UserProfileManager.Instance.CreateNewUserProfile(username,AuthenticationService.Instance.PlayerId);
+                    await UserProfileManager.Instance.UpdatePlayerProfile(true);
+                }
+                MetagameApplication.Instance.Broadcast(new EnterModelSelectionEvent());
 
-                if (await UserProfileManager.Instance.LoadAsync(true))
-                {
-                    MetagameApplication.Instance.Broadcast(new EnterModelSelectionEvent());
-                }
-                else
-                {
-                    username=string.IsNullOrEmpty(username)?UserProfileManager.CurrentUser.Username:username;
-                    await UserProfileManager.Instance.UpdatePlayerProfile(CreateNewUserProfile(username),true);
-                }
                 App.View.LoginView.Hide();
             }
         }

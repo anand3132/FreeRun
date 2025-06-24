@@ -24,6 +24,7 @@ namespace RedGaint.Network.Runtime.UserData
         public Dictionary<string, string> Achievement = new();
         public Dictionary<string, string> Inbox = new();
         public Dictionary<string, string> PlayerSettings= new();
+        public bool isGuest;
     }
     
     [Serializable]
