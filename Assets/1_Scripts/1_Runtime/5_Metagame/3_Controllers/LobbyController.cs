@@ -11,6 +11,7 @@ using System.Collections;
 
 namespace RedGaint.Network.Runtime
 {
+    //From here cloud module handle the lobby
     internal class LobbyController : Controller<MetagameApplication>
     {
         LobbyView View => App.View.LobbyView;
