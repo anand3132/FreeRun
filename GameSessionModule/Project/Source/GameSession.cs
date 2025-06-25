@@ -3,7 +3,6 @@ using Unity.Services.Lobby.Model;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Unity.Services.CloudCode.Apis;
 using Unity.Services.CloudCode.Core;
@@ -27,12 +26,6 @@ namespace RedGaint.Network.GameSessionModule
             _pushClient = pushClient;
             _logger = logger;
             _random = random;
-        }
-        
-        [CloudCodeFunction("SayHello")]
-        public string Hello(string name)
-        {
-            return $"Hello, {name}!";
         }
 
         public string testLobbyID;
