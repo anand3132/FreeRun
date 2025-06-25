@@ -80,3 +80,6 @@ crashlytics-build.properties
 .idea
 .idea
 .idea/.idea.FreeRun/.idea/workspace.xml
+PlayerCredentials
+GameSessionModule/Project/bin
+GameSessionModule/Project/obj
