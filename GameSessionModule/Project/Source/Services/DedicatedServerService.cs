@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -19,12 +20,14 @@ namespace RedGaint.Network.GameSessionModule
     public class DedicatedServerService
     {
         private readonly ILogger<DedicatedServerService> _logger;
-        private static readonly HttpClient _httpClient = new HttpClient(); // ✅ Use static HttpClient
+        private static readonly HttpClient _httpClient = new HttpClient();
 
-        private const string OAuthTokenUrl = "https://services.unity.com/v1/oauth2/token";
+        private const string TokenExchangeUrl =
+            "https://services.api.unity.com/auth/v1/token-exchange?projectId=52b8288e-8da7-4625-a2a3-32a577389bd1&environmentId=aacaf31c-924c-4dee-b713-e99e306445b9";
+
         private const string MultiplayAllocUrl = "https://services.unity.com/multiplay/allocations";
 
-        // ⚠️ Move these to Unity Cloud Code Environment Variables before production
+        // ⚠️ Move to Unity Cloud Code environment variables before production
         private const string ClientId = "844fe6c8-3c8a-4e78-b244-2858e34c1985";
         private const string ClientSecret = "SQmJFTv_tmhz9w4Yq4ikzMjeknOPhpKp";
         private const string BuildConfigId = "1293114";
@@ -53,6 +56,7 @@ namespace RedGaint.Network.GameSessionModule
             {
                 Content = new StringContent(JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json")
             };
+
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
             var response = await _httpClient.SendAsync(request);
@@ -61,7 +65,7 @@ namespace RedGaint.Network.GameSessionModule
             if (!response.IsSuccessStatusCode)
             {
                 _logger.LogError($"Failed to allocate server: {responseBody}");
-                throw new System.Exception($"Multiplay Allocation Failed: {response.StatusCode}");
+                throw new Exception($"Multiplay Allocation Failed: {response.StatusCode}");
             }
 
             _logger.LogInformation($"Server allocated successfully: {responseBody}");
@@ -69,37 +73,32 @@ namespace RedGaint.Network.GameSessionModule
             var json = JsonDocument.Parse(responseBody);
             var server = json.RootElement.GetProperty("server");
 
-            var ip = server.GetProperty("ip").GetString();
-            var port = server.GetProperty("port").GetInt32();
-
             return new ServerAllocationResult
             {
-                Ip = ip,
-                Port = port,
+                Ip = server.GetProperty("ip").GetString(),
+                Port = server.GetProperty("port").GetInt32(),
                 LobbyId = lobbyId
             };
         }
 
         private async Task<string> GetAccessTokenAsync()
         {
-            var authContent = new FormUrlEncodedContent(new[]
-            {
-                new KeyValuePair<string, string>("grant_type", "client_credentials"),
-                new KeyValuePair<string, string>("client_id", ClientId),
-                new KeyValuePair<string, string>("client_secret", ClientSecret)
-            });
+            var authHeader = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{ClientId}:{ClientSecret}"));
+            var request = new HttpRequestMessage(HttpMethod.Post, TokenExchangeUrl);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Basic", authHeader);
+            request.Content = new StringContent("{}", Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PostAsync(OAuthTokenUrl, authContent);
+            var response = await _httpClient.SendAsync(request);
             var responseString = await response.Content.ReadAsStringAsync();
 
             if (!response.IsSuccessStatusCode)
             {
                 _logger.LogError($"Token request failed: {responseString}");
-                throw new System.Exception("OAuth token fetch failed");
+                throw new Exception("OAuth token fetch failed");
             }
 
             var json = JsonDocument.Parse(responseString);
-            return json.RootElement.GetProperty("access_token").GetString();
+            return json.RootElement.GetProperty("accessToken").GetString(); // ✅ For token-exchange
         }
     }
 }

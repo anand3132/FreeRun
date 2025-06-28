@@ -19,7 +19,7 @@ namespace RedGaint.Network.GameSessionModule
         private readonly DedicatedServerService _serverService;
         private readonly PlayerDataBuilder _dataBuilder;
 
-        private const int MaxPlayers = 4;
+        private const int MaxPlayers = 2;
 
         public LobbyService(
             IGameApiClient client,
