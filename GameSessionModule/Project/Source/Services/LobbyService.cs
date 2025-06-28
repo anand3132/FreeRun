@@ -118,7 +118,7 @@ namespace RedGaint.Network.GameSessionModule
 
             if (response.Data.Players.Count == MaxPlayers)
             {
-                await _serverService.StartDedicatedServerForLobby(
+                await _serverService.StartTheServer(
                     ctx: ctx,
                     lobbyId: lobbyId
                 );
@@ -219,9 +219,9 @@ namespace RedGaint.Network.GameSessionModule
             return players;
         }
 
-        public async Task<string> StartDedicatedServerForLobby(IExecutionContext ctx, string lobbyId)
+        public async Task<ServerAllocationResult> StartDedicatedServerForLobby(IExecutionContext ctx, string lobbyId)
         {
-            return await _serverService.StartDedicatedServerForLobby(ctx, lobbyId);
+            return await _serverService.StartTheServer(ctx, lobbyId);
         }
     }
 }

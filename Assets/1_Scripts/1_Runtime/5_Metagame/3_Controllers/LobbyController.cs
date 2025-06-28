@@ -69,15 +69,44 @@ namespace RedGaint.Network.Runtime
             Debug.Log($"Starting lobby session for :  {AuthenticationService.Instance.PlayerId}");
             SessionResponse response = await CloudModule.Instance.StartTheGame();
             currentLobbyId = response?.LobbyId;
-
+        
             if (!string.IsNullOrEmpty(currentLobbyId))
             {
                 if (lobbyPollCoroutine != null)
                     StopCoroutine(lobbyPollCoroutine);
-
+        
                 lobbyPollCoroutine = StartCoroutine(PollLobbyPlayers());
             }
         }
+        
+        // async Task StartLobbySession()
+        // {
+        //     Debug.Log($"Starting lobby session for: {AuthenticationService.Instance.PlayerId}");
+        //
+        //     // Call Cloud Code to start and get server details
+        //     ServerAllocationResult result = await CloudModule.Instance.StartTheGame();
+        //
+        //     if (result == null || string.IsNullOrEmpty(result.LobbyId) || string.IsNullOrEmpty(result.Ip))
+        //     {
+        //         Debug.LogError("Failed to allocate server or missing data.");
+        //         return;
+        //     }
+        //
+        //     currentLobbyId = result.LobbyId;
+        //
+        //     Debug.Log($"Server allocated at {result.Ip}:{result.Port} for lobby {result.LobbyId}");
+        //
+        //     // Connect to the game server
+        //     ConnectionManager.SetConnectionDetails(result.Ip, result.Port);
+        //     ConnectionManager.Connect();
+        //
+        //     // Start polling players
+        //     if (lobbyPollCoroutine != null)
+        //         StopCoroutine(lobbyPollCoroutine);
+        //
+        //     lobbyPollCoroutine = StartCoroutine(PollLobbyPlayers());
+        // }
+        
 
         void OnLobbyCountdownUpdate(LobbyCountdownUpdateEvent evt)
         {
@@ -141,6 +170,7 @@ namespace RedGaint.Network.Runtime
                 }
 
                 yield return new WaitForSeconds(3f);
+                
             }
         }
 

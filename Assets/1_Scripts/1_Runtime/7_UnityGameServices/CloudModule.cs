@@ -122,11 +122,4 @@ namespace RedGaint.Network.Runtime.UserData
             }
         }
     }
-
-    public class SessionResponse
-    {
-        public string LobbyId { get; set; }
-        public string LobbyName { get; set; }
-        public string Message { get; set; }
-    }
 }
