@@ -19,20 +19,20 @@ namespace RedGaint.Network.GameSessionModule
     public class DedicatedServerService
     {
         private readonly ILogger<DedicatedServerService> _logger;
-        private readonly HttpClient _httpClient;
+        private static readonly HttpClient _httpClient = new HttpClient(); // ✅ Use static HttpClient
 
         private const string OAuthTokenUrl = "https://services.unity.com/v1/oauth2/token";
         private const string MultiplayAllocUrl = "https://services.unity.com/multiplay/allocations";
 
+        // ⚠️ Move these to Unity Cloud Code Environment Variables before production
         private const string ClientId = "844fe6c8-3c8a-4e78-b244-2858e34c1985";
         private const string ClientSecret = "SQmJFTv_tmhz9w4Yq4ikzMjeknOPhpKp";
         private const string BuildConfigId = "1293114";
         private const string RegionId = "f1697338-ae9d-4f27-b6b6-22c6e4458ae1";
 
-        public DedicatedServerService(ILogger<DedicatedServerService> logger, IHttpClientFactory httpClientFactory)
+        public DedicatedServerService(ILogger<DedicatedServerService> logger)
         {
             _logger = logger;
-            _httpClient = httpClientFactory.CreateClient();
         }
 
         public async Task<ServerAllocationResult> StartTheServer(IExecutionContext ctx, string lobbyId)

@@ -22,6 +22,9 @@ public class ModuleConfig : ICloudCodeSetup
         // ------------------------------------
         // Unity Service API Clients
         // ------------------------------------
+        
+        // config.Dependencies.AddHttpClient();
+
 
         // Lobby and matchmaking client for managing game lobbies
         config.Dependencies.AddSingleton(GameApiClient.Create());
@@ -45,6 +48,7 @@ public class ModuleConfig : ICloudCodeSetup
         config.Dependencies.AddSingleton<LobbyMonitorService>();
         config.Dependencies.AddSingleton<DedicatedServerService>();
         config.Dependencies.AddSingleton<PlayerDataBuilder>();
+        
 
         // ------------------------------------
         // Logging Services
