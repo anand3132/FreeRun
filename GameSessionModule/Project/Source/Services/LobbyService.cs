@@ -121,6 +121,7 @@ namespace RedGaint.Network.GameSessionModule
                 await _serverService.StartTheServer(
                     ctx: ctx,
                     lobbyId: lobbyId
+                    //,players: response.Data.Players
                 );
             }
 

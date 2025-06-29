@@ -26,4 +26,17 @@ namespace RedGaint.Network.GameSessionModule
         public string PlayerName { get; set; }
         public string CharacterId { get; set; }
     }
+    
+    public class ServerInfo
+    {
+        public int Id { get; set; }
+        public string Ip { get; set; }
+        public int Port { get; set; }
+    }
+    public class ServerAllocationResult
+    {
+        public string Ip { get; set; }
+        public int Port { get; set; }
+        public string LobbyId { get; set; }
+    }
 }
