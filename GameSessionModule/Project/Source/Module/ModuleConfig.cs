@@ -22,27 +22,28 @@ public class ModuleConfig : ICloudCodeSetup
         // ------------------------------------
         // Unity Service API Clients
         // ------------------------------------
-        
         // config.Dependencies.AddHttpClient();
-
-
         // Lobby and matchmaking client for managing game lobbies
         config.Dependencies.AddSingleton(GameApiClient.Create());
-
         // Push client for real-time messaging or event-driven updates
         config.Dependencies.AddSingleton<IPushClient, PushClient>(_ => PushClient.Create());
 
         // ------------------------------------
+        // Utility Classes
+        // ------------------------------------
+        config.Dependencies.AddSingleton<HttpHelper>();
+        config.Dependencies.AddSingleton<AuthService>();
+        config.Dependencies.AddSingleton<ServerRegistry>();
+        
+        // ------------------------------------
         // Shared Utility Services
         // ------------------------------------
-
         // System-level random number generator used across services
         config.Dependencies.AddSingleton(new Random());
 
         // ------------------------------------
         // Game Session Module Services
         // ------------------------------------
-
         // Core services that encapsulate game session and lobby logic
         config.Dependencies.AddSingleton<LobbyService>();
         config.Dependencies.AddSingleton<LobbyMonitorService>();
@@ -53,30 +54,24 @@ public class ModuleConfig : ICloudCodeSetup
         // ------------------------------------
         // Logging Services
         // ------------------------------------
-
-        // Logger specifically for GameSession class
         config.Dependencies.AddSingleton<ILogger<GameSession>>(provider =>
         {
-            var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
+            ILoggerFactory loggerFactory = provider.GetRequiredService<ILoggerFactory>();
             return loggerFactory.CreateLogger<GameSession>();
         });
-
-        // Optional loggers for modular services — useful for debugging and observability
         config.Dependencies.AddSingleton<ILogger<LobbyService>>(provider =>
         {
-            var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
+            ILoggerFactory loggerFactory = provider.GetRequiredService<ILoggerFactory>();
             return loggerFactory.CreateLogger<LobbyService>();
         });
-
         config.Dependencies.AddSingleton<ILogger<LobbyMonitorService>>(provider =>
         {
-            var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
+            ILoggerFactory loggerFactory = provider.GetRequiredService<ILoggerFactory>();
             return loggerFactory.CreateLogger<LobbyMonitorService>();
         });
-
         config.Dependencies.AddSingleton<ILogger<DedicatedServerService>>(provider =>
         {
-            var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
+            ILoggerFactory loggerFactory = provider.GetRequiredService<ILoggerFactory>();
             return loggerFactory.CreateLogger<DedicatedServerService>();
         });
     }

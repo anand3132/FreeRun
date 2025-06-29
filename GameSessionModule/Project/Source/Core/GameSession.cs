@@ -65,17 +65,17 @@ namespace RedGaint.Network.GameSessionModule
 
         
         //kept for testing purpose
-        /// <summary>
-        /// Cloud Code function to start the dedicated game server for a specific lobby.
-        /// This can be called directly or triggered automatically when a lobby is full.
-        /// </summary>
-        /// <param name="ctx">Cloud Code execution context.</param>
-        /// <param name="lobbyId">Unique lobby identifier.</param>
-        /// <returns>Game server session ID or IP address string.</returns>
-        [CloudCodeFunction("StartDedicatedServerForLobby")]
-        public async Task<ServerAllocationResult> StartDedicatedServerForLobby(IExecutionContext ctx, string lobbyId)
-        {
-            return await _lobbyService.StartDedicatedServerForLobby(ctx, lobbyId);
-        }
+        // /// <summary>
+        // /// Cloud Code function to start the dedicated game server for a specific lobby.
+        // /// This can be called directly or triggered automatically when a lobby is full.
+        // /// </summary>
+        // /// <param name="ctx">Cloud Code execution context.</param>
+        // /// <param name="lobbyId">Unique lobby identifier.</param>
+        // /// <returns>Game server session ID or IP address string.</returns>
+        // [CloudCodeFunction("StartDedicatedServerForLobby")]
+        // public async Task<ServerAllocationResult> StartDedicatedServerForLobby(IExecutionContext ctx, string lobbyId)
+        // {
+        //     return await _lobbyService.StartDedicatedServerForLobby(ctx, lobbyId);
+        // }
     }
 }

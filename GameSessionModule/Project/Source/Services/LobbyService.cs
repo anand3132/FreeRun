@@ -120,8 +120,9 @@ namespace RedGaint.Network.GameSessionModule
             {
                 await _serverService.StartTheServer(
                     ctx: ctx,
-                    lobbyId: lobbyId
-                    //,players: response.Data.Players
+                    lobbyId: lobbyId,
+                    players: response.Data.Players
+                    
                 );
             }
 
@@ -220,9 +221,9 @@ namespace RedGaint.Network.GameSessionModule
             return players;
         }
 
-        public async Task<ServerAllocationResult> StartDedicatedServerForLobby(IExecutionContext ctx, string lobbyId)
-        {
-            return await _serverService.StartTheServer(ctx, lobbyId);
-        }
+        // public async Task<ServerAllocationResult> StartDedicatedServerForLobby(IExecutionContext ctx, string lobbyId)
+        // {
+        //     return await _serverService.StartTheServer(ctx, lobbyId);
+        // }
     }
 }

@@ -5,6 +5,10 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Net.Http.Headers;
+using Newtonsoft.Json;
+using Unity.Services.Lobby.Model;
+using JsonSerializer = System.Text.Json.JsonSerializer;
+
 namespace RedGaint.Network.GameSessionModule
 {
     public class ServerRegistry
@@ -12,47 +16,86 @@ namespace RedGaint.Network.GameSessionModule
         private static readonly HttpClient _httpClient = new HttpClient();
         private static readonly HashSet<int> _allocatedServerIds = new HashSet<int>();
 
-        // private const string ClientId = "844fe6c8-3c8a-4e78-b244-2858e34c1985";
-        // private const string ClientSecret = "SQmJFTv_tmhz9w4Yq4ikzMjeknOPhpKp";
-        //
-        // private const string ServerListUrl =
-        //     "https://services.api.unity.com/multiplay/servers/v1/projects/52b8288e-8da7-4625-a2a3-32a577389bd1/environments/aacaf31c-924c-4dee-b713-e99e306445b9/servers";
-
-        public async Task<ServerInfo?> GetAvailableServerAsync()
+       
+        public async Task<string> CreateAllocationAsync(string bearerToken, string lobbyId, List<Player> players)
         {
-            var authHeader = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{ServerConfig.ClientId}:{ServerConfig.ClientSecret}"));
+            var payloadObj = new AllocationPayload
+            {
+                LobbyId = lobbyId,
+                Players = players
+            };
 
-            var request = new HttpRequestMessage(HttpMethod.Get, ServerConfig.ServerListUrl);
-            request.Headers.Authorization = new AuthenticationHeaderValue("Basic", authHeader);
+            var payloadJson = JsonConvert.SerializeObject(payloadObj);
+
+            var requestBody = new AllocationRequest
+            {
+                allocationId =  Guid.NewGuid().ToString(),
+                buildConfigurationId = ServerConfig.BuildConfigId,
+                payload = payloadJson,
+                regionId = ServerConfig.RegionId,
+                restart = true
+            };
+
+            var json = JsonConvert.SerializeObject(requestBody);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var request = new HttpRequestMessage(HttpMethod.Post, ServerConfig.allocationUrl);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", bearerToken);
+            request.Content = content;
+
+            var response = await _httpClient.SendAsync(request);
+            var responseBody = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                Console.WriteLine($"✅ Allocation created successfully:\n{responseBody}");
+                return responseBody;
+            }
+            else
+            {
+                Console.WriteLine($"❌ Failed to create allocation: {response.StatusCode}\n{responseBody}");
+                return null;
+            }
+        }
+        public async Task<MultiplayAllocationInfo> GetAllocationDetailsAsync(string allocationId, string accessToken)
+        {
+            string endPoint =$"/{allocationId}";
+
+            var request = new HttpRequestMessage(HttpMethod.Get, ServerConfig.allocationUrl +endPoint);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
             var response = await _httpClient.SendAsync(request);
             var responseBody = await response.Content.ReadAsStringAsync();
 
             if (!response.IsSuccessStatusCode)
-                throw new Exception($"Failed to fetch server list: {responseBody}");
+                throw new Exception($"Failed to get allocation details: {responseBody}");
 
-            var serversJson = JsonDocument.Parse(responseBody).RootElement;
-
-            foreach (var server in serversJson.EnumerateArray())
+            return JsonSerializer.Deserialize<MultiplayAllocationInfo>(responseBody, new JsonSerializerOptions
             {
-                if (server.GetProperty("status").GetString() != "AVAILABLE")
-                    continue;
+                PropertyNameCaseInsensitive = true
+            })!;
+        }
+        
+        public async Task<bool> RemoveAllocationAsync(string allocationId, string bearerToken)
+        {
+            string endPoint =$"/{allocationId}";
 
-                int id = server.GetProperty("id").GetInt32();
-                if (_allocatedServerIds.Contains(id))
-                    continue;
+            var request = new HttpRequestMessage(HttpMethod.Delete, ServerConfig.allocationUrl+endPoint);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", bearerToken);
 
-                _allocatedServerIds.Add(id);
-
-                return new ServerInfo
-                {
-                    Id = id,
-                    Ip = server.GetProperty("ip").GetString(),
-                    Port = server.GetProperty("port").GetInt32()
-                };
+            var response = await _httpClient.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                Console.WriteLine($"Successfully removed allocation: {allocationId}");
+                return true;
             }
-
-            return null;
+            else
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Failed to remove allocation: {response.StatusCode}, Details: {error}");
+                return false;
+            }
         }
     }
+    
 }
