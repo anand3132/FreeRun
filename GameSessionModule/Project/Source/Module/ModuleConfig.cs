@@ -49,7 +49,7 @@ public class ModuleConfig : ICloudCodeSetup
         config.Dependencies.AddSingleton<LobbyMonitorService>();
         config.Dependencies.AddSingleton<DedicatedServerService>();
         config.Dependencies.AddSingleton<PlayerDataBuilder>();
-        
+        config.Dependencies.AddSingleton<AuthService>();
 
         // ------------------------------------
         // Logging Services
@@ -73,6 +73,17 @@ public class ModuleConfig : ICloudCodeSetup
         {
             ILoggerFactory loggerFactory = provider.GetRequiredService<ILoggerFactory>();
             return loggerFactory.CreateLogger<DedicatedServerService>();
+        });
+        
+        config.Dependencies.AddSingleton<ILogger<AuthService>>(provider =>
+        {
+            ILoggerFactory loggerFactory = provider.GetRequiredService<ILoggerFactory>();
+            return loggerFactory.CreateLogger<AuthService>();
+        });
+        config.Dependencies.AddSingleton<ILogger<ServerRegistry>>(provider =>
+        {
+            ILoggerFactory loggerFactory = provider.GetRequiredService<ILoggerFactory>();
+            return loggerFactory.CreateLogger<ServerRegistry>();
         });
     }
 }

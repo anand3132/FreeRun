@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Net.Http.Headers;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Unity.Services.Lobby.Model;
 using JsonSerializer = System.Text.Json.JsonSerializer;
@@ -15,8 +16,10 @@ namespace RedGaint.Network.GameSessionModule
     {
         private static readonly HttpClient _httpClient = new HttpClient();
         private static readonly HashSet<int> _allocatedServerIds = new HashSet<int>();
-
-       
+        
+        private readonly ILogger<ServerRegistry> _logger;
+        public ServerRegistry(ILogger<ServerRegistry> logger)=> _logger = logger;
+        
         public async Task<string> CreateAllocationAsync(string bearerToken, string lobbyId, List<Player> players)
         {
             var payloadObj = new AllocationPayload
@@ -48,34 +51,46 @@ namespace RedGaint.Network.GameSessionModule
 
             if (response.IsSuccessStatusCode)
             {
-                Console.WriteLine($"✅ Allocation created successfully:\n{responseBody}");
+                _logger.LogInformation($"✅ Allocation created successfully:\n{responseBody}");
                 return responseBody;
             }
             else
             {
-                Console.WriteLine($"❌ Failed to create allocation: {response.StatusCode}\n{responseBody}");
+                _logger.LogError($"❌ Failed to create allocation: {response.StatusCode}\n{responseBody}");
                 return null;
             }
         }
+
         public async Task<MultiplayAllocationInfo> GetAllocationDetailsAsync(string allocationId, string accessToken)
         {
-            string endPoint =$"/{allocationId}";
+            string endPoint = $"/{allocationId}";
 
-            var request = new HttpRequestMessage(HttpMethod.Get, ServerConfig.allocationUrl +endPoint);
+            var request = new HttpRequestMessage(HttpMethod.Get, ServerConfig.allocationUrl + endPoint);
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
             var response = await _httpClient.SendAsync(request);
             var responseBody = await response.Content.ReadAsStringAsync();
 
             if (!response.IsSuccessStatusCode)
-                throw new Exception($"Failed to get allocation details: {responseBody}");
-
-            return JsonSerializer.Deserialize<MultiplayAllocationInfo>(responseBody, new JsonSerializerOptions
             {
-                PropertyNameCaseInsensitive = true
-            })!;
+                _logger.LogError("❌ Failed to get allocation details. StatusCode: {StatusCode}, Response: {ResponseBody}",
+                    response.StatusCode, responseBody);
+
+                throw new Exception($"❌ Failed to get allocation details: {responseBody}");
+            }
+
+            var allocationInfo = JsonSerializer.Deserialize<MultiplayAllocationInfo>(responseBody,
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                })!;
+
+            _logger.LogInformation("✅ Retrieved server details: IP = {Ip}, Port = {Port}", allocationInfo.Ipv4,
+                allocationInfo.GamePort);
+
+            return allocationInfo;
         }
-        
+
         public async Task<bool> RemoveAllocationAsync(string allocationId, string bearerToken)
         {
             string endPoint =$"/{allocationId}";
@@ -86,13 +101,13 @@ namespace RedGaint.Network.GameSessionModule
             var response = await _httpClient.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
-                Console.WriteLine($"Successfully removed allocation: {allocationId}");
+                _logger.LogInformation($"✅ Successfully removed allocation: {allocationId}");
                 return true;
             }
             else
             {
                 var error = await response.Content.ReadAsStringAsync();
-                Console.WriteLine($"Failed to remove allocation: {response.StatusCode}, Details: {error}");
+                _logger.LogError($"❌ Failed to remove allocation: {response.StatusCode}, Details: {error}");
                 return false;
             }
         }
