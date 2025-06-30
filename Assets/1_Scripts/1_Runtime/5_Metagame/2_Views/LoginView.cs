@@ -67,7 +67,7 @@ namespace RedGaint.Network.Runtime
         async void Start()
         {
 #if UNITY_EDITOR
-            await UnityServices.InitializeAsync(new InitializationOptions().SetEnvironmentName("development"));
+            await UnityServices.InitializeAsync(new InitializationOptions().SetEnvironmentName(UnityServicesInitializer.k_Environment));
 #else
 
             await UnityServices.InitializeAsync();

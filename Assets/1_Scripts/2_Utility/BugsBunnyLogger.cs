@@ -97,7 +97,7 @@ namespace RedGaint.Utility
 
         private static bool ShouldLog(IBugsBunny context)
         {
-            return context != null && context.LogThisClass;
+            return true;//context != null && context.LogThisClass;
         }
         
         [System.Diagnostics.DebuggerHidden]

@@ -848,7 +848,7 @@ PlayerSettings:
   webWasm2023: 0
   scriptingDefineSymbols:
     Android: inputsystem
-    Server: ENABLE_UNITY_SERVICES_VERBOSE_LOGGING
+    Server: 
     Standalone: inputsystem
     iPhone: inputsystem
   additionalCompilerArguments: {}

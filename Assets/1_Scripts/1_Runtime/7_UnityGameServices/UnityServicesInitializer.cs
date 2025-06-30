@@ -15,7 +15,7 @@ namespace RedGaint.Network.Runtime
     {
         public const string k_ServerID = "SERVER";
         public static UnityServicesInitializer Instance { get; private set; }
-        public MatchmakerTicketer Matchmaker { get; private set; }
+        // public MatchmakerTicketer Matchmaker { get; private set; }
 
         public const string k_Environment =
 #if LIVE
@@ -50,9 +50,11 @@ namespace RedGaint.Network.Runtime
             {
                 UnityServices.ExternalUserId = k_ServerID;
                 await UnityServiceAuthenticator.TrySignInAsync(k_Environment, serviceProfileName+k_ServerID);
-                BugsBunnyLogger.Log("Server Profile Name: " + serviceProfileName);
+                BugsBunnyLogger.Log("Server Profile Name: " + serviceProfileName+k_ServerID);
                 BugsBunnyLogger.Log("Environment: " + k_Environment);
             }
+            Debug.Log("---------------------------------------------------------------------------------");
+
         }
 
         public enum SignInMethod
@@ -217,10 +219,10 @@ namespace RedGaint.Network.Runtime
             return false;
         }
 
-        void InitializeClientOnlyServices()
-        {
-            Matchmaker = gameObject.AddComponent<MatchmakerTicketer>();
-        }
+        // void InitializeClientOnlyServices()
+        // {
+        //     Matchmaker = gameObject.AddComponent<MatchmakerTicketer>();
+        // }
 
         public bool LogThisClass  => true;
     }

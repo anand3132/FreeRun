@@ -21,7 +21,7 @@ namespace RedGaint.Network.Runtime
             {
                 deviceId = System.Guid.NewGuid().ToString("N"); // fallback
             }
-            guestProfile = UserProfileManager.Instance.CreateGuestProfile("Guest_" + deviceId[..6]);
+            guestProfile = UserProfileManager.Instance.CreateNewUserProfile("Guest_" + deviceId[..6],"GuistID",true);
 #endif
 
             _ui.NameLabel.text = guestProfile.Username;
