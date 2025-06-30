@@ -14,7 +14,7 @@ namespace RedGaint.Network.Runtime.UserData
     {
         private GameSessionModuleBindings _gameSessionModuleBinding;
 
-        public bool LogThisClass { get; } = false;
+        public bool LogThisClass=> false;
 
         private void Awake()
         {

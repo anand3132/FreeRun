@@ -6,11 +6,12 @@ using Unity.Services.Authentication;
 using UnityEngine;
 using Unity.Multiplayer;
 using RedGaint.Utility;
+using Random = UnityEngine.Random;
 
 namespace RedGaint.Network.Runtime
 {
     [MultiplayerRoleRestricted]
-    internal class UnityServicesInitializer : MonoBehaviour, IBugsBunny
+    internal class UnityServicesInitializer : MonoBehaviour,IBugsBunny
     {
         public const string k_ServerID = "SERVER";
         public static UnityServicesInitializer Instance { get; private set; }
@@ -42,11 +43,15 @@ namespace RedGaint.Network.Runtime
 
         public async Task Initialize(bool isClient)
         {
-            string serviceProfileName = $"FunRunServerProfile-{Guid.NewGuid()}";
+            Debug.Log("---------------------------------------------------------------------------------");
+            BugsBunny.Log("---------------------------------------------------------------------------------",this);
+
+            // string serviceProfileName = $"FunRunServerProfile_{Guid.NewGuid()}";
+             string serviceProfileName = $"FunRunServerProfile_";
             if (!isClient)
             {
                 UnityServices.ExternalUserId = k_ServerID;
-                await UnityServiceAuthenticator.TrySignInAsync(k_Environment, serviceProfileName);
+                await UnityServiceAuthenticator.TrySignInAsync(k_Environment, serviceProfileName+k_ServerID);
                 BugsBunny.Log("Server Profile Name: " + serviceProfileName);
                 BugsBunny.Log("Environment: " + k_Environment);
             }
@@ -219,6 +224,6 @@ namespace RedGaint.Network.Runtime
             Matchmaker = gameObject.AddComponent<MatchmakerTicketer>();
         }
 
-        public bool LogThisClass { get; } = true;
+        public bool LogThisClass  => true;
     }
 }

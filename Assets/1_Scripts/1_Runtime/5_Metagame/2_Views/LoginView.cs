@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
+using Unity.Services.Core.Environments;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -62,10 +63,15 @@ namespace RedGaint.Network.Runtime
             
             UserSignUpButton.clicked += SignUpUser;
         }
-        
+
         async void Start()
         {
+#if UNITY_EDITOR
+            await UnityServices.InitializeAsync(new InitializationOptions().SetEnvironmentName("development"));
+#else
+
             await UnityServices.InitializeAsync();
+#endif
         }
 
         public void OnDisable()

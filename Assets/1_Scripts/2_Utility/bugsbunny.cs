@@ -5,6 +5,17 @@ namespace RedGaint.Utility
 {
     public interface IBugsBunny
     {
+        // Usage:
+        // Implement this property in your class like this:
+        // public bool LogThisClass => true;
+        //
+        // This enables conditional logging using BugsBunny.Log(...)
+        // Example:
+        //     if (LogThisClass)
+        //         BugsBunny.Log("Something happened", this);
+        //
+        // Note: Logging will only occur if this returns true.
+
         bool LogThisClass { get; }
     }
 

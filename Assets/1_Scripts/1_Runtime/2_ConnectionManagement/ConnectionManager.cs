@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using RedGaint.Utility;
 using Unity.Multiplayer;
 using Unity.Netcode;
 using UnityEngine;
@@ -17,7 +18,7 @@ namespace RedGaint.Network.Runtime.ConnectionManagement
     /// NetworkManger callbacks and other outside calls and redirecting them to the current ConnectionState object.
     /// </summary>
     [MultiplayerRoleRestricted]
-    public class ConnectionManager : MonoBehaviour
+    public class ConnectionManager : MonoBehaviour,IBugsBunny
     {
         ConnectionState m_CurrentState;
 
@@ -139,5 +140,7 @@ namespace RedGaint.Network.Runtime.ConnectionManagement
         {
             m_CurrentState.OnUserRequestedShutdown();
         }
+
+        public bool LogThisClass { get; }
     }
 }
