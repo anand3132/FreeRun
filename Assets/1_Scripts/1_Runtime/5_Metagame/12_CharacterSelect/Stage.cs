@@ -22,7 +22,7 @@ namespace RedGaint.Network.Runtime
         public void Awake()
         {
            // LoadStage();
-           BugsBunny.Log("Stage Awake",this);
+           BugsBunnyLogger.Log("Stage Awake",this);
            LoadAllTables();
 
         }
@@ -101,7 +101,7 @@ namespace RedGaint.Network.Runtime
                return;
             if (table == null)
             {
-                BugsBunny.LogYellow($"Cannot focus on table {tableId}: not found.");
+                BugsBunnyLogger.LogYellow($"Cannot focus on table {tableId}: not found.");
                 return;
             }
 
@@ -112,7 +112,7 @@ namespace RedGaint.Network.Runtime
             }
             else
             {
-                BugsBunny.LogYellow($"Table {tableId} has no camera focus point assigned.");
+                BugsBunnyLogger.LogYellow($"Table {tableId} has no camera focus point assigned.");
             }
         }
         public void FocusStage()
@@ -124,7 +124,7 @@ namespace RedGaint.Network.Runtime
             }
             else
             {
-                BugsBunny.LogYellow("Stage camera position not set.");
+                BugsBunnyLogger.LogYellow("Stage camera position not set.");
             }
         }
 
@@ -133,7 +133,7 @@ namespace RedGaint.Network.Runtime
         {
             if (!TryGetTableById(tableId, out Table table))
             {
-                BugsBunny.LogYellow($"Table with ID {tableId} not found.");
+                BugsBunnyLogger.LogYellow($"Table with ID {tableId} not found.");
                 return;
             }
             table.tableName.text = userName;
