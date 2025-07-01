@@ -25,7 +25,7 @@ namespace RedGaint.Network.Runtime
 
         void OnClientEndMatch(EndMatchEvent evt)
         {
-            App.Model.PlayerCharacter.SetInputsActive(false);
+            // App.Model.PlayerCharacter.SetInputsActive(false);
             View.OnClientEndMatch(evt);
         }
 

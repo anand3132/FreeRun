@@ -95,14 +95,14 @@ namespace RedGaint.Network.Runtime.UserData
 
             try
             {
-                var request = new GameSession_LobbyRequest
+                GameSession_LobbyRequest request = new GameSession_LobbyRequest
                 {
                     lobbyId = lobbyId
                 };
 
-                var summaries = await _gameSessionModuleBinding.GetLobbyPlayers(request);
+                List<GameSession_PlayerSummary> summaries = await _gameSessionModuleBinding.GetLobbyPlayers(request);
 
-                var players = new List<PlayerData>(summaries.Count);
+                List<PlayerData> players = new List<PlayerData>(summaries.Count);
                 foreach (var s in summaries)
                 {
                     players.Add(new PlayerData

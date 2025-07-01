@@ -19,6 +19,6 @@ namespace RedGaint.Network.Runtime
 
         public bool MenuVisible { get; set; } = false;
 
-        public ClientPlayerCharacter PlayerCharacter { get; set; }
+        // public ClientPlayerCharacter PlayerCharacter { get; set; }
     }
 }

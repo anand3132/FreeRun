@@ -157,7 +157,7 @@ namespace RedGaint.Network.Runtime
         {
             while (true)
             {
-                var fetchTask = CloudModule.Instance.FetchPlayersFromLobby(currentLobbyId);
+                Task<List<PlayerData>> fetchTask = CloudModule.Instance.FetchPlayersFromLobby(currentLobbyId);
                 yield return new WaitUntil(() => fetchTask.IsCompleted);
                 // yield return new WaitForSeconds(1f);
                 if (fetchTask.Exception != null)
@@ -166,6 +166,7 @@ namespace RedGaint.Network.Runtime
                 }
                 else
                 {
+                   // Debug.Log(fetchTask.);
                     UpdatePlayerView(fetchTask.Result);
                 }
 

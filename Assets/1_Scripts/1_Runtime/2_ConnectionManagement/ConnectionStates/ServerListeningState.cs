@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using RedGaint.Network.Runtime.ApplicationLifecycle;
 using Unity.Netcode;
+#if UNITY_SERVER
 using Unity.Services.Multiplay;
+#endif
 using UnityEngine;
 
 namespace RedGaint.Network.Runtime.ConnectionManagement
@@ -17,7 +20,6 @@ namespace RedGaint.Network.Runtime.ConnectionManagement
         public List<Unity.Services.Lobbies.Models.Player> Players;
     }
 
-   
     class ServerListeningState : OnlineState
     {
         const int k_MaxConnectPayload = 1024;
@@ -27,43 +29,56 @@ namespace RedGaint.Network.Runtime.ConnectionManagement
         public override void Enter()
         {
             Debug.Log("<color=red>Server Listening State Entered</color>");
-// #if UNITY_SERVER
-            // Run async payload fetch logic in the background
+
+#if UNITY_SERVER
             _ = Task.Run(async () =>
             {
-                try
-                {
-                    // string allocationId = MultiplayService.Instance.ServerConfig.AllocationId;
-                    string allocationId =MultiplayService.Instance.ServerConfig.AllocationId;
-                    string payloadJson = await GetLocalPayloadAsync(allocationId);
-
-                    if (!string.IsNullOrEmpty(payloadJson))
-                    {
-                        _allocationPayload = JsonUtility.FromJson<AllocationPayload>(payloadJson);
-                        Debug.Log(
-                            $"[Payload] LobbyId: {_allocationPayload.LobbyId}, Players: {_allocationPayload.Players?.Count ?? 0}");
-
-                        if (_allocationPayload.Players != null)
-                        {
-                            foreach (var player in _allocationPayload.Players)
-                            {
-                                Debug.Log($"[Payload] Player ID: {player.Id}");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Debug.LogWarning("[Payload] No payload received from Multiplay allocation.");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Debug.LogError($"❌ Exception while fetching allocation payload: {ex.Message}");
-                }
+                await FetchAllocationPayloadAsync();
+                LogAllocationPayload();
             });
-// #endif
+#endif
+        }
+        private async Task FetchAllocationPayloadAsync()
+        {
+            try
+            {
+                Debug.Log("Started Reading Payload-------------");
+                string allocationId = MultiplayService.Instance.ServerConfig.AllocationId;
+                string payloadJson = await GetLocalPayloadAsync(allocationId);
+
+                if (!string.IsNullOrEmpty(payloadJson))
+                {
+                    _allocationPayload = JsonConvert.DeserializeObject<AllocationPayload>(payloadJson);
+                }
+                else
+                {
+                    Debug.LogWarning("[Payload] No payload received from Multiplay allocation.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"❌ Exception while fetching allocation payload: {ex.Message}");
+            }
         }
 
+        private void LogAllocationPayload()
+        {
+            if (_allocationPayload == null)
+            {
+                Debug.LogWarning("[Payload] Allocation payload is null.");
+                return;
+            }
+
+            Debug.Log($"[Payload] LobbyId: {_allocationPayload.LobbyId}, Players: {_allocationPayload.Players?.Count ?? 0}");
+
+            if (_allocationPayload.Players != null)
+            {
+                foreach (var player in _allocationPayload.Players)
+                {
+                    Debug.Log($"[Payload] Player ID: {player.Id}");
+                }
+            }
+        }
         public async Task<string> GetLocalPayloadAsync(string allocationId)
         {
             using var client = new HttpClient();
@@ -75,7 +90,9 @@ namespace RedGaint.Network.Runtime.ConnectionManagement
                 response.EnsureSuccessStatusCode();
 
                 string payloadJson = await response.Content.ReadAsStringAsync();
+                Debug.Log("Payload Resposne : "+payloadJson);
                 return payloadJson;
+                
             }
             catch (Exception ex)
             {

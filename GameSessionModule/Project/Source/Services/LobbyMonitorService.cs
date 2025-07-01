@@ -12,8 +12,8 @@ namespace RedGaint.Network.GameSessionModule
     {
         private readonly IGameApiClient _client;
         private readonly ILogger<LobbyMonitorService> _logger;
-        private const int MaxPlayers = 4;
-        private const int LobbyTimeoutSeconds = 30;
+        private const int MaxPlayers = 2;
+        private const int LobbyTimeoutSeconds = 60;
 
         public LobbyMonitorService(IGameApiClient client, ILogger<LobbyMonitorService> logger)
         {
