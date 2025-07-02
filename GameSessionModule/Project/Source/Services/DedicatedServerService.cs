@@ -29,17 +29,15 @@ namespace RedGaint.Network.GameSessionModule
             _logger.LogInformation($"Allocating server for Lobby: {lobbyId} with {players.Count} players");
 
             string token = await _authService.GetAccessTokenAsync();
-            var responseBody = await _serverRegistry.CreateAllocationAsync(token, lobbyId, players);
+            var allocationData = await _serverRegistry.CreateAllocationAsync(token, lobbyId, players);
 
-            if (responseBody != null)
+            if (allocationData != null)
             {
-                AllocationResponse allocationData = JsonConvert.DeserializeObject<AllocationResponse>(responseBody);
                 string allocationId = allocationData.AllocationId;
-
                 MultiplayAllocationInfo serverDetails = await _serverRegistry.GetAllocationDetailsAsync(allocationId, token);
-                
+    
                 _logger.LogInformation($"✅ Server allocated - IP: {serverDetails.Ipv4}, Port: {serverDetails.GamePort}");
-                //using the ip we can interact with the server
+
                 return new ServerAllocationResult
                 {
                     AllocationId = serverDetails.AllocationId,

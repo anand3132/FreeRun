@@ -14,13 +14,19 @@ namespace RedGaint.Network.GameSessionModule
         private readonly ILogger<LobbyMonitorService> _logger;
         private const int MaxPlayers = 2;
         private const int LobbyTimeoutSeconds = 60;
+        private readonly BotService _botService;
 
-        public LobbyMonitorService(IGameApiClient client, ILogger<LobbyMonitorService> logger)
+        public LobbyMonitorService(
+            IGameApiClient client,
+            ILogger<LobbyMonitorService> logger,
+            BotService botService)
         {
             _client = client;
             _logger = logger;
+            _botService = botService;
         }
 
+       
         public async Task MonitorLobbyTimeout(IExecutionContext ctx, string lobbyId)
         {
             await Task.Delay(TimeSpan.FromSeconds(LobbyTimeoutSeconds));
@@ -32,18 +38,10 @@ namespace RedGaint.Network.GameSessionModule
                 if (lobby.Data.Players.Count < MaxPlayers)
                 {
                     int botsToAdd = MaxPlayers - lobby.Data.Players.Count;
+                    var bots = _botService.CreateMultipleBots(botsToAdd);
 
-                    for (int i = 0; i < botsToAdd; i++)
+                    foreach (var bot in bots)
                     {
-                        var bot = new Player(
-                            id: $"bot_{Guid.NewGuid()}",
-                            data: new Dictionary<string, PlayerDataObject>
-                            {
-                                { "playerName", new PlayerDataObject($"Bot_{i + 1}",PlayerDataObject.VisibilityEnum.Public) },
-                                { "characterId", new PlayerDataObject("bot_char",PlayerDataObject.VisibilityEnum.Public ) },
-                                { "isBot", new PlayerDataObject("true",PlayerDataObject.VisibilityEnum.Member) }
-                            });
-
                         // await _client.Lobby.AddPlayerAsync(ctx, ctx.AccessToken, lobbyId, bot);
                     }
 

@@ -20,47 +20,6 @@ namespace RedGaint.Network.GameSessionModule
         private readonly ILogger<ServerRegistry> _logger;
         public ServerRegistry(ILogger<ServerRegistry> logger)=> _logger = logger;
         
-        public async Task<string> CreateAllocationAsync(string bearerToken, string lobbyId, List<Player> players)
-        {
-            var payloadObj = new AllocationPayload
-            {
-                LobbyId = lobbyId,
-                Players = players
-            };
-
-            var payloadJson = JsonConvert.SerializeObject(payloadObj);
-
-            var requestBody = new AllocationRequest
-            {
-                allocationId =  Guid.NewGuid().ToString(),
-                buildConfigurationId = ServerConfig.BuildConfigId,
-                payload = payloadJson,
-                regionId = ServerConfig.RegionId,
-                restart = true
-            };
-
-            var json = JsonConvert.SerializeObject(requestBody);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var request = new HttpRequestMessage(HttpMethod.Post, ServerConfig.allocationUrl);
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", bearerToken);
-            request.Content = content;
-
-            var response = await _httpClient.SendAsync(request);
-            var responseBody = await response.Content.ReadAsStringAsync();
-
-            if (response.IsSuccessStatusCode)
-            {
-                _logger.LogInformation($"✅ Allocation created successfully:\n{responseBody}");
-                return responseBody;
-            }
-            else
-            {
-                _logger.LogError($"❌ Failed to create allocation: {response.StatusCode}\n{responseBody}");
-                return null;
-            }
-        }
-
         public async Task<MultiplayAllocationInfo> GetAllocationDetailsAsync(string allocationId, string accessToken)
         {
             string endPoint = $"/{allocationId}";
@@ -109,6 +68,48 @@ namespace RedGaint.Network.GameSessionModule
                 var error = await response.Content.ReadAsStringAsync();
                 _logger.LogError($"❌ Failed to remove allocation: {response.StatusCode}, Details: {error}");
                 return false;
+            }
+        }
+        
+        public async Task<AllocationResponse> CreateAllocationAsync(string bearerToken, string lobbyId, List<Player> players)
+        {
+            var payloadObj = new AllocationPayload
+            {
+                LobbyId = lobbyId,
+                Players = players
+            };
+
+            var payloadJson = JsonConvert.SerializeObject(payloadObj);
+
+            var requestBody = new AllocationRequest
+            {
+                allocationId = Guid.NewGuid().ToString(),
+                buildConfigurationId = ServerConfig.BuildConfigId,
+                payload = payloadJson,
+                regionId = ServerConfig.RegionId,
+                restart = true
+            };
+
+            var json = JsonConvert.SerializeObject(requestBody);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var request = new HttpRequestMessage(HttpMethod.Post, ServerConfig.allocationUrl);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", bearerToken);
+            request.Content = content;
+
+            var response = await _httpClient.SendAsync(request);
+            var responseBody = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
+            {
+                var result = JsonConvert.DeserializeObject<AllocationResponse>(responseBody);
+                _logger.LogInformation("✅ Allocation created successfully: {response}", responseBody);
+                return result!;
+            }
+            else
+            {
+                _logger.LogError("❌ Failed to create allocation: {statusCode}, {response}", response.StatusCode, responseBody);
+                return null;
             }
         }
     }

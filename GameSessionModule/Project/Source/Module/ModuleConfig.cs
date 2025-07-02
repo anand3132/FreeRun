@@ -50,40 +50,30 @@ public class ModuleConfig : ICloudCodeSetup
         config.Dependencies.AddSingleton<DedicatedServerService>();
         config.Dependencies.AddSingleton<PlayerDataBuilder>();
         config.Dependencies.AddSingleton<AuthService>();
+        config.Dependencies.AddSingleton<BotService>();
 
-        // ------------------------------------
-        // Logging Services
-        // ------------------------------------
-        config.Dependencies.AddSingleton<ILogger<GameSession>>(provider =>
+
+// ------------------------------------
+// Logging Services
+// ------------------------------------
+        var services = config.Dependencies;
+
+        RegisterLogger<GameSession>(services);
+        RegisterLogger<LobbyService>(services);
+        RegisterLogger<LobbyMonitorService>(services);
+        RegisterLogger<DedicatedServerService>(services);
+        RegisterLogger<AuthService>(services);
+        RegisterLogger<ServerRegistry>(services);
+        RegisterLogger<BotService>(services);
+    }
+    
+    
+    private void RegisterLogger<T>(IServiceCollection services)
+    {
+        services.AddSingleton<ILogger<T>>(provider =>
         {
-            ILoggerFactory loggerFactory = provider.GetRequiredService<ILoggerFactory>();
-            return loggerFactory.CreateLogger<GameSession>();
-        });
-        config.Dependencies.AddSingleton<ILogger<LobbyService>>(provider =>
-        {
-            ILoggerFactory loggerFactory = provider.GetRequiredService<ILoggerFactory>();
-            return loggerFactory.CreateLogger<LobbyService>();
-        });
-        config.Dependencies.AddSingleton<ILogger<LobbyMonitorService>>(provider =>
-        {
-            ILoggerFactory loggerFactory = provider.GetRequiredService<ILoggerFactory>();
-            return loggerFactory.CreateLogger<LobbyMonitorService>();
-        });
-        config.Dependencies.AddSingleton<ILogger<DedicatedServerService>>(provider =>
-        {
-            ILoggerFactory loggerFactory = provider.GetRequiredService<ILoggerFactory>();
-            return loggerFactory.CreateLogger<DedicatedServerService>();
-        });
-        
-        config.Dependencies.AddSingleton<ILogger<AuthService>>(provider =>
-        {
-            ILoggerFactory loggerFactory = provider.GetRequiredService<ILoggerFactory>();
-            return loggerFactory.CreateLogger<AuthService>();
-        });
-        config.Dependencies.AddSingleton<ILogger<ServerRegistry>>(provider =>
-        {
-            ILoggerFactory loggerFactory = provider.GetRequiredService<ILoggerFactory>();
-            return loggerFactory.CreateLogger<ServerRegistry>();
+            var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
+            return loggerFactory.CreateLogger<T>();
         });
     }
 }
