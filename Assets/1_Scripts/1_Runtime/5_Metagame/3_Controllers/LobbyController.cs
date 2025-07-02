@@ -67,7 +67,9 @@ namespace RedGaint.Network.Runtime
         async Task StartLobbySession()
         {
             Debug.Log($"Starting lobby session for :  {AuthenticationService.Instance.PlayerId}");
-            SessionResponse response = await CloudModule.Instance.StartTheGame();
+            SessionResponse response = await CloudModule.Instance.StartOrJoinTheLobby();
+            string log = await CloudModule.Instance.GetAllocationServerLog();
+            Debug.Log(log);
             currentLobbyId = response?.LobbyId;
         
             if (!string.IsNullOrEmpty(currentLobbyId))

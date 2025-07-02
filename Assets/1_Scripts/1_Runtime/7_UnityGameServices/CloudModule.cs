@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -21,29 +22,30 @@ namespace RedGaint.Network.Runtime.UserData
             _gameSessionModuleBinding = new GameSessionModuleBindings(CloudCodeService.Instance);
         }
 
-        public async Task<SessionResponse> StartTheGame()
-        {
-            if (!AuthenticationService.Instance.IsSignedIn)
-            {
-                Debug.Log("User is not signed in");
-                return null;
-            }
+        // public async Task<SessionResponse> StartTheGame()
+        // {
+        //     if (!AuthenticationService.Instance.IsSignedIn)
+        //     {
+        //         Debug.Log("User is not signed in");
+        //         return null;
+        //     }
+        //
+        //     try
+        //     {
+        //         var sessionResponse = await JoinMatchLobby();
+        //         Debug.Log($"Lobby ID: {sessionResponse?.LobbyId} - {sessionResponse?.Message}");
+        //         
+        //         return sessionResponse;
+        //     }
+        //     catch (CloudCodeException exception)
+        //     {
+        //         Debug.LogError("CloudCode exception: " + exception.Message);
+        //     }
+        //
+        //     return null;
+        // }
 
-            try
-            {
-                var sessionResponse = await JoinMatchLobby();
-                Debug.Log($"Lobby ID: {sessionResponse?.LobbyId} - {sessionResponse?.Message}");
-                return sessionResponse;
-            }
-            catch (CloudCodeException exception)
-            {
-                Debug.LogError("CloudCode exception: " + exception.Message);
-            }
-
-            return null;
-        }
-
-        public async Task<SessionResponse> JoinMatchLobby()
+        public async Task<SessionResponse> StartOrJoinTheLobby()
         {
             if (!AuthenticationService.Instance.IsSignedIn)
             {
@@ -57,7 +59,7 @@ namespace RedGaint.Network.Runtime.UserData
 
             try
             {
-                var request = new GameSession_SessionRequest
+                var request = new SessionRequest()
                 {
                     PlayerId = playerId,
                     CharacterId = characterId,
@@ -88,6 +90,23 @@ namespace RedGaint.Network.Runtime.UserData
             }
         }
 
+        public async Task<string> GetAllocationServerLog()
+        {
+            if (!AuthenticationService.Instance.IsSignedIn)
+                return null;
+            try
+            {
+                string allocationServerlog = await _gameSessionModuleBinding.GetDebugLog();
+                return allocationServerlog;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Failed to fetch Server Logs: {ex.Message}");
+                return null;
+            }
+
+        }
+
         public async Task<List<PlayerData>> FetchPlayersFromLobby(string lobbyId)
         {
             if (!AuthenticationService.Instance.IsSignedIn || string.IsNullOrEmpty(lobbyId))
@@ -95,12 +114,12 @@ namespace RedGaint.Network.Runtime.UserData
 
             try
             {
-                GameSession_LobbyRequest request = new GameSession_LobbyRequest
+                LobbyRequest request = new LobbyRequest()
                 {
                     lobbyId = lobbyId
                 };
 
-                List<GameSession_PlayerSummary> summaries = await _gameSessionModuleBinding.GetLobbyPlayers(request);
+                 List<PlayerSummary> summaries = await _gameSessionModuleBinding.GetLobbyPlayers(request);
 
                 List<PlayerData> players = new List<PlayerData>(summaries.Count);
                 foreach (var s in summaries)

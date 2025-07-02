@@ -41,6 +41,7 @@ namespace RedGaint.Network.GameSessionModule
         {
             try
             {
+                CloudDebugLogger.Log("StartOrJoinSession started ...");
                 return await _lobbyService.HandleStartOrJoinSession(ctx, request);
             }
             catch (System.Exception ex)
@@ -63,19 +64,109 @@ namespace RedGaint.Network.GameSessionModule
             return await _lobbyService.GetLobbyPlayers(ctx, request.lobbyId);
         }
 
+
+        [CloudCodeFunction("GetDebugLog")]
+        public  async Task<string> GetDebugLog(IExecutionContext ctx)
+        {
+            return await Task.FromResult(CloudDebugLogger.GetRecentLogs());
+        }
+
+        [CloudCodeFunction("ClearDebugLog")]
+        public  async Task<string> ClearDebugLog(IExecutionContext ctx)
+        {
+            CloudDebugLogger.Clear();
+            return await Task.FromResult("Log file cleared.");
+        }
         
-        //kept for testing purpose
-        // /// <summary>
-        // /// Cloud Code function to start the dedicated game server for a specific lobby.
-        // /// This can be called directly or triggered automatically when a lobby is full.
-        // /// </summary>
-        // /// <param name="ctx">Cloud Code execution context.</param>
-        // /// <param name="lobbyId">Unique lobby identifier.</param>
-        // /// <returns>Game server session ID or IP address string.</returns>
-        // [CloudCodeFunction("StartDedicatedServerForLobby")]
-        // public async Task<ServerAllocationResult> StartDedicatedServerForLobby(IExecutionContext ctx, string lobbyId)
-        // {
-        //     return await _lobbyService.StartDedicatedServerForLobby(ctx, lobbyId);
-        // }
+        
+     
+        
+        
+        
     }
 }
+
+
+   //
+   // [CloudCodeFunction("GetAllocatedServer")]
+   //      public ServerStatusResponse GetAllocatedServer(LobbyQueryRequest request)
+   //      {
+   //          try
+   //          {
+   //              if (string.IsNullOrEmpty(request?.LobbyId))
+   //              {
+   //                  _logger.LogError("Invalid lobby ID received");
+   //                  return new ServerStatusResponse
+   //                  {
+   //                      StatusMessage = "Invalid lobby ID"
+   //                  };
+   //              }
+   //
+   //              var allocation = _serverService.GetAllocationForLobby(request.LobbyId);
+   //              
+   //              if (allocation == null)
+   //              {
+   //                  return new ServerStatusResponse
+   //                  {
+   //                      LobbyId = request.LobbyId,
+   //                      AllocationStatus = "pending",
+   //                      StatusMessage = "Server allocation in progress"
+   //                  };
+   //              }
+   //
+   //              return new ServerStatusResponse
+   //              {
+   //                  LobbyId = request.LobbyId,
+   //                  AllocationStatus = "ready",
+   //                  ServerIP = allocation.IPv4Address,
+   //                  Port = allocation.GamePort,
+   //                  ConnectionToken = allocation.AllocationId,
+   //                  StatusMessage = "Server ready for connection"
+   //              };
+   //          }
+   //          catch (System.Exception ex)
+   //          {
+   //              _logger.LogError(ex, $"Failed to get server allocation for lobby {request?.LobbyId}");
+   //              return new ServerStatusResponse
+   //              {
+   //                  LobbyId = request?.LobbyId,
+   //                  AllocationStatus = "failed",
+   //                  StatusMessage = $"Error: {ex.Message}"
+   //              };
+   //          }
+   //      }
+   //
+   //      [CloudCodeFunction("CleanupServerAllocation")]
+   //      public ServerStatusResponse CleanupServerAllocation(LobbyQueryRequest request)
+   //      {
+   //          try
+   //          {
+   //              if (string.IsNullOrEmpty(request?.LobbyId))
+   //              {
+   //                  _logger.LogError("Invalid lobby ID received");
+   //                  return new ServerStatusResponse
+   //                  {
+   //                      StatusMessage = "Invalid lobby ID"
+   //                  };
+   //              }
+   //
+   //              _serverService.CleanupLobbyAllocation(request.LobbyId);
+   //              
+   //              return new ServerStatusResponse
+   //              {
+   //                  LobbyId = request.LobbyId,
+   //                  AllocationStatus = "cleaned",
+   //                  StatusMessage = "Server allocation cleaned up"
+   //              };
+   //          }
+   //          catch (System.Exception ex)
+   //          {
+   //              _logger.LogError(ex, $"Failed to cleanup allocation for lobby {request?.LobbyId}");
+   //              return new ServerStatusResponse
+   //              {
+   //                  LobbyId = request?.LobbyId,
+   //                  AllocationStatus = "error",
+   //                  StatusMessage = $"Cleanup failed: {ex.Message}"
+   //              };
+   //          }
+   //      }

@@ -4,14 +4,12 @@ using System;
 
 namespace Unity.Services.CloudCode.GeneratedBindings.RedGaint.Network.GameSessionModule
 {
-    public partial class GameSession_SessionResponse
+    public partial class LobbyRequest
     {
-        public string LobbyId;
-        public string LobbyName;
-        public string Message;
+        public string lobbyId;
 
         [Preserve]
-        public GameSession_SessionResponse ()
+        public LobbyRequest ()
         {
         }
     }
