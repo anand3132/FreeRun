@@ -15,6 +15,7 @@ namespace RedGaint.Network.GameSessionModule
     {
         private readonly LobbyService _lobbyService;
         private readonly ILogger<GameSession> _logger;
+        private readonly DedicatedServerService _serverService;
 
         /// <summary>
         /// Constructor for GameSession.
@@ -63,8 +64,57 @@ namespace RedGaint.Network.GameSessionModule
         {
             return await _lobbyService.GetLobbyPlayers(ctx, request.lobbyId);
         }
+        [CloudCodeFunction("EndGameSession")]
+        public async Task<string> EndGameSession(IExecutionContext ctx, LobbyRequest request)
+        {
+            string lobbyId = request.lobbyId;
 
+            try
+            {
+                CloudDebugLogger.Log($"Ending game session for lobby {lobbyId}");
 
+                bool success = await _serverService.ReleaseServerAsync(lobbyId);
+
+                if (success)
+                {
+                    return $"✅ Server deallocated for lobby {lobbyId}";
+                }
+                else
+                {
+                    return $"⚠️ No active server found or failed to deallocate for lobby {lobbyId}";
+                }
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex, $"❌ Error ending session for lobby {lobbyId}");
+                return $"❌ Error: {ex.Message}";
+            }
+        }
+
+        [CloudCodeFunction("GetServerDetails")]
+        public async Task<ServerAllocationResult> GetServerDetails(IExecutionContext ctx, LobbyRequest request)
+        {
+            var result = _serverService.GetAllocatedServer(request.lobbyId);
+
+            if (result == null)
+            {
+                _logger.LogWarning($"No server found for Lobby ID: {request.lobbyId}");
+                return null;
+            }
+
+            return result;
+        }
+        
+        [CloudCodeFunction("ReleaseServer")]
+        public async Task<string> ReleaseServer(IExecutionContext ctx, LobbyRequest request)
+        {
+            bool success = await _serverService.ReleaseServerAsync(request.lobbyId);
+
+            return success
+                ? $"✅ Server released for Lobby: {request.lobbyId}"
+                : $"⚠️ No active server found for Lobby: {request.lobbyId}";
+        }
+        
         [CloudCodeFunction("GetDebugLog")]
         public  async Task<string> GetDebugLog(IExecutionContext ctx)
         {
@@ -78,95 +128,5 @@ namespace RedGaint.Network.GameSessionModule
             return await Task.FromResult("Log file cleared.");
         }
         
-        
-     
-        
-        
-        
     }
 }
-
-
-   //
-   // [CloudCodeFunction("GetAllocatedServer")]
-   //      public ServerStatusResponse GetAllocatedServer(LobbyQueryRequest request)
-   //      {
-   //          try
-   //          {
-   //              if (string.IsNullOrEmpty(request?.LobbyId))
-   //              {
-   //                  _logger.LogError("Invalid lobby ID received");
-   //                  return new ServerStatusResponse
-   //                  {
-   //                      StatusMessage = "Invalid lobby ID"
-   //                  };
-   //              }
-   //
-   //              var allocation = _serverService.GetAllocationForLobby(request.LobbyId);
-   //              
-   //              if (allocation == null)
-   //              {
-   //                  return new ServerStatusResponse
-   //                  {
-   //                      LobbyId = request.LobbyId,
-   //                      AllocationStatus = "pending",
-   //                      StatusMessage = "Server allocation in progress"
-   //                  };
-   //              }
-   //
-   //              return new ServerStatusResponse
-   //              {
-   //                  LobbyId = request.LobbyId,
-   //                  AllocationStatus = "ready",
-   //                  ServerIP = allocation.IPv4Address,
-   //                  Port = allocation.GamePort,
-   //                  ConnectionToken = allocation.AllocationId,
-   //                  StatusMessage = "Server ready for connection"
-   //              };
-   //          }
-   //          catch (System.Exception ex)
-   //          {
-   //              _logger.LogError(ex, $"Failed to get server allocation for lobby {request?.LobbyId}");
-   //              return new ServerStatusResponse
-   //              {
-   //                  LobbyId = request?.LobbyId,
-   //                  AllocationStatus = "failed",
-   //                  StatusMessage = $"Error: {ex.Message}"
-   //              };
-   //          }
-   //      }
-   //
-   //      [CloudCodeFunction("CleanupServerAllocation")]
-   //      public ServerStatusResponse CleanupServerAllocation(LobbyQueryRequest request)
-   //      {
-   //          try
-   //          {
-   //              if (string.IsNullOrEmpty(request?.LobbyId))
-   //              {
-   //                  _logger.LogError("Invalid lobby ID received");
-   //                  return new ServerStatusResponse
-   //                  {
-   //                      StatusMessage = "Invalid lobby ID"
-   //                  };
-   //              }
-   //
-   //              _serverService.CleanupLobbyAllocation(request.LobbyId);
-   //              
-   //              return new ServerStatusResponse
-   //              {
-   //                  LobbyId = request.LobbyId,
-   //                  AllocationStatus = "cleaned",
-   //                  StatusMessage = "Server allocation cleaned up"
-   //              };
-   //          }
-   //          catch (System.Exception ex)
-   //          {
-   //              _logger.LogError(ex, $"Failed to cleanup allocation for lobby {request?.LobbyId}");
-   //              return new ServerStatusResponse
-   //              {
-   //                  LobbyId = request?.LobbyId,
-   //                  AllocationStatus = "error",
-   //                  StatusMessage = $"Cleanup failed: {ex.Message}"
-   //              };
-   //          }
-   //      }

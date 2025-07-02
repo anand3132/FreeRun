@@ -23,32 +23,46 @@ namespace RedGaint.Network.GameSessionModule
         public async Task<MultiplayAllocationInfo> GetAllocationDetailsAsync(string allocationId, string accessToken)
         {
             string endPoint = $"/{allocationId}";
+            int maxRetries = 12;
+            int delaySeconds = 10;
 
-            var request = new HttpRequestMessage(HttpMethod.Get, ServerConfig.allocationUrl + endPoint);
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-
-            var response = await _httpClient.SendAsync(request);
-            var responseBody = await response.Content.ReadAsStringAsync();
-
-            if (!response.IsSuccessStatusCode)
+            for (int attempt = 0; attempt < maxRetries; attempt++)
             {
-                _logger.LogError("❌ Failed to get allocation details. StatusCode: {StatusCode}, Response: {ResponseBody}",
-                    response.StatusCode, responseBody);
+                var request = new HttpRequestMessage(HttpMethod.Get, ServerConfig.allocationUrl + endPoint);
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
-                throw new Exception($"❌ Failed to get allocation details: {responseBody}");
+                var response = await _httpClient.SendAsync(request);
+                var responseBody = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    _logger.LogError("❌ Failed to get allocation details. StatusCode: {StatusCode}, Response: {ResponseBody}",
+                        response.StatusCode, responseBody);
+                    throw new Exception($"❌ Failed to get allocation details: {responseBody}");
+                }
+
+                var allocationInfo = JsonSerializer.Deserialize<MultiplayAllocationInfo>(responseBody,
+                    new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    })!;
+
+                if (!string.IsNullOrEmpty(allocationInfo.Ipv4))
+                {
+                    _logger.LogInformation("✅ Retrieved server details: IP = {Ip}, Port = {Port}", allocationInfo.Ipv4,
+                        allocationInfo.GamePort);
+                    return allocationInfo;
+                }
+
+                _logger.LogWarning("⚠️ Allocation found, but IP is not yet available. Retrying in {Delay}s...", delaySeconds);
+                await Task.Delay(TimeSpan.FromSeconds(delaySeconds));
             }
 
-            var allocationInfo = JsonSerializer.Deserialize<MultiplayAllocationInfo>(responseBody,
-                new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                })!;
-
-            _logger.LogInformation("✅ Retrieved server details: IP = {Ip}, Port = {Port}", allocationInfo.Ipv4,
-                allocationInfo.GamePort);
-
-            return allocationInfo;
+            // After retries
+            _logger.LogError("❌ Server IP address was not assigned within the expected time for allocationId: {AllocationId}", allocationId);
+            throw new TimeoutException("Server IP was not available within 2 minutes.");
         }
+
 
         public async Task<bool> RemoveAllocationAsync(string allocationId, string bearerToken)
         {
