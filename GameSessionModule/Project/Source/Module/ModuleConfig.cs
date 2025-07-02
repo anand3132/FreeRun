@@ -34,6 +34,8 @@ public class ModuleConfig : ICloudCodeSetup
         config.Dependencies.AddSingleton<HttpHelper>();
         config.Dependencies.AddSingleton<AuthService>();
         config.Dependencies.AddSingleton<ServerRegistry>();
+        config.Dependencies.AddSingleton<LobbyMonitorService>();
+
         
         // ------------------------------------
         // Shared Utility Services
@@ -65,6 +67,8 @@ public class ModuleConfig : ICloudCodeSetup
         RegisterLogger<AuthService>(services);
         RegisterLogger<ServerRegistry>(services);
         RegisterLogger<BotService>(services);
+        RegisterLogger<LobbyMonitorService>(services);
+
     }
     
     

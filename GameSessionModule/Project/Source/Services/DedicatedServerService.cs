@@ -4,6 +4,7 @@ using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Unity.Services.CloudCode.Apis;
 using Unity.Services.CloudCode.Core;
 using Unity.Services.Lobby.Model;
 
@@ -15,7 +16,7 @@ namespace RedGaint.Network.GameSessionModule
         private readonly AuthService _authService;
         private readonly ServerRegistry _serverRegistry;
         private readonly HttpHelper _httpHelper;
-
+        
         public DedicatedServerService(ILogger<DedicatedServerService> logger, HttpHelper httpHelper,AuthService authService, ServerRegistry serverRegistry)
         {
             _logger = logger;
@@ -53,5 +54,8 @@ namespace RedGaint.Network.GameSessionModule
             return null;
         }
 
+        
+
+        
     }//DedicatedServerService
 }//RedGaint.Network.GameSessionModule

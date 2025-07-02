@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using RedGaint.Network.Config;
 using Unity.Services.CloudCode.Apis;
 using Unity.Services.CloudCode.Core;
 using Unity.Services.CloudCode.Shared;
@@ -18,9 +19,7 @@ namespace RedGaint.Network.GameSessionModule
         private readonly LobbyMonitorService _monitorService;
         private readonly DedicatedServerService _serverService;
         private readonly PlayerDataBuilder _dataBuilder;
-
-        private const int MaxPlayers = 2;
-
+        
         public LobbyService(
             IGameApiClient client,
             IPushClient pushClient,
@@ -93,7 +92,7 @@ namespace RedGaint.Network.GameSessionModule
                 lobby.Data != null &&
                 lobby.Data.TryGetValue("xpGroup", out var group) &&
                 group.Value == xpGroup &&
-                lobby.Players.Count < MaxPlayers);
+                lobby.Players.Count < GameConfig.MaxPlayers);
         }
 
         private async Task<SessionResponse> JoinExistingLobby(
@@ -115,16 +114,8 @@ namespace RedGaint.Network.GameSessionModule
                 lobbyId: lobbyId,
                 player: player
             );
-
-            if (response.Data.Players.Count == MaxPlayers)
-            {
-                await _serverService.StartTheServer(
-                    ctx: ctx,
-                    lobbyId: lobbyId,
-                    players: response.Data.Players
-                    
-                );
-            }
+            
+            await _monitorService.CheckAndStartServerIfLobbyFull(ctx, response.Data);
 
             return new SessionResponse
             {
@@ -168,7 +159,7 @@ namespace RedGaint.Network.GameSessionModule
 
             CreateRequest request = new CreateRequest(
                 name: name,
-                maxPlayers: MaxPlayers,
+                maxPlayers: GameConfig.MaxPlayers,
                 isPrivate: false,
                 player: player,
                 data: data
