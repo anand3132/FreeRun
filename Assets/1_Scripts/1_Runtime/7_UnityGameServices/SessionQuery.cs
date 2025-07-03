@@ -12,8 +12,11 @@ namespace RedGaint.Network.Runtime
     }
     public class ServerAllocationResult
     {
-        public string Ip { get; set; }
-        public int Port { get; set; }
-        public string LobbyId { get; set; }
+        public string AllocationId{ get; set; }
+        public long ServerId{ get; set; }
+        public string Ipv4{ get; set; }
+        public string Ipv6{ get; set; }
+        public int GamePort{ get; set; }
+        public string LobbyId{ get; set; }
     }
 }

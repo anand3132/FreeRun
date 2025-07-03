@@ -26,13 +26,16 @@ namespace RedGaint.Network.Runtime.UserData
         public Dictionary<string, string> PlayerSettings= new();
         public bool isGuest;
     }
-    
+
     [Serializable]
     public class PlayerData
     {
-        public string PlayerId;
-        public string PlayerName;
-        public string CharacterId;
+        public string PlayerId { get; set; } // Unique ID for the player
+        public string DisplayName { get; set; } // Player's name for display (was: PlayerName)
+        public string SelectedCharacterId { get; set; } // Character selected by the player (was: CharacterId)
+
+        public bool IsLobbyReady { get; set; } // True if lobby is full and server is allocated
+        public int JoinOrder { get; set; } // The player's join position (1-based)
+        public int MaxPlayersAllowed { get; set; }
     }
-   
 }

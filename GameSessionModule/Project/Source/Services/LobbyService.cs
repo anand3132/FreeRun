@@ -195,22 +195,29 @@ namespace RedGaint.Network.GameSessionModule
             );
 
             List<PlayerSummary> players = new List<PlayerSummary>();
+            var server = _serverService.GetAllocatedServer(lobbyId);
+            bool isLobbyReady = response.Data.Players.Count >= GameConfig.MaxPlayers && server != null;
 
+            int index = 1; // join order (1-based)
             foreach (Player player in response.Data.Players)
             {
-                string name = player.Data?.TryGetValue("playerName", out var pn) == true ? pn.Value : "Unknown";
-                string character = player.Data?.TryGetValue("characterId", out var ch) == true ? ch.Value : "None";
+                string displayName = player.Data?.TryGetValue("playerName", out var nameObj) == true ? nameObj.Value : "Unknown";
+                string selectedCharacterId = player.Data?.TryGetValue("characterId", out var charObj) == true ? charObj.Value : "None";
 
                 players.Add(new PlayerSummary
                 {
                     PlayerId = player.Id,
-                    PlayerName = name,
-                    CharacterId = character
+                    DisplayName = displayName,
+                    SelectedCharacterId = selectedCharacterId,
+                    IsLobbyReady = isLobbyReady,
+                    JoinOrder = index++,
+                    MaxPlayersAllowed = GameConfig.MaxPlayers
                 });
             }
 
             return players;
         }
+
 
  
     }

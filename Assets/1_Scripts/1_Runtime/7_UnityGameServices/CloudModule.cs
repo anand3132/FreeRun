@@ -127,8 +127,12 @@ namespace RedGaint.Network.Runtime.UserData
                     players.Add(new PlayerData
                     {
                         PlayerId = s.PlayerId,
-                        PlayerName = s.PlayerName,
-                        CharacterId = s.CharacterId
+                        DisplayName = s.DisplayName,
+                        SelectedCharacterId = s.SelectedCharacterId,
+                        IsLobbyReady = s.IsLobbyReady,
+                        JoinOrder = s.JoinOrder,
+                        MaxPlayersAllowed = s.MaxPlayersAllowed
+
                     });
                 }
 
@@ -137,6 +141,39 @@ namespace RedGaint.Network.Runtime.UserData
             catch (System.Exception ex)
             {
                 Debug.LogError($"Failed to fetch player list: {ex.Message}");
+                return null;
+            }
+        }
+
+        public async Task<ServerAllocationResult> FetchAndHandleServerDetails(string lobbyId)
+        {
+            if (!AuthenticationService.Instance.IsSignedIn || string.IsNullOrEmpty(lobbyId))
+                return null;
+
+            try
+            {
+                LobbyRequest request = new LobbyRequest
+                {
+                    lobbyId = lobbyId
+                };
+
+                var allocationResult = await _gameSessionModuleBinding.GetServerDetails(request);
+
+                ServerAllocationResult allocationDetails = new ServerAllocationResult
+                {
+                    AllocationId = allocationResult.AllocationId,
+                    ServerId = allocationResult.ServerId,
+                    Ipv4 = allocationResult.Ipv4,
+                    Ipv6 = allocationResult.Ipv6,
+                    GamePort = allocationResult.GamePort,
+                    LobbyId = allocationResult.LobbyId
+                };
+
+                return allocationDetails;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"❌ Failed to fetch server details for lobby {lobbyId}: {ex.Message}");
                 return null;
             }
         }

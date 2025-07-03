@@ -35,6 +35,39 @@ namespace Unity.Services.CloudCode.GeneratedBindings
                 });
         }
 
+        public async Task<string> EndGameSession(RedGaint.Network.GameSessionModule.LobbyRequest request)
+        {
+            return await k_Service.CallModuleEndpointAsync<string>(
+                "GameSessionModule",
+                "EndGameSession",
+                new Dictionary<string, object>()
+                {
+                    {"request", request},
+                });
+        }
+
+        public async Task<RedGaint.Network.GameSessionModule.ServerAllocationResult> GetServerDetails(RedGaint.Network.GameSessionModule.LobbyRequest request)
+        {
+            return await k_Service.CallModuleEndpointAsync<RedGaint.Network.GameSessionModule.ServerAllocationResult>(
+                "GameSessionModule",
+                "GetServerDetails",
+                new Dictionary<string, object>()
+                {
+                    {"request", request},
+                });
+        }
+
+        public async Task<string> ReleaseServer(RedGaint.Network.GameSessionModule.LobbyRequest request)
+        {
+            return await k_Service.CallModuleEndpointAsync<string>(
+                "GameSessionModule",
+                "ReleaseServer",
+                new Dictionary<string, object>()
+                {
+                    {"request", request},
+                });
+        }
+
         public async Task<string> GetDebugLog()
         {
             return await k_Service.CallModuleEndpointAsync<string>(

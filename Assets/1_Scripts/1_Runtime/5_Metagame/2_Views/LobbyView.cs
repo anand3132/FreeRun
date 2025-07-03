@@ -62,8 +62,8 @@ namespace RedGaint.Network.Runtime
                 if (!displayedPlayerIds.Contains(player.PlayerId))
                 {
                     var table = Stage.Instance.GetAvailableTable();
-                    Stage.Instance.ShowCharacterOnTable(table, player.CharacterId);
-                    Debug.Log($"Player joined lobby: {player.PlayerName} with CharacterID: {player.CharacterId}");
+                    Stage.Instance.ShowCharacterOnTable(table, player.SelectedCharacterId);
+                    Debug.Log($"Player joined lobby: {player.DisplayName} with CharacterID: {player.SelectedCharacterId}");
                     displayedPlayerIds.Add(player.PlayerId);
                 }
             }

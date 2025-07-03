@@ -4,17 +4,17 @@ using System;
 
 namespace Unity.Services.CloudCode.GeneratedBindings.RedGaint.Network.GameSessionModule
 {
-    public partial class PlayerSummary
+    public partial class ServerAllocationResult
     {
-        public string PlayerId;
-        public string DisplayName;
-        public string SelectedCharacterId;
-        public bool IsLobbyReady;
-        public int JoinOrder;
-        public int MaxPlayersAllowed;
+        public string AllocationId;
+        public long ServerId;
+        public string Ipv4;
+        public string Ipv6;
+        public int GamePort;
+        public string LobbyId;
 
         [Preserve]
-        public PlayerSummary ()
+        public ServerAllocationResult ()
         {
         }
     }

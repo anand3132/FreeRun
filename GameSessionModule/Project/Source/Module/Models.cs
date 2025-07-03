@@ -26,9 +26,13 @@ namespace RedGaint.Network.GameSessionModule
 
     public class PlayerSummary
     {
-        public string PlayerId { get; set; }
-        public string PlayerName { get; set; }
-        public string CharacterId { get; set; }
+        public string PlayerId { get; set; }             // Unique ID for the player
+        public string DisplayName { get; set; }          // Player's name for display (was: PlayerName)
+        public string SelectedCharacterId { get; set; }  // Character selected by the player (was: CharacterId)
+
+        public bool IsLobbyReady { get; set; }           // True if lobby is full and server is allocated
+        public int JoinOrder { get; set; }               // The player's join position (1-based)
+        public int MaxPlayersAllowed { get; set; }       // Lobby's maximum capacity
     }
 
     public class AllocationResponse
