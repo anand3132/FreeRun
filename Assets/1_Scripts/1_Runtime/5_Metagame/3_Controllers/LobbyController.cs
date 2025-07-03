@@ -172,11 +172,11 @@ namespace RedGaint.Network.Runtime
                     {
                         bool isLobbyReady = currentSnapshot[0].IsLobbyReady;
 
-                        if (!IsSameSnapshot(previousSnapshot, currentSnapshot))
-                        {
+                        //if (!IsSameSnapshot(previousSnapshot, currentSnapshot))
+                       // {
                             UpdatePlayerView(currentSnapshot);
-                            previousSnapshot = new List<PlayerData>(currentSnapshot);
-                        }
+                         //   previousSnapshot = new List<PlayerData>(currentSnapshot);
+                      //  }
 
                         Debug.Log("🔄 Polling Lobby...");
 

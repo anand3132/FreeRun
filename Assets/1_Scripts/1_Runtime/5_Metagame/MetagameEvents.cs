@@ -1,14 +1,5 @@
 namespace RedGaint.Network.Runtime
 {
-    internal class EnterMatchmakerQueueEvent : AppEvent
-    {
-        public string QueueName { get; private set; }
-
-        public EnterMatchmakerQueueEvent(string queueName)
-        {
-            QueueName = queueName;
-        }
-    }
     
     internal class EnterLobbyQueueEvent : AppEvent { }
     internal class EnterMainMenuEvent : AppEvent { }
@@ -18,15 +9,6 @@ namespace RedGaint.Network.Runtime
     
     internal class ExitMatchmakerQueueEvent : AppEvent { }
     
-    internal class EnterIPConnectionEvent : AppEvent { }
-    
-    internal class ExitIPConnectionEvent : AppEvent { }
-
-    internal class JoinThroughDirectIPEvent : AppEvent
-    {
-        public string ipAddress;
-        public ushort port;
-    }
     
     internal class EnterModelSelectionEvent : AppEvent { }
     internal class CancelConnectionEvent: AppEvent { }
@@ -36,7 +18,6 @@ namespace RedGaint.Network.Runtime
     /// </summary>
     internal class MatchEnteredEvent : AppEvent { }
     internal class StartSingleplayer : AppEvent { }
-
     
     internal class PlayerSignedIn : AppEvent
     {
