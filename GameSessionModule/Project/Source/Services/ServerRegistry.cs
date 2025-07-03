@@ -36,8 +36,7 @@ namespace RedGaint.Network.GameSessionModule
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    _logger.LogError("❌ Failed to get allocation details. StatusCode: {StatusCode}, Response: {ResponseBody}",
-                        response.StatusCode, responseBody);
+                    _logger.LogError($"❌ Failed to get allocation details. StatusCode: {response.StatusCode}, Response: {responseBody}");
                     throw new Exception($"❌ Failed to get allocation details: {responseBody}");
                 }
 
@@ -49,17 +48,18 @@ namespace RedGaint.Network.GameSessionModule
 
                 if (!string.IsNullOrEmpty(allocationInfo.Ipv4))
                 {
-                    _logger.LogInformation("✅ Retrieved server details: IP = {Ip}, Port = {Port}", allocationInfo.Ipv4,
-                        allocationInfo.GamePort);
+                    _logger.LogInformation($"✅ Retrieved server details: IP = {allocationInfo.Ipv4}, Port = {allocationInfo.GamePort}");
                     return allocationInfo;
                 }
+                string timestamp = DateTime.UtcNow.ToString("HH:mm:ss");
 
-                _logger.LogWarning("⚠️ Allocation found, but IP is not yet available. Retrying in {Delay}s...", delaySeconds);
+                CloudDebugLogger.Log($"⚠️ > {timestamp} < Allocation found, but IP is not yet available. ipv4 : {allocationInfo.Ipv4}, port : {allocationInfo.GamePort}..." );
+                _logger.LogWarning($"⚠️ Allocation found, but IP is not yet available. Retrying in {delaySeconds}s..." );
                 await Task.Delay(TimeSpan.FromSeconds(delaySeconds));
             }
 
             // After retries
-            _logger.LogError("❌ Server IP address was not assigned within the expected time for allocationId: {AllocationId}", allocationId);
+            _logger.LogError($"❌ Server IP address was not assigned within the expected time for allocationId: {allocationId}" );
             throw new TimeoutException("Server IP was not available within 2 minutes.");
         }
 
@@ -117,12 +117,12 @@ namespace RedGaint.Network.GameSessionModule
             if (response.IsSuccessStatusCode)
             {
                 var result = JsonConvert.DeserializeObject<AllocationResponse>(responseBody);
-                _logger.LogInformation("✅ Allocation created successfully: {response}", responseBody);
+                _logger.LogInformation($"✅ Allocation created successfully: {responseBody}" );
                 return result!;
             }
             else
             {
-                _logger.LogError("❌ Failed to create allocation: {statusCode}, {response}", response.StatusCode, responseBody);
+                _logger.LogError($"❌ Failed to create allocation: {response.StatusCode}, {responseBody}");
                 return null;
             }
         }

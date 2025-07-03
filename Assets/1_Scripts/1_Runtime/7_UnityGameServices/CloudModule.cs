@@ -177,5 +177,26 @@ namespace RedGaint.Network.Runtime.UserData
                 return null;
             }
         }
+
+        public async Task<string>  LeaveLobby(string lobbyId)
+        {
+            if (!AuthenticationService.Instance.IsSignedIn || string.IsNullOrEmpty(lobbyId))
+                return null;
+            try
+            {
+                LobbyRequest request = new LobbyRequest
+                {
+                    lobbyId = lobbyId
+                };
+                
+                return await _gameSessionModuleBinding.EndGameSession(request);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"❌ Internal Error while exiting  lobby {lobbyId}: {ex.Message}");
+                throw;
+            }
+
+        }
     }
 }

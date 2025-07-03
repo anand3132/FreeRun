@@ -148,6 +148,8 @@ namespace RedGaint.Network.Runtime
         IEnumerator PollLobbyPlayers()
         {
             List<PlayerData> previousSnapshot = null;
+            float timeout = 300f; // 5 minutes in seconds
+            float elapsedTime = 0f;
 
             while (true)
             {
@@ -170,12 +172,13 @@ namespace RedGaint.Network.Runtime
                     {
                         bool isLobbyReady = currentSnapshot[0].IsLobbyReady;
 
-                        // Only update UI if player list has changed
                         if (!IsSameSnapshot(previousSnapshot, currentSnapshot))
                         {
                             UpdatePlayerView(currentSnapshot);
                             previousSnapshot = new List<PlayerData>(currentSnapshot);
                         }
+
+                        Debug.Log("🔄 Polling Lobby...");
 
                         if (isLobbyReady)
                         {
@@ -184,6 +187,7 @@ namespace RedGaint.Network.Runtime
                             Task<ServerAllocationResult> serverTask =
                                 CloudModule.Instance.FetchAndHandleServerDetails(currentLobbyId);
                             yield return new WaitUntil(() => serverTask.IsCompleted);
+
                             if (serverTask.Exception != null)
                             {
                                 Debug.LogError($"Error fetching server details: {serverTask.Exception.Message}");
@@ -192,7 +196,10 @@ namespace RedGaint.Network.Runtime
                             {
                                 ServerAllocationResult result = serverTask.Result;
                                 Debug.Log($"🎯 Server ready: {result?.Ipv4}:{result?.GamePort}");
-                                // Optionally: Transition to gameplay using server info
+                              ConnectionManager.m_ClientConnecting.Configure(result.Ipv4,(ushort)result.GamePort);
+                              ConnectionManager.ChangeState(ConnectionManager.m_ClientConnecting);
+
+                                // Transition to game using server info
                             }
 
                             yield break;
@@ -200,9 +207,20 @@ namespace RedGaint.Network.Runtime
                     }
                 }
 
+                // Timeout check
+                elapsedTime += 3f; // Because we're waiting 3 seconds each loop
+                if (elapsedTime >= timeout)
+                {
+                    Debug.LogWarning("⏰ Timeout reached. Exiting lobby polling after 5 minutes.");
+                    // Optionally: leave the lobby or notify the player
+                    CloudModule.Instance.LeaveLobby(currentLobbyId); // if implemented
+                    yield break;
+                }
+
                 yield return new WaitForSeconds(3f);
             }
         }
+
 
 
 

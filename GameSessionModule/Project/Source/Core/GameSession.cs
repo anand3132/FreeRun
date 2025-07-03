@@ -23,10 +23,11 @@ namespace RedGaint.Network.GameSessionModule
         /// </summary>
         /// <param name="lobbyService">Service that handles lobby creation/joining.</param>
         /// <param name="logger">Logger for tracking session events and errors.</param>
-        public GameSession(LobbyService lobbyService, ILogger<GameSession> logger)
+        public GameSession(LobbyService lobbyService, ILogger<GameSession> logger,DedicatedServerService serverService)
         {
             _lobbyService = lobbyService;
             _logger = logger;
+            _serverService = serverService;
         }
 
         /// <summary>
@@ -64,45 +65,19 @@ namespace RedGaint.Network.GameSessionModule
         {
             return await _lobbyService.GetLobbyPlayers(ctx, request.lobbyId);
         }
+        
         [CloudCodeFunction("EndGameSession")]
-        public async Task<string> EndGameSession(IExecutionContext ctx, LobbyRequest request)
+        public Task<string> EndGameSession(IExecutionContext ctx, LobbyRequest request)
         {
-            string lobbyId = request.lobbyId;
-
-            try
-            {
-                CloudDebugLogger.Log($"Ending game session for lobby {lobbyId}");
-
-                bool success = await _serverService.ReleaseServerAsync(lobbyId);
-
-                if (success)
-                {
-                    return $"✅ Server deallocated for lobby {lobbyId}";
-                }
-                else
-                {
-                    return $"⚠️ No active server found or failed to deallocate for lobby {lobbyId}";
-                }
-            }
-            catch (System.Exception ex)
-            {
-                _logger.LogError(ex, $"❌ Error ending session for lobby {lobbyId}");
-                return $"❌ Error: {ex.Message}";
-            }
+            return _serverService.EndGameSessionAsync(request.lobbyId);
         }
 
+
         [CloudCodeFunction("GetServerDetails")]
-        public async Task<ServerAllocationResult> GetServerDetails(IExecutionContext ctx, LobbyRequest request)
+        public async Task<ServerAllocationResult?> GetServerDetails(IExecutionContext ctx, LobbyRequest request)
         {
-            var result = _serverService.GetAllocatedServer(request.lobbyId);
 
-            if (result == null)
-            {
-                _logger.LogWarning($"No server found for Lobby ID: {request.lobbyId}");
-                return null;
-            }
-
-            return result;
+            return _serverService.GetAllocatedServer(request.lobbyId);
         }
         
         [CloudCodeFunction("ReleaseServer")]
