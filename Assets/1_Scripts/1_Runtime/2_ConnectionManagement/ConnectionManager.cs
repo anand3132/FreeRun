@@ -126,10 +126,10 @@ namespace RedGaint.Network.Runtime.ConnectionManagement
             m_CurrentState.StartClient(ipaddress, port);
         }
 
-        public void StartServerMatchmaker()
-        {
-            m_CurrentState.StartServerMatchmaker();
-        }
+        // public void StartServerMatchmaker()
+        // {
+        //     m_CurrentState.StartServerMatchmaker();
+        // }
 
         public void StartServerIP(string ipaddress, ushort port)
         {

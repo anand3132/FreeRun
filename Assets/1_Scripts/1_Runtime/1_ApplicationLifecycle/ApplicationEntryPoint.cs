@@ -103,11 +103,14 @@ namespace RedGaint.Network.Runtime.ApplicationLifecycle
                 case MultiplayerRoleFlags.Client:
                 {
                     GlobalTextBridge.Init();
-                    SceneManager.LoadScene("MetagameScene");
+                    SceneManager.LoadScene(GlobalStaticVariables.MetaScene);
+                    
+                    //kept for testing 
                     if (AutoConnectOnStartup)
                     {
                         m_ConnectionManager.StartClient(k_DefaultClientAutoConnectServerAddress, listeningPort);
                     }
+                    
                     break;
                 }
                 case MultiplayerRoleFlags.ClientAndServer:

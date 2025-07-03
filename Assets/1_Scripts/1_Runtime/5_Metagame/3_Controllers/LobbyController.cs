@@ -196,8 +196,7 @@ namespace RedGaint.Network.Runtime
                             {
                                 ServerAllocationResult result = serverTask.Result;
                                 Debug.Log($"🎯 Server ready: {result?.Ipv4}:{result?.GamePort}");
-                              ConnectionManager.m_ClientConnecting.Configure(result.Ipv4,(ushort)result.GamePort);
-                              ConnectionManager.ChangeState(ConnectionManager.m_ClientConnecting);
+                                ConnectionManager.StartClient(result.Ipv4, (ushort)result.GamePort);
 
                                 // Transition to game using server info
                             }

@@ -18,8 +18,8 @@ namespace RedGaint.Network.Runtime
         internal LobbyView LobbyView => m_LobbyView;
         [SerializeField] private LobbyView m_LobbyView;
         
-        internal DirectIPView DirectIP => m_DirectIPView;
-        [SerializeField] private DirectIPView m_DirectIPView;
+        // internal DirectIPView DirectIP => m_DirectIPView;
+        // [SerializeField] private DirectIPView m_DirectIPView;
         
         internal ClientConnectingView ClientConnecting => m_ClientConnectingView;
         [SerializeField] private ClientConnectingView m_ClientConnectingView;
