@@ -11,7 +11,7 @@ namespace RedGaint.Network.Runtime
         public Transform stageCameraPosition;
         private Dictionary<int, GameObject> currentCharacters = new Dictionary<int, GameObject>();
 
-        private Dictionary<int, int>
+        public Dictionary<int, int>
             currentCharacterIndexes =
                 new Dictionary<int, int>(); // To keep track of character indexes for each table
 
@@ -160,43 +160,36 @@ namespace RedGaint.Network.Runtime
         /// <summary>
         /// Show the next character in the character database on the specified table.
         /// </summary>
-        public void ShowNextCharacterOnTable(int tableId)
+        public void ShowNextCharacterOnTable(int tableId, string characterId)
         {
-            if(!TryGetTableById(tableId, out Table table))
+            if (!TryGetTableById(tableId, out Table table))
                 return;
-            if (table == null)
-            {
-                Debug.LogWarning($"Table with ID {tableId} not found.");
-                return;
-            }
 
-            // Get the current index of the displayed character
-            if (!currentCharacterIndexes.ContainsKey(tableId))
-            {
-                currentCharacterIndexes[tableId] = 0;
-            }
-
-            int currentIndex = currentCharacterIndexes[tableId];
             var characters = characterDatabase.GetAllCharacters();
-
-            // If there are no characters, do nothing
             if (characters.Length == 0) return;
 
-            // Calculate the index of the next character
-            int nextIndex =
-                (currentIndex + 1) % characters.Length; // Loop back to the first character after the last one
+            // Find index of the current character ID
+            int currentIndex = System.Array.FindIndex(characters, c => c.Id == characterId);
+            if (currentIndex == -1)
+            {
+                Debug.LogWarning($"Character ID '{characterId}' not found in database. Defaulting to index 0.");
+                currentIndex = 0;
+            }
+
+            // Calculate next index and update state
+            int nextIndex = (currentIndex + 1) % characters.Length;
+            currentCharacterIndexes[tableId] = nextIndex;
 
             // Show the next character
             ShowCharacterOnTable(tableId, characters[nextIndex].Id);
-
-            // Update the index for the next character
-            currentCharacterIndexes[tableId] = nextIndex;
         }
+
+
 
         /// <summary>
         /// Show the previous character in the character database on the specified table.
         /// </summary>
-        public void ShowPreviousCharacterOnTable(int tableId)
+        public void ShowPreviousCharacterOnTable(int tableId,string characterId)
         {
             if (!TryGetTableById(tableId, out Table table))
             {
@@ -204,28 +197,23 @@ namespace RedGaint.Network.Runtime
                 return;
             }
 
-            // Get the current index of the displayed character
-            if (!currentCharacterIndexes.ContainsKey(tableId))
-            {
-                currentCharacterIndexes[tableId] = 0;
-            }
-
-            int currentIndex = currentCharacterIndexes[tableId];
             var characters = characterDatabase.GetAllCharacters();
-
-            // If there are no characters, do nothing
             if (characters.Length == 0) return;
 
-            // Calculate the index of the previous character
-            int previousIndex =
-                (currentIndex - 1 + characters.Length) %
-                characters.Length; // Loop to the last character if at the first one
+            // Determine current index using the table's character ID
+            int currentIndex = System.Array.FindIndex(characters, c => c.Id == characterId);
+            if (currentIndex == -1)
+            {
+                Debug.LogWarning($"Current character ID '{table.characterID}' not found. Defaulting to index 0.");
+                currentIndex = 0;
+            }
 
-            // Show the previous character
-            ShowCharacterOnTable(tableId, characters[previousIndex].Id);
+            // Calculate previous index with wrap-around
+            int previousIndex = (currentIndex - 1 + characters.Length) % characters.Length;
 
-            // Update the index for the previous character
+            // Store index and show character
             currentCharacterIndexes[tableId] = previousIndex;
+            ShowCharacterOnTable(tableId, characters[previousIndex].Id);
         }
 
         /// <summary>

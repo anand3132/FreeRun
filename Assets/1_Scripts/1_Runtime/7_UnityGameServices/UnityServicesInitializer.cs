@@ -6,6 +6,7 @@ using Unity.Services.Authentication;
 using UnityEngine;
 using Unity.Multiplayer;
 using RedGaint.Utility;
+using UnityEditor;
 using Random = UnityEngine.Random;
 
 namespace RedGaint.Network.Runtime
@@ -53,7 +54,6 @@ namespace RedGaint.Network.Runtime
                 BugsBunnyLogger.Log("Server Profile Name: " + serviceProfileName+k_ServerID);
                 BugsBunnyLogger.Log("Environment: " + k_Environment);
             }
-            Debug.Log("---------------------------------------------------------------------------------");
 
         }
 

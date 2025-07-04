@@ -63,6 +63,7 @@ namespace RedGaint.Network.Runtime
                 {
                     var table = Stage.Instance.GetAvailableTable();
                     Stage.Instance.ShowCharacterOnTable(table, player.SelectedCharacterId);
+                    Stage.Instance.UpdateTableUserName(table,player.DisplayName);
                     Debug.Log($"Player joined lobby: {player.DisplayName} with CharacterID: {player.SelectedCharacterId}");
                     displayedPlayerIds.Add(player.PlayerId);
                 }

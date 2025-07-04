@@ -96,6 +96,8 @@ namespace RedGaint
         public static readonly string FacebookToken = "NotDefined";
         public static readonly string AnonimusToken = "NotDefined";
         
+        //Todo: will be removed later      
+        public static readonly string UserDeafultPassword = "Rg#9vT!2pLxQ\n";
         //Asset Locations
         public static readonly string TurntablePrefabPath="4_Prefabs/Metagame/Stage/Turntable";
         // public static string UserName = "NotDefined";

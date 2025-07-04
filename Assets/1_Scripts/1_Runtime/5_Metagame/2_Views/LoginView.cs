@@ -12,7 +12,7 @@ namespace RedGaint.Network.Runtime
     {
         private Label statusLabel;
         private TextField usernameField;
-        private TextField passwordField;
+        // private TextField passwordField;
 
         private Button anonymousSignInButton;
         private Button usernameSignInButton;
@@ -20,7 +20,8 @@ namespace RedGaint.Network.Runtime
         private Button googleSignInButton;
         private Button facebookSignInButton;
         private Button UserSignUpButton;
-
+        private Button MainMenuButton;
+        
         private Action onAnonymousClick;
         private Action onUserSignInClick;
         private Action onAppleClick;
@@ -34,7 +35,7 @@ namespace RedGaint.Network.Runtime
             // Fetch elements by name (ensure these match your UXML names)
             statusLabel = root.Q<Label>("StatusLabel");
             usernameField = root.Q<TextField>("UsernameField");
-            passwordField = root.Q<TextField>("PasswordField");
+            // passwordField = root.Q<TextField>("PasswordField");
             
             anonymousSignInButton = root.Q<Button>("AnonymousSignInButton");
             usernameSignInButton = root.Q<Button>("UsernameSignInButton");
@@ -43,6 +44,8 @@ namespace RedGaint.Network.Runtime
             appleSignInButton = root.Q<Button>("AppleSignInButton");
             googleSignInButton = root.Q<Button>("GoogleSignInButton");
             facebookSignInButton = root.Q<Button>("FacebookSignInButton");
+            MainMenuButton = root.Q<Button>("MainMenuButton");
+
 
             // Set up actions
             onUserSignInClick = OnSignInClicked;
@@ -54,7 +57,7 @@ namespace RedGaint.Network.Runtime
 
             // Add listeners
             anonymousSignInButton.clicked += onAnonymousClick;
-            
+            MainMenuButton.clicked += OnMainMenuClicked;
             usernameSignInButton.clicked += onUserSignInClick;
             
             appleSignInButton.clicked += onAppleClick;
@@ -62,6 +65,12 @@ namespace RedGaint.Network.Runtime
             facebookSignInButton.clicked += onFacebookClick;
             
             UserSignUpButton.clicked += SignUpUser;
+        }
+
+        private void OnMainMenuClicked()
+        {
+            App.View.MainMenu.Show();
+            App.View.LoginView.Hide();
         }
 
         async void Start()
@@ -84,7 +93,19 @@ namespace RedGaint.Network.Runtime
             if (facebookSignInButton != null) facebookSignInButton.clicked -= onFacebookClick;
             if (UserSignUpButton != null) UserSignUpButton.clicked -= SignUpUser;
         }
-
+        // private UserData.PlayerProfileData  CreateNewUserProfile(string username)
+        // {
+        //     UserData.PlayerProfileData newProfile = new();
+        //     newProfile.PlayerId = AuthenticationService.Instance.PlayerId;
+        //     newProfile.Username = username;
+        //     newProfile.AvatarId = Guid.NewGuid().ToString();
+        //     newProfile.CharacterId = "1";
+        //     newProfile.CurrentLevelId = "Level_01";
+        //     newProfile.XP = 100;
+        //     newProfile.Coins = 100;
+        //     newProfile.ProgressLevel = 0;
+        //     return newProfile;
+        // }
         private async void AttemptSignIn(UnityServicesInitializer.SignInMethod method)
         {
             statusLabel.text = $"Signing in with {method}...";
@@ -100,10 +121,13 @@ namespace RedGaint.Network.Runtime
         private async void SignUpUser()
         {
             bool status = false;
-            if (!string.IsNullOrEmpty(usernameField.text) && !string.IsNullOrEmpty(passwordField.text))
+            
+            //if (!string.IsNullOrEmpty(usernameField.text) && !string.IsNullOrEmpty(passwordField.text))
+            if (!string.IsNullOrEmpty(usernameField.text))
+
             {
                 statusLabel.text = $"Creating a new user...";
-                status = await UnityServicesInitializer.Instance.TrySignUp(usernameField.text, passwordField.text);
+                status = await UnityServicesInitializer.Instance.TrySignUp(usernameField.text, GlobalStaticVariables.UserDeafultPassword);
             }
             else
             {
@@ -114,14 +138,14 @@ namespace RedGaint.Network.Runtime
             {
                 string cloudEncryptionKey = UserData.CloudPlayerProfileHandler.GetEncryptionKeyFromCloud();
                 string username = usernameField.text;
-                if (string.IsNullOrEmpty(passwordField.text))
-                {
-                    Debug.LogError("Error: Password is empty.");
-                    UnityServicesInitializer.Instance.TrySignOut();
-                    return;
-                }
+                // if (string.IsNullOrEmpty(passwordField.text))
+                // {
+                //     Debug.LogError("Error: Password is empty.");
+                //     UnityServicesInitializer.Instance.TrySignOut();
+                //     return;
+                // }
 #if UNITY_EDITOR
-                EditorCredentialManager.SaveCredentialsToFile(username,passwordField.text, cloudEncryptionKey);
+                EditorCredentialManager.SaveCredentialsToFile(username,GlobalStaticVariables.UserDeafultPassword, cloudEncryptionKey);
 #else
                 UserCredentialManager.SaveCredentials(username, passwordField.text, cloudEncryptionKey);
 #endif
@@ -133,38 +157,33 @@ namespace RedGaint.Network.Runtime
                     App.View.LoginView.Hide();
                 }
             }
+            else
+            {
+                statusLabel.text = $"{usernameField.text} is blocked..!!";
+            }
         }
         
-        
-        private UserData.PlayerProfileData  CreateNewUserProfile(string username)
-        {
-            UserData.PlayerProfileData newProfile = new();
-            newProfile.PlayerId = AuthenticationService.Instance.PlayerId;
-            newProfile.Username = username;
-            newProfile.AvatarId = Guid.NewGuid().ToString();
-            newProfile.CharacterId = "1";
-            newProfile.CurrentLevelId = "Level_01";
-            newProfile.XP = 100;
-            newProfile.Coins = 100;
-            newProfile.ProgressLevel = 0;
-            return newProfile;
-        }
         
         private async void OnSignInClicked()
         {
             string username = usernameField.value;
-            string password = passwordField.value;
+            //string password = passwordField.value;
+            string password = GlobalStaticVariables.UserDeafultPassword;
 
-            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+            if (string.IsNullOrWhiteSpace(username) )//|| string.IsNullOrWhiteSpace(password))
             {
-                statusLabel.text = "Please enter a username and password.";
+                statusLabel.text = "Please enter a username";
                 return;
             }
 
-            statusLabel.text = "Signing in with username & password...";
-            var result=await UnityServicesInitializer.Instance.InitializeAndSignIn(UnityServicesInitializer.SignInMethod.UsernamePassword,new Tuple<string, string>(username,password));
+            statusLabel.text = $"Signing in {username}...";
+            UnityServicesInitializer.SignInResult result=await UnityServicesInitializer.Instance.InitializeAndSignIn(UnityServicesInitializer.SignInMethod.UsernamePassword,new Tuple<string, string>(username,password));
             if(result.Success)
                 UpdateUserProfile(UnityServicesInitializer.SignInMethod.UsernamePassword, result.Username);
+            else
+            {
+                SignUpUser();
+            }
         }
 
         private async Task UpdateUserProfile(UnityServicesInitializer.SignInMethod method,string username)

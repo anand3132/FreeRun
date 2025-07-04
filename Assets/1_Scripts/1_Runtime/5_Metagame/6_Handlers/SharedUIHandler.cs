@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -41,10 +42,21 @@ namespace RedGaint.Network.Runtime
 
         private void OnQuitButtonClicked()
         {
+            // fire and forget, but awaited internally
+            _ = HandleQuitAsync();
+        }
+
+        private async Task HandleQuitAsync()
+        {
+            bool saveSuccessful = await UserProfileManager.Instance.UpdatePlayerProfile(true);
+
+            // Optional: log or handle if saving failed
+            Debug.Log($"Save successful: {saveSuccessful}");
+
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #else
-            Application.Quit();
+    Application.Quit();
 #endif
         }
     }

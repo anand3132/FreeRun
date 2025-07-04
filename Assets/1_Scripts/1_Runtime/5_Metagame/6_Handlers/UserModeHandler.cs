@@ -12,7 +12,6 @@ namespace RedGaint.Network.Runtime
         public void Initialize()
         {
              _ui.NameLabel.text = "Hello " +UserProfileManager.CurrentUser?.Username ?? "FreeRun";
-             Debug.Log("user called");
             _ui.ProfileButton.clicked += OnClickProfile;
             _ui.ProfileButton.text = GlobalTextBridge.ProfileButtonText;
         }

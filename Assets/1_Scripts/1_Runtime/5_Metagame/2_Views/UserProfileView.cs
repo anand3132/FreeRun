@@ -30,7 +30,7 @@ namespace RedGaint.Network.Runtime
             
             m_NextButton.clicked += OnNextClicked;
             m_PreviousButton.clicked += OnPreviousClicked;
-            m_MainMenuButton.clicked += OnBackClicked;
+            m_MainMenuButton.clicked += OnMainMenuClicked;
             m_StartMultiplayerButton.clicked += OnStartMultiplayerClicked;
             if (currentStageFocused==-1)
                 currentStageFocused = Stage.Instance.GetAvailableTable();
@@ -40,28 +40,34 @@ namespace RedGaint.Network.Runtime
 
         void OnNextClicked()
         {
-            Stage.Instance.ShowNextCharacterOnTable(currentStageFocused);
             if (Stage.Instance.TryGetCurrentCharacterOnStage(currentStageFocused, out Character currentCharacter))
             {
-                m_ModelNameLabel.text = $"Selected Model: {currentCharacter.DisplayName}";
+                Stage.Instance.ShowNextCharacterOnTable(currentStageFocused, currentCharacter.Id);
+                Stage.Instance.TryGetCurrentCharacterOnStage(currentStageFocused, out var nextCharacter);
+                m_ModelNameLabel.text = $"Selected Model: {nextCharacter.DisplayName}";
+                IsProfileDirty = true;
             }
-            IsProfileDirty = true;
         }
+
 
         void OnPreviousClicked()
         {
-            Stage.Instance.ShowPreviousCharacterOnTable(currentStageFocused);
             if (Stage.Instance.TryGetCurrentCharacterOnStage(currentStageFocused, out Character currentCharacter))
             {
-                m_ModelNameLabel.text = $"Selected Model: {currentCharacter.DisplayName}";
+                Stage.Instance.ShowPreviousCharacterOnTable(currentStageFocused, currentCharacter.Id);
+                Stage.Instance.TryGetCurrentCharacterOnStage(currentStageFocused, out var previousCharacter);
+                m_ModelNameLabel.text = $"Selected Model: {previousCharacter.DisplayName}";
+                IsProfileDirty = true;
             }
-            IsProfileDirty = true;
         }
-
-        void OnBackClicked()
+        void OnMainMenuClicked()
         {
             MetagameApplication.Instance.Broadcast(new EnterMainMenuEvent());
             Debug.Log(App.View.Name());
+            if(Stage.Instance.TryGetCurrentCharacterOnStage(currentStageFocused, out var characterOnStage)){
+                UserProfileManager.CurrentUser.CharacterId = characterOnStage.Id;
+                UserProfileManager.Instance.UpdatePlayerProfile(false);
+            }
             App.View.UserProfileView.Hide();
         }
 
@@ -96,25 +102,38 @@ namespace RedGaint.Network.Runtime
 
         void UpdateModelView(int stageID, string characterID)
         {
-           
-            Stage.Instance.ShowCharacterOnTable(currentStageFocused, characterID);
-            // Stage.Instance.ShowCharacterOnTable(currentStageFocused++, "2");
-            // Stage.Instance.ShowCharacterOnTable(currentStageFocused++, "3");
-            // Stage.Instance.ShowCharacterOnTable(currentStageFocused++, "4");
-            // Stage.Instance.ShowCharacterOnTable(currentStageFocused++, "1");
-            // Stage.Instance.ShowCharacterOnTable(currentStageFocused++, "2");
+            var characters = Stage.Instance.characterDatabase.GetAllCharacters();
+            int characterIndex = Array.FindIndex(characters, c => c.Id == characterID);
+    
+            if (characterIndex == -1)
+            {
+                Debug.LogWarning($"Character ID '{characterID}' not found in character database. Defaulting to first character.");
+                characterIndex = 0;
+            }
 
+            // Set the index mapping correctly
+            if (!Stage.Instance.currentCharacterIndexes.ContainsKey(stageID))
+            {
+                Stage.Instance.currentCharacterIndexes[stageID] = characterIndex;
+            }
+            else
+            {
+                Stage.Instance.currentCharacterIndexes[stageID] = characterIndex;
+            }
+
+            Stage.Instance.ShowCharacterOnTable(stageID, characters[characterIndex].Id);
             Stage.Instance.FocusStage();
-           // Stage.Instance.FocusCharacterOnTable(currentStageFocused);
+
             if (Stage.Instance.TryGetCurrentCharacterOnStage(stageID, out Character currentCharacter))
                 m_ModelNameLabel.text = $"Selected Model: {currentCharacter.DisplayName}";
         }
+
 
         void OnDestroy()
         {
             m_NextButton.clicked -= OnNextClicked;
             m_PreviousButton.clicked -= OnPreviousClicked;
-            m_MainMenuButton.clicked -= OnBackClicked;
+            m_MainMenuButton.clicked -= OnMainMenuClicked;
             m_StartMultiplayerButton.clicked -= OnStartMultiplayerClicked;
         }
     }
