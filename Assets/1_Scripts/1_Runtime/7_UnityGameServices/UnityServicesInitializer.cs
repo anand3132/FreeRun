@@ -12,7 +12,7 @@ using Random = UnityEngine.Random;
 namespace RedGaint.Network.Runtime
 {
     [MultiplayerRoleRestricted]
-    internal class UnityServicesInitializer : MonoBehaviour,IBugsBunny
+    internal class UnityServicesInitializer : Singleton<UnityServicesInitializer>, IBugsBunny
     {
         public const string k_ServerID = "SERVER";
         public static UnityServicesInitializer Instance { get; private set; }

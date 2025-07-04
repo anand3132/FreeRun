@@ -17,8 +17,9 @@ namespace RedGaint.Network.Runtime.UserData
 
         public bool LogThisClass=> false;
 
-        private void Awake()
+        public override void Awake()
         {
+            base.Awake();
             _gameSessionModuleBinding = new GameSessionModuleBindings(CloudCodeService.Instance);
         }
 

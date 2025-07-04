@@ -38,6 +38,8 @@ namespace RedGaint.Network.Runtime.ConnectionManagement
             });
 #endif
         }
+        
+#if UNITY_SERVER       
         private async Task FetchAllocationPayloadAsync()
         {
             try
@@ -60,7 +62,7 @@ namespace RedGaint.Network.Runtime.ConnectionManagement
                 Debug.LogError($"❌ Exception while fetching allocation payload: {ex.Message}");
             }
         }
-
+#endif
         private void LogAllocationPayload()
         {
             if (_allocationPayload == null)
