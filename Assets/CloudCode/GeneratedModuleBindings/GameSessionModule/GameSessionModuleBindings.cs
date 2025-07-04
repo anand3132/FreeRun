@@ -13,25 +13,78 @@ namespace Unity.Services.CloudCode.GeneratedBindings
             k_Service = service;
         }
 
-        public async Task<string> SayHello(string name)
+        public async Task<RedGaint.Network.GameSessionModule.SessionResponse> StartOrJoinSession(RedGaint.Network.GameSessionModule.SessionRequest request)
         {
-            return await k_Service.CallModuleEndpointAsync<string>(
-                "GameSessionModule",
-                "SayHello",
-                new Dictionary<string, object>()
-                {
-                    {"name", name},
-                });
-        }
-
-        public async Task<RedGaint.Network.GameSessionModule.GameSession_SessionResponse> StartOrJoinSession(RedGaint.Network.GameSessionModule.GameSession_SessionRequest request)
-        {
-            return await k_Service.CallModuleEndpointAsync<RedGaint.Network.GameSessionModule.GameSession_SessionResponse>(
+            return await k_Service.CallModuleEndpointAsync<RedGaint.Network.GameSessionModule.SessionResponse>(
                 "GameSessionModule",
                 "StartOrJoinSession",
                 new Dictionary<string, object>()
                 {
                     {"request", request},
+                });
+        }
+
+        public async Task<List<RedGaint.Network.GameSessionModule.PlayerSummary>> GetLobbyPlayers(RedGaint.Network.GameSessionModule.LobbyRequest request)
+        {
+            return await k_Service.CallModuleEndpointAsync<List<RedGaint.Network.GameSessionModule.PlayerSummary>>(
+                "GameSessionModule",
+                "GetLobbyPlayers",
+                new Dictionary<string, object>()
+                {
+                    {"request", request},
+                });
+        }
+
+        public async Task<string> EndGameSession(RedGaint.Network.GameSessionModule.LobbyRequest request)
+        {
+            return await k_Service.CallModuleEndpointAsync<string>(
+                "GameSessionModule",
+                "EndGameSession",
+                new Dictionary<string, object>()
+                {
+                    {"request", request},
+                });
+        }
+
+        public async Task<RedGaint.Network.GameSessionModule.ServerAllocationResult> GetServerDetails(RedGaint.Network.GameSessionModule.LobbyRequest request)
+        {
+            return await k_Service.CallModuleEndpointAsync<RedGaint.Network.GameSessionModule.ServerAllocationResult>(
+                "GameSessionModule",
+                "GetServerDetails",
+                new Dictionary<string, object>()
+                {
+                    {"request", request},
+                });
+        }
+
+        public async Task<string> ReleaseServer(RedGaint.Network.GameSessionModule.LobbyRequest request)
+        {
+            return await k_Service.CallModuleEndpointAsync<string>(
+                "GameSessionModule",
+                "ReleaseServer",
+                new Dictionary<string, object>()
+                {
+                    {"request", request},
+                });
+        }
+
+        public async Task<string> GetDebugLog()
+        {
+            return await k_Service.CallModuleEndpointAsync<string>(
+                "GameSessionModule",
+                "GetDebugLog",
+                new Dictionary<string, object>()
+                {
+                });
+        }
+
+        public async Task<string> ClearDebugLog()
+        {
+            return await k_Service.CallModuleEndpointAsync<string>(
+                "GameSessionModule",
+                "ClearDebugLog",
+                new Dictionary<string, object>()
+                {
                 });
         }
     }
