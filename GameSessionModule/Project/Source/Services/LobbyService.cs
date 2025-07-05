@@ -81,14 +81,21 @@ namespace RedGaint.Network.GameSessionModule
 
             await _monitorService.CheckAndStartServerIfLobbyFull(ctx, response.Data);
 
+            // ✅ Step 1: Get raw players
+            List<Player> players = await GetLobbyPlayersRaw(ctx, response.Data.Id);
+
+            // ✅ Step 2: Build player summaries with correct server check
+            var playerSummaries = BuildPlayerSummaries(players, response.Data.Id);
+
             return new SessionResponse
             {
                 LobbyId = response.Data.Id,
                 LobbyName = response.Data.Name,
-                Players = await GetLobbyPlayers(ctx, response.Data.Id), // Add this line
+                Players = playerSummaries,
                 Message = $"Player {playerId} joined existing lobby."
             };
         }
+
 
         private async Task<SessionResponse> CreateNewLobby(
             IExecutionContext ctx,
@@ -97,7 +104,7 @@ namespace RedGaint.Network.GameSessionModule
             string xpGroup,
             Dictionary<string, PlayerDataObject> playerData)
         {
-           CloudDebugLogger.LogInfo("➡️ Entered CreateNewLobby()");
+            CloudDebugLogger.LogInfo("➡️ Entered CreateNewLobby()");
 
             string name = $"AutoLobby_{DateTime.UtcNow:yyyyMMddHHmmssfff}";
             Player player = new Player(id: playerId, data: playerData);
@@ -141,11 +148,17 @@ namespace RedGaint.Network.GameSessionModule
                 )
             );
 
+            // ✅ Step 1: Fetch raw player list
+            var players = await GetLobbyPlayersRaw(ctx, result.Data.Id);
+
+            // ✅ Step 2: Build PlayerSummary list
+            var playerSummaries = BuildPlayerSummaries(players, result.Data.Id);
+
             return new SessionResponse
             {
                 LobbyId = result.Data.Id,
                 LobbyName = result.Data.Name,
-               Players = await GetLobbyPlayers(ctx, result.Data.Id), // Add this line
+                Players = playerSummaries,
                 Message = $"Player {playerId} created a new lobby."
             };
         }
@@ -185,20 +198,20 @@ namespace RedGaint.Network.GameSessionModule
                 lobby.Players.Count < GameConfig.MaxPlayers);
         }
 
-        public async Task<List<PlayerSummary>> GetLobbyPlayers(IExecutionContext ctx, string lobbyId)
+        public async Task<List<PlayerSummary>> GetLobbyPlayers1(IExecutionContext ctx, string lobbyId)
         {
             CloudDebugLogger.LogInfo("➡️ Entered GetLobbyPlayers()");
-
+        
             ApiResponse<Lobby> response = await _client.Lobby.GetLobbyAsync(
                 executionContext: ctx,
                 accessToken: ctx.AccessToken,
                 lobbyId: lobbyId
             );
-
+        
             List<PlayerSummary> players = new List<PlayerSummary>();
             var server = _serverService.GetAllocatedServer(lobbyId);
             bool isLobbyReady = response.Data.Players.Count >= GameConfig.MaxPlayers && server != null;
-
+        
             int index = 1;
             foreach (Player player in response.Data.Players)
             {
@@ -208,7 +221,7 @@ namespace RedGaint.Network.GameSessionModule
                 string selectedCharacterId = player.Data?.TryGetValue("characterId", out var charObj) == true
                     ? charObj.Value
                     : "None";
-
+        
                 players.Add(new PlayerSummary
                 {
                     PlayerId = player.Id,
@@ -219,8 +232,64 @@ namespace RedGaint.Network.GameSessionModule
                     MaxPlayersAllowed = GameConfig.MaxPlayers
                 });
             }
-
+        
             return players;
         }
+        
+        private async Task<List<Player>> GetLobbyPlayersRaw(IExecutionContext ctx, string lobbyId)
+        {
+            CloudDebugLogger.LogInfo("➡️ Entered GetLobbyPlayersRaw()");
+
+            ApiResponse<Lobby> response = await _client.Lobby.GetLobbyAsync(
+                executionContext: ctx,
+                accessToken: ctx.AccessToken,
+                lobbyId: lobbyId
+            );
+
+            return response.Data?.Players ?? new List<Player>();
+        }
+
+        private List<PlayerSummary> BuildPlayerSummaries(List<Player> players, string lobbyId)
+        {
+            CloudDebugLogger.LogInfo("➡️ Entered BuildPlayerSummaries()");
+
+            var server = _serverService.GetAllocatedServer(lobbyId);
+            bool isLobbyReady = players.Count >= GameConfig.MaxPlayers && server != null;
+
+            var summaries = new List<PlayerSummary>();
+            int index = 1;
+
+            foreach (var player in players)
+            {
+                string displayName = player.Data?.TryGetValue("playerName", out var nameObj) == true
+                    ? nameObj.Value
+                    : "Unknown";
+
+                string selectedCharacterId = player.Data?.TryGetValue("characterId", out var charObj) == true
+                    ? charObj.Value
+                    : "None";
+
+                summaries.Add(new PlayerSummary
+                {
+                    PlayerId = player.Id,
+                    DisplayName = displayName,
+                    SelectedCharacterId = selectedCharacterId,
+                    IsLobbyReady = isLobbyReady,
+                    JoinOrder = index++,
+                    MaxPlayersAllowed = GameConfig.MaxPlayers
+                });
+            }
+
+            return summaries;
+        }
+
+        public async Task<List<PlayerSummary>> GetLobbyPlayers(IExecutionContext ctx, string lobbyId)
+        {
+            CloudDebugLogger.LogInfo("➡️ Entered GetLobbyPlayers()");
+            var players = await GetLobbyPlayersRaw(ctx, lobbyId);
+            return BuildPlayerSummaries(players, lobbyId);
+        }
+
+        
     }
 }

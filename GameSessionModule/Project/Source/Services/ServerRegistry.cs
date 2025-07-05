@@ -50,9 +50,6 @@ namespace RedGaint.Network.GameSessionModule
                     CloudDebugLogger.LogInfo($"✅ Retrieved server details: IP = {allocationInfo.Ipv4}, Port = {allocationInfo.GamePort}");
                     return allocationInfo;
                 }
-
-                string timestamp = DateTime.UtcNow.ToString("HH:mm:ss");
-                CloudDebugLogger.LogInfo($"⚠️ > {timestamp} < Allocation found, but IP is not yet available. ipv4 : {allocationInfo.Ipv4}, port : {allocationInfo.GamePort}...");
                 CloudDebugLogger.LogWarning($"⚠️ Allocation found, but IP is not yet available. Retrying in {delaySeconds}s...");
                 await Task.Delay(TimeSpan.FromSeconds(delaySeconds));
             }

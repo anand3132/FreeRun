@@ -45,7 +45,7 @@ namespace RedGaint.Network.GameSessionModule
         {
             try
             {
-                CloudDebugLogger.LogInfo("<color=green> Allocation Server Log </color>");
+                CloudDebugLogger.LogInfo("<color=green>GameSession: secession start here : Allocation Server Logs ---------- </color>");
                 return await _lobbyService.HandleStartOrJoinSession(ctx, request);
             }
             catch (System.Exception ex)
