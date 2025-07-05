@@ -28,7 +28,7 @@ namespace RedGaint.Network.Runtime.UserData
     }
 
     [Serializable]
-    public class PlayerData
+    public class PlayerSummary
     {
         public string PlayerId { get; set; } // Unique ID for the player
         public string DisplayName { get; set; } // Player's name for display (was: PlayerName)
@@ -38,4 +38,5 @@ namespace RedGaint.Network.Runtime.UserData
         public int JoinOrder { get; set; } // The player's join position (1-based)
         public int MaxPlayersAllowed { get; set; }
     }
+
 }

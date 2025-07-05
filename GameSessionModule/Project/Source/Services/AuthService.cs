@@ -10,9 +10,8 @@ namespace RedGaint.Network.GameSessionModule
 {
     public class AuthService
     {
-        private readonly ILogger<AuthService> _logger;
+        public AuthService(ILogger<AuthService> logger) { } // Retained to satisfy DI, even if unused
 
-        public AuthService(ILogger<AuthService> logger)=> _logger = logger;
         public async Task<string> GetAccessTokenAsync()
         {
             var httpClient = new HttpClient();
@@ -22,22 +21,21 @@ namespace RedGaint.Network.GameSessionModule
             request.Headers.Authorization = new AuthenticationHeaderValue("Basic", authHeader);
             request.Content = new StringContent("{}", Encoding.UTF8, "application/json");
 
-            _logger.LogInformation("🔐 Requesting Unity access token...");
+            CloudDebugLogger.LogInfo("🔐 Requesting Unity access token...");
 
             var response = await httpClient.SendAsync(request);
             var responseBody = await response.Content.ReadAsStringAsync();
 
             if (!response.IsSuccessStatusCode)
             {
-                _logger.LogError("❌ Token request failed. StatusCode: {StatusCode}, Response: {ResponseBody}", 
-                    response.StatusCode, responseBody);
+                CloudDebugLogger.LogError($"❌ Token request failed. StatusCode: {response.StatusCode}, Response: {responseBody}");
                 throw new Exception($"Token request failed: {responseBody}");
             }
 
             var json = JsonDocument.Parse(responseBody);
             var accessToken = json.RootElement.GetProperty("accessToken").GetString();
 
-            _logger.LogInformation("✅ Successfully retrieved Unity access token.");
+            CloudDebugLogger.LogInfo("✅ Successfully retrieved Unity access token.");
             return accessToken;
         }
     }

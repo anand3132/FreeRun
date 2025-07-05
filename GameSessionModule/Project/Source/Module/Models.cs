@@ -17,8 +17,8 @@ namespace RedGaint.Network.GameSessionModule
         public string LobbyId { get; set; }
         public string LobbyName { get; set; }
         public string Message { get; set; }
+        public List<PlayerSummary> Players { get; set; } 
     }
-
     public class LobbyRequest
     {
         public string lobbyId { get; set; }

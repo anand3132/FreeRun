@@ -1,10 +1,13 @@
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 using RedGaint.Network.Runtime.ConnectionManagement;
+using RedGaint.Network.Runtime.UserData;
 using Unity.Multiplayer;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 using ConnectionEvent = RedGaint.Network.Runtime.ConnectionManagement.ConnectionEvent;
 using ConnectionManagement_ConnectionEvent = RedGaint.Network.Runtime.ConnectionManagement.ConnectionEvent;
 
@@ -128,7 +131,7 @@ namespace RedGaint.Network.Runtime.ApplicationLifecycle
                     case ConnectStatus.ServerEndedSession:
                     case ConnectStatus.StartServerFailed:
                         // If server ends networked session or fails to start, quit the application
-                        Quit();
+                        //Quit();
                         break;
                     case ConnectStatus.Success:
                         // If server successfully starts, load game scene
@@ -147,11 +150,18 @@ namespace RedGaint.Network.Runtime.ApplicationLifecycle
                         SceneManager.LoadScene(GlobalStaticVariables.MetaScene);
                         break;
                 }
+                Debug.Log("Client exited--------------");
             }
+        }
+
+        void OnApplicationQuit()
+        {
+            Quit();
         }
 
         void Quit()
         {
+
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #else

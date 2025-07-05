@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using RedGaint.Network.Runtime.UserData;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -26,23 +27,38 @@ namespace RedGaint.Network.Runtime
 
             m_TitleLabel.text = GlobalTextBridge.LobbyWaitingText;
         }
+        private System.Action quitClickHandler;
 
         void OnEnable()
         {
-            m_ExitButton.clicked += OnClickQuitClicked;
+            quitClickHandler = () => _ = OnClickQuitClickedAsync();
+            m_ExitButton.clicked += quitClickHandler;
+            
         }
 
         void OnDisable()
         {
-            m_ExitButton.clicked -= OnClickQuitClicked;
+            m_ExitButton.clicked -= quitClickHandler;
         }
 
-        private void OnClickQuitClicked()
+        private async Task OnClickQuitClickedAsync()
         {
-            // Optional: add confirmation or debug logic
-            Debug.Log("Quit clicked in lobby (optional)");
+            Debug.Log("<color=blue>Allocation Server Logs---------------------------------------</color>");
+    
+            string log = await CloudModule.Instance.GetAllocationServerLog();
+            Debug.Log(log);
+
+            // string lobbyId = CloudModule.Instance.CurrentLobbyId;
+            // if (!string.IsNullOrEmpty(lobbyId))
+            // {
+            //     string result = await CloudModule.Instance.EndGameSessionAsync(lobbyId);
+            //     Debug.Log(result);
+            // }
+
+            Debug.Log("Quit clicked in lobby");
         }
 
+        
         /// <summary>
         /// Updates the countdown display.
         /// </summary>
@@ -55,7 +71,7 @@ namespace RedGaint.Network.Runtime
         /// Updates the lobby view with all currently connected players.
         /// Shows their character models using Stage.Instance.
         /// </summary>
-        public void UpdatePlayerList(List<PlayerData> players)
+        public void UpdatePlayerList(List<PlayerSummary> players)
         {
             foreach (var player in players)
             {
@@ -64,7 +80,7 @@ namespace RedGaint.Network.Runtime
                     var table = Stage.Instance.GetAvailableTable();
                     Stage.Instance.ShowCharacterOnTable(table, player.SelectedCharacterId);
                     Stage.Instance.UpdateTableUserName(table,player.DisplayName);
-                    Debug.Log($"Player joined lobby: {player.DisplayName} with CharacterID: {player.SelectedCharacterId}");
+                    Debug.Log($"Player joined lobby: {player.DisplayName} with CharacterID: {player.SelectedCharacterId}:name{player.DisplayName}");
                     displayedPlayerIds.Add(player.PlayerId);
                 }
             }

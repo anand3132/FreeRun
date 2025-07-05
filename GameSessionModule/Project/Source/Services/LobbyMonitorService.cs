@@ -20,12 +20,10 @@ namespace RedGaint.Network.GameSessionModule
 
         public LobbyMonitorService(
             IGameApiClient client,
-            ILogger<LobbyMonitorService> logger,
             BotService botService,
             DedicatedServerService serverService)
         {
             _client = client;
-            _logger = logger;
             _botService = botService;
             _serverService = serverService;
         }
@@ -72,7 +70,8 @@ namespace RedGaint.Network.GameSessionModule
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"❌ Lobby timeout handling failed for lobby {lobbyId}");
+                
+                CloudDebugLogger.LogError(ex, $"❌ Lobby timeout handling failed for lobby {lobbyId}");
             }
         }
         

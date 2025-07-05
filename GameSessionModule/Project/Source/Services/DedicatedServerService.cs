@@ -9,22 +9,19 @@ namespace RedGaint.Network.GameSessionModule
 {
     public class DedicatedServerService
     {
-        private readonly ILogger<DedicatedServerService> _logger;
         private readonly AuthService _authService;
         private readonly ServerRegistry _serverRegistry;
         private readonly HttpHelper _httpHelper;
 
-        // Thread-safe in-memory map of lobbyId -> allocated server
         private static readonly ConcurrentDictionary<string, ServerAllocationResult> _allocatedServers =
             new ConcurrentDictionary<string, ServerAllocationResult>();
 
         public DedicatedServerService(
-            ILogger<DedicatedServerService> logger,
+            ILogger<DedicatedServerService> logger, // still required if used elsewhere
             HttpHelper httpHelper,
             AuthService authService,
             ServerRegistry serverRegistry)
         {
-            _logger = logger;
             _authService = authService;
             _httpHelper = httpHelper;
             _serverRegistry = serverRegistry;
@@ -37,18 +34,18 @@ namespace RedGaint.Network.GameSessionModule
         {
             if (_allocatedServers.ContainsKey(lobbyId))
             {
-                _logger.LogWarning($"⚠️ Server already allocated for Lobby: {lobbyId}");
+                CloudDebugLogger.LogWarning($"⚠️ Server already allocated for Lobby: {lobbyId}");
                 return _allocatedServers[lobbyId];
             }
 
-            _logger.LogInformation($"Allocating server for Lobby: {lobbyId} with {players.Count} players");
+            CloudDebugLogger.LogInfo($"Allocating server for Lobby: {lobbyId} with {players.Count} players");
 
             string token = await _authService.GetAccessTokenAsync();
             var allocationData = await _serverRegistry.CreateAllocationAsync(token, lobbyId, players);
 
             if (allocationData == null)
             {
-                _logger.LogError($"❌ Allocation API returned null for Lobby: {lobbyId}");
+                CloudDebugLogger.LogError($"❌ Allocation API returned null for Lobby: {lobbyId}");
                 return null;
             }
 
@@ -59,7 +56,7 @@ namespace RedGaint.Network.GameSessionModule
 
             if (serverDetails == null)
             {
-                _logger.LogError($"❌ Failed to fetch server details for AllocationId: {allocationData.AllocationId}");
+                CloudDebugLogger.LogError($"❌ Failed to fetch server details for AllocationId: {allocationData.AllocationId}");
                 return null;
             }
 
@@ -75,7 +72,7 @@ namespace RedGaint.Network.GameSessionModule
 
             _allocatedServers.TryAdd(lobbyId, serverResult);
 
-            _logger.LogInformation($"✅ Server allocated - IP: {serverDetails.Ipv4}, Port: {serverDetails.GamePort}");
+            CloudDebugLogger.LogInfo($"✅ Server allocated - IP: {serverDetails.Ipv4}, Port: {serverDetails.GamePort}");
             return serverResult;
         }
 
@@ -105,25 +102,25 @@ namespace RedGaint.Network.GameSessionModule
                 if (removed)
                 {
                     _allocatedServers.TryRemove(lobbyId, out _);
-                    _logger.LogInformation($"🧹 Server allocation removed for Lobby: {lobbyId}");
+                    CloudDebugLogger.LogInfo($"🧹 Server allocation removed for Lobby: {lobbyId}");
                     return true;
                 }
 
-                _logger.LogError($"❌ Failed to remove allocation for Lobby: {lobbyId}");
+                CloudDebugLogger.LogError($"❌ Failed to remove allocation for Lobby: {lobbyId}");
                 return false;
             }
 
-            _logger.LogWarning($"⚠️ No server allocation found for Lobby: {lobbyId} to remove.");
+            CloudDebugLogger.LogWarning($"⚠️ No server allocation found for Lobby: {lobbyId} to remove.");
             return false;
         }
 
         public async Task<string> EndGameSessionAsync(string lobbyId)
         {
-            CloudDebugLogger.Log($"Ending game session for lobby {lobbyId}");
+            CloudDebugLogger.LogInfo($"Ending game session for lobby {lobbyId}");
 
             if (!_allocatedServers.ContainsKey(lobbyId))
             {
-                CloudDebugLogger.Log($"⚠️ No allocated server found for lobby {lobbyId}");
+                CloudDebugLogger.LogInfo($"⚠️ No allocated server found for lobby {lobbyId}");
                 return $"⚠️ No allocated server found for lobby {lobbyId}";
             }
 

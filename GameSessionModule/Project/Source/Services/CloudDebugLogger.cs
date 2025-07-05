@@ -1,34 +1,63 @@
 ﻿using System;
 using System.IO;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace RedGaint.Network.GameSessionModule
 {
     public static class CloudDebugLogger
     {
         private static readonly string LogFilePath = "/tmp/cloudcode_debug_log.txt";
-        private const int MaxReturnLength = 4000; // Max characters to return when queried
+        private const int MaxReturnLength = 4000;
+
+        // Backing ILogger instance
+        private static ILogger? _logger;
 
         /// <summary>
-        /// Appends a line to the debug log file.
+        /// Call this once during startup to enable ILogger logging
         /// </summary>
-        public static void Log(string message)
+        public static void Initialize(ILogger logger)
+        {
+            _logger = logger;
+        }
+
+        public static void LogInfo(string message)
+        {
+            _logger?.LogInformation(message);
+            LogInternal("INFO", message);
+        }
+
+        public static void LogWarning(string message)
+        {
+            _logger?.LogWarning(message);
+            LogInternal("WARN", message);
+        }
+
+        public static void LogError(string message)
+        {
+            _logger?.LogError(message);
+            LogInternal("ERROR", message);
+        }
+
+        public static void LogError(Exception ex, string message = "")
+        {
+            var errorMessage = $"{message}\nException: {ex.GetType().Name}: {ex.Message}\n{ex.StackTrace}";
+            _logger?.LogError(ex, message);
+            LogInternal("ERROR", errorMessage);
+        }
+
+        private static void LogInternal(string level, string message)
         {
             try
             {
-                string line = $"[{DateTime.UtcNow:HH:mm:ss}] {message}";
+                string line = $"[{DateTime.UtcNow:HH:mm:ss}] [{level}] {message}";
                 File.AppendAllText(LogFilePath, line + Environment.NewLine);
             }
             catch
             {
-                // Intentionally suppress file errors
+                // Silent fail
             }
         }
 
-        /// <summary>
-        /// Reads the last part of the log file, up to MaxReturnLength.
-        /// </summary>
         public static string GetRecentLogs()
         {
             if (!File.Exists(LogFilePath))
@@ -37,10 +66,9 @@ namespace RedGaint.Network.GameSessionModule
             try
             {
                 var content = File.ReadAllText(LogFilePath);
-                if (content.Length <= MaxReturnLength)
-                    return content;
-
-                return content.Substring(content.Length - MaxReturnLength);
+                return content.Length <= MaxReturnLength
+                    ? content
+                    : content.Substring(content.Length - MaxReturnLength);
             }
             catch
             {
@@ -48,9 +76,6 @@ namespace RedGaint.Network.GameSessionModule
             }
         }
 
-        /// <summary>
-        /// Clears the log file (optional).
-        /// </summary>
         public static void Clear()
         {
             try

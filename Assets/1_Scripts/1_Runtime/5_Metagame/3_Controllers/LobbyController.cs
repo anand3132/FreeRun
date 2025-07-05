@@ -68,8 +68,14 @@ namespace RedGaint.Network.Runtime
         {
             Debug.Log($"Starting lobby session for :  {AuthenticationService.Instance.PlayerId}");
             SessionResponse response = await CloudModule.Instance.StartOrJoinTheLobby();
-            string log = await CloudModule.Instance.GetAllocationServerLog();
-            Debug.Log(log);
+            // string log = await CloudModule.Instance.GetAllocationServerLog();
+            // Debug.Log(log);
+
+            if (response.Message == "Failed")
+            {
+                Debug.Log($"Failed to start lobby session for :  {AuthenticationService.Instance.PlayerId}");
+                return;
+            }
             currentLobbyId = response?.LobbyId;
 
             if (!string.IsNullOrEmpty(currentLobbyId))
@@ -79,6 +85,7 @@ namespace RedGaint.Network.Runtime
 
                 lobbyPollCoroutine = StartCoroutine(PollLobbyPlayers());
             }
+            
         }
 
 
@@ -115,7 +122,7 @@ namespace RedGaint.Network.Runtime
             }
         }
 
-        void UpdatePlayerView(List<PlayerData> players)
+        void UpdatePlayerView(List<PlayerSummary> players)
         {
             if (players != null)
             {
@@ -127,7 +134,7 @@ namespace RedGaint.Network.Runtime
             }
         }
 
-        bool IsSameSnapshot(List<PlayerData> a, List<PlayerData> b)
+        bool IsSameSnapshot(List<PlayerSummary> a, List<PlayerSummary> b)
         {
             if (a == null || b == null || a.Count != b.Count)
                 return false;
@@ -147,13 +154,13 @@ namespace RedGaint.Network.Runtime
 
         IEnumerator PollLobbyPlayers()
         {
-            List<PlayerData> previousSnapshot = null;
+            List<PlayerSummary> previousSnapshot = null;
             float timeout = 300f; // 5 minutes in seconds
             float elapsedTime = 0f;
 
             while (true)
             {
-                Task<List<PlayerData>> fetchTask = CloudModule.Instance.FetchPlayersFromLobby(currentLobbyId);
+                Task<List<PlayerSummary>> fetchTask = CloudModule.Instance.FetchPlayersFromLobby(currentLobbyId);
                 yield return new WaitUntil(() => fetchTask.IsCompleted);
 
                 if (fetchTask.Exception != null)
@@ -162,7 +169,7 @@ namespace RedGaint.Network.Runtime
                 }
                 else
                 {
-                    List<PlayerData> currentSnapshot = fetchTask.Result;
+                    List<PlayerSummary> currentSnapshot = fetchTask.Result;
 
                     if (currentSnapshot == null || currentSnapshot.Count == 0)
                     {

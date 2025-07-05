@@ -28,6 +28,8 @@ namespace RedGaint.Network.GameSessionModule
             _lobbyService = lobbyService;
             _logger = logger;
             _serverService = serverService;
+            CloudDebugLogger.Initialize(logger);
+
         }
 
         /// <summary>
@@ -43,12 +45,12 @@ namespace RedGaint.Network.GameSessionModule
         {
             try
             {
-                CloudDebugLogger.Log("StartOrJoinSession started ...");
+                CloudDebugLogger.LogInfo("<color=green> Allocation Server Log </color>");
                 return await _lobbyService.HandleStartOrJoinSession(ctx, request);
             }
             catch (System.Exception ex)
             {
-                _logger.LogError(ex, "Failed to start or join session");
+                CloudDebugLogger.LogError(ex, "Failed to start or join session");
                 return new SessionResponse { Message = $"Error: {ex.Message}" };
             }
         }
@@ -90,14 +92,14 @@ namespace RedGaint.Network.GameSessionModule
                 : $"⚠️ No active server found for Lobby: {request.lobbyId}";
         }
         
-        [CloudCodeFunction("GetDebugLog")]
-        public  async Task<string> GetDebugLog(IExecutionContext ctx)
+        [CloudCodeFunction("GetAllocationServerLogs")]
+        public  async Task<string> GetAllocationServerLogs(IExecutionContext ctx)
         {
             return await Task.FromResult(CloudDebugLogger.GetRecentLogs());
         }
 
-        [CloudCodeFunction("ClearDebugLog")]
-        public  async Task<string> ClearDebugLog(IExecutionContext ctx)
+        [CloudCodeFunction("ClearAllocationServerLogs")]
+        public  async Task<string> ClearAllocationServerLogs(IExecutionContext ctx)
         {
             CloudDebugLogger.Clear();
             return await Task.FromResult("Log file cleared.");

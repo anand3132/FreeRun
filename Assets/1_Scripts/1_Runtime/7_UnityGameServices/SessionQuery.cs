@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using RedGaint.Network.Runtime.UserData;
+
 namespace RedGaint.Network.Runtime
 {
     public class SessionQuery
@@ -9,6 +12,8 @@ namespace RedGaint.Network.Runtime
         public string LobbyId { get; set; }
         public string LobbyName { get; set; }
         public string Message { get; set; }
+        
+        public List<PlayerSummary> Players {get;set;}
     }
     public class ServerAllocationResult
     {

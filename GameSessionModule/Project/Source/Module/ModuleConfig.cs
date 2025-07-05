@@ -32,9 +32,7 @@ public class ModuleConfig : ICloudCodeSetup
         // Utility Classes
         // ------------------------------------
         config.Dependencies.AddSingleton<HttpHelper>();
-        config.Dependencies.AddSingleton<AuthService>();
         config.Dependencies.AddSingleton<ServerRegistry>();
-        config.Dependencies.AddSingleton<LobbyMonitorService>();
 
         
         // ------------------------------------
@@ -53,21 +51,12 @@ public class ModuleConfig : ICloudCodeSetup
         config.Dependencies.AddSingleton<PlayerDataBuilder>();
         config.Dependencies.AddSingleton<AuthService>();
         config.Dependencies.AddSingleton<BotService>();
-
-
-// ------------------------------------
-// Logging Services
-// ------------------------------------
-        var services = config.Dependencies;
-
-        RegisterLogger<GameSession>(services);
-        RegisterLogger<LobbyService>(services);
-        RegisterLogger<LobbyMonitorService>(services);
-        RegisterLogger<DedicatedServerService>(services);
-        RegisterLogger<AuthService>(services);
-        RegisterLogger<ServerRegistry>(services);
-        RegisterLogger<BotService>(services);
-        RegisterLogger<LobbyMonitorService>(services);
+        
+        
+        //ForLogger Service 
+        // ------------------------------------
+        // var services = config.Dependencies;
+        // RegisterLogger<LobbyMonitorService>(services);
 
     }
     
