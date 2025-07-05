@@ -3,6 +3,6 @@
     public static class GameConfig
     {
         public const int MaxPlayers = 2;
-        public const int LobbyTimeoutSeconds = 60;
+        public const int LobbyTimeoutSeconds = 10;
     }
 }

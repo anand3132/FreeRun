@@ -1,31 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
 using Unity.Services.Lobby.Model;
 
 namespace RedGaint.Network.GameSessionModule
 {
     public class BotService
     {
-        public Player CreateBot(int botIndex)
+        private readonly PlayerDataBuilder _dataBuilder;
+        private readonly Random _random = new Random();
+
+        public BotService(PlayerDataBuilder dataBuilder)
         {
-            return new Player(
-                id: $"bot_{Guid.NewGuid()}",
-                data: new Dictionary<string, PlayerDataObject>
-                {
-                    { "playerName", new PlayerDataObject($"Bot_{botIndex}", PlayerDataObject.VisibilityEnum.Public) },
-                    { "characterId", new PlayerDataObject("bot_char", PlayerDataObject.VisibilityEnum.Public) },
-                    { "isBot", new PlayerDataObject("true", PlayerDataObject.VisibilityEnum.Member) }
-                });
+            _dataBuilder = dataBuilder;
         }
 
-        public List<Player> CreateMultipleBots(int count)
+        public Player CreateBot(string unityPlayerId, int botIndex)
         {
-            var bots = new List<Player>();
-            for (int i = 0; i < count; i++)
-            {
-                bots.Add(CreateBot(i + 1));
-            }
-            return bots;
+            int characterId = _random.Next(1, 5); // Random value from 1 to 4
+            int xp = _random.Next(100, 999);     // XP range from 100 to 1000
+
+            var playerData = _dataBuilder.BuildPlayerData(
+                playerId: unityPlayerId,
+                characterId: characterId.ToString(),
+                playerName: $"Bot_{botIndex}",
+                xp: xp
+            );
+
+            // Add bot-specific fields if needed
+            playerData.Add("isBot", new PlayerDataObject("true", PlayerDataObject.VisibilityEnum.Member));
+            playerData.Add("botIndex", new PlayerDataObject(botIndex.ToString(), PlayerDataObject.VisibilityEnum.Member));
+
+            return new Player(id: unityPlayerId, data: playerData);
         }
     }
 }

@@ -214,7 +214,7 @@ namespace RedGaint.Network.Runtime
                 }
 
                 // Timeout check
-                elapsedTime += 3f; // Because we're waiting 3 seconds each loop
+                elapsedTime += 10f; // Because we're waiting 3 seconds each loop
                 if (elapsedTime >= timeout)
                 {
                     Debug.LogWarning("⏰ Timeout reached. Exiting lobby polling after 5 minutes.");

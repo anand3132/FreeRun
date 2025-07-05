@@ -33,7 +33,6 @@ public class ModuleConfig : ICloudCodeSetup
         // ------------------------------------
         config.Dependencies.AddSingleton<HttpHelper>();
         config.Dependencies.AddSingleton<ServerRegistry>();
-
         
         // ------------------------------------
         // Shared Utility Services

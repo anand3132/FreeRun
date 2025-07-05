@@ -65,6 +65,8 @@ namespace RedGaint.Network.GameSessionModule
         [CloudCodeFunction("GetLobbyPlayers")]
         public async Task<List<PlayerSummary>> GetLobbyPlayers(IExecutionContext ctx, LobbyRequest request)
         {
+            CloudDebugLogger.LogInfo("<color=red>GameSession: polling lobby data---------- </color>");
+
             return await _lobbyService.GetLobbyPlayers(ctx, request.lobbyId);
         }
         
