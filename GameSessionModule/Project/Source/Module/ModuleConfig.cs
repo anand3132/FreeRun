@@ -50,8 +50,8 @@ public class ModuleConfig : ICloudCodeSetup
         config.Dependencies.AddSingleton<PlayerDataBuilder>();
         config.Dependencies.AddSingleton<AuthService>();
         config.Dependencies.AddSingleton<BotService>();
-        
-        
+        config.Dependencies.AddSingleton<TestBotLobbyManager>();
+
         //ForLogger Service 
         // ------------------------------------
         // var services = config.Dependencies;

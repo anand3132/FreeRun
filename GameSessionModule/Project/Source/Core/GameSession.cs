@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.Services.CloudCode.Core;
 using Unity.Services.CloudCode.Apis;
+using Unity.Services.Lobby.Model;
 
 namespace RedGaint.Network.GameSessionModule
 {
@@ -16,6 +17,7 @@ namespace RedGaint.Network.GameSessionModule
         private readonly LobbyService _lobbyService;
         private readonly ILogger<GameSession> _logger;
         private readonly DedicatedServerService _serverService;
+        private readonly TestBotLobbyManager _testBotLobbyManager;
 
         /// <summary>
         /// Constructor for GameSession.
@@ -23,15 +25,19 @@ namespace RedGaint.Network.GameSessionModule
         /// </summary>
         /// <param name="lobbyService">Service that handles lobby creation/joining.</param>
         /// <param name="logger">Logger for tracking session events and errors.</param>
-        public GameSession(LobbyService lobbyService, ILogger<GameSession> logger,DedicatedServerService serverService)
+        public GameSession(LobbyService lobbyService, ILogger<GameSession> logger,DedicatedServerService serverService,TestBotLobbyManager testBotLobbyManager)
         {
             _lobbyService = lobbyService;
             _logger = logger;
             _serverService = serverService;
+            _testBotLobbyManager = testBotLobbyManager;
             CloudDebugLogger.Initialize(logger);
 
         }
 
+        
+        
+        
         /// <summary>
         /// Cloud Code entry point to start or join a game session.
         /// - Finds an existing matching lobby or creates a new one.
@@ -75,6 +81,14 @@ namespace RedGaint.Network.GameSessionModule
         {
             return _serverService.EndGameSessionAsync(request.lobbyId);
         }
+
+        
+        [CloudCodeFunction("CreateTestLobbyWithBots")]
+        public Task<string> CreateTestLobbyWithBots(IExecutionContext ctx, int botCount)
+        {
+            return  _testBotLobbyManager.CreateTestLobbyWithBots(ctx, botCount);
+        }
+
 
 
         [CloudCodeFunction("GetServerDetails")]

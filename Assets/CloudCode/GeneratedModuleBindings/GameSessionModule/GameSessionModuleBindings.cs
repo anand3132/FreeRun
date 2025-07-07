@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
-using UnityEngine;
 
 namespace Unity.Services.CloudCode.GeneratedBindings
 {
@@ -16,7 +15,6 @@ namespace Unity.Services.CloudCode.GeneratedBindings
 
         public async Task<RedGaint.Network.GameSessionModule.SessionResponse> StartOrJoinSession(RedGaint.Network.GameSessionModule.SessionRequest request)
         {
-            Debug.Log($"StartOrJoinSession got REquest :{request.PlayerName}: {request.PlayerId} : {request.CharacterId } : {request.Xp}");
             return await k_Service.CallModuleEndpointAsync<RedGaint.Network.GameSessionModule.SessionResponse>(
                 "GameSessionModule",
                 "StartOrJoinSession",
@@ -45,6 +43,17 @@ namespace Unity.Services.CloudCode.GeneratedBindings
                 new Dictionary<string, object>()
                 {
                     {"request", request},
+                });
+        }
+
+        public async Task<string> CreateTestLobbyWithBots(int botCount)
+        {
+            return await k_Service.CallModuleEndpointAsync<string>(
+                "GameSessionModule",
+                "CreateTestLobbyWithBots",
+                new Dictionary<string, object>()
+                {
+                    {"botCount", botCount},
                 });
         }
 

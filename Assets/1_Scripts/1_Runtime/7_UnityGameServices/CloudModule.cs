@@ -214,6 +214,12 @@ namespace RedGaint.Network.Runtime.UserData
 
         }
 
+        public async Task<string> TestAllocation()
+        {
+            var lobyid=await _gameSessionModuleBinding.CreateTestLobbyWithBots(2);
+            Debug.Log($"<color=red>Test Allocation Success!:{lobyid}</color>");
+            return await _gameSessionModuleBinding.GetAllocationServerLogs();
+        }
 
     }
 }

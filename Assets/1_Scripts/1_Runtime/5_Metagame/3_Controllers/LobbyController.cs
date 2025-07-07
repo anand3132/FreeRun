@@ -20,6 +20,7 @@ namespace RedGaint.Network.Runtime
         private float countdownTime;
         private Coroutine lobbyPollCoroutine;
         private string currentLobbyId;
+        public bool OnTest = true;
 
         void Awake()
         {
@@ -67,6 +68,14 @@ namespace RedGaint.Network.Runtime
         async Task StartLobbySession()
         {
             Debug.Log($"Starting lobby session for :  {AuthenticationService.Instance.PlayerId}");
+            
+            if(OnTest)
+            {
+                ConnectionManager.StartClient(GlobalStaticVariables.LoopBackIP, GlobalStaticVariables.LocalServerListeningPort);
+                Debug.Log("------------onTest Lobby enabled-----------------");
+                return;
+            }
+
             SessionResponse response = await CloudModule.Instance.StartOrJoinTheLobby();
             // string log = await CloudModule.Instance.GetAllocationServerLog();
             // Debug.Log(log);
@@ -77,6 +86,7 @@ namespace RedGaint.Network.Runtime
                 return;
             }
             currentLobbyId = response?.LobbyId;
+
 
             if (!string.IsNullOrEmpty(currentLobbyId))
             {
@@ -203,6 +213,7 @@ namespace RedGaint.Network.Runtime
                             {
                                 ServerAllocationResult result = serverTask.Result;
                                 Debug.Log($"🎯 Server ready: {result?.Ipv4}:{result?.GamePort}");
+                                
                                 ConnectionManager.StartClient(result.Ipv4, (ushort)result.GamePort);
 
                                 // Transition to game using server info

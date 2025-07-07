@@ -105,7 +105,9 @@ namespace RedGaint
         
         public static bool UserLoggedInStatus = false;
         
-        
+        //Locat Test Data
+        public static string LoopBackIP = "127.0.0.1";
+        public static ushort LocalServerListeningPort = 7777;
 
         // public static void LoadFromScriptableObject(UserProfile data)
         // {
