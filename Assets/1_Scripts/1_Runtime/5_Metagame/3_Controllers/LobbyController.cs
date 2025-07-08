@@ -20,7 +20,7 @@ namespace RedGaint.Network.Runtime
         private float countdownTime;
         private Coroutine lobbyPollCoroutine;
         private string currentLobbyId;
-        public bool OnTest = true;
+        public bool OnTest = false;
 
         void Awake()
         {

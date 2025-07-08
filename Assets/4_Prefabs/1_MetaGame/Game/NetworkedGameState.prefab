@@ -31,7 +31,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6336112528498422674}
+  - {fileID: 8665544881460612763}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7972869019894705392
@@ -46,14 +46,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 52913003
+  GlobalObjectIdHash: 219102247
+  InScenePlacedSourceGlobalObjectIdHash: 52913003
+  DeferredDespawnTick: 0
+  Ownership: 1
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
+  SceneMigrationSynchronization: 0
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!114 &6131515836354047163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,7 +71,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c49e45af4320b1741be4c52adf9aef91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &1948398865024159841
+  ShowTopMostFoldoutHeaderGroup: 1
+--- !u!1001 &3793805084826856808
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -125,40 +131,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3162684168667458613, guid: 10f700a6f3ad51d469fd3f0666f0f25b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4609601705292101169}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10f700a6f3ad51d469fd3f0666f0f25b, type: 3}
---- !u!1 &3525762221863271508 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3162684168667458613, guid: 10f700a6f3ad51d469fd3f0666f0f25b, type: 3}
-  m_PrefabInstance: {fileID: 1948398865024159841}
-  m_PrefabAsset: {fileID: 0}
---- !u!1652712579 &4609601705292101169
-MultiplayerRolesData:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3525762221863271508}
-  m_GameObjectRolesMask: 2
-  m_ComponentsRolesMasks:
-  - m_Object: {fileID: 8188383779474413381}
-    m_RolesMask: 2
---- !u!4 &6336112528498422674 stripped
+--- !u!4 &8665544881460612763 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5540692768441426931, guid: 10f700a6f3ad51d469fd3f0666f0f25b, type: 3}
-  m_PrefabInstance: {fileID: 1948398865024159841}
+  m_PrefabInstance: {fileID: 3793805084826856808}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8188383779474413381 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7685641082116146980, guid: 10f700a6f3ad51d469fd3f0666f0f25b, type: 3}
-  m_PrefabInstance: {fileID: 1948398865024159841}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3525762221863271508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60bc545e3cb0a89478529e9a036abfbe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -25,7 +25,7 @@ namespace RedGaint.Network.Runtime
             if (!hasFocus)
             {
                 // open menu when losing focus
-                SetMenuActive(true);
+               // SetMenuActive(true);
             }
         }
 
