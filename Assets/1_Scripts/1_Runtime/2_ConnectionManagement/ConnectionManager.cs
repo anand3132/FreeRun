@@ -58,18 +58,24 @@ namespace RedGaint.Network.Runtime.ConnectionManagement
 
             m_CurrentState = m_Offline;
             NetworkManager.OnConnectionEvent += OnConnectionEvent;
-            NetworkManager.OnServerStarted += OnServerStarted;
-            NetworkManager.ConnectionApprovalCallback += ApprovalCheck;
             NetworkManager.OnTransportFailure += OnTransportFailure;
+            
+            //ServerSideCallbacks
+            NetworkManager.ConnectionApprovalCallback += ApprovalCheck;
+            NetworkManager.OnServerStarted += OnServerStarted;
             NetworkManager.OnServerStopped += OnServerStopped;
+
+
         }
 
         void OnDestroy()
         {
             NetworkManager.OnConnectionEvent -= OnConnectionEvent;
-            NetworkManager.OnServerStarted -= OnServerStarted;
-            NetworkManager.ConnectionApprovalCallback -= ApprovalCheck;
             NetworkManager.OnTransportFailure -= OnTransportFailure;
+            
+            //ServerSide Callbacks
+            NetworkManager.ConnectionApprovalCallback -= ApprovalCheck;
+            NetworkManager.OnServerStarted -= OnServerStarted;
             NetworkManager.OnServerStopped -= OnServerStopped;
         }
 

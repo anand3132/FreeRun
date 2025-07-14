@@ -17,6 +17,8 @@ namespace RedGaint.Network.Runtime.ConnectionManagement
     public class AllocationPayload
     {
         public string LobbyId;
+        public string SceneName; 
+
         public List<Unity.Services.Lobbies.Models.Player> Players;
     }
 
@@ -123,7 +125,19 @@ namespace RedGaint.Network.Runtime.ConnectionManagement
             {
                 _gameStarted = true;
                 Debug.Log("[Server] All players connected. Loading game scene...");
-                ConnectionManager.NetworkManager.SceneManager.LoadScene("MainGameScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
+                
+                if (!string.IsNullOrEmpty(_allocationPayload.SceneName))
+                {
+                    Debug.Log($"[Server] All players connected. Loading scene: {_allocationPayload.SceneName}");
+                    ConnectionManager.NetworkManager.SceneManager.LoadScene(
+                        _allocationPayload.SceneName,
+                        UnityEngine.SceneManagement.LoadSceneMode.Single
+                    );
+                }
+                else
+                {
+                    Debug.LogError("[Server] Scene name is missing in the allocation payload.");
+                }
             }
         }
 
@@ -143,7 +157,8 @@ namespace RedGaint.Network.Runtime.ConnectionManagement
 
         public override void ApprovalCheck(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
         {
-            var connectionData = request.Payload;
+            Debug.Log("Approval Check Request");
+            byte[] connectionData = request.Payload;
 
             if (connectionData.Length > k_MaxConnectPayload)
             {
@@ -152,10 +167,10 @@ namespace RedGaint.Network.Runtime.ConnectionManagement
                 return;
             }
 
-            var payload = Encoding.UTF8.GetString(connectionData);
-            var connectionPayload = JsonUtility.FromJson<ConnectionPayload>(payload);
+            string payload = Encoding.UTF8.GetString(connectionData);
+            ConnectionPayload connectionPayload = JsonUtility.FromJson<ConnectionPayload>(payload);
 
-            var status = GetConnectStatus(connectionPayload);
+            ConnectStatus status = GetConnectStatus(connectionPayload);
 
             if (status == ConnectStatus.Success)
             {

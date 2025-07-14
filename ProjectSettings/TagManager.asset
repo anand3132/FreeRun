@@ -18,9 +18,9 @@ TagManager:
   - 
   - Obstacles
   - Ledge
-  - 
-  - 
-  - 
+  - Player
+  - FootTrigger
+  - Hotspot
   - 
   - 
   - 

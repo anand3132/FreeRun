@@ -13,7 +13,7 @@ namespace RedGaint.Network.Runtime.ConnectionManagement
 
         public override void OnClientDisconnect(ulong clientId)
         {
-            var disconnectReason = ConnectionManager.NetworkManager.DisconnectReason;
+            string disconnectReason = ConnectionManager.NetworkManager.DisconnectReason;
             if (string.IsNullOrEmpty(disconnectReason))
             {
                 ConnectionManager.EventManager.Broadcast(new ConnectionEvent { status = ConnectStatus.GenericDisconnect });

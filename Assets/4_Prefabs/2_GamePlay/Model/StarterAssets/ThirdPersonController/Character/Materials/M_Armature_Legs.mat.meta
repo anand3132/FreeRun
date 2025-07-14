@@ -8,8 +8,8 @@ NativeFormatImporter:
   assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
-  productId: 196526
-  packageName: Starter Assets - Third Person Character Controller | URP
-  packageVersion: 1.1.5
-  assetPath: Assets/StarterAssets/ThirdPersonController/Character/Materials/M_Armature_Legs.mat
-  uploadId: 592926
+  productId: 258182
+  packageName: FS Parkour And Climbing System
+  packageVersion: 1.9.7
+  assetPath: Assets/4_Prefabs/2_GamePlay/Model/StarterAssets/ThirdPersonController/Character/Materials/M_Armature_Legs.mat
+  uploadId: 765144
