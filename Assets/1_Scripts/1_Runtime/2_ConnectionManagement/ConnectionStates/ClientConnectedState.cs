@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace RedGaint.Network.Runtime.ConnectionManagement
 {
@@ -7,9 +8,27 @@ namespace RedGaint.Network.Runtime.ConnectionManagement
     /// </summary>
     class ClientConnectedState : OnlineState
     {
-        public override void Enter() { }
+        public override void Enter()
+        {
+            ConnectionManager.NetworkManager.SceneManager.OnLoadComplete += OnSceneLoadComplete;
 
-        public override void Exit() { }
+        }
+
+        private void OnSceneLoadComplete(ulong clientid, string scenename, LoadSceneMode loadscenemode)
+        {
+            
+            if (clientid == ConnectionManager.NetworkManager.LocalClientId)
+            {
+                Debug.Log($"[Client] Scene loaded: {scenename}");
+                // You can notify UI here if needed
+            }
+        }
+
+        public override void Exit()
+        {
+            ConnectionManager.NetworkManager.SceneManager.OnLoadComplete -= OnSceneLoadComplete;
+
+        }
 
         public override void OnClientDisconnect(ulong clientId)
         {
