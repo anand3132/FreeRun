@@ -218,7 +218,7 @@ namespace FS_ThirdPerson
         AnimGraph animGraph;
         EnvironmentScanner environmentScanner;
         LocomotionInputManager inputManager;
-        ItemEquipper itemEquipper;
+        // ItemEquipper itemEquipper;
 
 
         void Awake()
@@ -235,7 +235,7 @@ namespace FS_ThirdPerson
             environmentScanner = GetComponent<EnvironmentScanner>();
             characterController = GetComponent<CharacterController>();
             inputManager = GetComponent<LocomotionInputManager>();
-            itemEquipper = GetComponent<ItemEquipper>();
+            // itemEquipper = GetComponent<ItemEquipper>();
             controllerDefaultHeight = characterController.height;
             controllerDefaultYOffset = characterController.center.y;
             if (!(groundLayer == (groundLayer | (1 << LayerMask.NameToLayer("Ledge")))))
@@ -837,7 +837,7 @@ namespace FS_ThirdPerson
                 EnableRootMotion();
                 if (!hasSpaceForRoll && heightHiting)
                 {
-                    itemEquipper.PreventItemSwitching = true;
+                    // itemEquipper.PreventItemSwitching = true;
                     yield return DoLocomotionAction("FallingToRoll", useCustomRootMovement: true,
                         onComplete: () =>
                         {
@@ -848,7 +848,7 @@ namespace FS_ThirdPerson
                             characterController.Move(currentVelocity * Time.deltaTime);
 
                             targetRotation = transform.rotation;
-                            itemEquipper.PreventItemSwitching = false;
+                            // itemEquipper.PreventItemSwitching = false;
                         }
                         , crossFadeTime: .1f, setMoveAmount: true,preventSystems: true);
                 }
@@ -890,8 +890,8 @@ namespace FS_ThirdPerson
             targetRotation = transform.rotation;
             currentVelocity *= 0f;
 
-            if (needHandsForAction)
-                UnEquipCurrentItem();
+            // if (needHandsForAction)
+            //     UnEquipCurrentItem();
 
             StartCoroutine(TweenVal(animator.GetFloat(AnimatorParameters.moveAmount), 0, 0.15f, (lerpVal) => { animator.SetFloat(AnimatorParameters.moveAmount, lerpVal); }));
             StartCoroutine(TweenVal(animator.GetFloat(AnimatorParameters.rotation), 0, 0.15f, (lerpVal) => { animator.SetFloat(AnimatorParameters.rotation, lerpVal); }));
@@ -908,8 +908,8 @@ namespace FS_ThirdPerson
             animator.SetFloat(AnimatorParameters.fallAmount, Mathf.Clamp(Mathf.Abs(ySpeed) * 0.05f, 0f, 1));
             GroundCheck();
             // Idle animation of an item might be stopped when starting this system, so resume it
-            itemEquipper.ResumeIdleAnimation();
-            itemEquipper.PreventItemSwitching = false;
+            // itemEquipper.ResumeIdleAnimation();
+            // itemEquipper.PreventItemSwitching = false;
         }
 
         void OnFocusSystem(SystemBase systemBase)
@@ -933,44 +933,44 @@ namespace FS_ThirdPerson
             playerController.ResetState();
         }
 
-        async void UnEquipCurrentItem()
-        {
-            WaitToStartSystem = true;
-            var equippedItem = itemEquipper.EquippedItem;
-            itemEquipper.PreventItemSwitching = true;
-
-            // If equipped item is nulll or if we're not tyring to equip or change an item then return
-            if (equippedItem == null && !itemEquipper.IsChangingItem)
-            {
-                itemEquipper.InterruptItemSwitching = false;
-                WaitToStartSystem = false;
-                return;
-            }
-
-            // If we are changing an item
-            //     case 1: If an item is being unequipped, then don't equip the new item
-            //     case 2: If an item is being equipped, then wait for it to complete so that we can unequip it later
-            if (itemEquipper.IsChangingItem)
-            {
-                itemEquipper.InterruptItemSwitching = true; // To prevent the new item from being equipped if the equipping has not already started
-
-                while (itemEquipper.IsChangingItem)
-                    await Task.Yield();
-
-                equippedItem = itemEquipper.EquippedItem;   // Item might have changed
-            }
-
-            animGraph.StopCurrentNonLoopingAnimation();
-
-            // Some items should be unequipped during actions for others we just have to stop it's idle animation
-            if (equippedItem != null && equippedItem.unEquipDuringActions)
-                itemEquipper.UnEquipItem(false);
-            else if (equippedItem != null)
-                itemEquipper.StopIdleAnimation();
-
-            itemEquipper.InterruptItemSwitching = false;
-            WaitToStartSystem = false;
-        }
+        // async void UnEquipCurrentItem()
+        // {
+        //     WaitToStartSystem = true;
+        //     var equippedItem = itemEquipper.EquippedItem;
+        //     itemEquipper.PreventItemSwitching = true;
+        //
+        //     // If equipped item is nulll or if we're not tyring to equip or change an item then return
+        //     if (equippedItem == null && !itemEquipper.IsChangingItem)
+        //     {
+        //         itemEquipper.InterruptItemSwitching = false;
+        //         WaitToStartSystem = false;
+        //         return;
+        //     }
+        //
+        //     // If we are changing an item
+        //     //     case 1: If an item is being unequipped, then don't equip the new item
+        //     //     case 2: If an item is being equipped, then wait for it to complete so that we can unequip it later
+        //     if (itemEquipper.IsChangingItem)
+        //     {
+        //         itemEquipper.InterruptItemSwitching = true; // To prevent the new item from being equipped if the equipping has not already started
+        //
+        //         while (itemEquipper.IsChangingItem)
+        //             await Task.Yield();
+        //
+        //         equippedItem = itemEquipper.EquippedItem;   // Item might have changed
+        //     }
+        //
+        //     animGraph.StopCurrentNonLoopingAnimation();
+        //
+        //     // Some items should be unequipped during actions for others we just have to stop it's idle animation
+        //     if (equippedItem != null && equippedItem.unEquipDuringActions)
+        //         itemEquipper.UnEquipItem(false);
+        //     else if (equippedItem != null)
+        //         itemEquipper.StopIdleAnimation();
+        //
+        //     itemEquipper.InterruptItemSwitching = false;
+        //     WaitToStartSystem = false;
+        // }
 
         #endregion
 

@@ -85,7 +85,7 @@ namespace FS_ParkourSystem
         Animator animator;
         PlayerController playerController;
         ICharacter player;
-        Damagable damagable;
+        // Damagable damagable;
         ClimbController climbController;
         public override SystemState State { get; } = SystemState.Parkour;
         //public override List<SystemState> ExecutionStates => new List<SystemState>() { SystemState.Parkour, SystemState.Swing, SystemState.GrapplingHook };
@@ -95,7 +95,7 @@ namespace FS_ParkourSystem
         {
             playerController = GetComponent<PlayerController>();
             player = GetComponent<ICharacter>();
-            damagable = GetComponent<Damagable>();
+            // damagable = GetComponent<Damagable>();
             animator = player.Animator;
             environmentScanner = GetComponent<EnvironmentScanner>();
             inputManager = GetComponent<ParkourInputManager>();
@@ -1415,13 +1415,13 @@ namespace FS_ParkourSystem
         }
         void OnStartSystem(SystemBase system, bool needHandsForAction = false)
         {
-            damagable.CanTakeHit = false;
+            // damagable.CanTakeHit = false;
             player.OnStartSystem(system, needHandsForAction);
         }
 
         void OnEndSystem(SystemBase system)
         {
-            damagable.CanTakeHit = true;
+            // damagable.CanTakeHit = true;
             player.OnEndSystem(system);
         }
     }
