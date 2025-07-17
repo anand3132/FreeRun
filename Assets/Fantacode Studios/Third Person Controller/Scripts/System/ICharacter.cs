@@ -56,16 +56,4 @@ namespace FS_ThirdPerson
         void OnEndSystem(SystemBase systemBase);
     }
 
-    //public interface IDamagable1
-    //{
-    //    public float MaxHealth { get; set; }
-    //    public float CurrentHealth { get; set; }
-    //    public float DamageMultiplier { get; }
-    //    public Action<Vector3, float> OnHit { get; set; }
-    //    public Action OnDamageUpdated { get; set; }
-    //    public IDamagable Parent { get; }
-    //    void TakeDamage(Vector3 dir, float damage);
-    //    public void UpadteHealth(float amount);
-    //    public bool CanTakeHit { get; set; }
-    //}
 }

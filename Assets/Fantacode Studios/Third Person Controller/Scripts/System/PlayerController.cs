@@ -36,9 +36,9 @@ namespace FS_ThirdPerson
         public GameObject cameraGameObject { get; set; }
 
         public Animator animator { get; set; }
-        ItemEquipper equippableItemController;
+        // ItemEquipper equippableItemController;
         public ICharacter player { get; set; }
-        public Damagable Damagable { get; private set; }
+        // public Damagable Damagable { get; private set; }
 
         public Action<float, float> OnStartCameraShake;
         public Action<CameraSettings> SetCustomCameraState;
@@ -49,7 +49,7 @@ namespace FS_ThirdPerson
         public bool PreventRotation { get; set; }
         public bool PreventFallingFromLedge { get; set; } = true;
 
-        public bool IsItemEquipped => equippableItemController.EquippedItem != null;
+        // public bool IsItemEquipped => equippableItemController.EquippedItem != null;
         public EquippableSystemBase CurrentEquippedSystem { get; private set; }
 
         void HandleCurrentEquippedItemUpdate(params SystemState[] systemState)
@@ -69,8 +69,8 @@ namespace FS_ThirdPerson
         private void Awake()
         {
             player = GetComponent<ICharacter>();
-            Damagable = GetComponent<Damagable>();
-            equippableItemController = GetComponent<ItemEquipper>();
+            // Damagable = GetComponent<Damagable>();
+            // equippableItemController = GetComponent<ItemEquipper>();
             cameraGameObject = Camera.main.gameObject;
             animator = player.Animator;
 
@@ -82,14 +82,14 @@ namespace FS_ThirdPerson
                 script?.HandleAwake();
             }
 
-            if (equippableItemController != null)
-            {
-                equippableItemController.OnEquip += (EquippableItem itemData) =>
-                {
-                    CurrentEquippedSystem = EquippableSystems.FirstOrDefault(m => m.EquippableItems.Contains(itemData?.GetType()));
-                };
-                equippableItemController.OnUnEquipComplete += () => { CurrentEquippedSystem = null; };
-            }
+            // if (equippableItemController != null)
+            // {
+            //     equippableItemController.OnEquip += (EquippableItem itemData) =>
+            //     {
+            //         CurrentEquippedSystem = EquippableSystems.FirstOrDefault(m => m.EquippableItems.Contains(itemData?.GetType()));
+            //     };
+            //     equippableItemController.OnUnEquipComplete += () => { CurrentEquippedSystem = null; };
+            // }
         }
 
         private void Start()
@@ -245,8 +245,8 @@ namespace FS_ThirdPerson
                 system.OnResetFighter();
             }
 
-            Damagable.CurrentHealth = Damagable.MaxHealth;
-            equippableItemController.UnEquipItem(false);
+            // Damagable.CurrentHealth = Damagable.MaxHealth;
+            // equippableItemController.UnEquipItem(false);
         }
 
 

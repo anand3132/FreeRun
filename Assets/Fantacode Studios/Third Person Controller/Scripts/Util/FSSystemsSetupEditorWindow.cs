@@ -554,7 +554,7 @@ namespace FS_ThirdPerson
             AnimatorMergerUtility animatorMergerUtility = new AnimatorMergerUtility(CombinedController, CombinedController);
 
 
-            (var player, var model, var systemControllerParentObj) = SetCharacterModelAsChild();
+            (GameObject player, GameObject model, GameObject systemControllerParentObj) = SetCharacterModelAsChild();
             foreach (var item in setupScript.FSSystems)
             {
                 if (item.Value.enabled)
@@ -636,7 +636,7 @@ namespace FS_ThirdPerson
 
             var animator = model.GetComponent<Animator>();
             AddFootTrigger(animator);
-            SetItemHandler(animator);
+            // SetItemHandler(animator);
 
             if (player.layer != LayerMask.NameToLayer("Player"))
                 player.layer = LayerMask.NameToLayer("Player");
@@ -663,18 +663,18 @@ namespace FS_ThirdPerson
 
         }
 
-        private void SetItemHandler(Animator animator)
-        {
-            var rh = new GameObject("Right Hand Item Handler");
-            rh.transform.parent = animator.GetBoneTransform(HumanBodyBones.RightHand);
-            rh.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
-
-            rh.AddComponent<EquippableItemHolder>();
-            var lh = new GameObject("Left Hand Item Handler");
-            lh.transform.parent = animator.GetBoneTransform(HumanBodyBones.LeftHand);
-            lh.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
-            lh.AddComponent<EquippableItemHolder>();
-        }
+        // private void SetItemHandler(Animator animator)
+        // {
+        //     var rh = new GameObject("Right Hand Item Handler");
+        //     rh.transform.parent = animator.GetBoneTransform(HumanBodyBones.RightHand);
+        //     rh.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+        //
+        //     rh.AddComponent<EquippableItemHolder>();
+        //     var lh = new GameObject("Left Hand Item Handler");
+        //     lh.transform.parent = animator.GetBoneTransform(HumanBodyBones.LeftHand);
+        //     lh.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+        //     lh.AddComponent<EquippableItemHolder>();
+        // }
 
         #region warning
 
