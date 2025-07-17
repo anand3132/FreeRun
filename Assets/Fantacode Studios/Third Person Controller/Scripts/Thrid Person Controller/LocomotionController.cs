@@ -826,10 +826,10 @@ namespace FS_ThirdPerson
             {
                 playerController.FocusedScript.UnFocusScript();
             }
-            if (playerController.CurrentEquippedSystem != null && playerController.CurrentEquippedSystem != systemBase)
-            {
-                playerController.CurrentEquippedSystem.ExitSystem();
-            }
+            // if (playerController.CurrentEquippedSystem != null && playerController.CurrentEquippedSystem != systemBase)
+            // {
+            //     playerController.CurrentEquippedSystem.ExitSystem();
+            // }
             systemBase.FocusScript();
             playerController.SetSystemState(systemBase.State);
         }

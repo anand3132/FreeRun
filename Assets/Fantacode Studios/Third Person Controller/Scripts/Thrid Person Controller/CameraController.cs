@@ -76,7 +76,7 @@ namespace FS_ThirdPerson
             playerController.OnLand += playerController.OnStartCameraShake;
 
             playerController.SetCustomCameraState += SetCustomCameraState;
-            playerController.CameraRecoil += CameraRecoil;
+            // playerController.CameraRecoil += CameraRecoil;
         }
 
         private void Start()
@@ -127,7 +127,7 @@ namespace FS_ThirdPerson
 
             if(cameraSettings == null)
             {
-                var activeState = (playerController.CurrentEquippedSystem != null) ? playerController.CurrentEquippedSystem.State : playerController.CurrentSystemState;
+                var activeState =  playerController.CurrentSystemState;
                 var currPlayerState = SystemToCameraState(activeState);
 
                 var overrideSettings = overrideCameraSettings.FirstOrDefault(x => x.state == currPlayerState);
@@ -161,7 +161,7 @@ namespace FS_ThirdPerson
         {
             if (Time.timeScale == 0) return;
 
-            var activeState = (playerController.CurrentEquippedSystem != null)? playerController.CurrentEquippedSystem.State : playerController.CurrentSystemState;
+            var activeState =  playerController.CurrentSystemState;
             var currPlayerState = SystemToCameraState(activeState);
 
             if (customSettings != null)
