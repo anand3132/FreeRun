@@ -838,7 +838,7 @@ namespace FS_ThirdPerson
             systemBase.UnFocusScript();
             playerController.ResetState();
         }
-        #endregion
+        #endregion Interface
         
         #region locomotion interface
         float _walkSpeed;

@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: 1ad84ec0134918b46bcd70bb9da8bed6
+AssetOrigin:
+  serializedVersion: 1
+  productId: 258182
+  packageName: FS Parkour And Climbing System
+  packageVersion: 1.9.7
+  assetPath: Assets/Fantacode Studios/Third Person Controller/InputAction/FSSystemsInputAction.inputactions
+  uploadId: 765144
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -12,10 +19,3 @@ ScriptedImporter:
   wrapperCodePath: 
   wrapperClassName: 
   wrapperCodeNamespace: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 258182
-  packageName: FS Parkour And Climbing System
-  packageVersion: 1.9.7
-  assetPath: Assets/Fantacode Studios/Third Person Controller/InputAction/FSSystemsInputAction.inputactions
-  uploadId: 765144
